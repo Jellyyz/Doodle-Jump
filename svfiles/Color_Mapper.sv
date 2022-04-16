@@ -18,20 +18,8 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
                        output logic [7:0]  Red, Green, Blue );
     
     logic ball_on;
-	 
- /* Old Ball: Generated square box by checking if the current pixel is within a square of length
-    2*Ball_Size, centered at (BallX, BallY).  Note that this requires unsigned comparisons.
-	 
-    if ((DrawX >= BallX - Ball_size) &&
-       (DrawX <= BallX + Ball_size) &&
-       (DrawY >= BallY - Ball_size) &&
-       (DrawY <= BallY + Ball_size))
 
-     New Ball: Generates (pixelated) circle by using the standard circle formula.  Note that while 
-     this single line is quite powerful descriptively, it causes the synthesis tool to use up three
-     of the 12 available multipliers on the chip!  Since the multiplicants are required to be signed,
-	  we have to first cast them from logic to int (signed by default) before they are multiplied). */
-	  
+
     int DistX, DistY, Size;
 	assign DistX = DrawX - BallX;
     assign DistY = DrawY - BallY;
@@ -46,6 +34,23 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
             ball_on = 1'b1;
         else 
             ball_on = 1'b0;
+    end 
+    
+
+    logic platform_on; 
+    logic [9:0] platX, platY, plat_size; 
+    assign platX = 10'd30000; 
+    assign platY = 10'd300;
+    assign plat_size = 10'd4;
+    always_comb
+    begin:Platform_on_proc
+         if ((DrawX >= platX - plat_size) &&
+            (DrawX <= platX + plat_size) &&
+            (DrawY >= platY - plat_size) &&
+            (DrawY <= platY + plat_size)) 
+            platform_on = 1'b1;
+        else 
+            platform_on = 1'b0;
      end 
        
     always_comb
@@ -53,9 +58,15 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
         if ((ball_on == 1'b1)) 
         begin 
             Red = 8'h00;
-            Green = 8'hff;
+            Green = 8'hFF;
             Blue = 8'h00;
-        end       
+        end      
+        else if((platform_on == 1'b1)) 
+        begin 
+            Red = 8'h00;
+            Green = 8'h00;
+            Blue = 8'hFF;
+        end  
         else 
         begin 
             Red = 8'h00; 

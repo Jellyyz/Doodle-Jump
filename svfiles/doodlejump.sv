@@ -162,6 +162,10 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 //instantiate a vga_controller, ball, and color_mapper here with the ports.
 logic pxl_clk;
 logic [2:0] outstate;
+
+logic [9:0] platx, platy; 
+assign platx[9:0] = 10'hC8; 
+assign platy[9:0] = 10'hC8; 
 vga_controller vga(
 	.Clk(MAX10_CLK1_50),
 	.Reset(Reset),
