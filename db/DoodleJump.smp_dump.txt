@@ -1,5 +1,5 @@
 
-State Machine - |doodlejump|ball:ball|jumpstate:jumpstate|State
+State Machine - |doodlejump|jumplogic:jumplogic|jumpstate:jumpstate|State
 Name State.Main_Menu State.Pause State.Game 
 State.Main_Menu 0 0 0 
 State.Game 1 0 1 

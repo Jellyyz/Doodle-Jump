@@ -1,20 +1,7 @@
-//-------------------------------------------------------------------------
-//    Ball.sv                                                            --
-//    Viral Mehta                                                        --
-//    Spring 2005                                                        --
-//                                                                       --
-//    Modified by Stephen Kempf 03-01-2006                               --
-//                              03-12-2007                               --
-//    Translated by Joe Meng    07-07-2013                               --
-//    Fall 2014 Distribution                                             --
-//                                                                       --
-//    For use with ECE 298 Lab 7                                         --
-//    UIUC ECE Department                                                --
-//-------------------------------------------------------------------------
 // Modified for final project, Ranpo & Gally 
 
 
-module  ball ( input Reset, frame_clk, Clk,
+module  jumplogic( input Reset, frame_clk, Clk,
 					input [7:0] keycode,
                output [9:0]  BallX, BallY, BallS );
     
@@ -72,60 +59,60 @@ logic jump_enable, jump_reset;
            
         else 
         begin 
-			unique case(outstate)
-			3'b000: ;
-					// display some main menu i guess ; 
-			3'b001: 
-			begin
+			// unique case(outstate)
+			// 3'b000: ;
+			// 		// display some main menu i guess ; 
+			// 3'b001: 
+			//begin
 				// on the ground and in motion must stop the ball 
 				if(Ball_Y_Pos + Ball_Size >= Ball_Y_Max)
-					Ball_Y_Motion <= 10'h0; 
+					Ball_Y_Motion = 10'h0; 
 				// above the ground and in motion start accelerating it in the positive time 
 				else if(Ball_Y_Motion > 10'h0 && Ball_Y_Pos + Ball_Size < Ball_Y_Max)
 					begin
 						jump_reset <= 1'b0; 
 						jump_enable <= 1'b1; 
-						Ball_Y_Motion <= counting2[1:0] + Ball_Y_Motion; 
+						Ball_Y_Motion += counting2[1:0]; 
 					end 
 				// if not moving then get it to start falling or start jumping 
 				if(Ball_Y_Motion == 10'h0)
 				begin 
 					// if the ball is currently on the ground
 					if(Ball_Y_Pos + Ball_Size >= Ball_Y_Max)
-					begin
-						jump_reset <= 1'b0; 
-						jump_enable <= 1'b1; 
-						Ball_Y_Motion <= (1'b1 + ~Gravity); 
-					end 
+						begin
+							jump_reset <= 1'b0; 
+							jump_enable <= 1'b1; 
+							Ball_Y_Motion = (1'b1 + ~Gravity); 
+						end 
 
 					// if the ball is currently above the ground 
 					else if(Ball_Y_Pos + Ball_Size <= Ball_Y_Max)
-					begin 
-						jump_reset <= 1'b1; 
-						jump_enable <= 1'b0; 
-						Ball_Y_Motion <= Gravity; 
-					end 
+						begin 
+							jump_reset <= 1'b1; 
+							jump_enable <= 1'b0; 
+							Ball_Y_Motion = Gravity; 
+						end 
 
 				end 
 
 				unique case(keycode)
 					8'd7, 8'd79:
-						Ball_X_Motion <= 1; 
+						Ball_X_Motion = 1; 
 					8'd4, 8'd80:
-						Ball_X_Motion <= -1;	
+						Ball_X_Motion = -1;	
 					default:
-						Ball_X_Motion <= 0;
+						Ball_X_Motion = 0;
 				endcase 
-			end
+			//end
 
-			3'b010: 
-			begin
-				Ball_Y_Motion <= 0; 
-				Ball_X_Motion <= 0; 
-			end
+			// 3'b010: 
+			// begin
+			// 	Ball_Y_Motion <= 0; 
+			// 	Ball_X_Motion <= 0; 
+			// end
 
 
-			endcase 
+			// endcase 
 
 
 				Ball_Y_Pos <= (Ball_Y_Pos + Ball_Y_Motion);  // Update ball position

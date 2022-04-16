@@ -173,11 +173,11 @@ vga_controller vga(
 	.DrawX(drawxsig[9:0]), .DrawY(drawysig[9:0])    // 10 bits 
 ); 
 
-ball ball(
+jumplogic jumplogic(
 	.Clk(MAX10_CLK1_50),
 	.Reset(Reset_h),
 	.frame_clk(VGA_VS), 
-	.keycode(SW[7:0]),    // 8 bits 
+	.keycode(keycode),    // 8 bits 
 		
 	.BallX(ballxsig[9:0]), .BallY(ballysig[9:0]), .BallS(ballsizesig[9:0])  // 10 bits 
 ); 
