@@ -115,7 +115,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					8'd7, 8'd79:
 						Ball_X_Motion = 2; 
 					8'd4, 8'd80:
-						Ball_X_Motion = -2;	
+						Ball_X_Motion = -2;	 
 					default:
 						Ball_X_Motion = 0;
 				endcase 
