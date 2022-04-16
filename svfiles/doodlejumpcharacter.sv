@@ -59,11 +59,11 @@ logic jump_enable, jump_reset;
            
         else 
         begin 
-			// unique case(outstate)
-			// 3'b000: ;
-			// 		// display some main menu i guess ; 
-			// 3'b001: 
-			//begin
+			unique case(outstate)
+			3'b000: ;
+					// display some main menu i guess ; 
+			3'b001: 
+			begin
 				// on the ground and in motion must stop the ball 
 				if(Ball_Y_Pos + Ball_Size >= Ball_Y_Max)
 					Ball_Y_Motion = 10'h0; 
@@ -103,16 +103,16 @@ logic jump_enable, jump_reset;
 					default:
 						Ball_X_Motion = 0;
 				endcase 
-			//end
+			end
 
-			// 3'b010: 
-			// begin
-			// 	Ball_Y_Motion <= 0; 
-			// 	Ball_X_Motion <= 0; 
-			// end
+			3'b010: 
+			begin
+				Ball_Y_Motion = 0; 
+				Ball_X_Motion = 0; 
+			end
 
 
-			// endcase 
+			endcase 
 
 
 				Ball_Y_Pos <= (Ball_Y_Pos + Ball_Y_Motion);  // Update ball position
