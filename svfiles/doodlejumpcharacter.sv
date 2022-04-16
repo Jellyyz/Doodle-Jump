@@ -3,7 +3,8 @@
 
 module  jumplogic( input Reset, frame_clk, Clk,
 					input [7:0] keycode,
-               output [9:0]  BallX, BallY, BallS );
+               output [9:0]  BallX, BallY, BallS, 
+			   output [2:0] outstate);
     
     logic [9:0] Ball_X_Pos, Ball_X_Motion, Ball_Y_Pos, Ball_Y_Motion, Ball_Size;
 	 
@@ -18,7 +19,7 @@ module  jumplogic( input Reset, frame_clk, Clk,
     
 
 	parameter [1:0] Gravity = 3; 
-    assign Ball_Size = 4;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
+    assign Ball_Size = 12;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
    
 counter counter(
 	.Reset(jump_reset), 
@@ -43,27 +44,42 @@ jumpstate jumpstate(
 
 	.outstate(outstate[2:0])
 );
-logic [2:0] outstate; 
+logic [2:0] Status, state; 
 logic [7:0] counting; 
 logic [1:0] counting2;
 logic jump_enable, jump_reset; 
-    always_ff @ (posedge Reset or posedge frame_clk )
+always_comb 
+begin 
+	if(Reset)
+		Status = state; 
+	else 
+		Status = outstate; 
+end
+always_ff @ (posedge Reset or posedge frame_clk)
     begin
         if (Reset)  // Asynchronous Reset
         begin 
-            Ball_Y_Motion <= 10'd0; //Ball_Y_Step;
-			Ball_X_Motion <= 10'd0; //Ball_X_Step;
-			Ball_Y_Pos <= Ball_Y_Center;
-			Ball_X_Pos <= Ball_X_Center;
+            	Ball_Y_Motion = 10'h0; //Ball_Y_Step;
+				Ball_X_Motion = 10'h0; //Ball_X_Step;
+				Ball_Y_Pos <= Ball_Y_Center;
+				Ball_X_Pos <= Ball_X_Center;
         end
            
         else 
         begin 
 			unique case(outstate)
-			3'b000: ;
-					// display some main menu i guess ; 
+			3'b000:
+			begin 
+					;
+			end 
+
 			3'b001: 
 			begin
+				// wrap around screen 
+				if((Ball_X_Pos + Ball_Size) >= Ball_X_Max )  
+					Ball_X_Pos <= Ball_X_Min; 
+				else if ( (Ball_X_Pos - Ball_Size) <= Ball_X_Min ) 
+					Ball_X_Pos <= Ball_X_Max; 
 				// on the ground and in motion must stop the ball 
 				if(Ball_Y_Pos + Ball_Size >= Ball_Y_Max)
 					Ball_Y_Motion = 10'h0; 
@@ -97,9 +113,9 @@ logic jump_enable, jump_reset;
 
 				unique case(keycode)
 					8'd7, 8'd79:
-						Ball_X_Motion = 1; 
+						Ball_X_Motion = 2; 
 					8'd4, 8'd80:
-						Ball_X_Motion = -1;	
+						Ball_X_Motion = -2;	
 					default:
 						Ball_X_Motion = 0;
 				endcase 
