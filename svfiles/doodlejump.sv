@@ -198,12 +198,15 @@ jumplogic jumplogic(
 
 color_mapper color(
 	// ten bits 
+	.Clk(MAX10_CLK1_50),
+	.frame_clk(frame_clk),
+	.Reset(Reset_h), 
 	.BallX(ballxsig[9:0]), 
 	.BallY(ballysig[9:0]), 
 	.DrawX(drawxsig[9:0]), .DrawY(drawysig[9:0]), 
 	.Ball_size(ballsizesig[9:0]),
 	.outstate(outstate[2:0]),
-
+	
 	.keycode(keycode), 
 	.CannonX(cannonxsig[9:0]), 
 	.CannonY(cannonysig[9:0]), 

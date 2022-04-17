@@ -1,14 +1,14 @@
-Fitter Status : Successful - Sun Apr 17 13:36:53 2022
+Fitter Status : Successful - Sun Apr 17 17:45:48 2022
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : DoodleJump
 Top-level Entity Name : doodlejump
 Family : MAX 10
 Device : 10M50DAF484C7G
 Timing Models : Final
-Total logic elements : 4,290 / 49,760 ( 9 % )
-    Total combinational functions : 3,713 / 49,760 ( 7 % )
-    Dedicated logic registers : 2,513 / 49,760 ( 5 % )
-Total registers : 2582
+Total logic elements : 4,295 / 49,760 ( 9 % )
+    Total combinational functions : 3,693 / 49,760 ( 7 % )
+    Dedicated logic registers : 2,531 / 49,760 ( 5 % )
+Total registers : 2600
 Total pins : 141 / 360 ( 39 % )
 Total virtual pins : 0
 Total memory bits : 11,392 / 1,677,312 ( < 1 % )

@@ -1,5 +1,5 @@
 |doodlejump
-MAX10_CLK1_50 => MAX10_CLK1_50.IN3
+MAX10_CLK1_50 => MAX10_CLK1_50.IN4
 KEY[0] => KEY[0].IN1
 KEY[1] => KEY[1].IN1
 SW[0] => ~NO_FANOUT~
@@ -95213,6 +95213,9 @@ outstate[2] <= <GND>
 
 
 |doodlejump|color_mapper:color
+Clk => Clk.IN16
+Reset => Reset.IN16
+frame_clk => ~NO_FANOUT~
 BallX[0] => Add4.IN20
 BallX[0] => Add5.IN10
 BallX[1] => Add4.IN19
@@ -96112,8 +96115,8 @@ Red[5] <= always1.DB_MAX_OUTPUT_PORT_TYPE
 Red[6] <= <VCC>
 Red[7] <= Red.DB_MAX_OUTPUT_PORT_TYPE
 Green[0] <= Green.DB_MAX_OUTPUT_PORT_TYPE
-Green[1] <= Green.DB_MAX_OUTPUT_PORT_TYPE
-Green[2] <= <GND>
+Green[1] <= <GND>
+Green[2] <= Green.DB_MAX_OUTPUT_PORT_TYPE
 Green[3] <= Green.DB_MAX_OUTPUT_PORT_TYPE
 Green[4] <= Green.DB_MAX_OUTPUT_PORT_TYPE
 Green[5] <= Green.DB_MAX_OUTPUT_PORT_TYPE
@@ -96127,5 +96130,1237 @@ Blue[4] <= Blue.DB_MAX_OUTPUT_PORT_TYPE
 Blue[5] <= Blue.DB_MAX_OUTPUT_PORT_TYPE
 Blue[6] <= Blue.DB_MAX_OUTPUT_PORT_TYPE
 Blue[7] <= <GND>
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR1
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR1|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR1|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR1|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR1|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR1|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR1|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR1|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR1|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR1|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR2
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR2|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR2|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR2|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR2|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR2|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR2|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR2|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR2|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR2|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR3
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR3|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR3|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR3|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR3|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR3|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR3|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR3|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR3|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR3|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR4
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR4|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR4|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR4|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR4|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR4|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR4|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR4|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR4|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR4|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR5
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR5|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR5|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR5|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR5|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR5|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR5|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR5|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR5|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR5|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR6
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR6|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR6|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR6|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR6|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR6|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR6|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR6|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR6|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR6|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR7
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR7|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR7|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR7|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR7|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR7|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR7|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR7|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR7|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR7|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR8
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR8|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR8|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR8|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR8|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR8|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR8|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR8|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR8|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR8|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR9
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR9|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR9|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR9|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR9|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR9|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR9|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR9|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR9|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR9|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR10
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR10|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR10|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR10|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR10|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR10|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR10|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR10|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR10|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR10|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR11
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR11|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR11|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR11|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR11|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR11|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR11|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR11|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR11|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR11|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR12
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR12|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR12|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR12|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR12|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR12|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR12|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR12|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR12|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR12|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR13
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR13|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR13|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR13|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR13|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR13|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR13|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR13|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR13|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR13|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR14
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR14|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR14|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR14|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR14|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR14|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR14|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR14|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR14|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR14|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR15
+Clk => Clk.IN9
+Reset => Reset.IN9
+outp[0] <= out[0].DB_MAX_OUTPUT_PORT_TYPE
+outp[1] <= out[1].DB_MAX_OUTPUT_PORT_TYPE
+outp[2] <= out[2].DB_MAX_OUTPUT_PORT_TYPE
+outp[3] <= out[3].DB_MAX_OUTPUT_PORT_TYPE
+outp[4] <= out[4].DB_MAX_OUTPUT_PORT_TYPE
+outp[5] <= out[5].DB_MAX_OUTPUT_PORT_TYPE
+outp[6] <= out[6].DB_MAX_OUTPUT_PORT_TYPE
+outp[7] <= out[7].DB_MAX_OUTPUT_PORT_TYPE
+outp[8] <= bit_register:bit_register8.Q
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR15|bit_register:bit_register0
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR15|bit_register:bit_register1
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR15|bit_register:bit_register2
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR15|bit_register:bit_register3
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR15|bit_register:bit_register4
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR15|bit_register:bit_register5
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR15|bit_register:bit_register6
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR15|bit_register:bit_register7
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|doodlejump|color_mapper:color|LFSR:LFSR15|bit_register:bit_register8
+Clk => Q~reg0.CLK
+Reset => ~NO_FANOUT~
+D => Q~reg0.DATAIN
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 

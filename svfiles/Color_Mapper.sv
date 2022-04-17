@@ -13,7 +13,8 @@
 //-------------------------------------------------------------------------
 
 
-module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
+module  color_mapper ( input Clk, Reset, frame_clk,
+							  input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
                        input        [6:0] keycode, 
                        input        [2:0] outstate,
                        input        [9:0] CannonX, CannonY, CannonS,  
@@ -49,13 +50,82 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
         else 
             ball_on = 1'b0;
     end 
-    
+
+LFSR LFSR(
+    .Clk(Clk), .Reset(Reset), .outp(testX[8:0])
+);
+LFSR LFSR1(
+    .Clk(Clk), .Reset(Reset), .outp(testX1[8:0])
+);
+LFSR LFSR2(
+    .Clk(Clk), .Reset(Reset), .outp(testX2[8:0])
+);
+LFSR LFSR3(
+    .Clk(Clk), .Reset(Reset), .outp(testX3[8:0])
+);
+LFSR LFSR4(
+    .Clk(Clk), .Reset(Reset), .outp(testX4[8:0])
+);
+LFSR LFSR5(
+    .Clk(Clk), .Reset(Reset), .outp(testX5[8:0])
+);
+LFSR LFSR6(
+    .Clk(Clk), .Reset(Reset), .outp(testX6[8:0])
+);
+LFSR LFSR7(
+    .Clk(Clk), .Reset(Reset), .outp(testX7[8:0])
+);
+LFSR LFSR8(
+    .Clk(Clk), .Reset(Reset), .outp(testX8[8:0])
+);
+LFSR LFSR9(
+    .Clk(Clk), .Reset(Reset), .outp(testX9[8:0])
+);
+LFSR LFSR10(
+    .Clk(Clk), .Reset(Reset), .outp(testX10[8:0])
+);
+LFSR LFSR11(
+    .Clk(Clk), .Reset(Reset), .outp(testX11[8:0])
+);
+LFSR LFSR12(
+    .Clk(Clk), .Reset(Reset), .outp(testX12[8:0])
+);
+LFSR LFSR13(
+    .Clk(Clk), .Reset(Reset), .outp(testX13[8:0])
+);
+LFSR LFSR14(
+    .Clk(Clk), .Reset(Reset), .outp(testX14[8:0])
+);
+LFSR LFSR15(
+    .Clk(Clk), .Reset(Reset), .outp(testX15[8:0])
+);
+ logic [8:0]testX,testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
+always_ff@(posedge Reset)
+    begin 
+        platX <= testX; 
+        platX1 <= testX1; 
+        platX2 <= testX2; 
+        platX3 <= testX3;  
+        platX4 <= testX4; 
+        platX5 <= testX5; 
+        platX6 <= testX6; 
+        platX7 <= testX7;
+        platX8 <= testX8; 
+        platX9 <= testX9; 
+        platX10 <= testX10; 
+        platX11 <= testX11;      
+        platX12 <= testX12; 
+        platX13 <= testX13;
+        platX14 <= testX14; 
+        platX15 <= testX15; 
+         
+    end 
+
 //~~~~~~~~~~PLATFORMS~~~~~~~~~~~~~~~~~~~~~~~
     logic platform_on; 
-    logic [9:0] platX, platY, plat_size; 
-    assign platX = 10'd012; 
-    assign platY = 10'd012;
-    assign plat_size = 10'd4;
+    logic [8:0] platX, platY, plat_size; 
+    assign platY = 9'd012;
+    assign plat_size = 9'd4;
     always_comb
     begin:Platform_on_proc
          if ((DrawX >= platX - plat_size) &&
@@ -69,7 +139,6 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
     
     logic platform_on1; 
     logic [9:0] platX1, platY1, plat_size1; 
-    assign platX1 = 10'd025; 
     assign platY1 = 10'd025;
     assign plat_size1 = 10'd4;
     always_comb
@@ -85,7 +154,6 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 
     logic platform_on2; 
     logic [9:0] platX2, platY2, plat_size2; 
-    assign platX2 = 10'd050; 
     assign platY2 = 10'd050;
     assign plat_size2 = 10'd4;
     always_comb
@@ -101,7 +169,6 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 
     logic platform_on3; 
     logic [9:0] platX3, platY3, plat_size3; 
-    assign platX3 = 10'd075; 
     assign platY3 = 10'd075;
     assign plat_size3 = 10'd4;
     always_comb
@@ -116,8 +183,7 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
      end 
 
     logic platform_on4; 
-    logic [9:0] platX4, platY4, plat_size4; 
-    assign platX4 = 10'd100; 
+    logic [9:0] platX4, platY4, plat_size4;  
     assign platY4 = 10'd100;
     assign plat_size4 = 10'd4;
     always_comb
@@ -133,7 +199,6 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 
    logic platform_on5; 
     logic [9:0] platX5, platY5, plat_size5; 
-    assign platX5 = 10'd125; 
     assign platY5 = 10'd125;
     assign plat_size5 = 10'd4;
     always_comb
@@ -148,8 +213,7 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
      end 
 
     logic platform_on6; 
-    logic [9:0] platX6, platY6, plat_size6; 
-    assign platX6 = 10'd150; 
+    logic [9:0] platX6, platY6, plat_size6;  
     assign platY6 = 10'd150;
     assign plat_size6 = 10'd4;
     always_comb
@@ -165,7 +229,6 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 
     logic platform_on7; 
     logic [9:0] platX7, platY7, plat_size7; 
-    assign platX7 = 10'd175; 
     assign platY7 = 10'd175;
     assign plat_size7 = 10'd4;
     always_comb
@@ -181,7 +244,6 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 
     logic platform_on8; 
     logic [9:0] platX8, platY8, plat_size8; 
-    assign platX8 = 10'd200; 
     assign platY8 = 10'd200;
     assign plat_size8 = 10'd4;
     always_comb
@@ -197,7 +259,6 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 
     logic platform_on9; 
     logic [9:0] platX9, platY9, plat_size9; 
-    assign platX9 = 10'd225; 
     assign platY9 = 10'd225;
     assign plat_size9 = 10'd4;
     always_comb
@@ -213,7 +274,6 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 
     logic platform_on10; 
     logic [9:0] platX10, platY10, plat_size10; 
-    assign platX10 = 10'd250; 
     assign platY10 = 10'd250;
     assign plat_size10 = 10'd4;
     always_comb
@@ -228,8 +288,7 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
      end
 
     logic platform_on11; 
-    logic [9:0] platX11, platY11, plat_size11; 
-    assign platX11 = 10'd275; 
+    logic [9:0] platX11, platY11, plat_size11;  
     assign platY11 = 10'd275;
     assign plat_size11 = 10'd4;
     always_comb
@@ -245,8 +304,7 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 
     logic platform_on12; 
     logic [9:0] platX12, platY12, plat_size12; 
-    assign platX12 = 10'd325; 
-    assign platY12 = 10'd325;
+    assign platY12 = 10'd300;
     assign plat_size12 = 10'd4;
     always_comb
     begin:Platform_on_proc12
@@ -262,8 +320,7 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 
     logic platform_on13; 
     logic [9:0] platX13, platY13, plat_size13; 
-    assign platX13 = 10'd350; 
-    assign platY13 = 10'd350;
+    assign platY13 = 10'd325;
     assign plat_size13 = 10'd4;
     always_comb
     begin:Platform_on_proc13
@@ -278,8 +335,7 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 
     logic platform_on14; 
     logic [9:0] platX14, platY14, plat_size14; 
-    assign platX14 = 10'd375; 
-    assign platY14 = 10'd375;
+    assign platY14 = 10'd350;
     assign plat_size14 = 10'd4;
     always_comb
     begin:Platform_on_proc14
@@ -294,8 +350,7 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 
     logic platform_on15; 
     logic [9:0] platX15, platY15, plat_size15; 
-    assign platX15 = 10'd400; 
-    assign platY15 = 10'd400;
+    assign platY15 = 10'd475;
     assign plat_size15 = 10'd4;
     always_comb
     begin:Platform_on_proc15
@@ -338,7 +393,7 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
         ) 
         begin 
             Red = 8'h66;
-            Green = 8'hBB;
+            Green = 8'hDD;
             Blue = 8'h11;
         end 
     // turn on pixels for the cannon 
