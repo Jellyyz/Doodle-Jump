@@ -314,7 +314,7 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
         if ((ball_on == 1'b1)) 
         begin 
             Red = 8'hCA;
-            Green = 8'hC5;
+            Green = 8'hC9;
             Blue = 8'h2E;
         end      
     //turn on pixels for the platforms 
@@ -348,12 +348,12 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
             Green = 8'h00; 
             Blue = 8'h00; 
         end 
-    // turn on pixels for the background..? needs blank signal fix still 
+    // turn on pixels for the background
         else 
         begin 
-            Red = 8'h00; 
-            Green = 8'h00;
-            Blue = 8'h00;
+            Red = 8'hD2; 
+            Green = 8'hB4;
+            Blue = 8'h8C;
         end      
     end 
     

@@ -109,10 +109,24 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	//Assign one button to reset
 	assign {Reset_h}=~ (KEY[0]);
 
-	//Our A/D converter is only 12 bit
-	assign VGA_R = Red[7:4];
-	assign VGA_B = Blue[7:4];
-	assign VGA_G = Green[7:4];
+	// output to the screen 
+	always_comb 
+	begin 
+		if(blank == 1'b0)
+			begin 
+				VGA_R = 4'h0; 
+				VGA_B = 4'h0; 
+				VGA_G = 4'h0; 
+
+			end 
+		else 
+			begin 
+				VGA_R = Red[7:4];
+				VGA_B = Blue[7:4];
+				VGA_G = Green[7:4];
+			end
+
+	end 
 	
 	
 	doodlejump_soc u0 (
@@ -179,7 +193,7 @@ jumplogic jumplogic(
 	.frame_clk(VGA_VS), 
 	.keycode(keycode),    // 8 bits 
 		
-	.BallX(ballxsig[9:0]), .BallY(ballysig[9:0]), .BallS(ballsizesig[9:0]),  // 10 bits
+	.DoodleX(ballxsig[9:0]), .DoodleY(ballysig[9:0]), .DoodleS(ballsizesig[9:0]),  // 10 bits
 	.CannonX(cannonxsig[9:0]), .CannonY(cannonysig[9:0]), .CannonS(cannonsizesig[9:0]), 
 	.outstate(outstate[2:0])
 ); 
