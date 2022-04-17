@@ -259,6 +259,7 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
             platform_on12 = 1'b0;
      end
 
+
     logic platform_on13; 
     logic [9:0] platX13, platY13, plat_size13; 
     assign platX13 = 10'd350; 
