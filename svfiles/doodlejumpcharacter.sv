@@ -76,8 +76,8 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				Doodle_X_Pos <= Screen_X_Center;
 				Cannon_Y_Pos <= Screen_Y_Center; 
 				Cannon_X_Pos <= Screen_X_Center; 
-				Cannon_Y_Motion = 0; 
-				Cannon_X_Motion = 0; 
+				Cannon_Y_Motion <= 0; 
+				Cannon_X_Motion <= 0; 
 				
 		end 
         else 
@@ -126,7 +126,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				unique case(keycode)
 					8'd30:
 					begin 
-						Cannon_Y_Motion = (1'b1 + ~CannonSpeed); 
+						Cannon_Y_Motion <= (1'b1 + ~CannonSpeed); 
 					end 
 					8'd7, 8'd79:
 						Doodle_X_Motion = 2; 
@@ -135,10 +135,9 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					default:
 					begin 
 						Doodle_X_Motion = 0;
-						Cannon_X_Motion = 0; 
+						Cannon_X_Motion <= 0; 
 					end 
 				endcase 
-				
 				
 
 			end
@@ -147,45 +146,42 @@ always_ff @ (posedge Reset or posedge frame_clk)
 			begin
 				Doodle_Y_Motion = 0; 
 				Doodle_X_Motion = 0;
-				Cannon_X_Motion = 0; 
-				Cannon_Y_Motion = 0; 
+				Cannon_X_Motion <= 0; 
+				Cannon_Y_Motion <= 0; 
 			end
 
 
 			endcase 
-
-				// Update Doodle position
+							// Update Doodle position
 				// wrap around screen condition  
-				if((Doodle_X_Pos + Doodle_Size) >= Screen_X_Max )  
-					Doodle_X_Pos <= Screen_X_Min + (Doodle_Size >> 2); 
-				else if ( (Doodle_X_Pos - Doodle_Size) <= Screen_X_Min ) 
-					Doodle_X_Pos <= Screen_X_Max - (Doodle_Size >> 3); 
+				if((Doodle_X_Pos + Doodle_Size) >= (Screen_X_Max - 10'd25))  
+					Doodle_X_Pos <= Screen_X_Min + (Doodle_Size << 2); 
+				else if ( (Doodle_X_Pos - Doodle_Size) <= 10'd25) 
+					Doodle_X_Pos <= Screen_X_Max - (Doodle_Size << 2); 
 				else 
-					begin 
-						Doodle_Y_Pos <= (Doodle_Y_Pos + Doodle_Y_Motion);  
-						Doodle_X_Pos <= (Doodle_X_Pos + Doodle_X_Motion);
-					end 
+				begin 
+					Doodle_Y_Pos <= (Doodle_Y_Pos + Doodle_Y_Motion);  
+					Doodle_X_Pos <= (Doodle_X_Pos + Doodle_X_Motion);
+				end 
+
 				// Update Cannon position 
-				if(Cannon_Y_Pos - Cannon_Size <= Screen_Y_Min)
+				if(Cannon_Y_Pos - Cannon_Size <= 10'd25)
 					begin 
-						Cannon_Y_Pos = Doodle_Y_Pos; 
-						Cannon_X_Pos = Doodle_X_Pos; 
-						Cannon_Y_Motion = 10'h0; 
+						Cannon_Y_Pos <= Doodle_Y_Pos; 
+						Cannon_X_Pos <= Doodle_X_Pos; 
+						Cannon_X_Motion <= 0; 
+						Cannon_Y_Motion <= 0; 
 					end
-				
-				else 
-					begin  
-						Cannon_Y_Pos = (Cannon_Y_Pos + Cannon_Y_Motion); 
-						Cannon_X_Pos = (Cannon_X_Pos + Cannon_X_Motion); 
-					end 
-
-				if(Cannon_Y_Motion == 10'h0)
+				if(Cannon_Y_Motion <= 0 && outstate != 3'b010)
 					begin 
-						Cannon_Y_Pos = Doodle_Y_Pos; 
-						Cannon_X_Pos = Doodle_X_Pos; 
-
-					end 
-
+						Cannon_Y_Pos <= Doodle_Y_Pos; 
+						Cannon_X_Pos <= Doodle_X_Pos; 
+					end
+				else 
+				begin 
+					Cannon_Y_Pos <= (Cannon_Y_Pos + Cannon_Y_Motion); 
+					Cannon_X_Pos <= (Cannon_X_Pos + Cannon_X_Motion); 
+				end
 		end  
     end
        

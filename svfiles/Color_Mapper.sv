@@ -351,9 +351,9 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
     // turn on pixels for the background
         else 
         begin 
-            Red = 8'hD2; 
-            Green = 8'hB4;
-            Blue = 8'h8C;
+            Red = 8'h69; 
+            Green = 8'h69;
+            Blue = 8'h69;
         end      
     end 
     
