@@ -4,6 +4,7 @@
 module  jumplogic( input Reset, frame_clk, Clk,
 					input [7:0] keycode,
                output [9:0]  BallX, BallY, BallS, 
+			   output [9:0]  CannonX, CannonY, CannonS, 
 			   output [2:0] outstate);
     
     logic [9:0] Ball_X_Pos, Ball_X_Motion, Ball_Y_Pos, Ball_Y_Motion, Ball_Size;
@@ -19,8 +20,9 @@ module  jumplogic( input Reset, frame_clk, Clk,
     
 
 	parameter [1:0] Gravity = 3; 
+	parameter [2:0] CannonSpeed = 7;
     assign Ball_Size = 12;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
-   
+	assign Cannon_Size = 2; 
 counter counter(
 	.Reset(jump_reset), 
 	.enable(jump_enable), 
@@ -48,13 +50,11 @@ logic [2:0] Status, state;
 logic [7:0] counting; 
 logic [1:0] counting2;
 logic jump_enable, jump_reset; 
-always_comb 
-begin 
-	if(Reset)
-		Status = state; 
-	else 
-		Status = outstate; 
-end
+logic [9:0] Ball_Top; 
+ 
+logic [9:0] Cannon_Y_Motion, Cannon_X_Motion, Cannon_Y_Pos, Cannon_X_Pos, Cannon_Size; 
+
+
 always_ff @ (posedge Reset or posedge frame_clk)
     begin
         if (Reset)  // Asynchronous Reset
@@ -63,6 +63,9 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				Ball_X_Motion = 10'h0; //Ball_X_Step;
 				Ball_Y_Pos <= Ball_Y_Center;
 				Ball_X_Pos <= Ball_X_Center;
+				Cannon_Y_Pos <= 10'h0; 
+				Cannon_X_Pos <= 10'h0; 
+				
         end
            
         else 
@@ -112,12 +115,21 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				end 
 
 				unique case(keycode)
+					8'd44:
+					begin 
+						Cannon_X_Pos <= Ball_X_Pos; 
+						Cannon_Y_Pos <= Ball_Y_Pos; 
+						Cannon_Y_Motion = (1'b1 + ~CannonSpeed); 
+					end 
 					8'd7, 8'd79:
 						Ball_X_Motion = 2; 
 					8'd4, 8'd80:
 						Ball_X_Motion = -2;	 
 					default:
+					begin 
 						Ball_X_Motion = 0;
+						Cannon_X_Motion = 0; 
+					end 
 				endcase 
 			end
 
@@ -130,18 +142,23 @@ always_ff @ (posedge Reset or posedge frame_clk)
 
 			endcase 
 
-
-				Ball_Y_Pos <= (Ball_Y_Pos + Ball_Y_Motion);  // Update ball position
+				// Update ball position
+				Ball_Y_Pos <= (Ball_Y_Pos + Ball_Y_Motion);  
 				Ball_X_Pos <= (Ball_X_Pos + Ball_X_Motion);
+				
+				// Update Cannon position 
+				Cannon_Y_Pos <= (Cannon_Y_Pos + Cannon_Y_Motion); 
+				Cannon_X_Pos <= (Cannon_X_Pos + Cannon_X_Motion); 
 
 		end  
     end
        
     assign BallX = Ball_X_Pos;
-   
     assign BallY = Ball_Y_Pos;
-   
     assign BallS = Ball_Size;
-    
+
+	assign CannonX = Cannon_X_Pos; 
+	assign CannonY = Cannon_Y_Pos; 
+    assign CannonS = Cannon_Size; 
 
 endmodule

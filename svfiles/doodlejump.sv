@@ -69,6 +69,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [1:0] signs;
 	logic [1:0] hundreds;
 	logic [9:0] drawxsig, drawysig, ballxsig, ballysig, ballsizesig;
+	logic [9:0] cannonxsig, cannonysig, cannonsizesig; 
 	logic [7:0] Red, Blue, Green;
 	logic [7:0] keycode;
 
@@ -184,7 +185,8 @@ jumplogic jumplogic(
 	.frame_clk(VGA_VS), 
 	.keycode(keycode),    // 8 bits 
 		
-	.BallX(ballxsig[9:0]), .BallY(ballysig[9:0]), .BallS(ballsizesig[9:0]),  // 10 bits 
+	.BallX(ballxsig[9:0]), .BallY(ballysig[9:0]), .BallS(ballsizesig[9:0]),  // 10 bits
+	.CannonX(cannonxsig[9:0]), .CannonY(cannonysig[9:0]), .CannonS(cannonsizesig[9:0]), 
 	.outstate(outstate[2:0])
 ); 
 
@@ -195,6 +197,13 @@ color_mapper color(
 	.DrawX(drawxsig[9:0]), .DrawY(drawysig[9:0]), 
 	.Ball_size(ballsizesig[9:0]),
 	.outstate(outstate[2:0]),
+
+	.keycode(keycode), 
+	.CannonX(cannonxsig[9:0]), 
+	.CannonY(cannonysig[9:0]), 
+	.CannonS(cannonsizesig[9:0]), 
+
+
 	
 	// 8 bits 
 	.Red(Red[7:0]), 
