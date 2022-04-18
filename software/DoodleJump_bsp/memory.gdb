@@ -3,7 +3,7 @@
 # Machine generated for CPU 'nios2_gen2_0' in SOPC Builder design 'doodlejump_soc'
 # SOPC Builder design path: ../../doodlejump_soc.sopcinfo
 #
-# Generated: Fri Apr 15 22:20:34 CDT 2022
+# Generated: Sun Apr 17 22:34:27 CDT 2022
 
 # DO NOT MODIFY THIS FILE
 #
