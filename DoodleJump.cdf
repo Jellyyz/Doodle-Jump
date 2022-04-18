@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(10M50DAF484) Path("C:/Users/gally/Desktop/doodlejump/") File("DoodleJump.sof") MfrSpec(OpMask(1));
+		Device PartName(10M50DAF484) Path("C:/Users/erick/Desktop/ECE_385/Final_Project/FP/Doodle-Jump/") File("DoodleJump.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

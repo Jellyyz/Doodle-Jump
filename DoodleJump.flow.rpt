@@ -1,5 +1,5 @@
 Flow report for DoodleJump
-Sun Apr 17 22:10:30 2022
+Sun Apr 17 22:34:07 2022
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,17 +40,17 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Sun Apr 17 22:10:26 2022       ;
+; Flow Status                        ; Successful - Sun Apr 17 22:33:57 2022       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; DoodleJump                                  ;
 ; Top-level Entity Name              ; doodlejump                                  ;
 ; Family                             ; MAX 10                                      ;
 ; Device                             ; 10M50DAF484C7G                              ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 4,304 / 49,760 ( 9 % )                      ;
-;     Total combinational functions  ; 3,722 / 49,760 ( 7 % )                      ;
-;     Dedicated logic registers      ; 2,532 / 49,760 ( 5 % )                      ;
-; Total registers                    ; 2601                                        ;
+; Total logic elements               ; 4,274 / 49,760 ( 9 % )                      ;
+;     Total combinational functions  ; 3,703 / 49,760 ( 7 % )                      ;
+;     Dedicated logic registers      ; 2,531 / 49,760 ( 5 % )                      ;
+; Total registers                    ; 2600                                        ;
 ; Total pins                         ; 141 / 360 ( 39 % )                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 11,392 / 1,677,312 ( < 1 % )                ;
@@ -66,7 +66,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/17/2022 22:09:36 ;
+; Start date & time ; 04/17/2022 22:32:13 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DoodleJump          ;
 +-------------------+---------------------+
@@ -77,7 +77,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+------------------------------------------------------------------+---------------+-------------------+------------+
 ; Assignment Name                     ; Value                                                            ; Default Value ; Entity Name       ; Section Id ;
 +-------------------------------------+------------------------------------------------------------------+---------------+-------------------+------------+
-; COMPILER_SIGNATURE_ID               ; 145862336529901.165025137616428                                  ; --            ; --                ; --         ;
+; COMPILER_SIGNATURE_ID               ; 222737053957167.165025273255560                                  ; --            ; --                ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                                               ; --            ; --                ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                                                ; --            ; --                ; --         ;
 ; MISC_FILE                           ; doodlejump_soc/synthesis/../doodlejump_soc.cmp                   ; --            ; --                ; --         ;
@@ -107,11 +107,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:26     ; 1.0                     ; 4982 MB             ; 00:00:44                           ;
-; Fitter               ; 00:00:16     ; 1.5                     ; 6007 MB             ; 00:00:31                           ;
-; Assembler            ; 00:00:03     ; 1.0                     ; 4707 MB             ; 00:00:03                           ;
-; Timing Analyzer      ; 00:00:04     ; 2.2                     ; 4933 MB             ; 00:00:08                           ;
-; Total                ; 00:00:49     ; --                      ; --                  ; 00:01:26                           ;
+; Analysis & Synthesis ; 00:01:01     ; 1.0                     ; 5046 MB             ; 00:01:21                           ;
+; Fitter               ; 00:00:27     ; 1.8                     ; 6306 MB             ; 00:00:52                           ;
+; Assembler            ; 00:00:05     ; 1.0                     ; 4704 MB             ; 00:00:05                           ;
+; Timing Analyzer      ; 00:00:09     ; 2.8                     ; 4982 MB             ; 00:00:15                           ;
+; Total                ; 00:01:42     ; --                      ; --                  ; 00:02:33                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -120,10 +120,10 @@ refer to the applicable agreement for further details.
 +----------------------+------------------+------------+------------+----------------+
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; Legion5igen6     ; Windows 10 ; 10.0       ; x86_64         ;
-; Fitter               ; Legion5igen6     ; Windows 10 ; 10.0       ; x86_64         ;
-; Assembler            ; Legion5igen6     ; Windows 10 ; 10.0       ; x86_64         ;
-; Timing Analyzer      ; Legion5igen6     ; Windows 10 ; 10.0       ; x86_64         ;
+; Analysis & Synthesis ; RanpoZ           ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; RanpoZ           ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler            ; RanpoZ           ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer      ; RanpoZ           ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 

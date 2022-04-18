@@ -101,7 +101,7 @@ LFSR LFSR15(
     .Clk(Clk), .Reset(Reset), .outp(testX15[8:0])
 );
  logic [8:0]testX,testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
-always_ff@(posedge loadplat)
+always_ff@(posedge Reset)
     begin 
         platX <= testX; 
         platX1 <= testX1; 
