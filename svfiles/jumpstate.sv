@@ -1,7 +1,8 @@
 module jumpstate(
     input logic Clock, Reset, 
 	input logic [7:0] Keycode,
-	output logic [2:0] outstate 
+	output logic [2:0] outstate,  
+	output logic loadplat
 );
 
 	enum logic [2:0] { Main_Menu, 
@@ -21,12 +22,15 @@ module jumpstate(
     begin
         // Default next state is staying at current state
 		Next_state = State;
-
+		loadplat = 0; 
         unique case(State)
 			Main_Menu: 
 				begin
 					if(Keycode == 8'd44) // space 
+					begin 
 						Next_state = Game; 
+						loadplat = 1; 
+					end 
 					else 
 						Next_state = Main_Menu; 
 				end 

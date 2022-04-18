@@ -1,0 +1,66 @@
+module LFSR(
+    input Clk, Reset 
+    output [8:0] out
+); 
+
+
+
+
+bit_register bit_register0(
+    .Clk(Clk), .Reset(Reset), .D(input0), .Q(output0)
+);
+bit_register bit_register1(
+    .Clk(Clk), .Reset(Reset), .D(output0), .Q(output1)
+);
+bit_register bit_register2(
+    .Clk(Clk), .Reset(Reset), .D(output1), .Q(output2)
+);
+bit_register bit_register0(
+    .Clk(Clk), .Reset(Reset), .D(input2), .Q(output3)
+);
+bit_register bit_register1(
+    .Clk(Clk), .Reset(Reset), .D(output3), .Q(output4)
+);
+bit_register bit_register2(
+    .Clk(Clk), .Reset(Reset), .D(output4), .Q(output5)
+);
+bit_register bit_register1(
+    .Clk(Clk), .Reset(Reset), .D(output5), .Q(output6)
+);
+bit_register bit_register2(
+    .Clk(Clk), .Reset(Reset), .D(output6), .Q(output7)
+);
+always_comb
+    begin 
+        input0 = output0 ^ output2;
+        input5 = output6 ^ output7;
+        out[0] = output0 
+        out[1] = output1
+        out[2] = output2
+        out[3] = output3
+        out[4] = output4
+        out[5] = output5
+        out[6] = output6 
+        out[7] = output7
+    end 
+
+
+endmodule 
+
+
+module bit_register(
+    input Clk, Reset; 
+    input D; 
+    output Q; 
+); 
+
+always_ff @(posedge Clk or posedge Reset)
+    begin 
+        if(Reset)
+            Q <= 1'b0; 
+        else 
+            Q <= D; 
+
+    end 
+
+endmodule 

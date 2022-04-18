@@ -171,7 +171,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 //instantiate a vga_controller, ball, and color_mapper here with the ports.
 logic pxl_clk;
 logic [2:0] outstate;
-
+logic loadplat; 
 
 vga_controller vga(
 	.Clk(MAX10_CLK1_50),
@@ -193,7 +193,8 @@ jumplogic jumplogic(
 		
 	.DoodleX(ballxsig[9:0]), .DoodleY(ballysig[9:0]), .DoodleS(ballsizesig[9:0]),  // 10 bits
 	.CannonX(cannonxsig[9:0]), .CannonY(cannonysig[9:0]), .CannonS(cannonsizesig[9:0]), 
-	.outstate(outstate[2:0])
+	.outstate(outstate[2:0]),
+	.loadplat(loadplat)
 ); 
 
 color_mapper color(
@@ -206,6 +207,8 @@ color_mapper color(
 	.DrawX(drawxsig[9:0]), .DrawY(drawysig[9:0]), 
 	.Ball_size(ballsizesig[9:0]),
 	.outstate(outstate[2:0]),
+	.loadplat(loadplat), 
+
 	
 	.keycode(keycode), 
 	.CannonX(cannonxsig[9:0]), 

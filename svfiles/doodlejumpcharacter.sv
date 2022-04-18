@@ -2,7 +2,9 @@
 
 
 module  jumplogic( input Reset, frame_clk, Clk,
-					input [7:0] keycode,
+				   input [7:0] keycode,
+
+			   output loadplat, 
                output [9:0]  DoodleX, DoodleY, DoodleS, 
 			   output [9:0]  CannonX, CannonY, CannonS, 
 			   output [2:0] outstate);
@@ -44,7 +46,8 @@ jumpstate jumpstate(
 	.Reset(Reset), 
 	.Keycode(keycode[7:0]),
 
-	.outstate(outstate[2:0])
+	.outstate(outstate[2:0]),
+	.loadplat(loadplat)
 );
 logic [2:0] Status, state; 
 logic [7:0] counting; 

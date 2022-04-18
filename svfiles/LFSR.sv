@@ -1,5 +1,6 @@
 module LFSR(
-    input Clk, Reset,
+    input Clk, Reset, 
+    input [8:0] seed, 
     output [8:0] outp
 ); 
 

@@ -14,6 +14,7 @@
 
 
 module  color_mapper ( input Clk, Reset, frame_clk,
+                       input loadplat, 
 							  input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
                        input        [6:0] keycode, 
                        input        [2:0] outstate,
@@ -100,7 +101,7 @@ LFSR LFSR15(
     .Clk(Clk), .Reset(Reset), .outp(testX15[8:0])
 );
  logic [8:0]testX,testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
-always_ff@(posedge frame_clk)
+always_ff@(posedge loadplat)
     begin 
         platX <= testX; 
         platX1 <= testX1; 
