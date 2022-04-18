@@ -51,54 +51,55 @@ module  color_mapper ( input Clk, Reset, frame_clk,
         else 
             ball_on = 1'b0;
     end 
+logic seed_en, seed_en1, seed_en2, seed_en3, seed_en4, seed_en5, seed_en6, seed_en7, seed_en8, seed_en9, seed_en10, seed_en11, seed_en12, seed_en13, seed_en14, seed_en15;
 
 LFSR LFSR(
-    .Clk(Clk), .Reset(Reset), .outp(testX[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX[8:0]), .seed_out(seed_en)
 );
 LFSR LFSR1(
-    .Clk(Clk), .Reset(Reset), .outp(testX1[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX1[8:0]), .seed(testX[8:0]), .seed_in(seed_en), .seed_out(seed_en1)
 );
 LFSR LFSR2(
-    .Clk(Clk), .Reset(Reset), .outp(testX2[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX2[8:0]), .seed(testX1[8:0]), .seed_in(seed_en1), .seed_out(seed_en2)
 );
 LFSR LFSR3(
-    .Clk(Clk), .Reset(Reset), .outp(testX3[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX3[8:0]), .seed(testX2[8:0]), .seed_in(seed_en2), .seed_out(seed_en3)
 );
 LFSR LFSR4(
-    .Clk(Clk), .Reset(Reset), .outp(testX4[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX4[8:0]), .seed(testX3[8:0]), .seed_in(seed_en3), .seed_out(seed_en4)
 );
 LFSR LFSR5(
-    .Clk(Clk), .Reset(Reset), .outp(testX5[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX5[8:0]), .seed(testX4[8:0]), .seed_in(seed_en4), .seed_out(seed_en5)
 );
 LFSR LFSR6(
-    .Clk(Clk), .Reset(Reset), .outp(testX6[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX6[8:0]), .seed(testX5[8:0]), .seed_in(seed_en5), .seed_out(seed_en6)
 );
 LFSR LFSR7(
-    .Clk(Clk), .Reset(Reset), .outp(testX7[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX7[8:0]), .seed(testX6[8:0]), .seed_in(seed_en6), .seed_out(seed_en7)
 );
 LFSR LFSR8(
-    .Clk(Clk), .Reset(Reset), .outp(testX8[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX8[8:0]), .seed(testX7[8:0]), .seed_in(seed_en7), .seed_out(seed_en8)
 );
 LFSR LFSR9(
-    .Clk(Clk), .Reset(Reset), .outp(testX9[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX9[8:0]), .seed(testX8[8:0]), .seed_in(seed_en8), .seed_out(seed_en9)
 );
 LFSR LFSR10(
-    .Clk(Clk), .Reset(Reset), .outp(testX10[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX10[8:0]), .seed(testX9[8:0]), .seed_in(seed_en9), .seed_out(seed_en10)
 );
 LFSR LFSR11(
-    .Clk(Clk), .Reset(Reset), .outp(testX11[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX11[8:0]), .seed(testX10[8:0]), .seed_in(seed_en10), .seed_out(seed_en11)
 );
 LFSR LFSR12(
-    .Clk(Clk), .Reset(Reset), .outp(testX12[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX12[8:0]), .seed(testX11[8:0]), .seed_in(seed_en11), .seed_out(seed_en12)
 );
 LFSR LFSR13(
-    .Clk(Clk), .Reset(Reset), .outp(testX13[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX13[8:0]), .seed(testX12[8:0]), .seed_in(seed_en12), .seed_out(seed_en13)
 );
 LFSR LFSR14(
-    .Clk(Clk), .Reset(Reset), .outp(testX14[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX14[8:0]), .seed(testX13[8:0]), .seed_in(seed_en13), .seed_out(seed_en14)
 );
 LFSR LFSR15(
-    .Clk(Clk), .Reset(Reset), .outp(testX15[8:0])
+    .Clk(Clk), .Reset(Reset), .outp(testX15[8:0]), .seed(testX15[8:0]), .seed_in(seed_en14), .seed_out(seed_en15)
 );
  logic [8:0]testX,testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
 always_ff@(posedge loadplat)
@@ -133,7 +134,7 @@ always_ff@(posedge loadplat)
             (DrawX <= platX + plat_size) &&
             (DrawY >= platY - plat_size) &&
             (DrawY <= platY + plat_size)) 
-            platform_on = 1'b1;
+            platform_on = 1'b1; // platform_on[0] = 1'b1 
         else 
             platform_on = 1'b0;
      end 
