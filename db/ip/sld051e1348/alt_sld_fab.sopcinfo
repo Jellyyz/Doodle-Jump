@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="alt_sld_fab" kind="alt_sld_fab" version="1.0" fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
+<<<<<<< HEAD
  <!-- 2022.04.17.22:32:52 -->
+=======
+ <!-- 2022.04.18.00:10:05 -->
+>>>>>>> 136f445a1f857c7a47022c2dc45a98629cc45a2a
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_DEVICE_FAMILY">
   <type>java.lang.String</type>
