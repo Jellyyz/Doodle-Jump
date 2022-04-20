@@ -138,40 +138,25 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				else if(Doodle_Y_Motion != 10'h0)
 				begin 
 					// if the doodle is moving upwards 
-					if(Doodle_Y_Motion[7:4] == 4'hF)
+					if(Doodle_Y_Motion[7:4] >= 4'hC)
 						begin 
 							jump_reset <= 0; 
 							jump_enable <= 1; 
-							Doodle_Y_Motion += counting2[1:0]; 
+							if(counting2 == 2'd3)
+								Doodle_Y_Motion += counting2[1:0]; 
 						end 
 					// if the doodle is moving downwards 
-					else if(Doodle_Y_Motion > 10'h0 && Doodle_Y_Motion[7:4] != 4'hF)
+					else if(Doodle_Y_Motion[7:4] >= 4'h0 && Doodle_Y_Motion[7:4] <= 4'hA)
 						begin 
 							// if the doodle is moving downwards and hitting the ground or platform 
-							if((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY + plat_sizeY) && (Doodle_Y_Pos + Doodle_Size >= platY - plat_sizeY) && (platX + plat_sizeX >= Doodle_X_Pos ) && (platX - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY1 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY1 - plat_sizeY) && (platX1 + plat_sizeX >= Doodle_X_Pos) && (platX1 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY2 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY2 - plat_sizeY) && (platX2 + plat_sizeX >= Doodle_X_Pos) && (platX2 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY3 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY3 - plat_sizeY) && (platX3 + plat_sizeX >= Doodle_X_Pos) && (platX3 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY4 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY4 - plat_sizeY) && (platX4 + plat_sizeX >= Doodle_X_Pos) && (platX4 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY5 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY5 - plat_sizeY) && (platX5 + plat_sizeX >= Doodle_X_Pos) && (platX5 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY6 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY6 - plat_sizeY) && (platX6 + plat_sizeX >= Doodle_X_Pos) && (platX6 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY7 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY7 - plat_sizeY) && (platX7 + plat_sizeX >= Doodle_X_Pos) && (platX7 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY8 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY8 - plat_sizeY) && (platX8 + plat_sizeX >= Doodle_X_Pos) && (platX8 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY9 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY9 - plat_sizeY) && (platX9 + plat_sizeX >= Doodle_X_Pos) && (platX9 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY10  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY10 - plat_sizeY) && (platX10 + plat_sizeX >= Doodle_X_Pos) && (platX10 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY11  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY11 - plat_sizeY) && (platX11 + plat_sizeX >= Doodle_X_Pos) && (platX11 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY12  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY12 - plat_sizeY) && (platX12 + plat_sizeX >= Doodle_X_Pos) && (platX12 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY13  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY13 - plat_sizeY) && (platX13 + plat_sizeX >= Doodle_X_Pos) && (platX13 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY14  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY14 - plat_sizeY) && (platX14 + plat_sizeX >= Doodle_X_Pos) && (platX14 - plat_sizeX <= Doodle_X_Pos)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY15  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY15 - plat_sizeY) && (platX15 + plat_sizeX >= Doodle_X_Pos) && (platX15 - plat_sizeX <= Doodle_X_Pos)))
+							if((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) || Platform_collision)
 								begin 
 								// if doodle falling then allow for it to turn velocity to 0 
 									jump_reset <= 1; 
 									jump_enable <= 0;
 									Doodle_Y_Motion = (1'b1 + ~Gravity); 
 								end 
-							else
+							else if(Doodle_Y_Motion != 4'hFE)
 								begin 
 									jump_reset <= 0; 
 									jump_enable <= 1; 
@@ -187,9 +172,9 @@ always_ff @ (posedge Reset or posedge frame_clk)
 						Cannon_Y_Motion <= (1'b1 + ~CannonSpeed); 
 					end 
 					8'd7, 8'd79:
-						Doodle_X_Motion = 2; 
+						Doodle_X_Motion = 3; 
 					8'd4, 8'd80:
-						Doodle_X_Motion = -2;	 
+						Doodle_X_Motion = -3;	 
 					default:
 					begin 
 						Doodle_X_Motion = 0;
@@ -213,9 +198,9 @@ always_ff @ (posedge Reset or posedge frame_clk)
 							// Update Doodle position
 				// wrap around screen condition  
 				if((Doodle_X_Pos + Doodle_Size) >= (Screen_X_Max - 10'd25))  
-					Doodle_X_Pos <= Screen_X_Min + (Doodle_Size << 2); 
+					Doodle_X_Pos <= Screen_X_Min + (Doodle_Size << 4); 
 				else if ( (Doodle_X_Pos - Doodle_Size) <= 10'd25) 
-					Doodle_X_Pos <= Screen_X_Max - (Doodle_Size << 2); 
+					Doodle_X_Pos <= Screen_X_Max - (Doodle_Size << 4); 
 				else 
 				begin 
 					Doodle_Y_Pos <= (Doodle_Y_Pos + Doodle_Y_Motion);  
@@ -243,6 +228,30 @@ always_ff @ (posedge Reset or posedge frame_clk)
 		end  
     end
        
+logic Platform_collision; 
+always_comb
+begin
+
+	Platform_collision =  (((Doodle_Y_Pos + Doodle_Size <= platY + plat_sizeY) && (Doodle_Y_Pos + Doodle_Size >= platY - plat_sizeY) && (platX + plat_sizeX >= Doodle_X_Pos - Doodle_Size ) && (platX - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY1 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY1 - plat_sizeY) && (platX1 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX1 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY2 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY2 - plat_sizeY) && (platX2 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX2 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY3 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY3 - plat_sizeY) && (platX3 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX3 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY4 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY4 - plat_sizeY) && (platX4 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX4 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY5 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY5 - plat_sizeY) && (platX5 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX5 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY6 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY6 - plat_sizeY) && (platX6 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX6 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY7 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY7 - plat_sizeY) && (platX7 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX7 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY8 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY8 - plat_sizeY) && (platX8 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX8 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY9 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY9 - plat_sizeY) && (platX9 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX9 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY10  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY10 - plat_sizeY) && (platX10 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX10 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY11  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY11 - plat_sizeY) && (platX11 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX11 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY12  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY12 - plat_sizeY) && (platX12 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX12 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY13  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY13 - plat_sizeY) && (platX13 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX13 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY14  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY14 - plat_sizeY) && (platX14 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX14 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
+								((Doodle_Y_Pos + Doodle_Size <= platY15  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY15 - plat_sizeY) && (platX15 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX15 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)));
+
+
+end 
+
     assign DoodleX = Doodle_X_Pos;
     assign DoodleY = Doodle_Y_Pos;
     assign DoodleS = Doodle_Size;
@@ -250,5 +259,6 @@ always_ff @ (posedge Reset or posedge frame_clk)
 	assign CannonX = Cannon_X_Pos; 
 	assign CannonY = Cannon_Y_Pos; 
     assign CannonS = Cannon_Size; 
+
 
 endmodule

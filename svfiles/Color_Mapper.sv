@@ -123,23 +123,71 @@ LFSR LFSR15(
  logic [8:0]testX,testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
 always_ff@(posedge loadplat)
     begin 
-        platX <= testX; 
-        platX1 <= testX1; 
-        platX2 <= testX2; 
-        platX3 <= testX3;  
-        platX4 <= testX4; 
-        platX5 <= testX5; 
-        platX6 <= testX6; 
-        platX7 <= testX7;
-        platX8 <= testX8; 
-        platX9 <= testX9; 
-        platX10 <= testX10; 
-        platX11 <= testX11;      
-        platX12 <= testX12; 
-        platX13 <= testX13;
-        platX14 <= testX14; 
-        platX15 <= testX15; 
-         
+        if(testX >= 0 && testX<= 500)
+            platX <= testX + 9'd100;
+        else 
+            platX <= testX; 
+        if(testX1 >= 0 && testX1<= 500)
+            platX1 <= testX1 + 9'd100;
+        else 
+            platX1 <= testX1; 
+        if(testX2 >= 0 && testX2<= 500)
+            platX2 <= testX2 + 9'd100; 
+        else 
+            platX2 <= testX2; 
+        if(testX3 >= 0 && testX3<= 500)
+            platX3 <= testX3 + 9'd100;  
+        else 
+            platX3 <= testX3; 
+        if(testX4 >= 0 && testX4<= 500)
+            platX4 <= testX4 + 9'd100; 
+        else 
+            platX4 <= testX4; 
+        if(testX5 >= 0 && testX5<= 500)
+            platX5 <= testX5 + 9'd100; 
+        else 
+            platX5 <= testX5; 
+        if(testX6 >= 0 && testX6<= 500)
+            platX6 <= testX6 + 9'd100; 
+        else 
+            platX6 <= testX6; 
+        if(testX7 >= 0 && testX7<= 500)
+            platX7 <= testX7 + 9'd100;
+        else 
+            platX7 <= testX7; 
+        if(testX8 >= 0 && testX8<= 500)
+            platX8 <= testX8 + 9'd100; 
+        else 
+            platX8 <= testX8; 
+        if(testX9 >= 0 && testX9<= 500)
+            platX9 <= testX9 + 9'd100; 
+        else 
+            platX9 <= testX9; 
+        if(testX10 >= 0 && testX10<= 500)
+            platX10 <= testX10 + 9'd100; 
+        else 
+            platX10 <= testX10; 
+        if(testX11 >= 0 && testX11<= 500)
+            platX11 <= testX11 + 9'd100;      
+        else 
+            platX11 <= testX11; 
+        if(testX12 >= 0 && testX12<= 500)
+            platX12 <= testX12 + 9'd100; 
+        else 
+            platX12 <= testX12; 
+        if(testX13 >= 0 && testX13<= 500)
+            platX13 <= testX13 + 9'd100;
+        else 
+            platX13 <= testX13; 
+        if(testX14 >= 0 && testX14<= 500)
+            platX14 <= testX14 + 9'd100; 
+        else 
+            platX14 <= testX14; 
+        if(testX15 >= 0 && testX15<= 500)
+            platX15 <= testX15 + 9'd100;    
+        else 
+            platX15 <= testX15; 
+    
     end 
 
 //~~~~~~~~~~PLATFORMS~~~~~~~~~~~~~~~~~~~~~~~
@@ -159,7 +207,7 @@ always_ff@(posedge loadplat)
      end 
     
     logic platform_on1; 
-    assign platY1 = 10'd060;
+    assign platY1 = 9'd060;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -174,7 +222,7 @@ always_ff@(posedge loadplat)
      end 
 
     logic platform_on2;  
-    assign platY2 = 10'd090;
+    assign platY2 = 9'd090;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -189,7 +237,7 @@ always_ff@(posedge loadplat)
      end 
 
     logic platform_on3; 
-    assign platY3 = 10'd0120;
+    assign platY3 = 9'd0120;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -204,7 +252,7 @@ always_ff@(posedge loadplat)
      end 
 
     logic platform_on4; 
-    assign platY4 = 10'd150;
+    assign platY4 = 9'd150;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -219,7 +267,7 @@ always_ff@(posedge loadplat)
      end 
 
    logic platform_on5; 
-    assign platY5 = 10'd180;
+    assign platY5 = 9'd180;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -234,7 +282,7 @@ always_ff@(posedge loadplat)
      end 
 
     logic platform_on6; 
-    assign platY6 = 10'd210;
+    assign platY6 = 9'd210;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -249,7 +297,7 @@ always_ff@(posedge loadplat)
      end 
 
     logic platform_on7;  
-    assign platY7 = 10'd240;
+    assign platY7 = 9'd240;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -264,7 +312,7 @@ always_ff@(posedge loadplat)
      end 
 
     logic platform_on8; 
-    assign platY8 = 10'd270;
+    assign platY8 = 9'd270;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -279,7 +327,7 @@ always_ff@(posedge loadplat)
      end
 
     logic platform_on9; 
-    assign platY9 = 10'd300;
+    assign platY9 = 9'd300;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -294,7 +342,7 @@ always_ff@(posedge loadplat)
      end
 
     logic platform_on10; 
-    assign platY10 = 10'd330;
+    assign platY10 = 9'd330;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -309,7 +357,7 @@ always_ff@(posedge loadplat)
      end
 
     logic platform_on11; 
-    assign platY11 = 10'd360;
+    assign platY11 = 9'd360;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -324,7 +372,7 @@ always_ff@(posedge loadplat)
      end
 
     logic platform_on12; 
-    assign platY12 = 10'd390;
+    assign platY12 = 9'd390;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -340,7 +388,7 @@ always_ff@(posedge loadplat)
 
 
     logic platform_on13;  
-    assign platY13 = 10'd420;
+    assign platY13 = 9'd420;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -355,7 +403,7 @@ always_ff@(posedge loadplat)
      end
 
     logic platform_on14; 
-    assign platY14 = 10'd450;
+    assign platY14 = 9'd450;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -370,7 +418,7 @@ always_ff@(posedge loadplat)
      end
 
     logic platform_on15; 
-    assign platY15 = 10'd475;
+    assign platY15 = 9'd475;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -427,9 +475,9 @@ always_ff@(posedge loadplat)
     // turn on pixels for the background
         else 
         begin 
-            Red = 8'h69; 
-            Green = 8'h69;
-            Blue = 8'h69;
+            Red = 8'h98; 
+            Green = 8'h85;
+            Blue = 8'h58;
         end      
     end 
     
