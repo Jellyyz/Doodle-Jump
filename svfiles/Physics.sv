@@ -2,10 +2,10 @@
 
 
 module  physics( input Reset, frame_clk, Clk,
-				 input [7:0] keycode 
+					input [7:0] keycode,
 
 			   output loadplat, 
-               output [9:0]  DoodleX, DoodleY, DoodleS, 
+             output [9:0]  DoodleX, DoodleY, DoodleS, 
 			   output [2:0] outstate);
     
     logic [9:0] Doodle_X_Pos, Doodle_X_Motion, Doodle_Y_Pos, Doodle_Y_Motion, Doodle_Size; 

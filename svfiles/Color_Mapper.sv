@@ -20,7 +20,7 @@ module  color_mapper ( input Clk, Reset, frame_clk,
                        input        [2:0] outstate,
                        input        [9:0] CannonX, CannonY, CannonS,  
                        output logic [7:0]  Red, Green, Blue,
-                        output [8:0]platX, platY, plat_size,
+                        output [8:0]platX, platY, plat_sizeX, plat_sizeY,
                         output [9:0]platX1, platY1, 
                         output [9:0]platX2, platY2, 
                         output [9:0]platX3, platY3, 
@@ -121,7 +121,7 @@ LFSR LFSR15(
     .Clk(Clk), .Reset(Reset), .outp(testX15[8:0]), .seed(testX15[8:0]), .seed_in(seed_en14), .seed_out(seed_en15)
 );
  logic [8:0]testX,testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
-always_ff@(posedge Reset)
+always_ff@(posedge loadplat)
     begin 
         platX <= testX; 
         platX1 <= testX1; 
@@ -145,13 +145,14 @@ always_ff@(posedge Reset)
 //~~~~~~~~~~PLATFORMS~~~~~~~~~~~~~~~~~~~~~~~
     logic platform_on; 
     assign platY = 9'd030;
-    assign plat_size = 9'd4;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc
-         if ((DrawX >= platX - plat_size) &&
-            (DrawX <= platX + plat_size) &&
-            (DrawY >= platY - plat_size) &&
-            (DrawY <= platY + plat_size)) 
+         if ((DrawX >= platX - plat_sizeX) &&
+            (DrawX <= platX + plat_sizeX) &&
+            (DrawY >= platY - plat_sizeY) &&
+            (DrawY <= platY + plat_sizeY)) 
             platform_on = 1'b1; // platform_on[0] = 1'b1 
         else 
             platform_on = 1'b0;
@@ -159,12 +160,14 @@ always_ff@(posedge Reset)
     
     logic platform_on1; 
     assign platY1 = 10'd060;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc1
-         if ((DrawX >= platX1 - plat_size) &&
-            (DrawX <= platX1 + plat_size) &&
-            (DrawY >= platY1 - plat_size) &&
-            (DrawY <= platY1 + plat_size)) 
+         if ((DrawX >= platX1 - plat_sizeX) &&
+            (DrawX <= platX1 + plat_sizeX) &&
+            (DrawY >= platY1 - plat_sizeY) &&
+            (DrawY <= platY1 + plat_sizeY)) 
             platform_on1 = 1'b1;
         else 
             platform_on1 = 1'b0;
@@ -172,12 +175,14 @@ always_ff@(posedge Reset)
 
     logic platform_on2;  
     assign platY2 = 10'd090;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc2
-         if ((DrawX >= platX2 - plat_size) &&
-            (DrawX <= platX2 + plat_size) &&
-            (DrawY >= platY2 - plat_size) &&
-            (DrawY <= platY2 + plat_size)) 
+         if ((DrawX >= platX2 - plat_sizeX) &&
+            (DrawX <= platX2 + plat_sizeX) &&
+            (DrawY >= platY2 - plat_sizeY) &&
+            (DrawY <= platY2 + plat_sizeY)) 
             platform_on2 = 1'b1;
         else 
             platform_on2 = 1'b0;
@@ -185,12 +190,14 @@ always_ff@(posedge Reset)
 
     logic platform_on3; 
     assign platY3 = 10'd0120;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc3
-         if ((DrawX >= platX3 - plat_size) &&
-            (DrawX <= platX3 + plat_size) &&
-            (DrawY >= platY3 - plat_size) &&
-            (DrawY <= platY3 + plat_size)) 
+         if ((DrawX >= platX3 - plat_sizeX) &&
+            (DrawX <= platX3 + plat_sizeX) &&
+            (DrawY >= platY3 - plat_sizeY) &&
+            (DrawY <= platY3 + plat_sizeY)) 
             platform_on3 = 1'b1;
         else 
             platform_on3 = 1'b0;
@@ -198,12 +205,14 @@ always_ff@(posedge Reset)
 
     logic platform_on4; 
     assign platY4 = 10'd150;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc4
-         if ((DrawX >= platX4 - plat_size) &&
-            (DrawX <= platX4 + plat_size) &&
-            (DrawY >= platY4 - plat_size) &&
-            (DrawY <= platY4 + plat_size)) 
+         if ((DrawX >= platX4 - plat_sizeX) &&
+            (DrawX <= platX4 + plat_sizeX) &&
+            (DrawY >= platY4 - plat_sizeY) &&
+            (DrawY <= platY4 + plat_sizeY)) 
             platform_on4 = 1'b1;
         else 
             platform_on4 = 1'b0;
@@ -211,12 +220,14 @@ always_ff@(posedge Reset)
 
    logic platform_on5; 
     assign platY5 = 10'd180;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc5
-         if ((DrawX >= platX5 - plat_size) &&
-            (DrawX <= platX5 + plat_size) &&
-            (DrawY >= platY5 - plat_size) &&
-            (DrawY <= platY5 + plat_size)) 
+         if ((DrawX >= platX5 - plat_sizeX) &&
+            (DrawX <= platX5 + plat_sizeX) &&
+            (DrawY >= platY5 - plat_sizeY) &&
+            (DrawY <= platY5 + plat_sizeY)) 
             platform_on5 = 1'b1;
         else 
             platform_on5 = 1'b0;
@@ -224,12 +235,14 @@ always_ff@(posedge Reset)
 
     logic platform_on6; 
     assign platY6 = 10'd210;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc6
-         if ((DrawX >= platX6 - plat_size) &&
-            (DrawX <= platX6 + plat_size) &&
-            (DrawY >= platY6 - plat_size) &&
-            (DrawY <= platY6 + plat_size)) 
+         if ((DrawX >= platX6 - plat_sizeX) &&
+            (DrawX <= platX6 + plat_sizeX) &&
+            (DrawY >= platY6 - plat_sizeY) &&
+            (DrawY <= platY6 + plat_sizeY)) 
             platform_on6 = 1'b1;
         else 
             platform_on6 = 1'b0;
@@ -237,12 +250,14 @@ always_ff@(posedge Reset)
 
     logic platform_on7;  
     assign platY7 = 10'd240;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc7
-         if ((DrawX >= platX7 - plat_size) &&
-            (DrawX <= platX7 + plat_size) &&
-            (DrawY >= platY7 - plat_size) &&
-            (DrawY <= platY7 + plat_size)) 
+         if ((DrawX >= platX7 - plat_sizeX) &&
+            (DrawX <= platX7 + plat_sizeX) &&
+            (DrawY >= platY7 - plat_sizeY) &&
+            (DrawY <= platY7 + plat_sizeY)) 
             platform_on7 = 1'b1;
         else 
             platform_on7 = 1'b0;
@@ -250,12 +265,14 @@ always_ff@(posedge Reset)
 
     logic platform_on8; 
     assign platY8 = 10'd270;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc8
-         if ((DrawX >= platX8 - plat_size) &&
-            (DrawX <= platX8 + plat_size) &&
-            (DrawY >= platY8 - plat_size) &&
-            (DrawY <= platY8 + plat_size)) 
+         if ((DrawX >= platX8 - plat_sizeX) &&
+            (DrawX <= platX8 + plat_sizeX) &&
+            (DrawY >= platY8 - plat_sizeY) &&
+            (DrawY <= platY8 + plat_sizeY)) 
             platform_on8 = 1'b1;
         else 
             platform_on8 = 1'b0;
@@ -263,12 +280,14 @@ always_ff@(posedge Reset)
 
     logic platform_on9; 
     assign platY9 = 10'd300;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc9
-         if ((DrawX >= platX9 - plat_size) &&
-            (DrawX <= platX9 + plat_size) &&
-            (DrawY >= platY9 - plat_size) &&
-            (DrawY <= platY9 + plat_size)) 
+         if ((DrawX >= platX9 - plat_sizeX) &&
+            (DrawX <= platX9 + plat_sizeX) &&
+            (DrawY >= platY9 - plat_sizeY) &&
+            (DrawY <= platY9 + plat_sizeY)) 
             platform_on9 = 1'b1;
         else 
             platform_on9 = 1'b0;
@@ -276,12 +295,14 @@ always_ff@(posedge Reset)
 
     logic platform_on10; 
     assign platY10 = 10'd330;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc10
-         if ((DrawX >= platX10 - plat_size) &&
-            (DrawX <= platX10 + plat_size) &&
-            (DrawY >= platY10 - plat_size) &&
-            (DrawY <= platY10 + plat_size)) 
+         if ((DrawX >= platX10 - plat_sizeX) &&
+            (DrawX <= platX10 + plat_sizeX) &&
+            (DrawY >= platY10 - plat_sizeY) &&
+            (DrawY <= platY10 + plat_sizeY)) 
             platform_on10 = 1'b1;
         else 
             platform_on10 = 1'b0;
@@ -289,12 +310,14 @@ always_ff@(posedge Reset)
 
     logic platform_on11; 
     assign platY11 = 10'd360;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc11
-         if ((DrawX >= platX11 - plat_size) &&
-            (DrawX <= platX11 + plat_size) &&
-            (DrawY >= platY11 - plat_size) &&
-            (DrawY <= platY11 + plat_size)) 
+         if ((DrawX >= platX11 - plat_sizeX) &&
+            (DrawX <= platX11 + plat_sizeX) &&
+            (DrawY >= platY11 - plat_sizeY) &&
+            (DrawY <= platY11 + plat_sizeY)) 
             platform_on11 = 1'b1;
         else 
             platform_on11 = 1'b0;
@@ -302,12 +325,14 @@ always_ff@(posedge Reset)
 
     logic platform_on12; 
     assign platY12 = 10'd390;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc12
-         if ((DrawX >= platX12 - plat_size) &&
-            (DrawX <= platX12 + plat_size) &&
-            (DrawY >= platY12 - plat_size) &&
-            (DrawY <= platY12 + plat_size)) 
+         if ((DrawX >= platX12 - plat_sizeX) &&
+            (DrawX <= platX12 + plat_sizeX) &&
+            (DrawY >= platY12 - plat_sizeY) &&
+            (DrawY <= platY12 + plat_sizeY)) 
             platform_on12 = 1'b1;
         else 
             platform_on12 = 1'b0;
@@ -316,12 +341,14 @@ always_ff@(posedge Reset)
 
     logic platform_on13;  
     assign platY13 = 10'd420;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc13
-         if ((DrawX >= platX13 - plat_size) &&
-            (DrawX <= platX13 + plat_size) &&
-            (DrawY >= platY13 - plat_size) &&
-            (DrawY <= platY13 + plat_size)) 
+         if ((DrawX >= platX13 - plat_sizeX) &&
+            (DrawX <= platX13 + plat_sizeX) &&
+            (DrawY >= platY13 - plat_sizeY) &&
+            (DrawY <= platY13 + plat_sizeY)) 
             platform_on13 = 1'b1;
         else 
             platform_on13 = 1'b0;
@@ -329,12 +356,14 @@ always_ff@(posedge Reset)
 
     logic platform_on14; 
     assign platY14 = 10'd450;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc14
-         if ((DrawX >= platX14 - plat_size) &&
-            (DrawX <= platX14 + plat_size) &&
-            (DrawY >= platY14 - plat_size) &&
-            (DrawY <= platY14 + plat_size)) 
+         if ((DrawX >= platX14 - plat_sizeX) &&
+            (DrawX <= platX14 + plat_sizeX) &&
+            (DrawY >= platY14 - plat_sizeY) &&
+            (DrawY <= platY14 + plat_sizeY)) 
             platform_on14 = 1'b1;
         else 
             platform_on14 = 1'b0;
@@ -342,12 +371,14 @@ always_ff@(posedge Reset)
 
     logic platform_on15; 
     assign platY15 = 10'd475;
+    assign plat_sizeX = 9'd10;
+    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc15
-         if ((DrawX >= platX15 - plat_size) &&
-            (DrawX <= platX15 + plat_size) &&
-            (DrawY >= platY15 - plat_size) &&
-            (DrawY <= platY15 + plat_size)) 
+         if ((DrawX >= platX15 - plat_sizeX) &&
+            (DrawX <= platX15 + plat_sizeX) &&
+            (DrawY >= platY15 - plat_sizeY) &&
+            (DrawY <= platY15 + plat_sizeY)) 
             platform_on15 = 1'b1;
         else 
             platform_on15 = 1'b0;
