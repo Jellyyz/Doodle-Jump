@@ -67,6 +67,8 @@ initial begin
 end 
 
 always_ff @ (posedge Reset or posedge frame_clk)
+	assign platY = 9'd090;
+    assign plat_size = 9'd4;
     begin
         if (Reset)  // Asynchronous Reset
         begin 

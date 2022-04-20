@@ -1,4 +1,4 @@
-// Modified for final project, Ranpo & Gally 
+// Modified for final project, Feng & Gally 
 
 
 module  jumplogic( input Reset, frame_clk, Clk,
@@ -7,10 +7,27 @@ module  jumplogic( input Reset, frame_clk, Clk,
 			   output loadplat, 
                output [9:0]  DoodleX, DoodleY, DoodleS, 
 			   output [9:0]  CannonX, CannonY, CannonS, 
-			   output [2:0] outstate);
-    
+			   output [2:0] outstate,
+				input [8:0]platX, platY, plat_size,
+				input [9:0]platX1, platY1, 
+				input [9:0]platX2, platY2, 
+				input [9:0]platX3, platY3, 
+				input [9:0]platX4, platY4, 
+				input [9:0]platX5, platY5, 
+				input [9:0]platX6, platY6, 
+				input [9:0]platX7, platY7, 
+				input [9:0]platX8, platY8, 
+				input [9:0]platX9, platY9, 
+				input [9:0]platX10, platY10, 
+				input [9:0]platX11, platY11, 
+				input [9:0]platX12, platY12, 
+				input [9:0]platX13, platY13, 
+				input [9:0]platX14, platY14, 
+				input [9:0]platX15, platY15);
+
     logic [9:0] Doodle_X_Pos, Doodle_X_Motion, Doodle_Y_Pos, Doodle_Y_Motion, Doodle_Size;
-	 
+	
+
     parameter [9:0] Screen_X_Center=320;  // Center position on the X axis
     parameter [9:0] Screen_Y_Center=240;  // Center position on the Y axis
     
@@ -71,6 +88,7 @@ end
 
 always_ff @ (posedge Reset or posedge frame_clk)
     begin
+		logic [8:0] PlatY, Plat_Size;
         if (Reset)  // Asynchronous Reset
         begin 
             	Doodle_Y_Motion = 10'h0; //Doodle_Y_Step;
@@ -93,7 +111,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 
 			3'b001: 
 			begin
-					
+				//if doodle position hits the top of the block while falling
 				
 				// on the ground and in motion must stop the Doodle 
 				if(Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max)
@@ -109,7 +127,23 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				if(Doodle_Y_Motion == 10'h0)
 				begin 
 					// if the Doodle is currently on the ground
-					if(Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max)
+					if(Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY + plat_size) && (Doodle_Y_Motion <= 0) && (platX + plat_size >= Doodle_X_Pos) && (platX - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY1 + plat_size) && (Doodle_Y_Motion <= 0) && (platX1 + plat_size >= Doodle_X_Pos) && (platX1 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY2 + plat_size) && (Doodle_Y_Motion <= 0) && (platX2 + plat_size >= Doodle_X_Pos) && (platX2 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY3 + plat_size) && (Doodle_Y_Motion <= 0) && (platX3 + plat_size >= Doodle_X_Pos) && (platX3 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY4 + plat_size) && (Doodle_Y_Motion <= 0) && (platX4 + plat_size >= Doodle_X_Pos) && (platX4 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY5 + plat_size) && (Doodle_Y_Motion <= 0) && (platX5 + plat_size >= Doodle_X_Pos) && (platX5 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY6 + plat_size) && (Doodle_Y_Motion <= 0) && (platX6 + plat_size >= Doodle_X_Pos) && (platX6 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY7 + plat_size) && (Doodle_Y_Motion <= 0) && (platX7 + plat_size >= Doodle_X_Pos) && (platX7 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY8 + plat_size) && (Doodle_Y_Motion <= 0) && (platX8 + plat_size >= Doodle_X_Pos) && (platX8 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY9 + plat_size) && (Doodle_Y_Motion <= 0) && (platX9 + plat_size >= Doodle_X_Pos) && (platX9 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY10 + plat_size) && (Doodle_Y_Motion <= 0) && (platX10 + plat_size >= Doodle_X_Pos) && (platX10 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY11 + plat_size) && (Doodle_Y_Motion <= 0) && (platX11 + plat_size >= Doodle_X_Pos) && (platX11 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY12 + plat_size) && (Doodle_Y_Motion <= 0) && (platX12 + plat_size >= Doodle_X_Pos) && (platX12 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY13 + plat_size) && (Doodle_Y_Motion <= 0) && (platX13 + plat_size >= Doodle_X_Pos) && (platX13 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY14 + plat_size) && (Doodle_Y_Motion <= 0) && (platX14 + plat_size >= Doodle_X_Pos) && (platX14 - plat_size <= Doodle_X_Pos)) |
+					  ((Doodle_Y_Pos + Doodle_Size >= platY15 + plat_size) && (Doodle_Y_Motion <= 0) && (platX15 + plat_size >= Doodle_X_Pos) && (platX15 - plat_size <= Doodle_X_Pos)))
 						begin
 							jump_reset <= 1'b0; 
 							jump_enable <= 1'b1; 

@@ -19,8 +19,27 @@ module  color_mapper ( input Clk, Reset, frame_clk,
                        input        [6:0] keycode, 
                        input        [2:0] outstate,
                        input        [9:0] CannonX, CannonY, CannonS,  
-                       output logic [7:0]  Red, Green, Blue );
-    
+                       output logic [7:0]  Red, Green, Blue,
+                        output [8:0]platX, platY, plat_size,
+                        output [9:0]platX1, platY1, 
+                        output [9:0]platX2, platY2, 
+                        output [9:0]platX3, platY3, 
+                        output [9:0]platX4, platY4, 
+                        output [9:0]platX5, platY5, 
+                        output [9:0]platX6, platY6, 
+                        output [9:0]platX7, platY7, 
+                        output [9:0]platX8, platY8, 
+                        output [9:0]platX9, platY9, 
+                        output [9:0]platX10, platY10, 
+                        output [9:0]platX11, platY11, 
+                        output [9:0]platX12, platY12, 
+                        output [9:0]platX13, platY13, 
+                        output [9:0]platX14, platY14, 
+                        output [9:0]platX15, platY15
+                       );
+     
+
+
     logic ball_on;
 
 
@@ -125,7 +144,6 @@ always_ff@(posedge Reset)
 
 //~~~~~~~~~~PLATFORMS~~~~~~~~~~~~~~~~~~~~~~~
     logic platform_on; 
-    logic [8:0] platX, platY, plat_size; 
     assign platY = 9'd030;
     assign plat_size = 9'd4;
     always_comb
@@ -140,7 +158,6 @@ always_ff@(posedge Reset)
      end 
     
     logic platform_on1; 
-    logic [9:0] platX1, platY1;
     assign platY1 = 10'd060;
     always_comb
     begin:Platform_on_proc1
@@ -153,8 +170,7 @@ always_ff@(posedge Reset)
             platform_on1 = 1'b0;
      end 
 
-    logic platform_on2; 
-    logic [9:0] platX2, platY2; 
+    logic platform_on2;  
     assign platY2 = 10'd090;
     always_comb
     begin:Platform_on_proc2
@@ -168,7 +184,6 @@ always_ff@(posedge Reset)
      end 
 
     logic platform_on3; 
-    logic [9:0] platX3, platY3; 
     assign platY3 = 10'd0120;
     always_comb
     begin:Platform_on_proc3
@@ -182,7 +197,6 @@ always_ff@(posedge Reset)
      end 
 
     logic platform_on4; 
-    logic [9:0] platX4, platY4;  
     assign platY4 = 10'd150;
     always_comb
     begin:Platform_on_proc4
@@ -196,7 +210,6 @@ always_ff@(posedge Reset)
      end 
 
    logic platform_on5; 
-    logic [9:0] platX5, platY5; 
     assign platY5 = 10'd180;
     always_comb
     begin:Platform_on_proc5
@@ -210,7 +223,6 @@ always_ff@(posedge Reset)
      end 
 
     logic platform_on6; 
-    logic [9:0] platX6, platY6;  
     assign platY6 = 10'd210;
     always_comb
     begin:Platform_on_proc6
@@ -223,8 +235,7 @@ always_ff@(posedge Reset)
             platform_on6 = 1'b0;
      end 
 
-    logic platform_on7; 
-    logic [9:0] platX7, platY7; 
+    logic platform_on7;  
     assign platY7 = 10'd240;
     always_comb
     begin:Platform_on_proc7
@@ -238,7 +249,6 @@ always_ff@(posedge Reset)
      end 
 
     logic platform_on8; 
-    logic [9:0] platX8, platY8; 
     assign platY8 = 10'd270;
     always_comb
     begin:Platform_on_proc8
@@ -252,7 +262,6 @@ always_ff@(posedge Reset)
      end
 
     logic platform_on9; 
-    logic [9:0] platX9, platY9; 
     assign platY9 = 10'd300;
     always_comb
     begin:Platform_on_proc9
@@ -266,7 +275,6 @@ always_ff@(posedge Reset)
      end
 
     logic platform_on10; 
-    logic [9:0] platX10, platY10; 
     assign platY10 = 10'd330;
     always_comb
     begin:Platform_on_proc10
@@ -280,7 +288,6 @@ always_ff@(posedge Reset)
      end
 
     logic platform_on11; 
-    logic [9:0] platX11, platY11;  
     assign platY11 = 10'd360;
     always_comb
     begin:Platform_on_proc11
@@ -294,7 +301,6 @@ always_ff@(posedge Reset)
      end
 
     logic platform_on12; 
-    logic [9:0] platX12, platY12; 
     assign platY12 = 10'd390;
     always_comb
     begin:Platform_on_proc12
@@ -308,8 +314,7 @@ always_ff@(posedge Reset)
      end
 
 
-    logic platform_on13; 
-    logic [9:0] platX13, platY13; 
+    logic platform_on13;  
     assign platY13 = 10'd420;
     always_comb
     begin:Platform_on_proc13
@@ -323,7 +328,6 @@ always_ff@(posedge Reset)
      end
 
     logic platform_on14; 
-    logic [9:0] platX14, platY14; 
     assign platY14 = 10'd450;
     always_comb
     begin:Platform_on_proc14
@@ -337,7 +341,6 @@ always_ff@(posedge Reset)
      end
 
     logic platform_on15; 
-    logic [9:0] platX15, platY15; 
     assign platY15 = 10'd475;
     always_comb
     begin:Platform_on_proc15

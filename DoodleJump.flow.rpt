@@ -1,9 +1,5 @@
 Flow report for DoodleJump
-<<<<<<< HEAD
-Sun Apr 17 22:34:07 2022
-=======
-Mon Apr 18 00:10:46 2022
->>>>>>> 136f445a1f857c7a47022c2dc45a98629cc45a2a
+Tue Apr 19 19:41:15 2022
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -44,35 +40,24 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-<<<<<<< HEAD
-; Flow Status                        ; Successful - Sun Apr 17 22:33:57 2022       ;
-=======
-; Flow Status                        ; Successful - Mon Apr 18 00:10:41 2022       ;
->>>>>>> 136f445a1f857c7a47022c2dc45a98629cc45a2a
+; Flow Status                        ; Flow Failed - Tue Apr 19 19:41:15 2022      ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; DoodleJump                                  ;
 ; Top-level Entity Name              ; doodlejump                                  ;
 ; Family                             ; MAX 10                                      ;
 ; Device                             ; 10M50DAF484C7G                              ;
 ; Timing Models                      ; Final                                       ;
-<<<<<<< HEAD
-; Total logic elements               ; 4,274 / 49,760 ( 9 % )                      ;
-;     Total combinational functions  ; 3,703 / 49,760 ( 7 % )                      ;
-;     Dedicated logic registers      ; 2,531 / 49,760 ( 5 % )                      ;
-; Total registers                    ; 2600                                        ;
-=======
-; Total logic elements               ; 5,041 / 49,760 ( 10 % )                     ;
-;     Total combinational functions  ; 4,408 / 49,760 ( 9 % )                      ;
-;     Dedicated logic registers      ; 2,806 / 49,760 ( 6 % )                      ;
-; Total registers                    ; 2875                                        ;
->>>>>>> 136f445a1f857c7a47022c2dc45a98629cc45a2a
-; Total pins                         ; 141 / 360 ( 39 % )                          ;
-; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 11,392 / 1,677,312 ( < 1 % )                ;
-; Embedded Multiplier 9-bit elements ; 0 / 288 ( 0 % )                             ;
-; Total PLLs                         ; 1 / 4 ( 25 % )                              ;
-; UFM blocks                         ; 0 / 1 ( 0 % )                               ;
-; ADC blocks                         ; 0 / 2 ( 0 % )                               ;
+; Total logic elements               ; N/A until Partition Merge                   ;
+;     Total combinational functions  ; N/A until Partition Merge                   ;
+;     Dedicated logic registers      ; N/A until Partition Merge                   ;
+; Total registers                    ; N/A until Partition Merge                   ;
+; Total pins                         ; N/A until Partition Merge                   ;
+; Total virtual pins                 ; N/A until Partition Merge                   ;
+; Total memory bits                  ; N/A until Partition Merge                   ;
+; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                   ;
+; Total PLLs                         ; N/A until Partition Merge                   ;
+; UFM blocks                         ; N/A until Partition Merge                   ;
+; ADC blocks                         ; N/A until Partition Merge                   ;
 +------------------------------------+---------------------------------------------+
 
 
@@ -81,11 +66,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-<<<<<<< HEAD
-; Start date & time ; 04/17/2022 22:32:13 ;
-=======
-; Start date & time ; 04/18/2022 00:09:49 ;
->>>>>>> 136f445a1f857c7a47022c2dc45a98629cc45a2a
+; Start date & time ; 04/19/2022 19:40:30 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DoodleJump          ;
 +-------------------+---------------------+
@@ -96,11 +77,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+------------------------------------------------------------------+---------------+-------------------+------------+
 ; Assignment Name                     ; Value                                                            ; Default Value ; Entity Name       ; Section Id ;
 +-------------------------------------+------------------------------------------------------------------+---------------+-------------------+------------+
-<<<<<<< HEAD
-; COMPILER_SIGNATURE_ID               ; 222737053957167.165025273255560                                  ; --            ; --                ; --         ;
-=======
-; COMPILER_SIGNATURE_ID               ; 145862336529901.165025858824804                                  ; --            ; --                ; --         ;
->>>>>>> 136f445a1f857c7a47022c2dc45a98629cc45a2a
+; COMPILER_SIGNATURE_ID               ; 222737053957167.165041522910628                                  ; --            ; --                ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                                               ; --            ; --                ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                                                ; --            ; --                ; --         ;
 ; MISC_FILE                           ; doodlejump_soc/synthesis/../doodlejump_soc.cmp                   ; --            ; --                ; --         ;
@@ -130,19 +107,8 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-<<<<<<< HEAD
-; Analysis & Synthesis ; 00:01:01     ; 1.0                     ; 5046 MB             ; 00:01:21                           ;
-; Fitter               ; 00:00:27     ; 1.8                     ; 6306 MB             ; 00:00:52                           ;
-; Assembler            ; 00:00:05     ; 1.0                     ; 4704 MB             ; 00:00:05                           ;
-; Timing Analyzer      ; 00:00:09     ; 2.8                     ; 4982 MB             ; 00:00:15                           ;
-; Total                ; 00:01:42     ; --                      ; --                  ; 00:02:33                           ;
-=======
-; Analysis & Synthesis ; 00:00:28     ; 1.0                     ; 5011 MB             ; 00:00:48                           ;
-; Fitter               ; 00:00:16     ; 1.5                     ; 6014 MB             ; 00:00:33                           ;
-; Assembler            ; 00:00:03     ; 1.0                     ; 4708 MB             ; 00:00:03                           ;
-; Timing Analyzer      ; 00:00:04     ; 2.4                     ; 4936 MB             ; 00:00:09                           ;
-; Total                ; 00:00:51     ; --                      ; --                  ; 00:01:33                           ;
->>>>>>> 136f445a1f857c7a47022c2dc45a98629cc45a2a
+; Analysis & Synthesis ; 00:00:47     ; 1.0                     ; 4988 MB             ; 00:01:06                           ;
+; Total                ; 00:00:47     ; --                      ; --                  ; 00:01:06                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -152,9 +118,6 @@ refer to the applicable agreement for further details.
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
 ; Analysis & Synthesis ; RanpoZ           ; Windows 10 ; 10.0       ; x86_64         ;
-; Fitter               ; RanpoZ           ; Windows 10 ; 10.0       ; x86_64         ;
-; Assembler            ; RanpoZ           ; Windows 10 ; 10.0       ; x86_64         ;
-; Timing Analyzer      ; RanpoZ           ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 
@@ -162,9 +125,6 @@ refer to the applicable agreement for further details.
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off DoodleJump -c DoodleJump
-quartus_fit --read_settings_files=off --write_settings_files=off DoodleJump -c DoodleJump
-quartus_asm --read_settings_files=off --write_settings_files=off DoodleJump -c DoodleJump
-quartus_sta DoodleJump -c DoodleJump
 
 
 

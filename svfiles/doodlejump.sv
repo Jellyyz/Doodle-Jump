@@ -66,7 +66,22 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [9:0] cannonxsig, cannonysig, cannonsizesig; 
 	logic [7:0] Red, Blue, Green;
 	logic [7:0] keycode;
-
+	logic [8:0] platX, platY, plat_size;
+	logic [9:0] platX1, platY1;
+	logic [9:0] platX2, platY2;
+	logic [9:0] platX3, platY3;
+	logic [9:0] platX4, platY4;
+	logic [9:0] platX5, platY5;
+	logic [9:0] platX6, platY6;
+	logic [9:0] platX7, platY7;
+	logic [9:0] platX8, platY8;
+	logic [9:0] platX9, platY9;
+	logic [9:0] platX10, platY10;
+	logic [9:0] platX11, platY11;
+	logic [9:0] platX12, platY12;
+	logic [9:0] platX13, platY13;
+	logic [9:0] platX14, platY14;
+	logic [9:0] platX15, platY15;
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -190,11 +205,17 @@ jumplogic jumplogic(
 	.Reset(Reset_h),
 	.frame_clk(VGA_VS), 
 	.keycode(keycode),    // 8 bits 
-		
+	
+	.platX(platX[8:0]), .platY(platY[8:0]), .plat_size(plat_size[8:0]),	//9 btis
+
 	.DoodleX(ballxsig[9:0]), .DoodleY(ballysig[9:0]), .DoodleS(ballsizesig[9:0]),  // 10 bits
 	.CannonX(cannonxsig[9:0]), .CannonY(cannonysig[9:0]), .CannonS(cannonsizesig[9:0]), 
 	.outstate(outstate[2:0]),
-	.loadplat(loadplat)
+	.loadplat(loadplat), 
+	.platX1(platX1[9:0]), .platX2(platX2[9:0]), .platX3(platX3[9:0]), .platX4(platX4[9:0]), .platX5(platX5[9:0]), .platX6(platX6[9:0]), .platX7(platX7[9:0]), .platX8(platX8[9:0]),
+	.platX9(platX9[9:0]), .platX10(platX10[9:0]), .platX11(platX11[9:0]), .platX12(platX12[9:0]), .platX13(platX13[9:0]), .platX14(platX14[9:0]), .platX15(platX15[9:0]),
+	.platY1(platX1[9:0]), .platY2(platX2[9:0]), .platY3(platX3[9:0]), .platY4(platX4[9:0]), .platY5(platX5[9:0]), .platY6(platX6[9:0]), .platY7(platX7[9:0]), .platY8(platX8[9:0]),
+	.platY9(platX9[9:0]), .platY10(platX10[9:0]), .platY11(platX11[9:0]), .platY12(platX12[9:0]), .platY13(platX13[9:0]), .platY14(platX14[9:0]), .platY15(platX15[9:0])
 ); 
 
 color_mapper color(
@@ -208,20 +229,23 @@ color_mapper color(
 	.Ball_size(ballsizesig[9:0]),
 	.outstate(outstate[2:0]),
 	.loadplat(loadplat), 
-
+	.platX1(platX1[9:0]), .platX2(platX2[9:0]), .platX3(platX3[9:0]), .platX4(platX4[9:0]), .platX5(platX5[9:0]), .platX6(platX6[9:0]), .platX7(platX7[9:0]), .platX8(platX8[9:0]),
+	.platX9(platX9[9:0]), .platX10(platX10[9:0]), .platX11(platX11[9:0]), .platX12(platX12[9:0]), .platX13(platX13[9:0]), .platX14(platX14[9:0]), .platX15(platX15[9:0]),
+	.platY1(platX1[9:0]), .platY2(platX2[9:0]), .platY3(platX3[9:0]), .platY4(platX4[9:0]), .platY5(platX5[9:0]), .platY6(platX6[9:0]), .platY7(platX7[9:0]), .platY8(platX8[9:0]),
+	.platY9(platX9[9:0]), .platY10(platX10[9:0]), .platY11(platX11[9:0]), .platY12(platX12[9:0]), .platY13(platX13[9:0]), .platY14(platX14[9:0]), .platY15(platX15[9:0]),
 	
 	.keycode(keycode), 
 	.CannonX(cannonxsig[9:0]), 
 	.CannonY(cannonysig[9:0]), 
 	.CannonS(cannonsizesig[9:0]), 
 
-
+	.platX(platX[8:0]), .platY(platY[8:0]), .plat_size(plat_size[8:0]),	//9 btis
 	
 	// 8 bits 
 	.Red(Red[7:0]), 
 	.Green(Green[7:0]), 
 	.Blue(Blue[7:0])
-
+	
 	
 );
 

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy
-<<<<<<< HEAD
- date="2022.04.17.22:32:56"
+ date="2022.04.19.19:41:09"
  outputDirectory="C:/Users/erick/Desktop/ECE_385/Final_Project/FP/Doodle-Jump/db/ip/sld051e1348/">
-=======
- date="2022.04.18.00:10:07"
- outputDirectory="C:/Users/gally/Desktop/doodlejump/db/ip/sld051e1348/">
->>>>>>> 136f445a1f857c7a47022c2dc45a98629cc45a2a
  <perimeter>
   <parameter
      name="AUTO_DEVICE_FAMILY"
