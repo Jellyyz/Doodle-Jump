@@ -23,9 +23,10 @@ module  jumplogic( input Reset, frame_clk, Clk,
 					output loadplat, 
 					output [9:0]  DoodleX, DoodleY, DoodleS, 
 					output [9:0]  CannonX, CannonY, CannonS, 
-					output [2:0] outstate);
+					output [2:0] outstate,
+					output [9:0] Doodle_Y_Motion);
 
-    logic [9:0] Doodle_X_Pos, Doodle_X_Motion, Doodle_Y_Pos, Doodle_Y_Motion, Doodle_Size;
+    logic [9:0] Doodle_X_Pos, Doodle_X_Motion, Doodle_Y_Pos, Doodle_Size;
 	
 
     parameter [9:0] Screen_X_Center=320;  // Center position on the X axis
@@ -134,8 +135,15 @@ always_ff @ (posedge Reset or posedge frame_clk)
 
 				else if(Doodle_Y_Motion != 10'h0)
 				begin 
-					// if the doodle is moving downwards  
-					if(Doodle_Y_Motion > 10'h0)
+					// if the doodle is moving upwards 
+					if(Doodle_Y_Motion[7:4] == 4'hF)
+						begin 
+							jump_reset <= 0; 
+							jump_enable <= 1; 
+							Doodle_Y_Motion += counting2[1:0]; 
+						end 
+					// if the doodle is moving downwards 
+					else if(Doodle_Y_Motion > 10'h0 && Doodle_Y_Motion[7:4] != 4'hF)
 						begin 
 							// if the doodle is moving downwards and hitting the ground or platform 
 							if((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) ||
@@ -169,12 +177,6 @@ always_ff @ (posedge Reset or posedge frame_clk)
 								end 
 						end 
 					// if the doodle is moving upwards 
-					else if(Doodle_Y_Motion < 10'h0)
-						begin 
-							jump_reset <= 0; 
-							jump_enable <= 1; 
-							Doodle_Y_Motion += counting2[1:0]; 
-						end 
 				end 
 
 				unique case(keycode)

@@ -82,6 +82,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [9:0] platX13, platY13;
 	logic [9:0] platX14, platY14;
 	logic [9:0] platX15, platY15;
+	logic [9:0] Doodle_Y_Motion;
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -104,10 +105,10 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign ARDUINO_IO[6] = 1'b1;
 	
 	//HEX drivers to convert numbers to HEX output
-	HexDriver hex_driver4 (hex_num_4, HEX4[6:0]);
+	HexDriver hex_driver4 (Doodle_Y_Motion[7:4], HEX4[6:0]);
 	assign HEX4[7] = 1'b1;
 	
-	HexDriver hex_driver3 (hex_num_3, HEX3[6:0]);
+	HexDriver hex_driver3 (Doodle_Y_Motion[3:0], HEX3[6:0]);
 	assign HEX3[7] = 1'b1;
 	
 	HexDriver hex_driver1 (hex_num_1, HEX1[6:0]);
@@ -181,7 +182,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 		.keycode_export(keycode)
 		
 	 );
-//assign keycode[7:0] = SW[7:0];
+
 
 //instantiate a vga_controller, ball, and color_mapper here with the ports.
 logic pxl_clk;
@@ -207,6 +208,10 @@ jumplogic jumplogic(
 	.keycode(keycode),    // 8 bits 
 	
 	.platX(platX[8:0]), .platY(platY[8:0]), .plat_sizeX(plat_sizeX[8:0]), .plat_sizeY(plat_sizeY[8:0]),	//9 btis
+
+	.Doodle_Y_Motion(Doodle_Y_Motion[9:0]),
+
+
 
 	.DoodleX(ballxsig[9:0]), .DoodleY(ballysig[9:0]), .DoodleS(ballsizesig[9:0]),  // 10 bits
 	.CannonX(cannonxsig[9:0]), .CannonY(cannonysig[9:0]), .CannonS(cannonsizesig[9:0]), 
