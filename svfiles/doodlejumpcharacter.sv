@@ -112,6 +112,8 @@ always_ff @ (posedge Reset or posedge frame_clk)
 
 			3'b001: 
 			begin
+				jump_reset <= 1;  // reset the counter for velocity 
+				jump_enable <= 0; 	// begin the convergence of velocity toward 0 
 				// if not moving then get it to start falling or start jumping 
 				if(Doodle_Y_Motion == 10'h0)
 				begin 
