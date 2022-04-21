@@ -219,7 +219,7 @@ assign testY15 = 9'd475 ;
 logic [8:0]ImY,ImY1,ImY2,ImY3,ImY4,ImY5,ImY6,ImY7,ImY8,ImY9,ImY10,ImY11,ImY12,ImY13,ImY14,ImY15;
  
 
-always_ff@(posedge frame_clk or posedge loadplat) 
+always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en) 
     begin
         // initially load all platforms 
         if(loadplat)
