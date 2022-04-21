@@ -98,25 +98,6 @@ end
 always_ff @ (posedge Reset or posedge frame_clk)
 	
     begin
-		// logic [8:0] platY;
-		// logic [8:0] platY1;
-		// logic [8:0] platY2;
-		// logic [8:0] platY3;
-		// logic [8:0] platY4;
-		// logic [8:0] platY5;
-		// logic [8:0] platY6;
-		// logic [8:0] platY7;
-		// logic [8:0] platY8;
-		// logic [8:0] platY9;
-		// logic [8:0] platY10;
-		// logic [8:0] platY11;
-		// logic [8:0] platY12;
-		// logic [8:0] platY13;
-		// logic [8:0] platY14;
-		// logic [8:0] platY15;
-		// logic 		refresh_en;
-		// logic [7:0] displacement;
-		
         if (Reset)  // Asynchronous Reset
         begin 
             	Doodle_Y_Motion = 10'h0; //Doodle_Y_Step;
@@ -132,21 +113,27 @@ always_ff @ (posedge Reset or posedge frame_clk)
         else 
         begin 
 			displacement <= 0;
-			refresh_en <= 1'b0;
 			unique case(outstate)
 			3'b000:
 			begin 
-					;
+					refresh_en <= 1'b0;
 			end 
 
 			3'b001: 
 			begin
+				displacement <= (240 - Doodle_Y_Pos);
 				if (Doodle_Y_Pos <= 239)
 				begin
 					jump_reset <= 1;  // reset the counter for velocity 
 					jump_enable <= 0; 	// begin the convergence of velocity toward 0 
 					refresh_en <= 1'b1;
 				end
+				else if(Doodle_Y_Pos >= 240)
+				begin
+					jump_reset <= 1;  // reset the counter for velocity 
+					jump_enable <= 0; 	// begin the convergence of velocity toward 0 
+					refresh_en <= 1'b0;
+				end 
 				jump_reset <= 1;  // reset the counter for velocity 
 				jump_enable <= 0; 	// begin the convergence of velocity toward 0 
 				// if not moving then get it to start falling or start jumping 
@@ -229,26 +216,8 @@ always_ff @ (posedge Reset or posedge frame_clk)
 			end
 			
 			3'b011:
-			begin
-			
-				displacement <= (240 - Doodle_Y_Pos);
-					// platY  <= platY + displacement;
-					// platY1 <= platY1 + displacement;
-					// platY2 <= platY2 + displacement;
-					// platY3 <= platY3 + displacement;
-					// platY4 <= platY4 + displacement;
-					// platY5 <= platY5 + displacement;
-					// platY6 <= platY6 + displacement;
-					// platY7 <= platY7 + displacement;
-					// platY8 <= platY8 + displacement;
-					// platY9 <= platY9 + displacement;
-					// platY10 <= platY10 + displacement;
-					// platY11 <= platY11 + displacement;
-					// platY12 <= platY12 + displacement;
-					// platY13 <= platY13 + displacement;
-					// platY14 <= platY14 + displacement;
-					// platY15 <= platY15 + displacement;
-
+				begin
+					displacement <= (240 - Doodle_Y_Pos);
 				end
 
 			

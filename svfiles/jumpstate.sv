@@ -42,8 +42,8 @@ module jumpstate(
 				begin
 					if(Keycode == 8'd41) // esc 
 						Next_state = Pause; 
-					else if(refresh_en == 1'b1)
-						Next_state = Refreshing;
+					// else if(refresh_en == 1'b1)
+					// 	Next_state = Refreshing;
 					else 
 						Next_state = Game; 
 				end

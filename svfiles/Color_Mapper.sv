@@ -13,17 +13,18 @@
 //-------------------------------------------------------------------------
 
 
-module  color_mapper ( input Clk, Reset, frame_clk,
-                       input loadplat, 
-							  input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
-                       input        [6:0] keycode, 
-                       input        [2:0] outstate,
-                       input        [9:0] CannonX, CannonY, CannonS,  
-                       input [9:0] Doodle_Y_Pos,
-                       input [7:0] displacement,
-                       input       refresh_en,
-                       output logic [7:0]  Red, Green, Blue,
-                        output [8:0]platX, platY, plat_sizeX, plat_sizeY,
+module  color_mapper ( 
+                    input Clk, Reset, frame_clk,
+                    input loadplat, 
+					input        [9:0] DoodleX, DoodleY, DrawX, DrawY, Doodle_size,
+                    input        [6:0] keycode, 
+                    input        [2:0] outstate,
+                    input        [9:0] CannonX, CannonY, CannonS,  
+                    input [9:0] Doodle_Y_Pos,
+                    input [7:0] displacement,
+                    input       refresh_en,
+                    output logic [7:0]  Red, Green, Blue,
+                    output [8:0]platX, platY, plat_sizeX, plat_sizeY,
                     output [8:0]platX1, platY1, 
                     output [8:0]platX2, platY2, 
                     output [8:0]platX3, platY3, 
@@ -39,18 +40,17 @@ module  color_mapper ( input Clk, Reset, frame_clk,
                     output [8:0]platX13, platY13, 
                     output [8:0]platX14, platY14, 
                     output [8:0]platX15, platY15
-                       );  
-     
+);  
     parameter [9:0] Screen_Y_Min=0;       // Topmost point on the Y axis
     parameter [9:0] Screen_Y_Max=479;     // Bottommost point on the Y axis
 
-    logic ball_on;
+    logic Doodle_on;
 
 
     int DistX, DistY, Size;
-	assign DistX = DrawX - BallX;
-    assign DistY = DrawY - BallY;
-    assign Size = Ball_size;
+	assign DistX = DrawX - DoodleX;
+    assign DistY = DrawY - DoodleY;
+    assign Size = Doodle_size;
 	  
     logic cannon_on; 
     always_comb
@@ -65,17 +65,17 @@ module  color_mapper ( input Clk, Reset, frame_clk,
     end 
        
     always_comb
-    begin:Ball_on_proc
-         if ((DrawX >= BallX - Ball_size) &&
-            (DrawX <= BallX + Ball_size) &&
-            (DrawY >= BallY - Ball_size) &&
-            (DrawY <= BallY + Ball_size)) 
-            ball_on = 1'b1;
+    begin:Doodle_on_proc
+         if ((DrawX >= DoodleX - Doodle_size) &&
+            (DrawX <= DoodleX + Doodle_size) &&
+            (DrawY >= DoodleY - Doodle_size) &&
+            (DrawY <= DoodleY + Doodle_size)) 
+            Doodle_on = 1'b1;
         else 
-            ball_on = 1'b0;
+            Doodle_on = 1'b0;
     end 
+// these LFSR are a chain of Shift Registers that generate 16 strings of 9 bit random numbers for platX
 logic seed_en, seed_en1, seed_en2, seed_en3, seed_en4, seed_en5, seed_en6, seed_en7, seed_en8, seed_en9, seed_en10, seed_en11, seed_en12, seed_en13, seed_en14, seed_en15;
-
 LFSR LFSR(
     .Clk(Clk), .Reset(Reset), .outp(testX[8:0]), .seed_out(seed_en)
 );
@@ -125,6 +125,7 @@ LFSR LFSR15(
     .Clk(Clk), .Reset(Reset), .outp(testX15[8:0]), .seed(testX15[8:0]), .seed_in(seed_en14), .seed_out(seed_en15)
 );
  logic [8:0]testX,testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
+// this is for calculation of platX
 always_ff@(posedge loadplat)
     begin 
         if(testX >= 0 && testX<= 500)
@@ -193,6 +194,9 @@ always_ff@(posedge loadplat)
             platX15 <= testX15; 
     
     end 
+
+
+// initial Y values of the platforms before anything, should be loaded in loadplat
 logic [8:0]testY, testY1, testY2, testY3, testY4, testY5, testY6, testY7, testY8, testY9, testY10, testY11, testY12, testY13, testY14, testY15;
 assign testY = 9'd030;
 assign testY1 = 9'd060;
@@ -210,30 +214,17 @@ assign testY12 = 9'd390 ;
 assign testY13 = 9'd420 ;
 assign testY14 = 9'd450 ;
 assign testY15 = 9'd475 ;
-always_ff@(posedge loadplat)
+
+
+logic [8:0]ImY,ImY1,ImY2,ImY3,ImY4,ImY5,ImY6,ImY7,ImY8,ImY9,ImY10,ImY11,ImY12,ImY13,ImY14,ImY15;
+ 
+
+always_ff@(posedge frame_clk or posedge loadplat) 
     begin
-        if(refresh_en == 1'b1)
+        // initially load all platforms 
+        if(loadplat)
             begin
-                platY  <= testY + displacement;
-			    platY1 <= testY1 + displacement;
-			    platY2 <= testY2 + displacement;
-			    platY3 <= testY3 + displacement;
-			    platY4 <= testY4 + displacement;
-			    platY5 <= testY5 + displacement;
-			    platY6 <= testY6 + displacement;
-			    platY7 <= testY7 + displacement;
-			    platY8 <= testY8 + displacement;
-			    platY9 <= testY9 + displacement;
-			    platY10 <= testY10 + displacement;
-			    platY11 <= testY11 + displacement;
-			    platY12 <= testY12 + displacement;
-			    platY13 <= testY13 + displacement;
-			    platY14 <= testY14 + displacement;
-			    platY15 <= testY15 + displacement;
-                end
-        else
-            begin
-                platY <= testY;
+                platY  <= testY;
 			    platY1 <= testY1;
 			    platY2 <= testY2;
 			    platY3 <= testY3;
@@ -249,14 +240,88 @@ always_ff@(posedge loadplat)
 			    platY13 <= testY13;
 			    platY14 <= testY14;
 			    platY15 <= testY15;
+
+                ImY  <= testY;
+			    ImY1 <= testY1;
+			    ImY2 <= testY2;
+			    ImY3 <= testY3;
+			    ImY4 <= testY4;
+			    ImY5 <= testY5;
+			    ImY6 <= testY6;
+			    ImY7 <= testY7;
+			    ImY8 <= testY8;
+			    ImY9 <= testY9;
+			    ImY10 <= testY10;
+			    ImY11 <= testY11;
+			    ImY12 <= testY12;
+			    ImY13 <= testY13;
+			    ImY14 <= testY14;
+			    ImY15 <= testY15;
+                
                 end
+        // if we have the need to refresh the platforms 
+        else if(refresh_en)
+            begin 
+                ImY <= platY + displacement;
+                ImY1 <= platY1 + displacement;
+                ImY2 <= platY2 + displacement;
+                ImY3 <= platY3 + displacement;
+                ImY4 <= platY4 + displacement;
+                ImY5 <= platY5 + displacement;
+                ImY6 <= platY6 + displacement;
+                ImY7 <= platY7 + displacement;
+                ImY8 <= platY8 + displacement;
+                ImY9 <= platY9 + displacement;
+                ImY10 <= platY10 + displacement;
+                ImY11 <= platY11 + displacement;
+                ImY12 <= platY12 + displacement;
+                ImY13 <= platY13 + displacement;
+                ImY14 <= platY14 + displacement;
+                ImY15 <= platY15 + displacement;
+                platY  = ImY;
+                platY1 = ImY1;
+                platY2 = ImY2;
+                platY3 = ImY3;
+                platY4 = ImY4;
+                platY5 = ImY5;
+                platY6 = ImY6;
+                platY7 = ImY7;
+                platY8 = ImY8;
+                platY9 = ImY9;
+                platY10 = ImY10;
+                platY11 = ImY11;
+                platY12 = ImY12;
+                platY13 = ImY13;
+                platY14 = ImY14;
+                platY15 = ImY15;
+            end 
+            
+        // if we dont need to refresh platforms 
+        else if(!refresh_en)
+            begin
+                platY <= ImY;
+			    platY1 <= ImY1;
+			    platY2 <= ImY2;
+			    platY3 <= ImY3;
+			    platY4 <= ImY4;
+			    platY5 <= ImY5;
+			    platY6 <= ImY6;
+			    platY7 <= ImY7;
+			    platY8 <= ImY8;
+			    platY9 <= ImY9;
+			    platY10 <= ImY10;
+			    platY11 <= ImY11;
+			    platY12 <= ImY12;
+			    platY13 <= ImY13;
+			    platY14 <= ImY14;
+			    platY15 <= ImY15;
+            end
     end
             
             
         
-//~~~~~~~~~~PLATFORMS~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~PLATFORMS~~~~~~~~~~~~~~~~~~~~~~~ this should cause for the platforms to be drawn on the screen 
     logic platform_on; 
-    // assign testY = 9'd030;
     assign plat_sizeX = 9'd10;
     assign plat_sizeY = 9'd4;
     always_comb
@@ -273,9 +338,6 @@ always_ff@(posedge loadplat)
     
     
     logic platform_on1; 
-    // assign testY1 = 9'd060;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
     always_comb
     begin:Platform_on_proc1
          if ((DrawX >= platX1 - plat_sizeX) &&
@@ -288,9 +350,7 @@ always_ff@(posedge loadplat)
      end 
 
     logic platform_on2;  
-    // assign testY2 = 9'd090 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+ 
     always_comb
     begin:Platform_on_proc2
          if ((DrawX >= platX2 - plat_sizeX) &&
@@ -304,8 +364,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on3; 
     // assign testY3 = 9'd0120 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+       
     always_comb
     begin:Platform_on_proc3
          if ((DrawX >= platX3 - plat_sizeX) &&
@@ -319,8 +378,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on4; 
     // assign testY4 = 9'd150 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+       
     always_comb
     begin:Platform_on_proc4
          if ((DrawX >= platX4 - plat_sizeX) &&
@@ -334,8 +392,7 @@ always_ff@(posedge loadplat)
 
    logic platform_on5; 
     // assign testY5 = 9'd180 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+       
     always_comb
     begin:Platform_on_proc5
          if ((DrawX >= platX5 - plat_sizeX) &&
@@ -349,8 +406,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on6; 
     // assign testY6 = 9'd210 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+       
     always_comb
     begin:Platform_on_proc6
          if ((DrawX >= platX6 - plat_sizeX) &&
@@ -364,8 +420,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on7;  
     // assign testY7 = 9'd240 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+       
     always_comb
     begin:Platform_on_proc7
          if ((DrawX >= platX7 - plat_sizeX) &&
@@ -379,8 +434,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on8; 
     // assign testY8 = 9'd270 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+       
     always_comb
     begin:Platform_on_proc8
          if ((DrawX >= platX8 - plat_sizeX) &&
@@ -394,8 +448,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on9; 
     // assign testY9 = 9'd300 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+    
     always_comb
     begin:Platform_on_proc9
          if ((DrawX >= platX9 - plat_sizeX) &&
@@ -409,8 +462,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on10; 
     // assign testY10 = 9'd330 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+    
     always_comb
     begin:Platform_on_proc10
          if ((DrawX >= platX10 - plat_sizeX) &&
@@ -424,8 +476,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on11; 
     // assign testY11 = 9'd360 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+    
     always_comb
     begin:Platform_on_proc11
          if ((DrawX >= platX11 - plat_sizeX) &&
@@ -439,8 +490,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on12; 
     // assign testY12 = 9'd390 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+    
     always_comb
     begin:Platform_on_proc12
          if ((DrawX >= platX12 - plat_sizeX) &&
@@ -455,8 +505,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on13;  
     // assign testY13 = 9'd420 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+    
     always_comb
     begin:Platform_on_proc13
          if ((DrawX >= platX13 - plat_sizeX) &&
@@ -470,8 +519,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on14; 
     // assign testY14 = 9'd450 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+    
     always_comb
     begin:Platform_on_proc14
          if ((DrawX >= platX14 - plat_sizeX) &&
@@ -485,8 +533,7 @@ always_ff@(posedge loadplat)
 
     logic platform_on15; 
     // assign testY15 = 9'd475 ;
-    assign plat_sizeX = 9'd10;
-    assign plat_sizeY = 9'd4;
+    
     always_comb
     begin:Platform_on_proc15
          if ((DrawX >= platX15 - plat_sizeX) &&
@@ -498,81 +545,11 @@ always_ff@(posedge loadplat)
             platform_on15 = 1'b0;
      end
 
-    // always_ff @ (posedge Reset or posedge frame_clk)
-    // begin
-    // if (Doodle_Y_Pos < 240)
-    //     begin 
-    //         if (platY + 6 > Screen_Y_Max)
-    //             begin
-    //                 platform_on = 1'b0;
-    //             end
-    //         else if (platY1 + 6 > Screen_Y_Max)
-    //             begin
-    //                 platform_on1 = 1'b0; 
-    //             end
-    //         else if (platY2 + 6 > Screen_Y_Max)
-    //             begin
-    //                 platform_on2 = 1'b0;  
-    //             end
-    //         else if (platY3 + 6 > Screen_Y_Max)
-    //             begin
-    //                 platform_on3 = 1'b0;
-    //             end
-    //         else if (platY4 + 6 > Screen_Y_Max)
-    //             begin 
-    //                 platform_on4 = 1'b0; 
-    //             end
-    //         else if (platY5 + 6 > Screen_Y_Max)
-    //             begin
-    //                 platform_on5 = 1'b0; 
-    //             end
-    //         else if (platY6 + 6 > Screen_Y_Max)
-    //             begin    
-    //                 platform_on6 = 1'b0;
-    //             end 
-    //         else if (platY7 + 6 > Screen_Y_Max)
-    //             begin        
-    //                 platform_on7 = 1'b0;
-    //             end
-    //         else if (platY8 + 6 > Screen_Y_Max)
-    //             begin        
-    //                 platform_on8 = 1'b0;
-    //             end
-    //         else if (platY9 + 6 > Screen_Y_Max)  
-    //             begin
-    //                 platform_on9 = 1'b0;
-    //             end
-    //         else if (platY10 + 6 > Screen_Y_Max)
-    //             begin
-    //                 platform_on10 = 1'b0;  
-    //             end
-    //         else if (platY11 + 6 > Screen_Y_Max)
-    //             begin
-    //                 platform_on11 = 1'b0;
-    //             end
-    //         else if (platY12 + 6 > Screen_Y_Max) 
-    //             begin
-    //                 platform_on12 = 1'b0; 
-    //             end
-    //         else if (platY13 + 6 > Screen_Y_Max)
-    //             begin
-    //                 platform_on13 = 1'b0;
-    //             end
-    //         else if (platY14 + 6 > Screen_Y_Max)
-    //             begin
-    //                 platform_on14 = 1'b0;
-    //             end 
-    //         else if (platY15 + 6 > Screen_Y_Max)
-    //             begin
-    //                 platform_on15 = 1'b0;
-    //             end     
-    // end
-    // end
 // ~~~~~~Platforms~~~~~~~~~~~~~       
     always_comb
     begin:RGB_Display
-    //turn on pixels for the ball 
-        if ((ball_on == 1'b1)) 
+    //turn on pixels for the Doodle 
+        if ((Doodle_on == 1'b1)) 
         begin 
             Red = 8'hCA;
             Green = 8'hC9;

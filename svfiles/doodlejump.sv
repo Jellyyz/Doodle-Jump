@@ -62,7 +62,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [3:0] hex_num_4, hex_num_3, hex_num_1, hex_num_0; //4 bit input hex digits
 	logic [1:0] signs;
 	logic [1:0] hundreds;
-	logic [9:0] drawxsig, drawysig, ballxsig, ballysig, ballsizesig;
+	logic [9:0] drawxsig, drawysig, Doodlexsig, Doodleysig, Doodlesizesig;
 	logic [9:0] cannonxsig, cannonysig, cannonsizesig; 
 	logic [7:0] Red, Blue, Green;
 	logic [7:0] keycode;
@@ -108,21 +108,20 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign ARDUINO_IO[6] = 1'b1;
 	
 	//HEX drivers to convert numbers to HEX output
-	HexDriver hex_driver4 (Doodle_Y_Motion[7:4], HEX4[6:0]);
+	HexDriver hex_driver5 (Doodle_Y_Motion[7:4], HEX5[6:0]);
+	assign HEX5[7] = 1'b1;
+	
+	HexDriver hex_driver4 (Doodle_Y_Motion[3:0], HEX4[6:0]);
 	assign HEX4[7] = 1'b1;
 	
-	HexDriver hex_driver3 (Doodle_Y_Motion[3:0], HEX3[6:0]);
-	assign HEX3[7] = 1'b1;
-	
+	HexDriver hex_driver2 (refresh_en, HEX2[6:0]); 
+	assign HEX2[7] = 1'b1;
+
 	HexDriver hex_driver1 (hex_num_1, HEX1[6:0]);
 	assign HEX1[7] = 1'b1;
 	
-	HexDriver hex_driver0 (hex_num_0, HEX0[6:0]);
+	HexDriver hex_driver0 (outstate[2:0], HEX0[6:0]);
 	assign HEX0[7] = 1'b1;
-	
-	//fill in the hundreds digit as well as the negative sign
-	assign HEX5 = {1'b1, ~signs[1], 3'b111, ~hundreds[1], ~hundreds[1], 1'b1};
-	assign HEX2 = {1'b1, ~signs[0], 3'b111, ~hundreds[0], ~hundreds[0], 1'b1};
 	
 	
 	//Assign one button to reset
@@ -187,7 +186,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	 );
 
 
-//instantiate a vga_controller, ball, and color_mapper here with the ports.
+//instantiate a vga_controller, Doodle, and color_mapper here with the ports.
 logic pxl_clk;
 logic [2:0] outstate;
 logic loadplat; 
@@ -216,7 +215,7 @@ jumplogic jumplogic(
 
 
 	.Doodle_Y_Pos(Doodle_Y_Pos[9:0]),
-	.DoodleX(ballxsig[9:0]), .DoodleY(ballysig[9:0]), .DoodleS(ballsizesig[9:0]),  // 10 bits
+	.DoodleX(Doodlexsig[9:0]), .DoodleY(Doodleysig[9:0]), .DoodleS(Doodlesizesig[9:0]),  // 10 bits
 	.CannonX(cannonxsig[9:0]), .CannonY(cannonysig[9:0]), .CannonS(cannonsizesig[9:0]), 
 	.outstate(outstate[2:0]),
 	.loadplat(loadplat), 
@@ -234,10 +233,10 @@ color_mapper color(
 	.Clk(MAX10_CLK1_50),
 	.frame_clk(frame_clk),
 	.Reset(Reset_h), 
-	.BallX(ballxsig[9:0]), 
-	.BallY(ballysig[9:0]), 
+	.DoodleX(Doodlexsig[9:0]), 
+	.DoodleY(Doodleysig[9:0]), 
 	.DrawX(drawxsig[9:0]), .DrawY(drawysig[9:0]), 
-	.Ball_size(ballsizesig[9:0]),
+	.Doodle_size(Doodlesizesig[9:0]),
 	.outstate(outstate[2:0]),
 	.loadplat(loadplat), 
 	.platX1(platX1[9:0]), .platX2(platX2[9:0]), .platX3(platX3[9:0]), .platX4(platX4[9:0]), .platX5(platX5[9:0]), .platX6(platX6[9:0]), .platX7(platX7[9:0]), .platX8(platX8[9:0]),
