@@ -1,13 +1,15 @@
 module jumpstate(
     input logic Clock, Reset, 
 	input logic [7:0] Keycode,
+	input logic refresh_en, 
 	output logic [2:0] outstate,  
 	output logic loadplat
 );
 
 	enum logic [2:0] { Main_Menu, 
                        Game,
-					   Pause 	
+					   Pause,
+					   Refreshing 	
 
 						}   State, Next_state;   // Internal state logic
 	always_ff @ (posedge Clock)
@@ -23,6 +25,8 @@ module jumpstate(
         // Default next state is staying at current state
 		Next_state = State;
 		loadplat = 0; 
+
+		
         unique case(State)
 			Main_Menu: 
 				begin
@@ -38,16 +42,26 @@ module jumpstate(
 				begin
 					if(Keycode == 8'd41) // esc 
 						Next_state = Pause; 
+					else if(refresh_en == 1'b1)
+						Next_state = Refreshing;
 					else 
 						Next_state = Game; 
 				end
 			Pause: 
-			begin 
-				if(Keycode != 9'h0)
-					Next_state = Game;
-				else 
-					Next_state = Pause; 
-			end 
+				begin 
+					if(Keycode != 9'h0)
+						Next_state = Game;
+					else 
+						Next_state = Pause; 
+				end 
+			Refreshing:
+				begin
+					if(refresh_en != 1'b1)
+						Next_state = Game;
+					else
+						Next_state = Refreshing;
+
+				end
 		endcase 
 		
 		unique case(State)
@@ -61,6 +75,9 @@ module jumpstate(
 			Pause:
 			// pause screen 
 				outstate = 3'b010;
+			Refreshing:
+			// refresh the screen
+				outstate = 3'b011;
 		endcase 
 
 

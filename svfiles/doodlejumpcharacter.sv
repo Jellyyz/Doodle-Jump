@@ -1,9 +1,10 @@
 // Modified for final project, Feng & Gally 
 
 
-module  jumplogic( input Reset, frame_clk, Clk,
-				   input [7:0] keycode,
-					input [8:0]platX, platY, plat_sizeX, plat_sizeY,
+module  jumplogic(  input Reset, frame_clk, Clk,
+				    input [7:0] keycode,
+				    input [8:0]plat_sizeX, plat_sizeY,
+					input [8:0]platX, platY, 
 					input [8:0]platX1, platY1, 
 					input [8:0]platX2, platY2, 
 					input [8:0]platX3, platY3, 
@@ -24,10 +25,15 @@ module  jumplogic( input Reset, frame_clk, Clk,
 					output [9:0]  DoodleX, DoodleY, DoodleS, 
 					output [9:0]  CannonX, CannonY, CannonS, 
 					output [2:0] outstate,
-					output [9:0] Doodle_Y_Motion);
+					output [9:0] Doodle_Y_Motion,
+					output [9:0] Doodle_Y_Pos,
+					output refresh_en,
+					output [7:0]displacement);
 
-    logic [9:0] Doodle_X_Pos, Doodle_X_Motion, Doodle_Y_Pos, Doodle_Size;
+    logic [9:0] Doodle_X_Pos, Doodle_X_Motion, Doodle_Size;
 	
+
+		
 
     parameter [9:0] Screen_X_Center=320;  // Center position on the X axis
     parameter [9:0] Screen_Y_Center=240;  // Center position on the Y axis
@@ -63,7 +69,7 @@ jumpstate jumpstate(
 	.Clock(Clk), 
 	.Reset(Reset), 
 	.Keycode(keycode[7:0]),
-
+	.refresh_en(refresh_en),
 	.outstate(outstate[2:0]),
 	.loadplat(loadplat)
 );
@@ -74,6 +80,8 @@ logic jump_enable, jump_reset;
 logic [9:0] Doodle_Top; 
  
 logic [9:0] Cannon_Y_Motion, Cannon_X_Motion, Cannon_Y_Pos, Cannon_X_Pos, Cannon_Size; 
+
+
 
 initial begin
 	Doodle_Y_Motion = 10'h0; //Doodle_Y_Step;
@@ -88,8 +96,27 @@ initial begin
 end 
 
 always_ff @ (posedge Reset or posedge frame_clk)
+	
     begin
-		logic [8:0] PlatY;
+		// logic [8:0] platY;
+		// logic [8:0] platY1;
+		// logic [8:0] platY2;
+		// logic [8:0] platY3;
+		// logic [8:0] platY4;
+		// logic [8:0] platY5;
+		// logic [8:0] platY6;
+		// logic [8:0] platY7;
+		// logic [8:0] platY8;
+		// logic [8:0] platY9;
+		// logic [8:0] platY10;
+		// logic [8:0] platY11;
+		// logic [8:0] platY12;
+		// logic [8:0] platY13;
+		// logic [8:0] platY14;
+		// logic [8:0] platY15;
+		// logic 		refresh_en;
+		// logic [7:0] displacement;
+		
         if (Reset)  // Asynchronous Reset
         begin 
             	Doodle_Y_Motion = 10'h0; //Doodle_Y_Step;
@@ -100,10 +127,12 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				Cannon_X_Pos <= Screen_X_Center; 
 				Cannon_Y_Motion <= 0; 
 				Cannon_X_Motion <= 0; 
-				
 		end 
+
         else 
         begin 
+			displacement <= 0;
+			refresh_en <= 1'b0;
 			unique case(outstate)
 			3'b000:
 			begin 
@@ -112,6 +141,12 @@ always_ff @ (posedge Reset or posedge frame_clk)
 
 			3'b001: 
 			begin
+				if (Doodle_Y_Pos <= 239)
+				begin
+					jump_reset <= 1;  // reset the counter for velocity 
+					jump_enable <= 0; 	// begin the convergence of velocity toward 0 
+					refresh_en <= 1'b1;
+				end
 				jump_reset <= 1;  // reset the counter for velocity 
 				jump_enable <= 0; 	// begin the convergence of velocity toward 0 
 				// if not moving then get it to start falling or start jumping 
@@ -192,9 +227,33 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				Cannon_X_Motion <= 0; 
 				Cannon_Y_Motion <= 0; 
 			end
+			
+			3'b011:
+			begin
+			
+				displacement <= (240 - Doodle_Y_Pos);
+					// platY  <= platY + displacement;
+					// platY1 <= platY1 + displacement;
+					// platY2 <= platY2 + displacement;
+					// platY3 <= platY3 + displacement;
+					// platY4 <= platY4 + displacement;
+					// platY5 <= platY5 + displacement;
+					// platY6 <= platY6 + displacement;
+					// platY7 <= platY7 + displacement;
+					// platY8 <= platY8 + displacement;
+					// platY9 <= platY9 + displacement;
+					// platY10 <= platY10 + displacement;
+					// platY11 <= platY11 + displacement;
+					// platY12 <= platY12 + displacement;
+					// platY13 <= platY13 + displacement;
+					// platY14 <= platY14 + displacement;
+					// platY15 <= platY15 + displacement;
 
+				end
 
-			endcase 
+			
+
+		endcase 
 							// Update Doodle position
 				// wrap around screen condition  
 				if((Doodle_X_Pos + Doodle_Size) >= (Screen_X_Max - 10'd25))  

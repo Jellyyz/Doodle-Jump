@@ -83,6 +83,9 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [9:0] platX14, platY14;
 	logic [9:0] platX15, platY15;
 	logic [9:0] Doodle_Y_Motion;
+	logic [9:0] Doodle_Y_Pos;
+	logic refresh_en;
+	logic [7:0] displacement;
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -212,7 +215,7 @@ jumplogic jumplogic(
 	.Doodle_Y_Motion(Doodle_Y_Motion[9:0]),
 
 
-
+	.Doodle_Y_Pos(Doodle_Y_Pos[9:0]),
 	.DoodleX(ballxsig[9:0]), .DoodleY(ballysig[9:0]), .DoodleS(ballsizesig[9:0]),  // 10 bits
 	.CannonX(cannonxsig[9:0]), .CannonY(cannonysig[9:0]), .CannonS(cannonsizesig[9:0]), 
 	.outstate(outstate[2:0]),
@@ -220,7 +223,10 @@ jumplogic jumplogic(
 	.platX1(platX1[9:0]), .platX2(platX2[9:0]), .platX3(platX3[9:0]), .platX4(platX4[9:0]), .platX5(platX5[9:0]), .platX6(platX6[9:0]), .platX7(platX7[9:0]), .platX8(platX8[9:0]),
 	.platX9(platX9[9:0]), .platX10(platX10[9:0]), .platX11(platX11[9:0]), .platX12(platX12[9:0]), .platX13(platX13[9:0]), .platX14(platX14[9:0]), .platX15(platX15[9:0]),
 	.platY1(platY1[9:0]), .platY2(platY2[9:0]), .platY3(platY3[9:0]), .platY4(platY4[9:0]), .platY5(platY5[9:0]), .platY6(platY6[9:0]), .platY7(platY7[9:0]), .platY8(platY8[9:0]),
-	.platY9(platY9[9:0]), .platY10(platY10[9:0]), .platY11(platY11[9:0]), .platY12(platY12[9:0]), .platY13(platY13[9:0]), .platY14(platY14[9:0]), .platY15(platY15[9:0])
+	.platY9(platY9[9:0]), .platY10(platY10[9:0]), .platY11(platY11[9:0]), .platY12(platY12[9:0]), .platY13(platY13[9:0]), .platY14(platY14[9:0]), .platY15(platY15[9:0]),
+
+	.refresh_en(refresh_en),
+	.displacement(displacement[7:0])
 ); 
 
 color_mapper color(
@@ -238,7 +244,8 @@ color_mapper color(
 	.platX9(platX9[9:0]), .platX10(platX10[9:0]), .platX11(platX11[9:0]), .platX12(platX12[9:0]), .platX13(platX13[9:0]), .platX14(platX14[9:0]), .platX15(platX15[9:0]),
 	.platY1(platY1[9:0]), .platY2(platY2[9:0]), .platY3(platY3[9:0]), .platY4(platY4[9:0]), .platY5(platY5[9:0]), .platY6(platY6[9:0]), .platY7(platY7[9:0]), .platY8(platY8[9:0]),
 	.platY9(platY9[9:0]), .platY10(platY10[9:0]), .platY11(platY11[9:0]), .platY12(platY12[9:0]), .platY13(platY13[9:0]), .platY14(platY14[9:0]), .platY15(platY15[9:0]),
-	
+	.Doodle_Y_Pos(Doodle_Y_Pos[9:0]),
+
 	.keycode(keycode), 
 	.CannonX(cannonxsig[9:0]), 
 	.CannonY(cannonysig[9:0]), 
@@ -249,9 +256,10 @@ color_mapper color(
 	// 8 bits 
 	.Red(Red[7:0]), 
 	.Green(Green[7:0]), 
-	.Blue(Blue[7:0])
+	.Blue(Blue[7:0]),
+	.displacement(displacement[7:0]),
 	
-	
+	.refresh_en(refresh_en)
 );
 
 endmodule
