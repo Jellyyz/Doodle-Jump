@@ -14,16 +14,19 @@
 
 
 module  color_mapper ( 
-                    input Clk, Reset, frame_clk,
+                    input Clk, Reset, frame_clk, pixel_clk,
                     input loadplat, 
 					input        [9:0] DoodleX, DoodleY, DrawX, DrawY, Doodle_size,
                     input        [6:0] keycode, 
                     input        [2:0] outstate,
                     input        [9:0] CannonX, CannonY, CannonS,  
-                    input [9:0] Doodle_Y_Pos,
+                    input [9:0] Doodle_Y_Pos, plat_temp_Y,
                     input [7:0] displacement,
                     input       refresh_en,
-                    output logic [7:0]  Red, Green, Blue,
+
+
+                    output trigger, 
+                    output [7:0]  Red, Green, Blue,
                     output [8:0]platX, platY, plat_sizeX, plat_sizeY,
                     output [8:0]platX1, platY1, 
                     output [8:0]platX2, platY2, 
@@ -217,13 +220,13 @@ assign testY15 = 9'd475 ;
 
 
 logic [8:0]ImY,ImY1,ImY2,ImY3,ImY4,ImY5,ImY6,ImY7,ImY8,ImY9,ImY10,ImY11,ImY12,ImY13,ImY14,ImY15;
- 
 
-always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en) 
+always_ff@(posedge Clk) 
     begin
         // initially load all platforms 
         if(loadplat)
             begin
+                trigger <= 0; 
                 platY  <= testY;
 			    platY1 <= testY1;
 			    platY2 <= testY2;
@@ -258,26 +261,26 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
 			    ImY14 <= testY14;
 			    ImY15 <= testY15;
                 
-                end
+            end
         // if we have the need to refresh the platforms 
         else if(refresh_en)
             begin 
-                ImY <= platY + displacement;
-                ImY1 <= platY1 + displacement;
-                ImY2 <= platY2 + displacement;
-                ImY3 <= platY3 + displacement;
-                ImY4 <= platY4 + displacement;
-                ImY5 <= platY5 + displacement;
-                ImY6 <= platY6 + displacement;
-                ImY7 <= platY7 + displacement;
-                ImY8 <= platY8 + displacement;
-                ImY9 <= platY9 + displacement;
-                ImY10 <= platY10 + displacement;
-                ImY11 <= platY11 + displacement;
-                ImY12 <= platY12 + displacement;
-                ImY13 <= platY13 + displacement;
-                ImY14 <= platY14 + displacement;
-                ImY15 <= platY15 + displacement;
+                ImY <= platY + 1;
+                ImY1 <= platY1 + 1;
+                ImY2 <= platY2 + 1;
+                ImY3 <= platY3 + 1;
+                ImY4 <= platY4 + 1;
+                ImY5 <= platY5 + 1;
+                ImY6 <= platY6 + 1;
+                ImY7 <= platY7 + 1;
+                ImY8 <= platY8 + 1;
+                ImY9 <= platY9 + 1;
+                ImY10 <= platY10 + 1;
+                ImY11 <= platY11 + 1;
+                ImY12 <= platY12 + 1;
+                ImY13 <= platY13 + 1;
+                ImY14 <= platY14 + 1;
+                ImY15 <= platY15 + 1;
                 platY  = ImY;
                 platY1 = ImY1;
                 platY2 = ImY2;
@@ -294,11 +297,13 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
                 platY13 = ImY13;
                 platY14 = ImY14;
                 platY15 = ImY15;
+                trigger <= 1;
             end 
             
         // if we dont need to refresh platforms 
         else if(!refresh_en)
             begin
+                trigger <= 0; 
                 platY <= ImY;
 			    platY1 <= ImY1;
 			    platY2 <= ImY2;
@@ -317,9 +322,7 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
 			    platY15 <= ImY15;
             end
     end
-            
-            
-        
+         
 //~~~~~~~~~~PLATFORMS~~~~~~~~~~~~~~~~~~~~~~~ this should cause for the platforms to be drawn on the screen 
     logic platform_on; 
     assign plat_sizeX = 9'd10;

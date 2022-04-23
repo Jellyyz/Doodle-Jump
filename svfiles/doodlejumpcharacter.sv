@@ -1,5 +1,10 @@
 // Modified for final project, Feng & Gally 
-
+//Initial Current_Y = 240;
+//displacement <= (Current_Y - Doodle_Y_Pos);
+//Current_Y <= Doodle_Y_Pos;
+//ImY <= PlatY + displacement;
+//Plat = ImY;
+//displacement = 0;
 
 module  jumplogic(  input Reset, frame_clk, Clk,
 				    input [7:0] keycode,
@@ -20,14 +25,16 @@ module  jumplogic(  input Reset, frame_clk, Clk,
 					input [8:0]platX13, platY13, 
 					input [8:0]platX14, platY14, 
 					input [8:0]platX15, platY15,
+					input trigger, 
 
 					output loadplat, 
 					output [9:0]  DoodleX, DoodleY, DoodleS, 
 					output [9:0]  CannonX, CannonY, CannonS, 
 					output [2:0] outstate,
 					output [9:0] Doodle_Y_Motion,
-					output [9:0] Doodle_Y_Pos,
+					output [9:0] Doodle_Y_Pos, plat_temp_Y, 
 					output refresh_en,
+					output [15:0] countingss, 
 					output [7:0]displacement);
 
     logic [9:0] Doodle_X_Pos, Doodle_X_Motion, Doodle_Size;
@@ -57,6 +64,14 @@ counter counter(
     .out(counting[6:0])
 );
 
+counter counter2(
+	.Reset(plat_reset), 
+	.enable(plat_enable), 
+    .Clk(frame_clk), 
+
+    .out(countingss[15:0])
+);
+
 counter counter3(
 	.Reset(jump_reset), 
 	.enable(counting[5]), 
@@ -75,8 +90,10 @@ jumpstate jumpstate(
 );
 logic [2:0] Status, state; 
 logic [7:0] counting; 
+//logic [15:0] countingss;
 logic [1:0] counting2;
 logic jump_enable, jump_reset; 
+logic plat_reset, plat_enable;
 logic [9:0] Doodle_Top; 
  
 logic [9:0] Cannon_Y_Motion, Cannon_X_Motion, Cannon_Y_Pos, Cannon_X_Pos, Cannon_Size; 
@@ -94,7 +111,7 @@ initial begin
 	Cannon_X_Motion = 0; 
 
 end 
-
+logic [7:0] counterdis; 
 always_ff @ (posedge Reset or posedge frame_clk)
 	
     begin
@@ -112,28 +129,47 @@ always_ff @ (posedge Reset or posedge frame_clk)
 
         else 
         begin 
-			displacement <= 0;
+
 			unique case(outstate)
 			3'b000:
 			begin 
-					refresh_en <= 1'b0;
+				refresh_en <= 1'b0;
 			end 
-
 			3'b001: 
 			begin
-				displacement <= (240 - Doodle_Y_Pos);
-				if (Doodle_Y_Pos <= 239)
-				begin
-					jump_reset <= 1;  // reset the counter for velocity 
-					jump_enable <= 0; 	// begin the convergence of velocity toward 0 
-					refresh_en <= 1'b1;
-				end
-				else if(Doodle_Y_Pos >= 240)
-				begin
-					jump_reset <= 1;  // reset the counter for velocity 
-					jump_enable <= 0; 	// begin the convergence of velocity toward 0 
-					refresh_en <= 1'b0;
-				end 
+				// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SCROLLING ENGINE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				if(trigger)
+					begin
+						if(Doodle_Y_Pos <= 240 && countingss[4])
+						begin 
+							Doodle_Y_Motion = -plat_temp_Y;
+							refresh_en = 0; 
+							plat_reset = 1;
+							plat_enable = 0; 
+						end
+						else 
+							refresh_en = 0; 
+					end
+
+				else if(!trigger)
+					begin
+						// if the doodle about to pass the mid point while moving UP, stop motion and start scrolling 
+						if(Doodle_Y_Pos <= 240 && (Doodle_Y_Motion[7:4] >= 4'h0 && Doodle_Y_Motion[7:4] <= 4'hA))
+							begin 
+								refresh_en = 1;		// control signal to start scrolling 
+								plat_temp_Y <= -Doodle_Y_Motion; // transfer motion to temp variable so we can retrieve it later 
+								plat_enable = 1; 
+								plat_reset = 0; 
+							end 
+						else
+							begin
+								refresh_en = 0; 
+								plat_enable = 0; 
+								plat_reset = 1; 
+							end 	
+					end 
+
+				// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PHYSICS ENGINE BELOW~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 				jump_reset <= 1;  // reset the counter for velocity 
 				jump_enable <= 0; 	// begin the convergence of velocity toward 0 
 				// if not moving then get it to start falling or start jumping 
@@ -188,6 +224,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					// if the doodle is moving upwards 
 				end 
 
+				// keyboard input detector
 				unique case(keycode)
 					8'd30:
 					begin 
