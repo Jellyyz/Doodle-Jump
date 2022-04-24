@@ -14,35 +14,26 @@
 
 
 module  color_mapper ( 
-                    input Clk, Reset, frame_clk, pixel_clk,
-                    input loadplat, 
-					input        [9:0] DoodleX, DoodleY, DrawX, DrawY, Doodle_size,
-                    input        [6:0] keycode, 
-                    input        [2:0] outstate,
-                    input        [9:0] CannonX, CannonY, CannonS,  
-                    input [9:0] Doodle_Y_Pos, plat_temp_Y,
-                    input [7:0] displacement,
-                    input       refresh_en,
+                    input logic Clk, Reset, frame_clk, pixel_clk,
+					input logic        [9:0] DoodleX, DoodleY, DrawX, DrawY, Doodle_size,
+                    input logic        [6:0] keycode, 
+                    input logic        [5:0] outstate,
+                    input logic        [9:0] CannonX, CannonY, CannonS,  
+                    input logic [9:0] Doodle_Y_Pos, plat_temp_Y,
+					input logic loadplat, 
 
-
-                    output trigger, 
-                    output [7:0]  Red, Green, Blue,
-                    output [8:0]platX, platY, plat_sizeX, plat_sizeY,
-                    output [8:0]platX1, platY1, 
-                    output [8:0]platX2, platY2, 
-                    output [8:0]platX3, platY3, 
-                    output [8:0]platX4, platY4, 
-                    output [8:0]platX5, platY5, 
-                    output [8:0]platX6, platY6, 
-                    output [8:0]platX7, platY7, 
-                    output [8:0]platX8, platY8, 
-                    output [8:0]platX9, platY9, 
-                    output [8:0]platX10, platY10, 
-                    output [8:0]platX11, platY11, 
-                    output [8:0]platX12, platY12, 
-                    output [8:0]platX13, platY13, 
-                    output [8:0]platX14, platY14, 
-                    output [8:0]platX15, platY15
+						  
+						  
+						  
+                    output logic  [31:0] countingplat,
+                    output logic  trigger, 
+                    output logic  [7:0]  Red, Green, Blue,
+                    output logic  [8:0]platX, platY, plat_sizeX, plat_sizeY,
+                    output logic  [8:0]platX1, platY1, platX2, platY2, platX3, platY3, platX4, platY4, 
+                    output logic  [8:0]platX5, platY5, platX6, platY6, platX7, platY7, platX8, platY8, 
+                    output logic  [8:0]platX9, platY9, platX10, platY10, platX11, platY11, platX12, platY12, 
+                    output logic  [8:0]platX13, platY13, platX14, platY14, platX15, platY15,
+                    output logic  plat_enable, plat_reset, test
 );  
     parameter [9:0] Screen_Y_Min=0;       // Topmost point on the Y axis
     parameter [9:0] Screen_Y_Max=479;     // Bottommost point on the Y axis
@@ -129,218 +120,155 @@ LFSR LFSR15(
 );
  logic [8:0]testX,testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
 // this is for calculation of platX
-always_ff@(posedge loadplat)
+always_ff @ (posedge loadplat)
     begin 
         if(testX >= 0 && testX<= 500)
-            platX <= testX + 9'd100;
+            platX = testX + 9'd100;
         else 
-            platX <= testX; 
+            platX = testX; 
         if(testX1 >= 0 && testX1<= 500)
-            platX1 <= testX1 + 9'd100;
+            platX1 = testX1 + 9'd100;
         else 
-            platX1 <= testX1; 
+            platX1 = testX1; 
         if(testX2 >= 0 && testX2<= 500)
-            platX2 <= testX2 + 9'd100; 
+            platX2 = testX2 + 9'd100; 
         else 
-            platX2 <= testX2; 
+            platX2 = testX2; 
         if(testX3 >= 0 && testX3<= 500)
-            platX3 <= testX3 + 9'd100;  
+            platX3 = testX3 + 9'd100;  
         else 
-            platX3 <= testX3; 
+            platX3 = testX3; 
         if(testX4 >= 0 && testX4<= 500)
-            platX4 <= testX4 + 9'd100; 
+            platX4 = testX4 + 9'd100; 
         else 
-            platX4 <= testX4; 
+            platX4 = testX4; 
         if(testX5 >= 0 && testX5<= 500)
-            platX5 <= testX5 + 9'd100; 
+            platX5 = testX5 + 9'd100; 
         else 
-            platX5 <= testX5; 
+            platX5 = testX5; 
         if(testX6 >= 0 && testX6<= 500)
-            platX6 <= testX6 + 9'd100; 
+            platX6 = testX6 + 9'd100; 
         else 
-            platX6 <= testX6; 
+            platX6 = testX6; 
         if(testX7 >= 0 && testX7<= 500)
-            platX7 <= testX7 + 9'd100;
+            platX7 = testX7 + 9'd100;
         else 
-            platX7 <= testX7; 
+            platX7 = testX7; 
         if(testX8 >= 0 && testX8<= 500)
-            platX8 <= testX8 + 9'd100; 
+            platX8 = testX8 + 9'd100; 
         else 
-            platX8 <= testX8; 
+            platX8 = testX8; 
         if(testX9 >= 0 && testX9<= 500)
-            platX9 <= testX9 + 9'd100; 
+            platX9 = testX9 + 9'd100; 
         else 
-            platX9 <= testX9; 
+            platX9 = testX9; 
         if(testX10 >= 0 && testX10<= 500)
-            platX10 <= testX10 + 9'd100; 
+            platX10 = testX10 + 9'd100; 
         else 
-            platX10 <= testX10; 
+            platX10 = testX10; 
         if(testX11 >= 0 && testX11<= 500)
-            platX11 <= testX11 + 9'd100;      
+            platX11 = testX11 + 9'd100;      
         else 
-            platX11 <= testX11; 
+            platX11 = testX11; 
         if(testX12 >= 0 && testX12<= 500)
-            platX12 <= testX12 + 9'd100; 
+            platX12 = testX12 + 9'd100; 
         else 
-            platX12 <= testX12; 
+            platX12 = testX12; 
         if(testX13 >= 0 && testX13<= 500)
-            platX13 <= testX13 + 9'd100;
+            platX13 = testX13 + 9'd100;
         else 
-            platX13 <= testX13; 
+            platX13 = testX13; 
         if(testX14 >= 0 && testX14<= 500)
-            platX14 <= testX14 + 9'd100; 
+            platX14 = testX14 + 9'd100; 
         else 
-            platX14 <= testX14; 
+            platX14 = testX14; 
         if(testX15 >= 0 && testX15<= 500)
-            platX15 <= testX15 + 9'd100;    
+            platX15 = testX15 + 9'd100;    
         else 
-            platX15 <= testX15; 
-    
+            platX15 = testX15; 
+
     end 
-
-
-// initial Y values of the platforms before anything, should be loaded in loadplat
-logic [8:0]testY, testY1, testY2, testY3, testY4, testY5, testY6, testY7, testY8, testY9, testY10, testY11, testY12, testY13, testY14, testY15;
-assign testY = 9'd030;
-assign testY1 = 9'd060;
-assign testY2 = 9'd090 ;
-assign testY3 = 9'd0120 ;
-assign testY4 = 9'd150 ;
-assign testY5 = 9'd180 ;
-assign testY6 = 9'd210 ;
-assign testY7 = 9'd240 ;
-assign testY8 = 9'd270 ;
-assign testY9 = 9'd300 ;
-assign testY10 = 9'd330 ;
-assign testY11 = 9'd360 ;
-assign testY12 = 9'd390 ;
-assign testY13 = 9'd420 ;
-assign testY14 = 9'd450 ;
-assign testY15 = 9'd475 ;
-
-
-logic [8:0]ImY,ImY1,ImY2,ImY3,ImY4,ImY5,ImY6,ImY7,ImY8,ImY9,ImY10,ImY11,ImY12,ImY13,ImY14,ImY15;
-logic plat_reset, plat_enable;
-logic [15:0] countingplat; 
-
-counter counter2(
+counter counterplat(
 	.Reset(plat_reset), 
 	.enable(plat_enable), 
-    .Clk(frame_clk), 
+    .Clk(Clk), 
 
-    .out(countingplat[15:0])
+    .out(countingplat[31:0])
 );
 
-always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en) 
-    begin
-        // initially load all platforms 
-        if(loadplat)
-            begin
-                platY  <= testY;
-			    platY1 <= testY1;
-			    platY2 <= testY2;
-			    platY3 <= testY3;
-			    platY4 <= testY4;
-			    platY5 <= testY5;
-			    platY6 <= testY6;
-			    platY7 <= testY7;
-			    platY8 <= testY8;
-			    platY9 <= testY9;
-			    platY10 <= testY10;
-			    platY11 <= testY11;
-			    platY12 <= testY12;
-			    platY13 <= testY13;
-			    platY14 <= testY14;
-			    platY15 <= testY15;
 
-                ImY  <= testY;
-			    ImY1 <= testY1;
-			    ImY2 <= testY2;
-			    ImY3 <= testY3;
-			    ImY4 <= testY4;
-			    ImY5 <= testY5;
-			    ImY6 <= testY6;
-			    ImY7 <= testY7;
-			    ImY8 <= testY8;
-			    ImY9 <= testY9;
-			    ImY10 <= testY10;
-			    ImY11 <= testY11;
-			    ImY12 <= testY12;
-			    ImY13 <= testY13;
-			    ImY14 <= testY14;
-			    ImY15 <= testY15;
-                trigger <= 0; 
-                plat_reset <= 1; 
-                plat_enable <= 0; 
-            end
-        // if we have the need to refresh the platforms 
-        else if(refresh_en)
+always_ff @ (posedge frame_clk or posedge loadplat)
+    begin 
+        // initial Y values of the platforms before anything
+        unique case(outstate)
+        3'b000: 
             begin 
-                ImY <= platY + plat_temp_Y;
-                ImY1 <= platY1 + plat_temp_Y;
-                ImY2 <= platY2 + plat_temp_Y;
-                ImY3 <= platY3 + plat_temp_Y;
-                ImY4 <= platY4 + plat_temp_Y;
-                ImY5 <= platY5 + plat_temp_Y;
-                ImY6 <= platY6 + plat_temp_Y;
-                ImY7 <= platY7 + plat_temp_Y;
-                ImY8 <= platY8 + plat_temp_Y;
-                ImY9 <= platY9 + plat_temp_Y;
-                ImY10 <= platY10 + plat_temp_Y;
-                ImY11 <= platY11 + plat_temp_Y;
-                ImY12 <= platY12 + plat_temp_Y;
-                ImY13 <= platY13 + plat_temp_Y;
-                ImY14 <= platY14 + plat_temp_Y;
-                ImY15 <= platY15 + plat_temp_Y;
-                platY  <= ImY;
-                platY1 <= ImY1;
-                platY2 <= ImY2;
-                platY3 <= ImY3;
-                platY4 <= ImY4;
-                platY5 <= ImY5;
-                platY6 <= ImY6;
-                platY7 <= ImY7;
-                platY8 <= ImY8;
-                platY9 <= ImY9;
-                platY10 <= ImY10;
-                platY11 <= ImY11;
-                platY12 <= ImY12;
-                platY13 <= ImY13;
-                platY14 <= ImY14;
-                platY15 <= ImY15;
+                plat_enable <= 0; 
+                plat_reset <= 1;  
+                trigger <= 0; 
+            end 
+        // game 
+        3'b010: 
+            begin 
+                trigger <= 0; 
+            end 
+        // pause 
+        3'b011:
+            begin   
+
+            end 
+        // refreshing 
+        3'b100: 
+            begin 
                 plat_enable <= 1; 
                 plat_reset <= 0; 
-                if(countingplat[5])
+
+                if(countingplat[25])
                     begin 
                         trigger <= 1; 
                     end 
             end 
-            
-        // if we dont need to refresh platforms 
-        else if(!refresh_en)
-            begin
-                plat_enable <= 0; 
-                plat_reset <= 1;
-                platY <= ImY;
-			    platY1 <= ImY1;
-			    platY2 <= ImY2;
-			    platY3 <= ImY3;
-			    platY4 <= ImY4;
-			    platY5 <= ImY5;
-			    platY6 <= ImY6;
-			    platY7 <= ImY7;
-			    platY8 <= ImY8;
-			    platY9 <= ImY9;
-			    platY10 <= ImY10;
-			    platY11 <= ImY11;
-			    platY12 <= ImY12;
-			    platY13 <= ImY13;
-			    platY14 <= ImY14;
-			    platY15 <= ImY15;
-                trigger <= 0; 
-            end
-    end
-         
+        endcase 
+        // if we have the need to refresh the platforms 
+        if(loadplat)
+            begin 
+                platY   <= 9'd30;
+                platY1  <= 9'd60;
+                platY2 <= 9'd90;
+                platY3 <= 9'd120;
+                platY4 <= 9'd150;
+                platY5 <= 9'd180;
+                platY6 <= 9'd210;
+                platY7 <= 9'd240;
+                platY8 <= 9'd270;
+                platY9 <= 9'd300;
+                platY10 <= 9'd330;
+                platY11 <= 9'd360;
+                platY12 <= 9'd390;
+                platY13 <= 9'd420;
+                platY14 <= 9'd450;
+                platY15 <= 9'd475;
+            end 
+        else 
+            begin 
+            platY  <= platY - plat_temp_Y;
+            platY1 <= platY1 - plat_temp_Y;
+            platY2 <= platY2 - plat_temp_Y;
+            platY3 <= platY3 - plat_temp_Y;
+            platY4 <= platY4 - plat_temp_Y;
+            platY5 <= platY5 - plat_temp_Y;
+            platY6 <= platY6 - plat_temp_Y;
+            platY7 <= platY7 - plat_temp_Y;
+            platY8 <= platY8 - plat_temp_Y;
+            platY9 <= platY9 - plat_temp_Y;
+            platY10 <= platY10 - plat_temp_Y;
+            platY11 <= platY11 - plat_temp_Y;
+            platY12 <= platY12 - plat_temp_Y;
+            platY13 <= platY13 - plat_temp_Y;
+            platY14 <= platY14 - plat_temp_Y;
+            platY15 <= platY15 - plat_temp_Y;
+            end 
+    end 
 //~~~~~~~~~~PLATFORMS~~~~~~~~~~~~~~~~~~~~~~~ this should cause for the platforms to be drawn on the screen 
     logic platform_on; 
     assign plat_sizeX = 9'd10;
@@ -384,7 +312,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end 
 
     logic platform_on3; 
-    // assign testY3 = 9'd0120 ;
        
     always_comb
     begin:Platform_on_proc3
@@ -398,7 +325,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end 
 
     logic platform_on4; 
-    // assign testY4 = 9'd150 ;
        
     always_comb
     begin:Platform_on_proc4
@@ -412,7 +338,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end 
 
    logic platform_on5; 
-    // assign testY5 = 9'd180 ;
        
     always_comb
     begin:Platform_on_proc5
@@ -426,7 +351,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end 
 
     logic platform_on6; 
-    // assign testY6 = 9'd210 ;
        
     always_comb
     begin:Platform_on_proc6
@@ -440,7 +364,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end 
 
     logic platform_on7;  
-    // assign testY7 = 9'd240 ;
        
     always_comb
     begin:Platform_on_proc7
@@ -454,7 +377,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end 
 
     logic platform_on8; 
-    // assign testY8 = 9'd270 ;
        
     always_comb
     begin:Platform_on_proc8
@@ -468,7 +390,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end
 
     logic platform_on9; 
-    // assign testY9 = 9'd300 ;
     
     always_comb
     begin:Platform_on_proc9
@@ -482,7 +403,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end
 
     logic platform_on10; 
-    // assign testY10 = 9'd330 ;
     
     always_comb
     begin:Platform_on_proc10
@@ -496,7 +416,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end
 
     logic platform_on11; 
-    // assign testY11 = 9'd360 ;
     
     always_comb
     begin:Platform_on_proc11
@@ -510,7 +429,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end
 
     logic platform_on12; 
-    // assign testY12 = 9'd390 ;
     
     always_comb
     begin:Platform_on_proc12
@@ -525,7 +443,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
 
 
     logic platform_on13;  
-    // assign testY13 = 9'd420 ;
     
     always_comb
     begin:Platform_on_proc13
@@ -539,7 +456,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end
 
     logic platform_on14; 
-    // assign testY14 = 9'd450 ;
     
     always_comb
     begin:Platform_on_proc14
@@ -553,7 +469,6 @@ always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en)
      end
 
     logic platform_on15; 
-    // assign testY15 = 9'd475 ;
     
     always_comb
     begin:Platform_on_proc15

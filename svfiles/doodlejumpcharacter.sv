@@ -27,10 +27,10 @@ module  jumplogic(  input Reset, frame_clk, Clk,
 					input [8:0]platX15, platY15,
 					input trigger, 
 
-					output loadplat, 
+					output loadplat,
 					output [9:0]  DoodleX, DoodleY, DoodleS, 
 					output [9:0]  CannonX, CannonY, CannonS, 
-					output [2:0] outstate,
+					output [5:0] outstate,
 					output [9:0] Doodle_Y_Motion,
 					output [9:0] Doodle_Y_Pos, plat_temp_Y, 
 					output refresh_en,
@@ -64,13 +64,6 @@ counter counter(
     .out(counting[6:0])
 );
 
-counter counter2(
-	.Reset(plat_reset), 
-	.enable(plat_enable), 
-    .Clk(frame_clk), 
-
-    .out(countingss[15:0])
-);
 
 counter counter3(
 	.Reset(jump_reset), 
@@ -86,7 +79,7 @@ jumpstate jumpstate(
 	.Keycode(keycode[7:0]),
 	.trigger(trigger),
 	.refresh_en(refresh_en),
-	.outstate(outstate[2:0]),
+	.outstate(outstate[5:0]),
 	.loadplat(loadplat)
 );
 logic [2:0] Status, state; 
@@ -99,158 +92,155 @@ logic [9:0] Doodle_Top;
 logic [9:0] Cannon_Y_Motion, Cannon_X_Motion, Cannon_Y_Pos, Cannon_X_Pos, Cannon_Size; 
 
 
-
-initial begin
-	Doodle_Y_Motion = 10'h0; //Doodle_Y_Step;
-	Doodle_X_Motion = 10'h0; //Doodle_X_Step;
-	Doodle_Y_Pos <= Screen_Y_Center;
-	Doodle_X_Pos <= Screen_X_Center;
-	Cannon_Y_Pos <= Screen_Y_Center; 
-	Cannon_X_Pos <= Screen_X_Center; 
-	Cannon_Y_Motion = 0; 
-	Cannon_X_Motion = 0; 
-
-end 
 logic [7:0] counterdis; 
 always_ff @ (posedge Reset or posedge frame_clk)
-	
+
     begin
         if (Reset)  // Asynchronous Reset
-        begin 
-            	Doodle_Y_Motion = 10'h0; //Doodle_Y_Step;
-				Doodle_X_Motion = 10'h0; //Doodle_X_Step;
-				Doodle_Y_Pos <= Screen_Y_Center;
-				Doodle_X_Pos <= Screen_X_Center;
-				Cannon_Y_Pos <= Screen_Y_Center; 
-				Cannon_X_Pos <= Screen_X_Center; 
-				Cannon_Y_Motion <= 0; 
-				Cannon_X_Motion <= 0; 
-		end 
+			begin 
+					Doodle_Y_Motion = 10'h0; //Doodle_Y_Step;
+					Doodle_X_Motion <= 10'h0; //Doodle_X_Step;
+					Doodle_Y_Pos <= Screen_Y_Center;
+					Doodle_X_Pos <= Screen_X_Center;
+					Cannon_Y_Pos <= Screen_Y_Center; 
+					Cannon_X_Pos <= Screen_X_Center; 
+					Cannon_Y_Motion <= 0; 
+					Cannon_X_Motion <= 0; 
+					plat_temp_Y <= 0; 
+			end 
 
         else 
         begin 
 
 			unique case(outstate)
-			3'b000:
-			begin 
-				refresh_en <= 1'b0;
-			end 
-			3'b001: 
-			begin
-				// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SCROLLING ENGINE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-				if(Doodle_Y_Pos <= 240 && (Doodle_Y_Motion[7:4] == 4'hF))
-					begin 
-						plat_temp_Y = Doodle_Y_Motion; 
-						refresh_en = 1; 
-					end 
- 
-				// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PHYSICS ENGINE BELOW~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-				jump_reset <= 1;  // reset the counter for velocity 
-				jump_enable <= 0; 	// begin the convergence of velocity toward 0 
-				// if not moving then get it to start falling or start jumping 
-				if(Doodle_Y_Motion == 10'h0)
-					begin 
-						// if the Doodle is currently on the ground
-						if(Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max)
-							begin
-								jump_reset <= 1;  // reset the counter for velocity 
-								jump_enable <= 0; 	// begin the convergence of velocity toward 0 
-								Doodle_Y_Motion = (1'b1 + ~Gravity);  // allow for the doodle to "jump"
-							end 
-
-						// if the Doodle is currently above the ground 
-						else if(Doodle_Y_Pos + Doodle_Size < Screen_Y_Max) // && if not already in proximity of platform ?
-							begin 
-								jump_reset <= 1; 
-								jump_enable <= 0; 
-								Doodle_Y_Motion = Gravity;  // allow for the doodle to start falling at peak 
-							end 
-					end 
-
-				else if(Doodle_Y_Motion != 10'h0)
+				3'b000:
 				begin 
-					// if the doodle is moving upwards 
-					if(Doodle_Y_Motion[7:4] >= 4'hC)
-						begin 
-							jump_reset <= 0; 
-							jump_enable <= 1; 
-							if(counting2 == 2'd3)
-								Doodle_Y_Motion += counting2[1:0]; 
-						end 
-					// if the doodle is moving downwards 
-					else if(Doodle_Y_Motion[7:4] >= 4'h0 && Doodle_Y_Motion[7:4] <= 4'hA)
-						begin 
-							// if the doodle is moving downwards and hitting the ground or platform 
-							if((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) || Platform_collision)
-								begin 
-								// if doodle falling then allow for it to turn velocity to 0 
-									jump_reset <= 1; 
-									jump_enable <= 0;
-									Doodle_Y_Motion = (1'b1 + ~Gravity); 
-								end 
-							else if(Doodle_Y_Motion != 4'hFE)
-								begin 
-									jump_reset <= 0; 
-									jump_enable <= 1; 
-									Doodle_Y_Motion += counting2[0]; 
-								end 
-						end 
-					// if the doodle is moving upwards 
+					refresh_en <= 0;
+					plat_temp_Y <= 0; 
+				end
+				3'b001:
+				begin 
+					plat_temp_Y <= 0; 
 				end 
-
-				// keyboard input detector
-				unique case(keycode)
-					8'd30:
+				3'b010: 
+				begin
+					// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SCROLLING ENGINE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+					if(Doodle_Y_Pos <= 240 && (Doodle_Y_Motion[7:4] == 4'hF))
 						begin 
-							Cannon_Y_Motion <= (1'b1 + ~CannonSpeed); 
+							plat_temp_Y <= Doodle_Y_Motion; 
+							refresh_en <= 1; 
 						end 
-					8'd7, 8'd79:
-						Doodle_X_Motion = 3; 
-					8'd4, 8'd80:
-						Doodle_X_Motion = -3;	 
-					default:
+					else 
+						plat_temp_Y <= 0; 
+
+
+					// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PHYSICS ENGINE BELOW~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+					jump_reset <= 1;  // reset the counter for velocity 
+					jump_enable <= 0; 	// begin the convergence of velocity toward 0 
+					
+					// if not moving then get it to start falling or start jumping 
+					if(Doodle_Y_Motion == 10'h0)
 						begin 
-							Doodle_X_Motion = 0;
-							Cannon_X_Motion <= 0; 
+							// if the Doodle is currently on the ground
+							if(Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max)
+								begin
+									jump_reset <= 1;  // reset the counter for velocity 
+									jump_enable <= 0; 	// begin the convergence of velocity toward 0 
+									Doodle_Y_Motion = (1'b1 + ~Gravity);  // allow for the doodle to "jump"
+								end 
+
+							// if the Doodle is currently above the ground 
+							else if(Doodle_Y_Pos + Doodle_Size < Screen_Y_Max) // && if not already in proximity of platform ?
+								begin 
+									jump_reset <= 1; 
+									jump_enable <= 0; 
+									Doodle_Y_Motion = Gravity;  // allow for the doodle to start falling at peak 
+								end 
 						end 
-				endcase 
-				
 
-			end
+					else if(Doodle_Y_Motion != 10'h0)
+					begin 
+						// if the doodle is moving upwards 
+						if(Doodle_Y_Motion[7:4] >= 4'hC)
+							begin 
+								jump_reset <= 0; 
+								jump_enable <= 1; 
+								if(counting2 == 2'd3)
+									Doodle_Y_Motion += counting2[1:0]; 
+							end 
+						// if the doodle is moving downwards 
+						else if(Doodle_Y_Motion[7:4] >= 4'h0 && Doodle_Y_Motion[7:4] <= 4'hA)
+							begin 
+								// if the doodle is moving downwards and hitting the ground or platform 
+								if((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) || Platform_collision)
+									begin 
+									// if doodle falling then allow for it to turn velocity to 0 
+										jump_reset <= 1; 
+										jump_enable <= 0;
+										Doodle_Y_Motion = (1'b1 + ~Gravity); 
+									end 
+								else if(Doodle_Y_Motion != 4'hFE)
+									begin 
+										jump_reset <= 0; 
+										jump_enable <= 1; 
+										Doodle_Y_Motion += counting2[0]; 
+									end 
+							end 
+						// if the doodle is moving upwards 
+					end 
 
-			3'b010: 
-			begin
-				Doodle_Y_Motion = 0; 
-				Doodle_X_Motion = 0;
-				Cannon_X_Motion <= 0; 
-				Cannon_Y_Motion <= 0; 
-			end
-			
-			3'b011:
+					// keyboard input detector
+					unique case(keycode)
+						8'd30:
+							begin 
+								Cannon_Y_Motion <= (1'b1 + ~CannonSpeed); 
+							end 
+						8'd7, 8'd79:
+							Doodle_X_Motion <= 3; 
+						8'd4, 8'd80:
+							Doodle_X_Motion <= -3;	 
+						default:
+							begin 
+								Doodle_X_Motion <= 0;
+								Cannon_X_Motion <= 0; 
+							end 
+					endcase 
+					
+
+				end
+
+				3'b011: 
 				begin
 					Doodle_Y_Motion = 0; 
-					if(trigger)
-						refresh_en = 0; 
+					Doodle_X_Motion <= 0;
+					Cannon_X_Motion <= 0; 
+					Cannon_Y_Motion <= 0;
+					plat_temp_Y <= 0;  
+				end
+			
+				3'b100:
+				begin
+					Doodle_Y_Motion = 0; 
 					unique case(keycode)
 						8'd30:
 						begin 
 							Cannon_Y_Motion <= (1'b1 + ~CannonSpeed); 
 						end 
 						8'd7, 8'd79:
-							Doodle_X_Motion = 3; 
+							Doodle_X_Motion <= 3; 
 						8'd4, 8'd80:
-							Doodle_X_Motion = -3;	 
+							Doodle_X_Motion <= -3;	 
 						default:
-						begin 
-							Doodle_X_Motion = 0;
-							Cannon_X_Motion <= 0; 
-						end 
+							begin 
+								Doodle_X_Motion <= 0;
+								Cannon_X_Motion <= 0; 
+							end 
 					endcase 
 				end
 
 			
 
-		endcase 
+			endcase 
 							// Update Doodle position
 				// wrap around screen condition  
 				if((Doodle_X_Pos + Doodle_Size) >= (Screen_X_Max - 10'd25))  
@@ -271,7 +261,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 						Cannon_X_Motion <= 0; 
 						Cannon_Y_Motion <= 0; 
 					end
-				if(Cannon_Y_Motion <= 0 && outstate != 3'b010)
+				if(Cannon_Y_Motion <= 0 && outstate != 3'b011)
 					begin 
 						Cannon_Y_Pos <= Doodle_Y_Pos; 
 						Cannon_X_Pos <= Doodle_X_Pos; 
