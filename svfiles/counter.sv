@@ -9,7 +9,7 @@ module counter(
 always_ff @ (posedge Clk)begin
 
     if(Reset)
-        out <= 31'b0;
+        out <= 32'b0;
     else if(enable)
         out <= out + 1; 
 end

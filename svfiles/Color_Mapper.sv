@@ -220,13 +220,22 @@ assign testY15 = 9'd475 ;
 
 
 logic [8:0]ImY,ImY1,ImY2,ImY3,ImY4,ImY5,ImY6,ImY7,ImY8,ImY9,ImY10,ImY11,ImY12,ImY13,ImY14,ImY15;
+logic plat_reset, plat_enable;
+logic [15:0] countingplat; 
 
-always_ff@(posedge Clk) 
+counter counter2(
+	.Reset(plat_reset), 
+	.enable(plat_enable), 
+    .Clk(frame_clk), 
+
+    .out(countingplat[15:0])
+);
+
+always_ff@(posedge frame_clk or posedge loadplat or posedge refresh_en) 
     begin
         // initially load all platforms 
         if(loadplat)
             begin
-                trigger <= 0; 
                 platY  <= testY;
 			    platY1 <= testY1;
 			    platY2 <= testY2;
@@ -260,50 +269,58 @@ always_ff@(posedge Clk)
 			    ImY13 <= testY13;
 			    ImY14 <= testY14;
 			    ImY15 <= testY15;
-                
+                trigger <= 0; 
+                plat_reset <= 1; 
+                plat_enable <= 0; 
             end
         // if we have the need to refresh the platforms 
         else if(refresh_en)
             begin 
-                ImY <= platY + 1;
-                ImY1 <= platY1 + 1;
-                ImY2 <= platY2 + 1;
-                ImY3 <= platY3 + 1;
-                ImY4 <= platY4 + 1;
-                ImY5 <= platY5 + 1;
-                ImY6 <= platY6 + 1;
-                ImY7 <= platY7 + 1;
-                ImY8 <= platY8 + 1;
-                ImY9 <= platY9 + 1;
-                ImY10 <= platY10 + 1;
-                ImY11 <= platY11 + 1;
-                ImY12 <= platY12 + 1;
-                ImY13 <= platY13 + 1;
-                ImY14 <= platY14 + 1;
-                ImY15 <= platY15 + 1;
-                platY  = ImY;
-                platY1 = ImY1;
-                platY2 = ImY2;
-                platY3 = ImY3;
-                platY4 = ImY4;
-                platY5 = ImY5;
-                platY6 = ImY6;
-                platY7 = ImY7;
-                platY8 = ImY8;
-                platY9 = ImY9;
-                platY10 = ImY10;
-                platY11 = ImY11;
-                platY12 = ImY12;
-                platY13 = ImY13;
-                platY14 = ImY14;
-                platY15 = ImY15;
-                trigger <= 1;
+                ImY <= platY + plat_temp_Y;
+                ImY1 <= platY1 + plat_temp_Y;
+                ImY2 <= platY2 + plat_temp_Y;
+                ImY3 <= platY3 + plat_temp_Y;
+                ImY4 <= platY4 + plat_temp_Y;
+                ImY5 <= platY5 + plat_temp_Y;
+                ImY6 <= platY6 + plat_temp_Y;
+                ImY7 <= platY7 + plat_temp_Y;
+                ImY8 <= platY8 + plat_temp_Y;
+                ImY9 <= platY9 + plat_temp_Y;
+                ImY10 <= platY10 + plat_temp_Y;
+                ImY11 <= platY11 + plat_temp_Y;
+                ImY12 <= platY12 + plat_temp_Y;
+                ImY13 <= platY13 + plat_temp_Y;
+                ImY14 <= platY14 + plat_temp_Y;
+                ImY15 <= platY15 + plat_temp_Y;
+                platY  <= ImY;
+                platY1 <= ImY1;
+                platY2 <= ImY2;
+                platY3 <= ImY3;
+                platY4 <= ImY4;
+                platY5 <= ImY5;
+                platY6 <= ImY6;
+                platY7 <= ImY7;
+                platY8 <= ImY8;
+                platY9 <= ImY9;
+                platY10 <= ImY10;
+                platY11 <= ImY11;
+                platY12 <= ImY12;
+                platY13 <= ImY13;
+                platY14 <= ImY14;
+                platY15 <= ImY15;
+                plat_enable <= 1; 
+                plat_reset <= 0; 
+                if(countingplat[5])
+                    begin 
+                        trigger <= 1; 
+                    end 
             end 
             
         // if we dont need to refresh platforms 
         else if(!refresh_en)
             begin
-                trigger <= 0; 
+                plat_enable <= 0; 
+                plat_reset <= 1;
                 platY <= ImY;
 			    platY1 <= ImY1;
 			    platY2 <= ImY2;
@@ -320,6 +337,7 @@ always_ff@(posedge Clk)
 			    platY13 <= ImY13;
 			    platY14 <= ImY14;
 			    platY15 <= ImY15;
+                trigger <= 0; 
             end
     end
          

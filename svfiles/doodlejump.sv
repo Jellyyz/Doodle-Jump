@@ -130,10 +130,10 @@ logic [31:0] countingreeeee;
 	HexDriver hex_driver2 (trigger, HEX2[6:0]); 
 	assign HEX2[7] = 1'b1;
 
-	HexDriver hex_driver1 (loadplat, HEX1[6:0]);
+	HexDriver hex_driver1 (plat_temp_Y[7:4], HEX1[6:0]);
 	assign HEX1[7] = 1'b1;
 	
-	HexDriver hex_driver0 (countingss[3:0], HEX0[6:0]);
+	HexDriver hex_driver0 (plat_temp_Y[3:0], HEX0[6:0]);
 	assign HEX0[7] = 1'b1;
 	
 	
@@ -221,7 +221,7 @@ jumplogic jumplogic(
 	.Reset(Reset_h),
 	.frame_clk(VGA_VS), 
 	.keycode(keycode),    // 8 bits 
-	
+	.trigger(trigger),
 	.platX(platX[8:0]), .platY(platY[8:0]), .plat_sizeX(plat_sizeX[8:0]), .plat_sizeY(plat_sizeY[8:0]),	//9 btis
 
 	.Doodle_Y_Motion(Doodle_Y_Motion[9:0]),
@@ -237,7 +237,7 @@ jumplogic jumplogic(
 	.platY1(platY1[9:0]), .platY2(platY2[9:0]), .platY3(platY3[9:0]), .platY4(platY4[9:0]), .platY5(platY5[9:0]), .platY6(platY6[9:0]), .platY7(platY7[9:0]), .platY8(platY8[9:0]),
 	.platY9(platY9[9:0]), .platY10(platY10[9:0]), .platY11(platY11[9:0]), .platY12(platY12[9:0]), .platY13(platY13[9:0]), .platY14(platY14[9:0]), .platY15(platY15[9:0]),
 	.countingss(countingss[15:0]),
-	.refresh_en(refresh_en), .trigger(trigger),
+	.refresh_en(refresh_en),
 	.displacement(displacement[7:0])
 ); 
 
@@ -258,6 +258,7 @@ color_mapper color(
 	.platY9(platY9[9:0]), .platY10(platY10[9:0]), .platY11(platY11[9:0]), .platY12(platY12[9:0]), .platY13(platY13[9:0]), .platY14(platY14[9:0]), .platY15(platY15[9:0]),
 	.Doodle_Y_Pos(Doodle_Y_Pos[9:0]), .plat_temp_Y(plat_temp_Y[9:0]),
 	.pixel_clk(pixel_clk), 
+	.refresh_en(refresh_en),
 
 	.keycode(keycode), 
 	.CannonX(cannonxsig[9:0]), 
@@ -272,7 +273,6 @@ color_mapper color(
 	.Blue(Blue[7:0]),
 	.displacement(displacement[7:0]),
 	
-	.refresh_en(refresh_en)
 );
 
 endmodule

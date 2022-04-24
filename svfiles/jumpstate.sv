@@ -1,5 +1,5 @@
 module jumpstate(
-    input logic Clock, Reset, 
+    input logic Clock, Reset, trigger,
 	input logic [7:0] Keycode,
 	input logic refresh_en, 
 	output logic [2:0] outstate,  
@@ -42,8 +42,8 @@ module jumpstate(
 				begin
 					if(Keycode == 8'd41) // esc 
 						Next_state = Pause; 
-					// else if(refresh_en == 1'b1)
-					// 	Next_state = Refreshing;
+					else if(refresh_en)
+						Next_state = Refreshing;
 					else 
 						Next_state = Game; 
 				end
@@ -56,7 +56,7 @@ module jumpstate(
 				end 
 			Refreshing:
 				begin
-					if(refresh_en != 1'b1)
+					if(trigger)
 						Next_state = Game;
 					else
 						Next_state = Refreshing;

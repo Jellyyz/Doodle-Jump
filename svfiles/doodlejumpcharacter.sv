@@ -53,7 +53,7 @@ module  jumplogic(  input Reset, frame_clk, Clk,
     
 
 	parameter [1:0] Gravity = 3; 
-	parameter [2:0] CannonSpeed = 7;
+	parameter [2:0] CannonSpeed = 14;
     assign Doodle_Size = 6;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
 	assign Cannon_Size = 2; 
 counter counter(
@@ -84,6 +84,7 @@ jumpstate jumpstate(
 	.Clock(Clk), 
 	.Reset(Reset), 
 	.Keycode(keycode[7:0]),
+	.trigger(trigger),
 	.refresh_en(refresh_en),
 	.outstate(outstate[2:0]),
 	.loadplat(loadplat)
@@ -93,7 +94,6 @@ logic [7:0] counting;
 //logic [15:0] countingss;
 logic [1:0] counting2;
 logic jump_enable, jump_reset; 
-logic plat_reset, plat_enable;
 logic [9:0] Doodle_Top; 
  
 logic [9:0] Cannon_Y_Motion, Cannon_X_Motion, Cannon_Y_Pos, Cannon_X_Pos, Cannon_Size; 
@@ -138,60 +138,34 @@ always_ff @ (posedge Reset or posedge frame_clk)
 			3'b001: 
 			begin
 				// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SCROLLING ENGINE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-				if(trigger)
-					begin
-						if(Doodle_Y_Pos <= 240 && countingss[4])
-						begin 
-							Doodle_Y_Motion = -plat_temp_Y;
-							refresh_en = 0; 
-							plat_reset = 1;
-							plat_enable = 0; 
-						end
-						else 
-							refresh_en = 0; 
-					end
-
-				else if(!trigger)
-					begin
-						// if the doodle about to pass the mid point while moving UP, stop motion and start scrolling 
-						if(Doodle_Y_Pos <= 240 && (Doodle_Y_Motion[7:4] >= 4'h0 && Doodle_Y_Motion[7:4] <= 4'hA))
-							begin 
-								refresh_en = 1;		// control signal to start scrolling 
-								plat_temp_Y <= -Doodle_Y_Motion; // transfer motion to temp variable so we can retrieve it later 
-								plat_enable = 1; 
-								plat_reset = 0; 
-							end 
-						else
-							begin
-								refresh_en = 0; 
-								plat_enable = 0; 
-								plat_reset = 1; 
-							end 	
+				if(Doodle_Y_Pos <= 240 && (Doodle_Y_Motion[7:4] == 4'hF))
+					begin 
+						plat_temp_Y = Doodle_Y_Motion; 
+						refresh_en = 1; 
 					end 
-
+ 
 				// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PHYSICS ENGINE BELOW~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 				jump_reset <= 1;  // reset the counter for velocity 
 				jump_enable <= 0; 	// begin the convergence of velocity toward 0 
 				// if not moving then get it to start falling or start jumping 
 				if(Doodle_Y_Motion == 10'h0)
-				begin 
-					// if the Doodle is currently on the ground
-					if(Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max)
-						begin
-							jump_reset <= 1;  // reset the counter for velocity 
-							jump_enable <= 0; 	// begin the convergence of velocity toward 0 
-							Doodle_Y_Motion = (1'b1 + ~Gravity);  // allow for the doodle to "jump"
-						end 
+					begin 
+						// if the Doodle is currently on the ground
+						if(Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max)
+							begin
+								jump_reset <= 1;  // reset the counter for velocity 
+								jump_enable <= 0; 	// begin the convergence of velocity toward 0 
+								Doodle_Y_Motion = (1'b1 + ~Gravity);  // allow for the doodle to "jump"
+							end 
 
-					// if the Doodle is currently above the ground 
-					else if(Doodle_Y_Pos + Doodle_Size < Screen_Y_Max) // && if not already in proximity of platform ?
-						begin 
-							jump_reset <= 1; 
-							jump_enable <= 0; 
-							Doodle_Y_Motion = Gravity;  // allow for the doodle to start falling at peak 
-						end 
-
-				end 
+						// if the Doodle is currently above the ground 
+						else if(Doodle_Y_Pos + Doodle_Size < Screen_Y_Max) // && if not already in proximity of platform ?
+							begin 
+								jump_reset <= 1; 
+								jump_enable <= 0; 
+								Doodle_Y_Motion = Gravity;  // allow for the doodle to start falling at peak 
+							end 
+					end 
 
 				else if(Doodle_Y_Motion != 10'h0)
 				begin 
@@ -227,18 +201,18 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				// keyboard input detector
 				unique case(keycode)
 					8'd30:
-					begin 
-						Cannon_Y_Motion <= (1'b1 + ~CannonSpeed); 
-					end 
+						begin 
+							Cannon_Y_Motion <= (1'b1 + ~CannonSpeed); 
+						end 
 					8'd7, 8'd79:
 						Doodle_X_Motion = 3; 
 					8'd4, 8'd80:
 						Doodle_X_Motion = -3;	 
 					default:
-					begin 
-						Doodle_X_Motion = 0;
-						Cannon_X_Motion <= 0; 
-					end 
+						begin 
+							Doodle_X_Motion = 0;
+							Cannon_X_Motion <= 0; 
+						end 
 				endcase 
 				
 
@@ -254,7 +228,24 @@ always_ff @ (posedge Reset or posedge frame_clk)
 			
 			3'b011:
 				begin
-					displacement <= (240 - Doodle_Y_Pos);
+					Doodle_Y_Motion = 0; 
+					if(trigger)
+						refresh_en = 0; 
+					unique case(keycode)
+						8'd30:
+						begin 
+							Cannon_Y_Motion <= (1'b1 + ~CannonSpeed); 
+						end 
+						8'd7, 8'd79:
+							Doodle_X_Motion = 3; 
+						8'd4, 8'd80:
+							Doodle_X_Motion = -3;	 
+						default:
+						begin 
+							Doodle_X_Motion = 0;
+							Cannon_X_Motion <= 0; 
+						end 
+					endcase 
 				end
 
 			
