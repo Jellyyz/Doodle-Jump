@@ -35,7 +35,7 @@ module  jumplogic(  input Reset, frame_clk, Clk,
 					output [9:0] Doodle_Y_Pos, plat_temp_Y, 
 					output refresh_en,
 					output [15:0] countingss, 
-					output [7:0]displacement);
+					output [7:0] displacement, airtime);
 
     logic [9:0] Doodle_X_Pos, Doodle_X_Motion, Doodle_Size;
 	
@@ -82,6 +82,7 @@ jumpstate jumpstate(
 	.outstate(outstate[5:0]),
 	.loadplat(loadplat)
 );
+
 logic [2:0] Status, state; 
 logic [7:0] counting; 
 //logic [15:0] countingss;
@@ -90,7 +91,6 @@ logic jump_enable, jump_reset;
 logic [9:0] Doodle_Top; 
  
 logic [9:0] Cannon_Y_Motion, Cannon_X_Motion, Cannon_Y_Pos, Cannon_X_Pos, Cannon_Size; 
-
 
 logic [7:0] counterdis; 
 always_ff @ (posedge Reset or posedge frame_clk)
@@ -131,7 +131,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					if(!refresh_en)
 						begin 
 						// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SCROLLING ENGINE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-						if(Doodle_Y_Pos <= 240 && (Doodle_Y_Motion[7:4] == 4'hF))
+						if(!Platform_collision && Doodle_Y_Pos <= 240 && (Doodle_Y_Motion[7:4] == 4'hF))
 							begin 
 								plat_temp_Y <= Doodle_Y_Motion; 
 								refresh_en <= 1; 
@@ -185,7 +185,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 						else if(Doodle_Y_Motion[7:4] >= 4'h0 && Doodle_Y_Motion[7:4] <= 4'hA)
 							begin 
 								// if the doodle is moving downwards and hitting the ground or platform 
-								if((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) || Platform_collision)
+								if((airtime == 8'h0) && ((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) || Platform_collision))
 									begin 
 									// if doodle falling then allow for it to turn velocity to 0 
 										jump_reset <= 1; 
@@ -255,7 +255,13 @@ always_ff @ (posedge Reset or posedge frame_clk)
 			
 
 			endcase 
-							// Update Doodle position
+				// count however long the doodle is in the air for
+				if(outstate == 5'd2 && Doodle_Y_Motion[7:4] >= 4'hC)
+					airtime <= airtime + 1; 
+				else 
+					airtime <= 0; 
+
+				// Update Doodle position
 				// wrap around screen condition  
 				if((Doodle_X_Pos + Doodle_Size) >= (Screen_X_Max - 10'd25))  
 					Doodle_X_Pos <= Screen_X_Min + (Doodle_Size << 4); 

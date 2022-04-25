@@ -21,10 +21,10 @@ module  color_mapper (
                     input logic        [9:0] CannonX, CannonY, CannonS,  
                     input logic [9:0] Doodle_Y_Pos, plat_temp_Y,
 					input logic loadplat, 
-
+                    input logic [7:0] airtime, 
 						  
 						  
-						  
+                    output logic [7:0] temp, 
                     output logic  [31:0] countingplat,
                     output logic  trigger, 
                     output logic  [7:0]  Red, Green, Blue,
@@ -195,23 +195,33 @@ counter counterplat(
 
     .out(countingplat[31:0])
 );
+countdown countdown(
+    .Reset(plat_reset),
+    .enable(plat_enable),
+    .Clk(frame_clk), 
+    .seed((6'h25 - airtime[5:0])), 
+    
+    .temp(temp),
+    .done(stop_refresh_flag)
+);
 
 
 always_ff @ (posedge frame_clk or posedge loadplat)
     begin 
         // initial Y values of the platforms before anything
+		    
         unique case(outstate)
         3'b000: 
             begin 
-                plat_enable <= 0; 
                 plat_reset <= 1;  
+                plat_enable <= 1; 
                 trigger <= 0; 
             end 
         // game 
         3'b010: 
             begin 
-                plat_enable <= 0; 
                 plat_reset <= 1;  
+                plat_enable <= 1; 
                 trigger <= 0; 
             end 
         // pause 
@@ -222,13 +232,10 @@ always_ff @ (posedge frame_clk or posedge loadplat)
         // refreshing 
         3'b100: 
             begin 
-                plat_enable <= 1; 
                 plat_reset <= 0; 
-
-                if(countingplat[25])
+                plat_enable <= 0; 
+                if(stop_refresh_flag)
                     begin 
-                        plat_enable <= 0; 
-                        plat_reset <= 0; 
                         trigger <= 1; 
                     end 
                 else 

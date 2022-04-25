@@ -85,10 +85,11 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [9:0] Doodle_Y_Motion;
 	logic [9:0] Doodle_Y_Pos, plat_temp_Y;
 	logic refresh_en, trigger;
-	logic [7:0] displacement;
+	logic [7:0] displacement, airtime;
 	logic [15:0] countingss;
 	logic [31:0] countingplat;
-	logic test; 
+	logic test;
+	logic [7:0] temp; 
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -111,17 +112,24 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	//Assign uSD CS to '1' to prevent uSD card from interfering with USB Host (if uSD card is plugged in)
 	assign ARDUINO_IO[6] = 1'b1;
 	
+	//Assign LED for debug
+	assign LEDR[9] = plat_enable; 
+	assign LEDR[8] = plat_reset;
+
+	assign LEDR[1] = refresh_en; 
+	assign LEDR[0] = trigger; 
+	
 	//HEX drivers to convert numbers to HEX output
-	HexDriver hex_driver5 (refresh_en, HEX5[6:0]);
+	HexDriver hex_driver5 (airtime[7:4], HEX5[6:0]);
 	assign HEX5[7] = 1'b1;
 	
-	HexDriver hex_driver4 (trigger, HEX4[6:0]);
+	HexDriver hex_driver4 (airtime[3:0], HEX4[6:0]);
 	assign HEX4[7] = 1'b1;
 		
-	HexDriver hex_driver3 (platY[7:4], HEX3[6:0]); 
+	HexDriver hex_driver3 (temp[7:4], HEX3[6:0]); 
 	assign HEX3[7] = 1'b1;
 	
-	HexDriver hex_driver2 (platY[3:0], HEX2[6:0]); 
+	HexDriver hex_driver2 (temp[3:0], HEX2[6:0]); 
 	assign HEX2[7] = 1'b1;
 
 	HexDriver hex_driver1 (loadplat, HEX1[6:0]);
@@ -187,12 +195,12 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 		
 		//LEDs and HEX
 		.hex_digits_export({hex_num_4, hex_num_3, hex_num_1, hex_num_0}),
-		.leds_export({hundreds, signs, LEDR}),
+		.leds_export({hundreds, signs, trash}),
 		.keycode_export(keycode)
 		
 	 );
 
-
+logic [9:0] trash; 
 //instantiate a vga_controller, Doodle, and color_mapper here with the ports.
 logic pxl_clk;
 logic [5:0] outstate;
@@ -230,7 +238,7 @@ jumplogic jumplogic(
 	.platY9(platY9[9:0]), .platY10(platY10[9:0]), .platY11(platY11[9:0]), .platY12(platY12[9:0]), .platY13(platY13[9:0]), .platY14(platY14[9:0]), .platY15(platY15[9:0]),
 	.countingss(countingss[15:0]),
 	.refresh_en(refresh_en),
-	.displacement(displacement[7:0]),
+	.displacement(displacement[7:0]), .airtime(airtime[7:0]),
 	.loadplat(loadplat)
 ); 
 
@@ -251,6 +259,7 @@ color_mapper color(
 	.Doodle_Y_Pos(Doodle_Y_Pos[9:0]), .plat_temp_Y(plat_temp_Y[9:0]),
 	.pixel_clk(pixel_clk), 
 	.loadplat(loadplat),
+	.airtime(airtime[7:0]),
 
 	.keycode(keycode), 
 	.CannonX(cannonxsig[9:0]), 
@@ -264,8 +273,8 @@ color_mapper color(
 	.Green(Green[7:0]), 
 	.Blue(Blue[7:0]),
 	.countingplat(countingplat[31:0]),
-	.test(test)
-	
+	.test(test),
+	.temp(temp)
 );
 
 endmodule
