@@ -6,36 +6,38 @@
 //Plat = ImY;
 //displacement = 0;
 
-module  jumplogic(  input Reset, frame_clk, Clk,
-				    input [7:0] keycode,
-				    input [8:0]plat_sizeX, plat_sizeY,
-					input [8:0]platX, platY, 
-					input [8:0]platX1, platY1, 
-					input [8:0]platX2, platY2, 
-					input [8:0]platX3, platY3, 
-					input [8:0]platX4, platY4, 
-					input [8:0]platX5, platY5, 
-					input [8:0]platX6, platY6, 
-					input [8:0]platX7, platY7, 
-					input [8:0]platX8, platY8, 
-					input [8:0]platX9, platY9, 
-					input [8:0]platX10, platY10, 
-					input [8:0]platX11, platY11, 
-					input [8:0]platX12, platY12, 
-					input [8:0]platX13, platY13, 
-					input [8:0]platX14, platY14, 
-					input [8:0]platX15, platY15,
-					input trigger, 
+module  jumplogic(  input logic Reset, frame_clk, Clk,
+				    input logic [7:0] keycode,
+				    input logic [8:0]plat_sizeX, plat_sizeY,
+					input logic [8:0]platX, platY, 
+					input logic [8:0]platX1, platY1, 
+					input logic [8:0]platX2, platY2, 
+					input logic [8:0]platX3, platY3, 
+					input logic [8:0]platX4, platY4, 
+					input logic [8:0]platX5, platY5, 
+					input logic [8:0]platX6, platY6, 
+					input logic [8:0]platX7, platY7, 
+					input logic [8:0]platX8, platY8, 
+					input logic [8:0]platX9, platY9, 
+					input logic [8:0]platX10, platY10, 
+					input logic [8:0]platX11, platY11, 
+					input logic [8:0]platX12, platY12, 
+					input logic [8:0]platX13, platY13, 
+					input logic [8:0]platX14, platY14, 
+					input logic [8:0]platX15, platY15,
+					input logic trigger, 
 
-					output loadplat,
-					output [9:0]  DoodleX, DoodleY, DoodleS, 
-					output [9:0]  CannonX, CannonY, CannonS, 
-					output [5:0] outstate,
-					output [9:0] Doodle_Y_Motion,
-					output [9:0] Doodle_Y_Pos, plat_temp_Y, 
-					output refresh_en,
-					output [15:0] countingss, 
-					output [7:0] displacement, airtime);
+					output logic loadplat,
+					output logic [9:0]  DoodleX, DoodleY, DoodleS, 
+					output logic [9:0]  CannonX, CannonY, CannonS, 
+					output logic [9:0]  CannonX1, CannonY1, CannonS1,
+					output logic [9:0]  CannonX2, CannonY2, CannonS2,
+					output logic [5:0] outstate,
+					output logic [9:0] Doodle_Y_Motion,
+					output logic [9:0] Doodle_Y_Pos, plat_temp_Y, 
+					output logic refresh_en,
+					output logic [15:0] countingss, 
+					output logic [7:0] displacement, airtime);
 
     logic [9:0] Doodle_X_Pos, Doodle_X_Motion, Doodle_Size;
 	
@@ -53,8 +55,10 @@ module  jumplogic(  input Reset, frame_clk, Clk,
     
 
 	parameter [1:0] Gravity = 3; 
-	parameter [2:0] CannonSpeed = 14;
-    assign Doodle_Size = 6;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
+	parameter [4:0] CannonSpeed = 5'd14;
+	parameter [4:0] CannonSpeed1 = 5'd10;
+    parameter [2:0] CannonSpeed2 = 3'd6;
+	assign Doodle_Size = 6;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
 	assign Cannon_Size = 2; 
 counter counter(
 	.Reset(jump_reset), 
@@ -91,6 +95,9 @@ logic jump_enable, jump_reset;
 logic [9:0] Doodle_Top; 
  
 logic [9:0] Cannon_Y_Motion, Cannon_X_Motion, Cannon_Y_Pos, Cannon_X_Pos, Cannon_Size; 
+logic [9:0] Cannon_Y_Motion1, Cannon_X_Motion1, Cannon_Y_Pos1, Cannon_X_Pos1; 
+logic [9:0] Cannon_Y_Motion2, Cannon_X_Motion2, Cannon_Y_Pos2, Cannon_X_Pos2; 
+
 
 logic [7:0] counterdis; 
 always_ff @ (posedge Reset or posedge frame_clk)
@@ -105,7 +112,15 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					Cannon_Y_Pos <= Screen_Y_Center; 
 					Cannon_X_Pos <= Screen_X_Center; 
 					Cannon_Y_Motion <= 0; 
-					Cannon_X_Motion <= 0; 
+					Cannon_X_Motion <= 0;
+					Cannon_Y_Pos1 <= Screen_Y_Center; 
+					Cannon_X_Pos1 <= Screen_X_Center; 
+					Cannon_Y_Motion1 <= 0; 
+					Cannon_X_Motion1 <= 0;
+					Cannon_Y_Pos2 <= Screen_Y_Center; 
+					Cannon_X_Pos2 <= Screen_X_Center; 
+					Cannon_Y_Motion2 <= 0; 
+					Cannon_X_Motion2 <= 0;  
 					plat_temp_Y <= 0; 
 			end 
 
@@ -202,12 +217,14 @@ always_ff @ (posedge Reset or posedge frame_clk)
 						// if the doodle is moving upwards 
 					end 
 
-					// keyboard input detector
+					// keyboard input logic detector
 					unique case(keycode)
 						8'd30:
-							begin 
-								Cannon_Y_Motion <= (1'b1 + ~CannonSpeed); 
-							end 
+						begin 
+							Cannon_Y_Motion <= (1'b1 + ~CannonSpeed); 
+							Cannon_Y_Motion1 <= (1'b1 + ~CannonSpeed1); 
+							Cannon_Y_Motion2 <= (1'b1 + ~CannonSpeed2); 
+						end 
 						8'd7, 8'd79:
 							Doodle_X_Motion <= 3; 
 						8'd4, 8'd80:
@@ -216,6 +233,8 @@ always_ff @ (posedge Reset or posedge frame_clk)
 							begin 
 								Doodle_X_Motion <= 0;
 								Cannon_X_Motion <= 0; 
+								Cannon_X_Motion1 <= 0;
+								Cannon_X_Motion2 <= 0;
 							end 
 					endcase 
 					
@@ -226,8 +245,9 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				begin
 					Doodle_Y_Motion = 0; 
 					Doodle_X_Motion <= 0;
-					Cannon_X_Motion <= 0; 
 					Cannon_Y_Motion <= 0;
+					Cannon_Y_Motion1 <= 0;
+					Cannon_Y_Motion2 <= 0;
 					plat_temp_Y <= 0;  
 				end
 				// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	Refresh screen  ▣	▣	▣	▣	▣	▣	▣	▣	▣	
@@ -239,6 +259,8 @@ always_ff @ (posedge Reset or posedge frame_clk)
 						8'd30:
 						begin 
 							Cannon_Y_Motion <= (1'b1 + ~CannonSpeed); 
+							Cannon_Y_Motion1 <= (1'b1 + ~CannonSpeed1); 
+							Cannon_Y_Motion2 <= (1'b1 + ~CannonSpeed2); 
 						end 
 						8'd7, 8'd79:
 							Doodle_X_Motion <= 3; 
@@ -248,6 +270,8 @@ always_ff @ (posedge Reset or posedge frame_clk)
 							begin 
 								Doodle_X_Motion <= 0;
 								Cannon_X_Motion <= 0; 
+								Cannon_X_Motion1 <= 0;
+								Cannon_X_Motion2 <= 0;
 							end 
 					endcase 
 				end
@@ -255,6 +279,8 @@ always_ff @ (posedge Reset or posedge frame_clk)
 			
 
 			endcase 
+// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	Constant Calculation ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	
+
 				// count however long the doodle is in the air for
 				if(outstate == 5'd2 && Doodle_Y_Motion[7:4] >= 4'hC)
 					airtime <= airtime + 1; 
@@ -291,6 +317,47 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					Cannon_Y_Pos <= (Cannon_Y_Pos + Cannon_Y_Motion); 
 					Cannon_X_Pos <= (Cannon_X_Pos + Cannon_X_Motion); 
 				end
+				
+				// Update Cannon1 position 
+				if(Cannon_Y_Pos1 - Cannon_Size <= 10'd25)
+					begin 
+						Cannon_Y_Pos1 <= Doodle_Y_Pos; 
+						Cannon_X_Pos1 <= Doodle_X_Pos; 
+						Cannon_X_Motion1 <= 0; 
+						Cannon_Y_Motion1 <= 0; 
+					end
+				if(Cannon_Y_Motion1 <= 0 && outstate != 3'b011)
+					begin 
+						Cannon_Y_Pos1 <= Doodle_Y_Pos; 
+						Cannon_X_Pos1 <= Doodle_X_Pos; 
+					end
+				else 
+				begin 
+					Cannon_Y_Pos1 <= (Cannon_Y_Pos1 + Cannon_Y_Motion1); 
+					Cannon_X_Pos1 <= (Cannon_X_Pos1 + Cannon_X_Motion1); 
+				end
+
+				// Update Cannon2 position 
+				if(Cannon_Y_Pos2 - Cannon_Size <= 10'd25)
+					begin 
+						Cannon_Y_Pos2 <= Doodle_Y_Pos; 
+						Cannon_X_Pos2 <= Doodle_X_Pos; 
+						Cannon_X_Motion2 <= 0; 
+						Cannon_Y_Motion2 <= 0; 
+					end
+				if(Cannon_Y_Motion2 <= 0 && outstate != 3'b011)
+					begin 
+						Cannon_Y_Pos2 <= Doodle_Y_Pos; 
+						Cannon_X_Pos2 <= Doodle_X_Pos; 
+					end
+				else 
+				begin 
+					Cannon_Y_Pos2 <= (Cannon_Y_Pos2 + Cannon_Y_Motion2); 
+					Cannon_X_Pos2 <= (Cannon_X_Pos2 + Cannon_X_Motion2); 
+				end
+
+
+
 		end  
     end
        
@@ -326,5 +393,10 @@ end
 	assign CannonY = Cannon_Y_Pos; 
     assign CannonS = Cannon_Size; 
 
+	assign CannonX1 = Cannon_X_Pos1; 
+	assign CannonY1 = Cannon_Y_Pos1; 
+	
+	assign CannonX2 = Cannon_X_Pos2; 
+	assign CannonY2 = Cannon_Y_Pos2; 
 
 endmodule

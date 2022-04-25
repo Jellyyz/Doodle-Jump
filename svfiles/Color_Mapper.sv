@@ -18,7 +18,9 @@ module  color_mapper (
 					input logic        [9:0] DoodleX, DoodleY, DrawX, DrawY, Doodle_size,
                     input logic        [6:0] keycode, 
                     input logic        [5:0] outstate,
-                    input logic        [9:0] CannonX, CannonY, CannonS,  
+					input logic [9:0]  CannonX, CannonY, CannonS, 
+					input logic [9:0]  CannonX1, CannonY1, 
+					input logic [9:0]  CannonX2, CannonY2, 
                     input logic [9:0] Doodle_Y_Pos, plat_temp_Y,
 					input logic loadplat, 
                     input logic [7:0] airtime, 
@@ -56,6 +58,30 @@ module  color_mapper (
             cannon_on = 1'b1;
         else 
             cannon_on = 1'b0;
+    end 
+
+    logic cannon_on1; 
+    always_comb
+    begin:Cannon_on_proc1
+         if ((DrawX >= CannonX1 - CannonS) &&
+            (DrawX <= CannonX1 + CannonS) &&
+            (DrawY >= CannonY1 - CannonS) &&
+            (DrawY <= CannonY1 + CannonS)) 
+            cannon_on1 = 1'b1;
+        else 
+            cannon_on1 = 1'b0;
+    end 
+
+    logic cannon_on2; 
+    always_comb
+    begin:Cannon_on_proc2
+         if ((DrawX >= CannonX2 - CannonS) &&
+            (DrawX <= CannonX2 + CannonS) &&
+            (DrawY >= CannonY2 - CannonS) &&
+            (DrawY <= CannonY2 + CannonS)) 
+            cannon_on2 = 1'b1;
+        else 
+            cannon_on2 = 1'b0;
     end 
        
     always_comb
@@ -122,67 +148,67 @@ LFSR LFSR15(
 // this is for calculation of platX
 always_ff @ (posedge loadplat)
     begin 
-        if(testX >= 0 && testX<= 500)
+        if(testX >= 9'h0 && testX <= 9'd500)
             platX = testX + 9'd100;
         else 
             platX = testX; 
-        if(testX1 >= 0 && testX1<= 500)
+        if(testX1 >= 9'h0 && testX1 <= 9'd500)
             platX1 = testX1 + 9'd100;
         else 
             platX1 = testX1; 
-        if(testX2 >= 0 && testX2<= 500)
+        if(testX2 >= 9'h0 && testX2 <= 9'd500)
             platX2 = testX2 + 9'd100; 
         else 
             platX2 = testX2; 
-        if(testX3 >= 0 && testX3<= 500)
+        if(testX3 >= 9'h0 && testX3 <= 9'd500)
             platX3 = testX3 + 9'd100;  
         else 
             platX3 = testX3; 
-        if(testX4 >= 0 && testX4<= 500)
+        if(testX4 >= 9'h0 && testX4 <= 9'd500)
             platX4 = testX4 + 9'd100; 
         else 
             platX4 = testX4; 
-        if(testX5 >= 0 && testX5<= 500)
+        if(testX5 >= 9'h0 && testX5 <= 9'd500)
             platX5 = testX5 + 9'd100; 
         else 
             platX5 = testX5; 
-        if(testX6 >= 0 && testX6<= 500)
+        if(testX6 >= 9'h0 && testX6 <= 9'd500)
             platX6 = testX6 + 9'd100; 
         else 
             platX6 = testX6; 
-        if(testX7 >= 0 && testX7<= 500)
+        if(testX7 >= 9'h0 && testX7 <= 9'd500)
             platX7 = testX7 + 9'd100;
         else 
             platX7 = testX7; 
-        if(testX8 >= 0 && testX8<= 500)
+        if(testX8 >= 9'h0 && testX8 <= 9'd500)
             platX8 = testX8 + 9'd100; 
         else 
             platX8 = testX8; 
-        if(testX9 >= 0 && testX9<= 500)
+        if(testX9 >= 9'h0 && testX9 <= 9'd500)
             platX9 = testX9 + 9'd100; 
         else 
             platX9 = testX9; 
-        if(testX10 >= 0 && testX10<= 500)
+        if(testX10 >= 9'h0 && testX10 <= 9'd500)
             platX10 = testX10 + 9'd100; 
         else 
             platX10 = testX10; 
-        if(testX11 >= 0 && testX11<= 500)
+        if(testX11 >= 9'h0 && testX11 <= 9'd500)
             platX11 = testX11 + 9'd100;      
         else 
             platX11 = testX11; 
-        if(testX12 >= 0 && testX12<= 500)
+        if(testX12 >= 9'h0 && testX12 <= 9'd500)
             platX12 = testX12 + 9'd100; 
         else 
             platX12 = testX12; 
-        if(testX13 >= 0 && testX13<= 500)
+        if(testX13 >= 9'h0 && testX13 <= 9'd500)
             platX13 = testX13 + 9'd100;
         else 
             platX13 = testX13; 
-        if(testX14 >= 0 && testX14<= 500)
+        if(testX14 >= 9'h0 && testX14 <= 9'd500)
             platX14 = testX14 + 9'd100; 
         else 
             platX14 = testX14; 
-        if(testX15 >= 0 && testX15<= 500)
+        if(testX15 >= 9'h0 && testX15 <= 9'd500)
             platX15 = testX15 + 9'd100;    
         else 
             platX15 = testX15; 
@@ -498,7 +524,7 @@ always_ff @ (posedge frame_clk or posedge loadplat)
     always_comb
     begin:RGB_Display
     //turn on pixels for the Doodle 
-        if ((Doodle_on == 1'b1)) 
+        if ((Doodle_on)) 
         begin 
             Red = 8'hCA;
             Green = 8'hC9;
@@ -506,22 +532,22 @@ always_ff @ (posedge frame_clk or posedge loadplat)
         end      
     //turn on pixels for the platforms 
         else if(
-        (platform_on == 1'b1) || 
-        (platform_on1 == 1'b1) ||
-        (platform_on2 == 1'b1) || 
-        (platform_on3 == 1'b1) ||
-        (platform_on4 == 1'b1) || 
-        (platform_on5 == 1'b1) ||
-        (platform_on6 == 1'b1) || 
-        (platform_on7 == 1'b1) ||       
-        (platform_on8 == 1'b1) || 
-        (platform_on9 == 1'b1) ||
-        (platform_on10 == 1'b1) || 
-        (platform_on11 == 1'b1) ||
-        (platform_on12 == 1'b1) ||
-        (platform_on13 == 1'b1) ||
-        (platform_on14 == 1'b1) || 
-        (platform_on15 == 1'b1)
+        (platform_on) || 
+        (platform_on1) ||
+        (platform_on2) || 
+        (platform_on3) ||
+        (platform_on4) || 
+        (platform_on5) ||
+        (platform_on6) || 
+        (platform_on7) ||       
+        (platform_on8) || 
+        (platform_on9) ||
+        (platform_on10) || 
+        (platform_on11) ||
+        (platform_on12) ||
+        (platform_on13) ||
+        (platform_on14) || 
+        (platform_on15)
         ) 
         begin 
             Red = 8'h66;
@@ -529,11 +555,23 @@ always_ff @ (posedge frame_clk or posedge loadplat)
             Blue = 8'h11;
         end 
     // turn on pixels for the cannon 
-        else if((cannon_on == 1'b1))
+        else if(cannon_on)
         begin 
             Red = 8'hFF; 
             Green = 8'h00; 
             Blue = 8'h00; 
+        end 
+        else if(cannon_on1)
+        begin 
+            Red = 8'hFF; 
+            Green = 8'h33; 
+            Blue = 8'h33; 
+        end 
+        else if(cannon_on2)
+        begin 
+            Red = 8'hFF; 
+            Green = 8'h66; 
+            Blue = 8'h66; 
         end 
     // turn on pixels for the background
         else 

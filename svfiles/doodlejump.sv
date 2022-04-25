@@ -64,6 +64,8 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [1:0] hundreds;
 	logic [9:0] drawxsig, drawysig, Doodlexsig, Doodleysig, Doodlesizesig;
 	logic [9:0] cannonxsig, cannonysig, cannonsizesig; 
+	logic [9:0] cannonxsig1, cannonysig1; 
+	logic [9:0] cannonxsig2, cannonysig2; 
 	logic [7:0] Red, Blue, Green;
 	logic [7:0] keycode;
 	logic [8:0] platX, platY, plat_sizeX, plat_sizeY;
@@ -231,6 +233,8 @@ jumplogic jumplogic(
 	.Doodle_Y_Pos(Doodle_Y_Pos[9:0]),
 	.DoodleX(Doodlexsig[9:0]), .DoodleY(Doodleysig[9:0]), .DoodleS(Doodlesizesig[9:0]),  // 10 bits
 	.CannonX(cannonxsig[9:0]), .CannonY(cannonysig[9:0]), .CannonS(cannonsizesig[9:0]), 
+	.CannonX1(cannonxsig1[9:0]), .CannonY1(cannonysig1[9:0]),
+	.CannonX2(cannonxsig2[9:0]), .CannonY2(cannonysig2[9:0]),
 	.outstate(outstate[5:0]),
 	.platX1(platX1[9:0]), .platX2(platX2[9:0]), .platX3(platX3[9:0]), .platX4(platX4[9:0]), .platX5(platX5[9:0]), .platX6(platX6[9:0]), .platX7(platX7[9:0]), .platX8(platX8[9:0]),
 	.platX9(platX9[9:0]), .platX10(platX10[9:0]), .platX11(platX11[9:0]), .platX12(platX12[9:0]), .platX13(platX13[9:0]), .platX14(platX14[9:0]), .platX15(platX15[9:0]),
@@ -262,8 +266,8 @@ color_mapper color(
 	.airtime(airtime[7:0]),
 
 	.keycode(keycode), 
-	.CannonX(cannonxsig[9:0]), 
-	.CannonY(cannonysig[9:0]), 
+	.CannonX(cannonxsig[9:0]), .CannonX1(cannonxsig1[9:0]), .CannonX2(cannonxsig2[9:0]), 
+	.CannonY(cannonysig[9:0]), .CannonY1(cannonysig1[9:0]), .CannonY2(cannonysig2[9:0]), 
 	.CannonS(cannonsizesig[9:0]), 
 	.trigger(trigger), 
 	.platX(platX[8:0]), .platY(platY[8:0]), .plat_sizeX(plat_sizeX[8:0]), .plat_sizeY(plat_sizeY[8:0]),	//9 btis
