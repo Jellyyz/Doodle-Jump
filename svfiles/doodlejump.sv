@@ -112,10 +112,10 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign ARDUINO_IO[6] = 1'b1;
 	
 	//HEX drivers to convert numbers to HEX output
-	HexDriver hex_driver5 (platX[7:4], HEX5[6:0]);
+	HexDriver hex_driver5 (refresh_en, HEX5[6:0]);
 	assign HEX5[7] = 1'b1;
 	
-	HexDriver hex_driver4 (platX[3:0], HEX4[6:0]);
+	HexDriver hex_driver4 (trigger, HEX4[6:0]);
 	assign HEX4[7] = 1'b1;
 		
 	HexDriver hex_driver3 (platY[7:4], HEX3[6:0]); 

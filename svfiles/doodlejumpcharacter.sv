@@ -113,26 +113,39 @@ always_ff @ (posedge Reset or posedge frame_clk)
         begin 
 
 			unique case(outstate)
+				// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	Main Menu ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	
 				3'b000:
 				begin 
 					refresh_en <= 0;
 					plat_temp_Y <= 0; 
 				end
+				// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	Loading ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	
 				3'b001:
 				begin 
+					refresh_en <= 0;
 					plat_temp_Y <= 0; 
 				end 
+				// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	Game ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	
 				3'b010: 
 				begin
-					// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SCROLLING ENGINE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-					if(Doodle_Y_Pos <= 240 && (Doodle_Y_Motion[7:4] == 4'hF))
+					if(!refresh_en)
 						begin 
-							plat_temp_Y <= Doodle_Y_Motion; 
-							refresh_en <= 1; 
+						// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SCROLLING ENGINE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+						if(Doodle_Y_Pos <= 240 && (Doodle_Y_Motion[7:4] == 4'hF))
+							begin 
+								plat_temp_Y <= Doodle_Y_Motion; 
+								refresh_en <= 1; 
+							end 
+						else 
+							plat_temp_Y <= 0; 
+						end  
+					else if(refresh_en)
+						begin 
+							Doodle_Y_Motion = 0;
+							Doodle_Y_Pos <= 240;  
+							if(trigger)
+								refresh_en <= 0; 
 						end 
-					else 
-						plat_temp_Y <= 0; 
-
 
 					// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PHYSICS ENGINE BELOW~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 					jump_reset <= 1;  // reset the counter for velocity 
@@ -208,7 +221,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					
 
 				end
-
+				// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	Pause ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	
 				3'b011: 
 				begin
 					Doodle_Y_Motion = 0; 
@@ -217,9 +230,10 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					Cannon_Y_Motion <= 0;
 					plat_temp_Y <= 0;  
 				end
-			
+				// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	Refresh screen  ▣	▣	▣	▣	▣	▣	▣	▣	▣	
 				3'b100:
 				begin
+					refresh_en <= 0; 
 					Doodle_Y_Motion = 0; 
 					unique case(keycode)
 						8'd30:

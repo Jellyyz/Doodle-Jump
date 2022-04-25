@@ -210,12 +210,14 @@ always_ff @ (posedge frame_clk or posedge loadplat)
         // game 
         3'b010: 
             begin 
+                plat_enable <= 0; 
+                plat_reset <= 1;  
                 trigger <= 0; 
             end 
         // pause 
         3'b011:
             begin   
-
+                trigger <= 0; 
             end 
         // refreshing 
         3'b100: 
@@ -225,8 +227,12 @@ always_ff @ (posedge frame_clk or posedge loadplat)
 
                 if(countingplat[25])
                     begin 
+                        plat_enable <= 0; 
+                        plat_reset <= 0; 
                         trigger <= 1; 
                     end 
+                else 
+                    trigger <= 0; 
             end 
         endcase 
         // if we have the need to refresh the platforms 
