@@ -64,7 +64,7 @@ always_ff @(posedge Clk or posedge Reset)
         if (Reset)
             clockcounter <= 4'd0; 
         else  
-            clockcounter <= clockcounter + 1; 
+            clockcounter <= clockcounter + 4'd1; 
     end 
 
 always_comb

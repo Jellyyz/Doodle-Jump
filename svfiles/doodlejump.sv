@@ -69,29 +69,33 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [7:0] Red, Blue, Green;
 	logic [7:0] keycode;
 	logic [8:0] platX, platY, plat_sizeX, plat_sizeY;
-	logic [9:0] platX1, platY1;
-	logic [9:0] platX2, platY2;
-	logic [9:0] platX3, platY3;
-	logic [9:0] platX4, platY4;
-	logic [9:0] platX5, platY5;
-	logic [9:0] platX6, platY6;
-	logic [9:0] platX7, platY7;
-	logic [9:0] platX8, platY8;
-	logic [9:0] platX9, platY9;
-	logic [9:0] platX10, platY10;
-	logic [9:0] platX11, platY11;
-	logic [9:0] platX12, platY12;
-	logic [9:0] platX13, platY13;
-	logic [9:0] platX14, platY14;
-	logic [9:0] platX15, platY15;
+	logic [8:0] platX1, platY1;
+	logic [8:0] platX2, platY2;
+	logic [8:0] platX3, platY3;
+	logic [8:0] platX4, platY4;
+	logic [8:0] platX5, platY5;
+	logic [8:0] platX6, platY6;
+	logic [8:0] platX7, platY7;
+	logic [8:0] platX8, platY8;
+	logic [8:0] platX9, platY9;
+	logic [8:0] platX10, platY10;
+	logic [8:0] platX11, platY11;
+	logic [8:0] platX12, platY12;
+	logic [8:0] platX13, platY13;
+	logic [8:0] platX14, platY14;
+	logic [8:0] platX15, platY15;
+	logic [8:0]plat_size_easy_X, plat_size_medium_X, plat_size_hard_X;
+	logic [8:0]plat_size_easy_Y, plat_size_medium_Y, plat_size_hard_Y;
 	logic [9:0] Doodle_Y_Motion;
-	logic [9:0] Doodle_Y_Pos, plat_temp_Y;
+	logic [9:0] Doodle_X_Pos, plat_temp_Y;
 	logic refresh_en, trigger;
 	logic [7:0] displacement, airtime;
 	logic [15:0] countingss;
 	logic [31:0] countingplat;
 	logic test;
 	logic [7:0] temp; 
+	logic [11:0]Score;
+	logic [1:0] difficulty; 
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -122,19 +126,31 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign LEDR[0] = trigger; 
 	
 	//HEX drivers to convert numbers to HEX output
-	HexDriver hex_driver5 (airtime[7:4], HEX5[6:0]);
-	assign HEX5[7] = 1'b1;
+	// HexDriver hex_driver5 (airtime[7:4], HEX5[6:0]);
+	// assign HEX5[7] = 1'b1;
 	
-	HexDriver hex_driver4 (airtime[3:0], HEX4[6:0]);
-	assign HEX4[7] = 1'b1;
+	// HexDriver hex_driver4 (airtime[3:0], HEX4[6:0]);
+	// assign HEX4[7] = 1'b1;
 		
-	HexDriver hex_driver3 (temp[7:4], HEX3[6:0]); 
-	assign HEX3[7] = 1'b1;
+	// HexDriver hex_driver3 (Doodle_Y_Motion[7:4], HEX3[6:0]); 
+	// assign HEX3[7] = 1'b1;
+
+	// HexDriver hex_driver2 (Doodle_Y_Motion[3:0], HEX2[6:0]); 
+	// assign HEX2[7] = 1'b1;
 	
-	HexDriver hex_driver2 (temp[3:0], HEX2[6:0]); 
+	HexDriver hex_driver5 (Score[11:8], HEX5[6:0]);
+	assign HEX5[7] = 1'b1;
+
+	HexDriver hex_driver4 (Score[7:4], HEX4[6:0]);
+	assign HEX4[7] = 1'b1;
+
+    HexDriver hex_driver3 (Score[3:0], HEX3[6:0]); 
+	assign HEX3[7] = 1'b1;
+
+	HexDriver hex_driver2 (0, HEX2[6:0]); 
 	assign HEX2[7] = 1'b1;
 
-	HexDriver hex_driver1 (loadplat, HEX1[6:0]);
+	HexDriver hex_driver1 (0, HEX1[6:0]);
 	assign HEX1[7] = 1'b1;
 	
 	HexDriver hex_driver0 (outstate, HEX0[6:0]);
@@ -145,9 +161,9 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign {Reset_h}=~ (KEY[0]);
 
 	// output to the screen 
-	always_comb 
+	always_ff @ (posedge MAX10_CLK1_50)
 	begin 
-		if(blank == 1'b0)
+		if(!blank)
 			begin 
 				VGA_R = 4'h0; 
 				VGA_B = 4'h0; 
@@ -230,20 +246,24 @@ jumplogic jumplogic(
 	.Doodle_Y_Motion(Doodle_Y_Motion[9:0]),
 
 	.plat_temp_Y(plat_temp_Y[9:0]),
-	.Doodle_Y_Pos(Doodle_Y_Pos[9:0]),
+	.Doodle_X_Pos(Doodle_X_Pos[9:0]),
 	.DoodleX(Doodlexsig[9:0]), .DoodleY(Doodleysig[9:0]), .DoodleS(Doodlesizesig[9:0]),  // 10 bits
 	.CannonX(cannonxsig[9:0]), .CannonY(cannonysig[9:0]), .CannonS(cannonsizesig[9:0]), 
 	.CannonX1(cannonxsig1[9:0]), .CannonY1(cannonysig1[9:0]),
 	.CannonX2(cannonxsig2[9:0]), .CannonY2(cannonysig2[9:0]),
 	.outstate(outstate[5:0]),
-	.platX1(platX1[9:0]), .platX2(platX2[9:0]), .platX3(platX3[9:0]), .platX4(platX4[9:0]), .platX5(platX5[9:0]), .platX6(platX6[9:0]), .platX7(platX7[9:0]), .platX8(platX8[9:0]),
-	.platX9(platX9[9:0]), .platX10(platX10[9:0]), .platX11(platX11[9:0]), .platX12(platX12[9:0]), .platX13(platX13[9:0]), .platX14(platX14[9:0]), .platX15(platX15[9:0]),
-	.platY1(platY1[9:0]), .platY2(platY2[9:0]), .platY3(platY3[9:0]), .platY4(platY4[9:0]), .platY5(platY5[9:0]), .platY6(platY6[9:0]), .platY7(platY7[9:0]), .platY8(platY8[9:0]),
-	.platY9(platY9[9:0]), .platY10(platY10[9:0]), .platY11(platY11[9:0]), .platY12(platY12[9:0]), .platY13(platY13[9:0]), .platY14(platY14[9:0]), .platY15(platY15[9:0]),
+	.platX1(platX1[8:0]), .platX2(platX2[8:0]), .platX3(platX3[8:0]), .platX4(platX4[8:0]), .platX5(platX5[8:0]), .platX6(platX6[8:0]), .platX7(platX7[8:0]), .platX8(platX8[8:0]),
+	.platX9(platX9[8:0]), .platX10(platX10[8:0]), .platX11(platX11[8:0]), .platX12(platX12[8:0]), .platX13(platX13[8:0]), .platX14(platX14[8:0]), .platX15(platX15[8:0]),
+	.platY1(platY1[8:0]), .platY2(platY2[8:0]), .platY3(platY3[8:0]), .platY4(platY4[8:0]), .platY5(platY5[8:0]), .platY6(platY6[8:0]), .platY7(platY7[8:0]), .platY8(platY8[8:0]),
+	.platY9(platY9[8:0]), .platY10(platY10[8:0]), .platY11(platY11[8:0]), .platY12(platY12[8:0]), .platY13(platY13[8:0]), .platY14(platY14[8:0]), .platY15(platY15[8:0]),
+	.plat_size_easy_X(plat_size_easy_X[8:0]), .plat_size_medium_X(plat_size_medium_X[8:0]), .plat_size_hard_X(plat_size_hard_X[8:0]), 
+	.plat_size_easy_Y(plat_size_easy_Y[8:0]), .plat_size_medium_Y(plat_size_medium_Y[8:0]), .plat_size_hard_Y(plat_size_hard_Y[8:0]),
 	.countingss(countingss[15:0]),
 	.refresh_en(refresh_en),
 	.displacement(displacement[7:0]), .airtime(airtime[7:0]),
-	.loadplat(loadplat)
+	.loadplat(loadplat),
+	.Score(Score[9:0]),
+	.difficulty(difficulty[1:0])
 ); 
 
 color_mapper color(
@@ -260,7 +280,9 @@ color_mapper color(
 	.platX9(platX9[8:0]), .platX10(platX10[8:0]), .platX11(platX11[8:0]), .platX12(platX12[8:0]), .platX13(platX13[8:0]), .platX14(platX14[8:0]), .platX15(platX15[8:0]),
 	.platY1(platY1[8:0]), .platY2(platY2[8:0]), .platY3(platY3[8:0]), .platY4(platY4[8:0]), .platY5(platY5[8:0]), .platY6(platY6[8:0]), .platY7(platY7[8:0]), .platY8(platY8[8:0]),
 	.platY9(platY9[8:0]), .platY10(platY10[8:0]), .platY11(platY11[8:0]), .platY12(platY12[8:0]), .platY13(platY13[8:0]), .platY14(platY14[8:0]), .platY15(platY15[8:0]),
-	.Doodle_Y_Pos(Doodle_Y_Pos[9:0]), .plat_temp_Y(plat_temp_Y[9:0]),
+	.plat_size_easy_X(plat_size_easy_X[8:0]), .plat_size_medium_X(plat_size_medium_X[8:0]), .plat_size_hard_X(plat_size_hard_X[8:0]), 
+	.plat_size_easy_Y(plat_size_easy_Y[8:0]), .plat_size_medium_Y(plat_size_medium_Y[8:0]), .plat_size_hard_Y(plat_size_hard_Y[8:0]), 
+	.plat_temp_Y(plat_temp_Y[8:0]),
 	.pixel_clk(pixel_clk), 
 	.loadplat(loadplat),
 	.airtime(airtime[7:0]),
@@ -278,7 +300,10 @@ color_mapper color(
 	.Blue(Blue[7:0]),
 	.countingplat(countingplat[31:0]),
 	.test(test),
-	.temp(temp)
+	.temp(temp),
+	.difficulty(difficulty[1:0])
+
 );
+
 
 endmodule
