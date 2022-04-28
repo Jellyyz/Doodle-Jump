@@ -93,6 +93,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [15:0] countingss;
 	logic [31:0] countingplat;
 	logic test;
+	logic [8:0] readyX, testX;
 	logic [7:0] temp; 
 	logic [11:0]Score;
 	logic [1:0] difficulty; 
@@ -148,22 +149,22 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
     // HexDriver hex_driver3 (Score[3:0], HEX3[6:0]); 
 	// assign HEX3[7] = 1'b1;
 
-	// HexDriver hex_driver5 (BKG_out[23:20], HEX5[6:0]);
-	// assign HEX5[7] = 1'b1;
+	HexDriver hex_driver5 (testX[8], HEX5[6:0]);
+	assign HEX5[7] = 1'b1;
 
-	// HexDriver hex_driver4 (BKG_out[19:16], HEX4[6:0]);
-	// assign HEX4[7] = 1'b1;
+	HexDriver hex_driver4 (testX[7:4], HEX4[6:0]);
+	assign HEX4[7] = 1'b1;
 
-    // HexDriver hex_driver3 (BKG_out[15:12], HEX3[6:0]); 
-	// assign HEX3[7] = 1'b1;
+    HexDriver hex_driver3 (testX[3:0], HEX3[6:0]); 
+	assign HEX3[7] = 1'b1;
 
-	// HexDriver hex_driver2 (BKG_out[11:8], HEX2[6:0]); 
-	// assign HEX2[7] = 1'b1;
+	HexDriver hex_driver2 (readyX[8], HEX2[6:0]); 
+	assign HEX2[7] = 1'b1;
 
-	// HexDriver hex_driver1 (BKG_out[7:4], HEX1[6:0]);
+	HexDriver hex_driver1 (readyX[7:4], HEX1[6:0]);
 	// assign HEX1[7] = 1'b1;
 	
-	// HexDriver hex_driver0 (BKG_out[3:0], HEX0[6:0]);
+	HexDriver hex_driver0 (readyX[3:0], HEX0[6:0]);
 	assign HEX0[7] = 1'b1;
 	
 	
@@ -298,6 +299,9 @@ color_mapper color(
 	.airtime(airtime[7:0]),
 	.BKG_out(BKG_out[23:0]),
 
+
+	.readyX(readyX),
+	.testX(testX),
 	.keycode(keycode), 
 	.CannonX(cannonxsig[9:0]), .CannonX1(cannonxsig1[9:0]), .CannonX2(cannonxsig2[9:0]), 
 	.CannonY(cannonysig[9:0]), .CannonY1(cannonysig1[9:0]), .CannonY2(cannonysig2[9:0]), 

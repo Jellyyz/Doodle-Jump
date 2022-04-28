@@ -38,8 +38,9 @@ module  color_mapper (
                     output logic [8:0]platX13, platY13, platX14, platY14, platX15, platY15,
                     output logic [8:0]plat_size_easy_X, plat_size_medium_X, plat_size_hard_X,                    
                     output logic [8:0]plat_size_easy_Y, plat_size_medium_Y, plat_size_hard_Y,
-                    output logic plat_enable, plat_reset, test,
-                    output logic [23:0] BKG_out 
+                    output logic plat_enable, plat_reset, test, 
+                    output logic [8:0] readyX, testX,
+                    output logic [23:0] BKG_out
 );  
     parameter [9:0] Screen_Y_Min=0;       // Topmost point on the Y axis
     parameter [9:0] Screen_Y_Max=479;     // Bottommost point on the Y axis
@@ -99,7 +100,8 @@ LFSR LFSR14(
 LFSR LFSR15(
     .Clk(Clk), .Reset(Reset), .outp(testX15[8:0]), .seed(testX15[8:0]), .seed_in(seed_en14), .seed_out(seed_en15)
 );
- logic [8:0]testX,testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
+logic [8:0] testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
+logic [8:0] readyX1, readyX2, readyX3, readyX4, readyX5, readyX6, readyX7,  readyX8, readyX9, readyX10, readyX11, readyX12, readyX13, readyX14, readyX15;
 // checking if the platforms are close enough to each other 
 
 // this is for changing the difficulty
@@ -123,115 +125,114 @@ always_comb
             end 
 		endcase 
     end 
-// logic plat_ready; 
-// logic plat_reset; 
-// always_comb
-// begin 
-//     if (testX inside {[100:250]} || testX1 inside {[251:500]} || testX2 inside {[100:250]} || 
-//     testX3 inside {[251:500]} || testX4 inside {[100:250]} || testX5 inside {[251:500]} || 
-//     testX6 inside {[100:250]} || testX7 inside {[251:500]} || testX8 inside {[100:250]} || 
-//     testX9 inside {[251:500]} || testX10 inside {[100:250]} || testX11 inside {[251:500]} || 
-//     testX12 inside {[100:250]} || testX13 inside {[251:500]} || testX14 inside {[100:250]} || 
-//     testX15 inside {[251:500]}) 
-//         begin 
-//             plat_ready = 1; 
-//             plat_reset = 1; 
-//         end 
-//     else
-//         begin  
-//             plat_ready = 0;
-//             plat_reset = 0;  
-//         end 
-// end 
+logic plat_ready; 
+
+always_ff @ (posedge Clk)
+begin 
+    if (testX > 9'd0 && testX[7:0] <= 8'd256) 
+        readyX  <= testX[7:0];
+    if (testX1 >= 9'd201 && testX1 <= 9'd400) 
+        readyX1 <= testX1;
+    if (testX2 > 9'd0 && testX2[7:0] <= 8'd256) 
+        readyX2 <= testX2[7:0];
+    if (testX3 >= 9'd201 && testX3 <= 9'd400) 
+        readyX3 <= testX3[7:0];
+    if (testX4 > 9'd0 && testX4[7:0] <= 8'd256)
+        readyX4 <= testX4[7:0];
+    if (testX5 >= 9'd201 && testX5 <= 9'd400)
+        readyX5 <= testX5;
+    if (testX6 > 9'd0 && testX6[7:0] <= 8'd256)
+        readyX6 <= testX6[7:0];
+    if (testX7 >= 9'd201 && testX7 <= 9'd400) 
+        readyX7 <= testX7;
+    if (testX8 > 9'd0 && testX8[7:0] <= 8'd256)
+        readyX8 <= testX8[7:0];
+    if (testX9 >= 9'd201 && testX9 <= 9'd400)
+        readyX9 <= testX9[7:0];
+    if (testX10 > 9'd0 && testX10[7:0] <= 8'd256)
+        readyX10 <= testX10[7:0];
+    if (testX11 >= 9'd201 && testX11 <= 9'd400)
+        readyX11 <= testX11;
+    if (testX12 > 9'd0 && testX12[7:0] <= 8'd256)
+        readyX12 <= testX12[7:0];
+    if (testX13 >= 9'd201 && testX13 <= 9'd400)
+        readyX13 <= testX13;
+    if (testX14 > 9'd0 && testX14[7:0] <= 8'd256)
+        readyX14 <= testX14[7:0];
+    if (testX15 >= 9'd201 && testX15 <= 9'd400) 
+        readyX15 <= testX15; 
+end 
 // this is for calculation of platX
-always_ff @ (posedge Clk or posedge loadplat)
+always_ff @ (posedge loadplat)
     begin 
         if(loadplat)
         begin 
-            if(testX >= 9'h0 && testX <= 9'd400)
-                platX = testX + 9'd100;
+            if(readyX >= 9'h0 && readyX <= 9'd400)
+                platX = readyX + 9'd100;
             else 
-                platX = testX; 
-            if(testX1 >= 9'h0 && testX1 <= 9'd400)
-                platX1 = testX1 + 9'd100;
+                platX = readyX; 
+            if(readyX1 >= 9'h0 && readyX1 <= 9'd400)
+                platX1 = readyX1 + 9'd100;
             else 
-                platX1 = testX1; 
-            if(testX2 >= 9'h0 && testX2 <= 9'd400)
-                platX2 = testX2 + 9'd100; 
+                platX1 = readyX1; 
+            if(readyX2 >= 9'h0 && readyX2 <= 9'd400)
+                platX2 = readyX2 + 9'd100; 
             else 
-                platX2 = testX2; 
-            if(testX3 >= 9'h0 && testX3 <= 9'd400)
-                platX3 = testX3 + 9'd100;  
+                platX2 = readyX2; 
+            if(readyX3 >= 9'h0 && readyX3 <= 9'd400)
+                platX3 = readyX3 + 9'd100;  
             else 
-                platX3 = testX3; 
-            if(testX4 >= 9'h0 && testX4 <= 9'd400)
-                platX4 = testX4 + 9'd100; 
+                platX3 = readyX3; 
+            if(readyX4 >= 9'h0 && readyX4 <= 9'd400)
+                platX4 = readyX4 + 9'd100; 
             else 
-                platX4 = testX4; 
-            if(testX5 >= 9'h0 && testX5 <= 9'd400)
-                platX5 = testX5 + 9'd100; 
+                platX4 = readyX4; 
+            if(readyX5 >= 9'h0 && readyX5 <= 9'd400)
+                platX5 = readyX5 + 9'd100; 
             else 
-                platX5 = testX5; 
-            if(testX6 >= 9'h0 && testX6 <= 9'd400)
-                platX6 = testX6 + 9'd100; 
+                platX5 = readyX5; 
+            if(readyX6 >= 9'h0 && readyX6 <= 9'd400)
+                platX6 = readyX6 + 9'd100; 
             else 
-                platX6 = testX6; 
-            if(testX7 >= 9'h0 && testX7 <= 9'd400)
-                platX7 = testX7 + 9'd100;
+                platX6 = readyX6; 
+            if(readyX7 >= 9'h0 && readyX7 <= 9'd400)
+                platX7 = readyX7 + 9'd100;
             else 
-                platX7 = testX7; 
-            if(testX8 >= 9'h0 && testX8 <= 9'd400)
-                platX8 = testX8 + 9'd100; 
+                platX7 = readyX7; 
+            if(readyX8 >= 9'h0 && readyX8 <= 9'd400)
+                platX8 = readyX8 + 9'd100; 
             else 
-                platX8 = testX8; 
-            if(testX9 >= 9'h0 && testX9 <= 9'd400)
-                platX9 = testX9 + 9'd100; 
+                platX8 = readyX8; 
+            if(readyX9 >= 9'h0 && readyX9 <= 9'd400)
+                platX9 = readyX9 + 9'd100; 
             else 
-                platX9 = testX9; 
-            if(testX10 >= 9'h0 && testX10 <= 9'd400)
-                platX10 = testX10 + 9'd100; 
+                platX9 = readyX9; 
+            if(readyX10 >= 9'h0 && readyX10 <= 9'd400)
+                platX10 = readyX10 + 9'd100; 
             else 
-                platX10 = testX10; 
-            if(testX11 >= 9'h0 && testX11 <= 9'd400)
-                platX11 = testX11 + 9'd100;      
+                platX10 = readyX10; 
+            if(readyX11 >= 9'h0 && readyX11 <= 9'd400)
+                platX11 = readyX11 + 9'd100;      
             else 
-                platX11 = testX11; 
-            if(testX12 >= 9'h0 && testX12 <= 9'd400)
-                platX12 = testX12 + 9'd100; 
+                platX11 = readyX11; 
+            if(readyX12 >= 9'h0 && readyX12 <= 9'd400)
+                platX12 = readyX12 + 9'd100; 
             else 
-                platX12 = testX12; 
-            if(testX13 >= 9'h0 && testX13 <= 9'd400)
-                platX13 = testX13 + 9'd100;
+                platX12 = readyX12; 
+            if(readyX13 >= 9'h0 && readyX13 <= 9'd400)
+                platX13 = readyX13 + 9'd100;
             else 
-                platX13 = testX13; 
-            if(testX14 >= 9'h0 && testX14 <= 9'd400)
-                platX14 = testX14 + 9'd100; 
+                platX13 = readyX13; 
+            if(readyX14 >= 9'h0 && readyX14 <= 9'd400)
+                platX14 = readyX14 + 9'd100; 
             else 
-                platX14 = testX14; 
-            if(testX15 >= 9'h0 && testX15 <= 9'd400)
-                platX15 = testX15 + 9'd100;    
+                platX14 = readyX14; 
+            if(readyX15 >= 9'h0 && readyX15 <= 9'd400)
+                platX15 = readyX15 + 9'd100;    
             else 
-                platX15 = testX15; 
+                platX15 = readyX15; 
         end
-        else 
-            begin 
-                platX  <=  0; 
-                platX1 <=  0; 
-                platX2 <=  0; 
-                platX3 <=  0; 
-                platX4 <=  0; 
-                platX5 <=  0; 
-                platX6 <=  0; 
-                platX7 <=  0; 
-                platX8 <=  0; 
-                platX9 <=  0; 
-                platX10 <= 0; 
-                platX11 <= 0; 
-                platX12 <= 0; 
-                platX13 <= 0; 
-                platX14 <= 0; 
-                platX15 <= 0; 
-            end 
+
     end 
 counter counterplat(
 	.Reset(plat_reset), 
@@ -313,8 +314,8 @@ always_ff @ (posedge frame_clk or posedge loadplat)
                 platY6 <= 9'd210;
                 platY7 <= 9'd240;
                 platY8 <= 9'd270;
-                platY9 <= 9'd300;
-                platY10 <= 9'd430;
+                platY9 <= 8'd300;
+                platY10 <= 9'd330;
                 platY11 <= 9'd360;
                 platY12 <= 9'd390;
                 platY13 <= 9'd420;
@@ -412,7 +413,7 @@ always_ff @ (posedge frame_clk or posedge loadplat)
 // main menu platforms 
     logic platform_easy_on; 
     assign plat_size_easy_X = 9'd230;
-    assign plat_size_easy_Y = 9'd200;
+    assign plat_size_easy_Y = 8'd200;
     always_comb
     begin:Platform_easy_on_proc
             if ((DrawX >= plat_size_easy_X - plat_sizeX) &&
@@ -426,7 +427,7 @@ always_ff @ (posedge frame_clk or posedge loadplat)
     
     logic platform_medium_on; 
     assign plat_size_medium_X = 9'd330;
-    assign plat_size_medium_Y = 9'd200;
+    assign plat_size_medium_Y = 8'd200;
     always_comb
     begin:Platform_medium_on_proc
             if ((DrawX >= plat_size_medium_X - plat_sizeX) &&
@@ -440,7 +441,7 @@ always_ff @ (posedge frame_clk or posedge loadplat)
 
     logic platform_hard_on; 
     assign plat_size_hard_X = 9'd430;
-    assign plat_size_hard_Y = 9'd200;
+    assign plat_size_hard_Y = 8'd200;
     always_comb
     begin:Platform_hard_on_proc
             if ((DrawX >= plat_size_hard_X - plat_sizeX) &&
