@@ -96,6 +96,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [7:0] temp; 
 	logic [11:0]Score;
 	logic [1:0] difficulty; 
+	logic [23:0] BKG_out;
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -138,22 +139,31 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	// HexDriver hex_driver2 (Doodle_Y_Motion[3:0], HEX2[6:0]); 
 	// assign HEX2[7] = 1'b1;
 	
-	HexDriver hex_driver5 (Score[11:8], HEX5[6:0]);
-	assign HEX5[7] = 1'b1;
+	// HexDriver hex_driver5 (Score[11:8], HEX5[6:0]);
+	// assign HEX5[7] = 1'b1;
 
-	HexDriver hex_driver4 (Score[7:4], HEX4[6:0]);
-	assign HEX4[7] = 1'b1;
+	// HexDriver hex_driver4 (Score[7:4], HEX4[6:0]);
+	// assign HEX4[7] = 1'b1;
 
-    HexDriver hex_driver3 (Score[3:0], HEX3[6:0]); 
-	assign HEX3[7] = 1'b1;
+    // HexDriver hex_driver3 (Score[3:0], HEX3[6:0]); 
+	// assign HEX3[7] = 1'b1;
 
-	HexDriver hex_driver2 (0, HEX2[6:0]); 
-	assign HEX2[7] = 1'b1;
+	// HexDriver hex_driver5 (BKG_out[23:20], HEX5[6:0]);
+	// assign HEX5[7] = 1'b1;
 
-	HexDriver hex_driver1 (0, HEX1[6:0]);
-	assign HEX1[7] = 1'b1;
+	// HexDriver hex_driver4 (BKG_out[19:16], HEX4[6:0]);
+	// assign HEX4[7] = 1'b1;
+
+    // HexDriver hex_driver3 (BKG_out[15:12], HEX3[6:0]); 
+	// assign HEX3[7] = 1'b1;
+
+	// HexDriver hex_driver2 (BKG_out[11:8], HEX2[6:0]); 
+	// assign HEX2[7] = 1'b1;
+
+	// HexDriver hex_driver1 (BKG_out[7:4], HEX1[6:0]);
+	// assign HEX1[7] = 1'b1;
 	
-	HexDriver hex_driver0 (outstate, HEX0[6:0]);
+	// HexDriver hex_driver0 (BKG_out[3:0], HEX0[6:0]);
 	assign HEX0[7] = 1'b1;
 	
 	
@@ -286,6 +296,7 @@ color_mapper color(
 	.pixel_clk(pixel_clk), 
 	.loadplat(loadplat),
 	.airtime(airtime[7:0]),
+	.BKG_out(BKG_out[23:0]),
 
 	.keycode(keycode), 
 	.CannonX(cannonxsig[9:0]), .CannonX1(cannonxsig1[9:0]), .CannonX2(cannonxsig2[9:0]), 

@@ -1,5 +1,5 @@
 module LFSR(
-    input Clk, Reset, 
+    input Clk, Reset, enable,
     input [8:0] seed, 
     input seed_in,
     output [8:0] outp,
@@ -63,7 +63,7 @@ always_ff @(posedge Clk or posedge Reset)
     begin 
         if (Reset)
             clockcounter <= 4'd0; 
-        else  
+        else if (enable)
             clockcounter <= clockcounter + 4'd1; 
     end 
 

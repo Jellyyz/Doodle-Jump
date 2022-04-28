@@ -38,7 +38,8 @@ module  color_mapper (
                     output logic [8:0]platX13, platY13, platX14, platY14, platX15, platY15,
                     output logic [8:0]plat_size_easy_X, plat_size_medium_X, plat_size_hard_X,                    
                     output logic [8:0]plat_size_easy_Y, plat_size_medium_Y, plat_size_hard_Y,
-                    output logic plat_enable, plat_reset, test
+                    output logic plat_enable, plat_reset, test,
+                    output logic [23:0] BKG_out 
 );  
     parameter [9:0] Screen_Y_Min=0;       // Topmost point on the Y axis
     parameter [9:0] Screen_Y_Max=479;     // Bottommost point on the Y axis
@@ -46,10 +47,7 @@ module  color_mapper (
     logic Doodle_on;
 
 
-    int DistX, DistY, Size;
-	assign DistX = DrawX - DoodleX;
-    assign DistY = DrawY - DoodleY;
-    assign Size = Doodle_size;
+  
 
 // these LFSR are a chain of Shift Registers that generate 16 strings of 9 bit random numbers for platX
 logic seed_en, seed_en1, seed_en2, seed_en3, seed_en4, seed_en5, seed_en6, seed_en7, seed_en8, seed_en9, seed_en10, seed_en11, seed_en12, seed_en13, seed_en14, seed_en15;
@@ -102,6 +100,8 @@ LFSR LFSR15(
     .Clk(Clk), .Reset(Reset), .outp(testX15[8:0]), .seed(testX15[8:0]), .seed_in(seed_en14), .seed_out(seed_en15)
 );
  logic [8:0]testX,testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
+// checking if the platforms are close enough to each other 
+
 // this is for changing the difficulty
 always_comb
     begin 
@@ -123,74 +123,115 @@ always_comb
             end 
 		endcase 
     end 
+// logic plat_ready; 
+// logic plat_reset; 
+// always_comb
+// begin 
+//     if (testX inside {[100:250]} || testX1 inside {[251:500]} || testX2 inside {[100:250]} || 
+//     testX3 inside {[251:500]} || testX4 inside {[100:250]} || testX5 inside {[251:500]} || 
+//     testX6 inside {[100:250]} || testX7 inside {[251:500]} || testX8 inside {[100:250]} || 
+//     testX9 inside {[251:500]} || testX10 inside {[100:250]} || testX11 inside {[251:500]} || 
+//     testX12 inside {[100:250]} || testX13 inside {[251:500]} || testX14 inside {[100:250]} || 
+//     testX15 inside {[251:500]}) 
+//         begin 
+//             plat_ready = 1; 
+//             plat_reset = 1; 
+//         end 
+//     else
+//         begin  
+//             plat_ready = 0;
+//             plat_reset = 0;  
+//         end 
+// end 
 // this is for calculation of platX
-always_ff @ (posedge loadplat)
+always_ff @ (posedge Clk or posedge loadplat)
     begin 
-        if(testX >= 9'h0 && testX <= 9'd400)
-            platX = testX + 9'd100;
+        if(loadplat)
+        begin 
+            if(testX >= 9'h0 && testX <= 9'd400)
+                platX = testX + 9'd100;
+            else 
+                platX = testX; 
+            if(testX1 >= 9'h0 && testX1 <= 9'd400)
+                platX1 = testX1 + 9'd100;
+            else 
+                platX1 = testX1; 
+            if(testX2 >= 9'h0 && testX2 <= 9'd400)
+                platX2 = testX2 + 9'd100; 
+            else 
+                platX2 = testX2; 
+            if(testX3 >= 9'h0 && testX3 <= 9'd400)
+                platX3 = testX3 + 9'd100;  
+            else 
+                platX3 = testX3; 
+            if(testX4 >= 9'h0 && testX4 <= 9'd400)
+                platX4 = testX4 + 9'd100; 
+            else 
+                platX4 = testX4; 
+            if(testX5 >= 9'h0 && testX5 <= 9'd400)
+                platX5 = testX5 + 9'd100; 
+            else 
+                platX5 = testX5; 
+            if(testX6 >= 9'h0 && testX6 <= 9'd400)
+                platX6 = testX6 + 9'd100; 
+            else 
+                platX6 = testX6; 
+            if(testX7 >= 9'h0 && testX7 <= 9'd400)
+                platX7 = testX7 + 9'd100;
+            else 
+                platX7 = testX7; 
+            if(testX8 >= 9'h0 && testX8 <= 9'd400)
+                platX8 = testX8 + 9'd100; 
+            else 
+                platX8 = testX8; 
+            if(testX9 >= 9'h0 && testX9 <= 9'd400)
+                platX9 = testX9 + 9'd100; 
+            else 
+                platX9 = testX9; 
+            if(testX10 >= 9'h0 && testX10 <= 9'd400)
+                platX10 = testX10 + 9'd100; 
+            else 
+                platX10 = testX10; 
+            if(testX11 >= 9'h0 && testX11 <= 9'd400)
+                platX11 = testX11 + 9'd100;      
+            else 
+                platX11 = testX11; 
+            if(testX12 >= 9'h0 && testX12 <= 9'd400)
+                platX12 = testX12 + 9'd100; 
+            else 
+                platX12 = testX12; 
+            if(testX13 >= 9'h0 && testX13 <= 9'd400)
+                platX13 = testX13 + 9'd100;
+            else 
+                platX13 = testX13; 
+            if(testX14 >= 9'h0 && testX14 <= 9'd400)
+                platX14 = testX14 + 9'd100; 
+            else 
+                platX14 = testX14; 
+            if(testX15 >= 9'h0 && testX15 <= 9'd400)
+                platX15 = testX15 + 9'd100;    
+            else 
+                platX15 = testX15; 
+        end
         else 
-            platX = testX; 
-        if(testX1 >= 9'h0 && testX1 <= 9'd400)
-            platX1 = testX1 + 9'd100;
-        else 
-            platX1 = testX1; 
-        if(testX2 >= 9'h0 && testX2 <= 9'd400)
-            platX2 = testX2 + 9'd100; 
-        else 
-            platX2 = testX2; 
-        if(testX3 >= 9'h0 && testX3 <= 9'd400)
-            platX3 = testX3 + 9'd100;  
-        else 
-            platX3 = testX3; 
-        if(testX4 >= 9'h0 && testX4 <= 9'd400)
-            platX4 = testX4 + 9'd100; 
-        else 
-            platX4 = testX4; 
-        if(testX5 >= 9'h0 && testX5 <= 9'd400)
-            platX5 = testX5 + 9'd100; 
-        else 
-            platX5 = testX5; 
-        if(testX6 >= 9'h0 && testX6 <= 9'd400)
-            platX6 = testX6 + 9'd100; 
-        else 
-            platX6 = testX6; 
-        if(testX7 >= 9'h0 && testX7 <= 9'd400)
-            platX7 = testX7 + 9'd100;
-        else 
-            platX7 = testX7; 
-        if(testX8 >= 9'h0 && testX8 <= 9'd400)
-            platX8 = testX8 + 9'd100; 
-        else 
-            platX8 = testX8; 
-        if(testX9 >= 9'h0 && testX9 <= 9'd400)
-            platX9 = testX9 + 9'd100; 
-        else 
-            platX9 = testX9; 
-        if(testX10 >= 9'h0 && testX10 <= 9'd400)
-            platX10 = testX10 + 9'd100; 
-        else 
-            platX10 = testX10; 
-        if(testX11 >= 9'h0 && testX11 <= 9'd400)
-            platX11 = testX11 + 9'd100;      
-        else 
-            platX11 = testX11; 
-        if(testX12 >= 9'h0 && testX12 <= 9'd400)
-            platX12 = testX12 + 9'd100; 
-        else 
-            platX12 = testX12; 
-        if(testX13 >= 9'h0 && testX13 <= 9'd400)
-            platX13 = testX13 + 9'd100;
-        else 
-            platX13 = testX13; 
-        if(testX14 >= 9'h0 && testX14 <= 9'd400)
-            platX14 = testX14 + 9'd100; 
-        else 
-            platX14 = testX14; 
-        if(testX15 >= 9'h0 && testX15 <= 9'd400)
-            platX15 = testX15 + 9'd100;    
-        else 
-            platX15 = testX15; 
-
+            begin 
+                platX  <=  0; 
+                platX1 <=  0; 
+                platX2 <=  0; 
+                platX3 <=  0; 
+                platX4 <=  0; 
+                platX5 <=  0; 
+                platX6 <=  0; 
+                platX7 <=  0; 
+                platX8 <=  0; 
+                platX9 <=  0; 
+                platX10 <= 0; 
+                platX11 <= 0; 
+                platX12 <= 0; 
+                platX13 <= 0; 
+                platX14 <= 0; 
+                platX15 <= 0; 
+            end 
     end 
 counter counterplat(
 	.Reset(plat_reset), 
@@ -622,6 +663,28 @@ always_ff @ (posedge frame_clk or posedge loadplat)
      end
 
 // ~~~~~~Platforms~~~~~~~~~~~~~       
+// writing to the screen
+BKG_ram BKG(
+    .read_address(BKG_address[14:0]),
+    .Clk(Clk), 
+
+    .data_Out(BKG_out[23:0])
+); 
+logic [14:0] BKG_address; 
+logic [10:0] shape_size_x = 10'd640;
+logic [10:0] shape_size_y = 10'd480;
+logic BKG_on;
+always_comb
+    begin 
+        BKG_address = (639 * DrawY) + DrawX;
+        if(DrawY >= 0 && DrawY < shape_size_y && DrawX >= 0 && DrawX < shape_size_x) //Ball_x = 0
+            BKG_on = 1;
+        else
+            BKG_on = 0; 
+    end 
+
+
+
 
     always_comb
         begin:RGB_Display
@@ -696,18 +759,32 @@ always_ff @ (posedge frame_clk or posedge loadplat)
                 Blue = 8'h66; 
             end 
         // turn on pixels for the background
-            else if(outstate == 3'b000)
-            begin 
-                Red = 8'h00; 
-                Green = 8'h00;
-                Blue = 8'h00;
-            end  
-            else 
-            begin 
-                Red = 8'hEE; 
-                Green = 8'hEE;
-                Blue = 8'hEE;
-            end      
+            // else if(outstate == 3'b000)
+            // begin 
+            //     Red = 8'h00; 
+            //     Green = 8'h00;
+            //     Blue = 8'h00;
+            // end  
+            // else 
+            // begin 
+            //     Red = 8'hEE; 
+            //     Green = 8'hEE;
+            //     Blue = 8'hEE;
+            // end      
+            else if(BKG_on)
+                begin 
+                    Red = BKG_out[23:16];
+                    Green = BKG_out[15:8];
+                    Blue = BKG_out[7:0];
+                end 
+			else 
+                begin 
+                    Red = 8'hED;
+                    Green = 8'hE2;
+                    Blue = 8'hD4;
+                end 		 
+
+                
         end 
  
 
