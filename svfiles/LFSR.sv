@@ -62,9 +62,9 @@ logic [3:0] clockcounter;
 always_ff @(posedge Clk or posedge Reset) 
     begin 
         if (Reset)
-            clockcounter <= 4'd0; 
+            clockcounter <= 4'h0; 
         else
-            clockcounter <= clockcounter + 4'd1; 
+            clockcounter <= clockcounter + 1; 
     end 
 
 always_comb
@@ -76,7 +76,7 @@ always_comb
         else 
             seed_out = 0; 
         // make sure the seed always be produced will keep producing. 
-        if(outp[8:0] == 9'h1FF)
+        if(outp[8:0] == 9'b111111111)
             input0 = (out[3] ^ out[8]);
         else
             input0 = ~(out[3] ^ out[8]); 

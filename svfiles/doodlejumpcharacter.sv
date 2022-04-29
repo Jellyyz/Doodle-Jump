@@ -119,12 +119,12 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					Doodle_X_Pos <= 9'd330;
 					Cannon_Y_Motion <= 0; 
 					Cannon_X_Motion <= 0;
-					Cannon_Y_Pos1 <= Screen_Y_Center; 
-					Cannon_X_Pos1 <= Screen_X_Center; 
+					Cannon_Y_Pos1 <= Doodle_Y_Pos; 
+					Cannon_X_Pos1 <= Doodle_X_Pos; 
 					Cannon_Y_Motion1 <= 0; 
 					Cannon_X_Motion1 <= 0;
-					Cannon_Y_Pos2 <= Screen_Y_Center; 
-					Cannon_X_Pos2 <= Screen_X_Center; 
+					Cannon_Y_Pos2 <= Doodle_Y_Pos; 
+					Cannon_X_Pos2 <= Doodle_X_Pos; 
 					Cannon_Y_Motion2 <= 0; 
 					Cannon_X_Motion2 <= 0;  
 					plat_temp_Y <= 0; 
