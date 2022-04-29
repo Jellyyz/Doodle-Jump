@@ -98,6 +98,9 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [11:0]Score;
 	logic [1:0] difficulty; 
 	logic [23:0] BKG_out;
+	logic [23:0] BKG_out2;
+	logic [3:0]BKG_on;
+    logic [3:0]BKG_on2;
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -140,32 +143,38 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	// HexDriver hex_driver2 (Doodle_Y_Motion[3:0], HEX2[6:0]); 
 	// assign HEX2[7] = 1'b1;
 	
-	// HexDriver hex_driver5 (Score[11:8], HEX5[6:0]);
-	// assign HEX5[7] = 1'b1;
-
-	// HexDriver hex_driver4 (Score[7:4], HEX4[6:0]);
-	// assign HEX4[7] = 1'b1;
-
-    // HexDriver hex_driver3 (Score[3:0], HEX3[6:0]); 
-	// assign HEX3[7] = 1'b1;
-
-	HexDriver hex_driver5 (testX[8], HEX5[6:0]);
+	HexDriver hex_driver5 (Score[11:8], HEX5[6:0]);
 	assign HEX5[7] = 1'b1;
 
-	HexDriver hex_driver4 (testX[7:4], HEX4[6:0]);
+	HexDriver hex_driver4 (Score[7:4], HEX4[6:0]);
 	assign HEX4[7] = 1'b1;
 
-    HexDriver hex_driver3 (testX[3:0], HEX3[6:0]); 
+    HexDriver hex_driver3 (Score[3:0], HEX3[6:0]); 
 	assign HEX3[7] = 1'b1;
 
-	HexDriver hex_driver2 (readyX[8], HEX2[6:0]); 
+	// HexDriver hex_driver5 (testX[8], HEX5[6:0]);
+	// assign HEX5[7] = 1'b1;
+
+	// HexDriver hex_driver4 (testX[7:4], HEX4[6:0]);
+	// assign HEX4[7] = 1'b1;
+
+    // HexDriver hex_driver3 (testX[3:0], HEX3[6:0]); 
+	// assign HEX3[7] = 1'b1;
+
+	// HexDriver hex_driver2 (readyX[8], HEX2[6:0]); 
+	// assign HEX2[7] = 1'b1;
+
+	// HexDriver hex_driver1 (readyX[7:4], HEX1[6:0]);
+	// // assign HEX1[7] = 1'b1;
+
+	HexDriver hex_driver2 (BKG_on2[3:0], HEX2[6:0]); 
 	assign HEX2[7] = 1'b1;
 
-	HexDriver hex_driver1 (readyX[7:4], HEX1[6:0]);
-	// assign HEX1[7] = 1'b1;
+	HexDriver hex_driver1 (BKG_on[3:0], HEX1[6:0]);
+	assign HEX1[7] = 1'b1;
 	
-	HexDriver hex_driver0 (readyX[3:0], HEX0[6:0]);
-	assign HEX0[7] = 1'b1;
+	// HexDriver hex_driver0 (readyX[3:0], HEX0[6:0]);
+	// assign HEX0[7] = 1'b1;
 	
 	
 	//Assign one button to reset
@@ -273,7 +282,7 @@ jumplogic jumplogic(
 	.refresh_en(refresh_en),
 	.displacement(displacement[7:0]), .airtime(airtime[7:0]),
 	.loadplat(loadplat),
-	.Score(Score[9:0]),
+	.Score(Score[11:0]),
 	.difficulty(difficulty[1:0])
 ); 
 
@@ -298,7 +307,10 @@ color_mapper color(
 	.loadplat(loadplat),
 	.airtime(airtime[7:0]),
 	.BKG_out(BKG_out[23:0]),
-
+	.BKG_out2(BKG_out2[23:0]),
+	.BKG_on(BKG_on),
+	.BKG_on2(BKG_on2),
+	.Score(Score[11:0]),
 
 	.readyX(readyX),
 	.testX(testX),

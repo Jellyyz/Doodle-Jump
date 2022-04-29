@@ -151,6 +151,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				begin 
 					refresh_en <= 0;
 					plat_temp_Y <= 0; 
+					Score <= 0;
 					// modified physics engine for main menu 
 					// if not moving then get it to start falling or start jumping 
 					if(Doodle_Y_Motion == 10'h0)
