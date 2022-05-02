@@ -1684,7 +1684,7 @@ BKG4_ram BKG4(
     .data_Out4(BKG_out4[23:0])
 ); 
 
-BKG4_ram BKG5(
+BKG5_ram BKG5(
     .read_address(BKG_address5[14:0]),
     .Clk(Clk), 
 
