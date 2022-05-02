@@ -20,7 +20,32 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
                     input logic [8:0]plat_size_easy_X, plat_size_medium_X, plat_size_hard_X,                    
                 	input logic [8:0]plat_size_easy_Y, plat_size_medium_Y, plat_size_hard_Y,
 					input logic trigger, 
+					input logic [8:0] springX, springY, 
+                    input logic [8:0] springX1, springY1, 
+                    input logic [8:0] springX2, springY2, 
+                    input logic [8:0] springX3, springY3,
+					input logic springsizeX, springsizeY,
+					input logic [8:0] rocketX, rocketY, 
+					input logic rocketsizeX, rocketsizeY,
 
+					output logic doodle_down_check, 
+					output logic Platform_collision,
+					output logic Platform_collision0,
+					output logic Platform_collision1,
+					output logic Platform_collision2,
+					output logic Platform_collision3,
+					output logic Platform_collision4,
+					output logic Platform_collision5,
+					output logic Platform_collision6,
+					output logic Platform_collision7,
+					output logic Platform_collision8,
+					output logic Platform_collision9,
+					output logic Platform_collision10,
+					output logic Platform_collision11,
+					output logic Platform_collision12,
+					output logic Platform_collision13,
+					output logic Platform_collision14,
+					output logic Platform_collision15,
 					output logic loadplat,
 					output logic [9:0]  DoodleX, DoodleY, DoodleS, 
 					output logic [9:0]  CannonX, CannonY, CannonS, 
@@ -33,7 +58,7 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
 					output logic refresh_en,
 					output logic [15:0] countingss, 
 					output logic [7:0] displacement, airtime,
-					output logic [11:0]Score,
+					output logic [19:0]Score,
 					output logic [1:0] difficulty
 					);
 
@@ -54,6 +79,8 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
     
 
 	parameter [1:0] Gravity = 3; 
+	parameter [2:0] Spring_Modifier = 7;
+	parameter [3:0] Rocket_Modifier = 15;
 	parameter [4:0] CannonSpeed = 5'd14;
 	parameter [4:0] CannonSpeed1 = 5'd10;
     parameter [2:0] CannonSpeed2 = 3'd6;
@@ -73,7 +100,7 @@ counter counter3(
 	.enable(counting[5]), 
     .Clk(frame_clk), 
 
-    .out(counting2[1:0])
+    .out(counting2[3:0])
 );
 
 counter antispam(
@@ -97,11 +124,9 @@ logic [2:0] Status, state;
 logic [7:0] counting; 
 logic [5:0] antighosting; 
 logic [7:0] antighostkey; 
-//logic [15:0] countingss;
-logic [1:0] counting2;
 logic jump_enable, jump_reset; 
 logic [9:0] Doodle_Top; 
- 
+logic [3:0] counting2;
 logic [9:0] Cannon_Y_Motion, Cannon_X_Motion, Cannon_Y_Pos, Cannon_X_Pos, Cannon_Size; 
 logic [9:0] Cannon_Y_Motion1, Cannon_X_Motion1, Cannon_Y_Pos1, Cannon_X_Pos1; 
 logic [9:0] Cannon_Y_Motion2, Cannon_X_Motion2, Cannon_Y_Pos2, Cannon_X_Pos2; 
@@ -304,14 +329,25 @@ always_ff @ (posedge Reset or posedge frame_clk)
 							begin 
 								jump_reset <= 0; 
 								jump_enable <= 1; 
-								if(counting2 == 2'd3)
-									Doodle_Y_Motion += counting2[1:0]; 
+								if(counting2 == 2'd3 && Doodle_Y_Motion == 1'b1 + ~Gravity)
+									Doodle_Y_Motion += 2'd3;  
+								else if(counting2 == 3'd7 && Doodle_Y_Motion == 1'b1 + ~Spring_Modifier)
+									Doodle_Y_Motion += 3'd7; 
+								else if(counting2 == 4'd15 && Doodle_Y_Motion == 1'b1 + ~Rocket_Modifier)
+									Doodle_Y_Motion += 4'd15; 
 							end 
 						// if the doodle is moving downwards 
-						else if(Doodle_Y_Motion[7:4] >= 4'h0 && Doodle_Y_Motion[7:4] <= 4'hA)
+						else if(doodle_down_check)
 							begin 
+								if((airtime == 8'h0) && ((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) || Spring_collision ))
+									begin 
+									// if doodle falling then allow for it to turn velocity to 0 
+										jump_reset <= 1; 
+										jump_enable <= 0;
+										Doodle_Y_Motion = (1'b1 + ~Spring_Modifier); 
+									end 
 								// if the doodle is moving downwards and hitting the ground or platform 
-								if((airtime == 8'h0) && ((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) || Platform_collision))
+								else if((airtime == 8'h0) && ((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) || Platform_collision))
 									begin 
 									// if doodle falling then allow for it to turn velocity to 0 
 										jump_reset <= 1; 
@@ -322,7 +358,8 @@ always_ff @ (posedge Reset or posedge frame_clk)
 									begin 
 										jump_reset <= 0; 
 										jump_enable <= 1; 
-										Doodle_Y_Motion += counting2[0]; 
+										if(counting2 == 2'd3)
+											Doodle_Y_Motion += counting2[1:0]; 
 									end 
 							end 
 						// if the doodle is moving upwards 
@@ -480,33 +517,54 @@ always_ff @ (posedge Reset or posedge frame_clk)
 
 		end  
 	end
-logic Platform_collision; 
-always_comb
-begin
-// DETECTS IF WE HIT A PLATFORM
-	Platform_collision =  (((Doodle_Y_Pos + Doodle_Size <= platY + plat_sizeY) && (Doodle_Y_Pos + Doodle_Size >= platY - plat_sizeY) && (platX + plat_sizeX >= Doodle_X_Pos - Doodle_Size ) && (platX - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY1 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY1 - plat_sizeY) && (platX1 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX1 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY2 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY2 - plat_sizeY) && (platX2 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX2 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY3 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY3 - plat_sizeY) && (platX3 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX3 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY4 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY4 - plat_sizeY) && (platX4 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX4 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY5 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY5 - plat_sizeY) && (platX5 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX5 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY6 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY6 - plat_sizeY) && (platX6 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX6 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY7 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY7 - plat_sizeY) && (platX7 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX7 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY8 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY8 - plat_sizeY) && (platX8 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX8 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY9 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY9 - plat_sizeY) && (platX9 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX9 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY10  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY10 - plat_sizeY) && (platX10 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX10 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY11  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY11 - plat_sizeY) && (platX11 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX11 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY12  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY12 - plat_sizeY) && (platX12 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX12 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY13  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY13 - plat_sizeY) && (platX13 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX13 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY14  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY14 - plat_sizeY) && (platX14 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX14 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= platY15  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY15 - plat_sizeY) && (platX15 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX15 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= plat_size_easy_Y  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= plat_size_easy_Y - plat_sizeY) && (plat_size_easy_X + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (plat_size_easy_X - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= plat_size_medium_Y  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= plat_size_medium_Y - plat_sizeY) && (plat_size_medium_X + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (plat_size_medium_X - plat_sizeX <= Doodle_X_Pos + Doodle_Size)) ||
-								((Doodle_Y_Pos + Doodle_Size <= plat_size_hard_Y  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= plat_size_hard_Y - plat_sizeY) && (plat_size_hard_X + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (plat_size_hard_X - plat_sizeX <= Doodle_X_Pos + Doodle_Size))						
-								);
 
+
+assign doodle_down_check = Doodle_Y_Motion[7:4] >= 4'h0 && Doodle_Y_Motion[7:4] <= 4'hA; 
+always_comb
+begin:Plat_coll
+
+logic Platform_collisionE;
+logic Platform_collisionM;
+logic Platform_collisionH;
+// DETECTS IF WE HIT A PLATFORM
+	Platform_collision0 = ((Doodle_Y_Pos + Doodle_Size <= platY + plat_sizeY) && (Doodle_Y_Pos + Doodle_Size >= platY - plat_sizeY) && (platX + plat_sizeX >= Doodle_X_Pos - Doodle_Size ) && (platX - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision1 = ((Doodle_Y_Pos + Doodle_Size <= platY1 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY1 - plat_sizeY) && (platX1 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX1 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)); 
+	Platform_collision2 = ((Doodle_Y_Pos + Doodle_Size <= platY2 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY2 - plat_sizeY) && (platX2 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX2 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision3 = ((Doodle_Y_Pos + Doodle_Size <= platY3 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY3 - plat_sizeY) && (platX3 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX3 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision4 = ((Doodle_Y_Pos + Doodle_Size <= platY4 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY4 - plat_sizeY) && (platX4 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX4 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision5 = ((Doodle_Y_Pos + Doodle_Size <= platY5 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY5 - plat_sizeY) && (platX5 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX5 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision6 = ((Doodle_Y_Pos + Doodle_Size <= platY6 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY6 - plat_sizeY) && (platX6 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX6 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision7 = ((Doodle_Y_Pos + Doodle_Size <= platY7 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY7 - plat_sizeY) && (platX7 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX7 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision8 = ((Doodle_Y_Pos + Doodle_Size <= platY8 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY8 - plat_sizeY) && (platX8 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX8 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision9 = ((Doodle_Y_Pos + Doodle_Size <= platY9 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY9 - plat_sizeY) && (platX9 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX9 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision10 = ((Doodle_Y_Pos + Doodle_Size <= platY10  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY10 - plat_sizeY) && (platX10 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX10 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision11 = ((Doodle_Y_Pos + Doodle_Size <= platY11  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY11 - plat_sizeY) && (platX11 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX11 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision12 = ((Doodle_Y_Pos + Doodle_Size <= platY12  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY12 - plat_sizeY) && (platX12 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX12 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision13 = ((Doodle_Y_Pos + Doodle_Size <= platY13  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY13 - plat_sizeY) && (platX13 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX13 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision14 = ((Doodle_Y_Pos + Doodle_Size <= platY14  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY14 - plat_sizeY) && (platX14 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX14 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collision15 = ((Doodle_Y_Pos + Doodle_Size <= platY15  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY15 - plat_sizeY) && (platX15 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX15 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collisionE = ((Doodle_Y_Pos + Doodle_Size <= plat_size_easy_Y  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= plat_size_easy_Y - plat_sizeY) && (plat_size_easy_X + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (plat_size_easy_X - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collisionM = ((Doodle_Y_Pos + Doodle_Size <= plat_size_medium_Y  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= plat_size_medium_Y - plat_sizeY) && (plat_size_medium_X + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (plat_size_medium_X - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	Platform_collisionH = ((Doodle_Y_Pos + Doodle_Size <= plat_size_hard_Y  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= plat_size_hard_Y - plat_sizeY) && (plat_size_hard_X + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (plat_size_hard_X - plat_sizeX <= Doodle_X_Pos + Doodle_Size));						
+Platform_collision = Platform_collision0 || Platform_collision1 || Platform_collision2 || Platform_collision3 || Platform_collision4 || Platform_collision5 || Platform_collision6 || Platform_collision7 || Platform_collision8 || Platform_collision9 || Platform_collision10 || Platform_collision11 || Platform_collision12 || Platform_collision13 || Platform_collision14 || Platform_collision15 || Platform_collisionE || Platform_collisionM || Platform_collisionH;
 
 end 
+logic Spring_collision;
+always_comb
+begin:Spring_collision_
+	Spring_collision = (((Doodle_Y_Pos + Doodle_Size <= springY + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY - springsizeY) && (springX + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
+	((Doodle_Y_Pos + Doodle_Size <= springY1 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY1 - springsizeY) && (springX1 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
+	((Doodle_Y_Pos + Doodle_Size <= springY2 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY2 - springsizeY) && (springX2 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
+	((Doodle_Y_Pos + Doodle_Size <= springY3 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY3 - springsizeY) && (springX3 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size))
+	);
+end 
+logic Rocket_collision;
+
+always_comb 
+begin:Rocket_collision_
+	Rocket_collision = ((Doodle_Y_Pos + Doodle_Size <= rocketY + rocketsizeY) && (Doodle_Y_Pos + Doodle_Size >= rocketY - rocketsizeY) && (rocketX + rocketsizeX >= Doodle_X_Pos - Doodle_Size ) && (rocketX - rocketsizeX <= Doodle_X_Pos + Doodle_Size));
+end
+
 
     assign DoodleX = Doodle_X_Pos;
     assign DoodleY = Doodle_Y_Pos;
