@@ -29,6 +29,7 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
 					output logic [5:0] outstate,
 					output logic [9:0] Doodle_Y_Motion,
 					output logic [9:0] Doodle_X_Pos, 
+					output logic [9:0] Doodle_Y_Pos,
 					output logic [8:0] plat_temp_Y, 
 					output logic refresh_en,
 					output logic [15:0] countingss, 
@@ -38,7 +39,7 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
 					);
 
 
-    logic [9:0] Doodle_Y_Pos, Doodle_X_Motion, Doodle_Size;
+    logic [9:0] Doodle_X_Motion;
 	
 
 		
@@ -145,6 +146,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					jump_enable <= 0; 
 					refresh_en <= 0;
 					difficulty <= 2'b01;
+					Score <= 0;
 				end 
 				// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣   Main Menu   ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	
 				3'b000:

@@ -33,7 +33,8 @@ module  color_mapper (
                     input logic [7:0] airtime,
                     input logic [1:0] difficulty, 
                     input logic [11:0] Score,
-						  
+                     
+    
 						  
                     output logic [7:0] temp, 
                     output logic [31:0] countingplat,
@@ -50,8 +51,9 @@ module  color_mapper (
                     output logic [8:0] readyX, testX,
                     output logic [23:0] BKG_out,
                     output logic [23:0] BKG_out2,
-                    output logic [3:0]BKG_on,
-                    output logic [3:0]BKG_on2
+                    output logic [23:0] BKG_out3,
+                    output logic [23:0] BKG_out4
+                    
 );  
     parameter [9:0] Screen_Y_Min=0;       // Topmost point on the Y axis
     parameter [9:0] Screen_Y_Max=479;     // Bottommost point on the Y axis
@@ -845,37 +847,106 @@ BKG2_ram BKG2(
     .data_Out2(BKG_out2[23:0])
 ); 
 
+BKG3_ram BKG3(
+    .read_address2(BKG_address3[14:0]),
+    .Clk(Clk), 
+
+    .data_Out3(BKG_out3[23:0])
+); 
+
+BKG4_ram BKG4(
+    .read_address(BKG_address4[14:0]),
+    .Clk(Clk), 
+
+    .data_Out4(BKG_out4[23:0])
+); 
+
+logic [3:0]BKG_on;
+logic [3:0]BKG_on2;
+logic [3:0]BKG_on3;
+logic [3:0]BKG_on4;
 logic [14:0] BKG_address; 
 logic [14:0] BKG_address2; 
+logic [14:0] BKG_address3;
+logic [14:0] BKG_address4;
 logic [10:0] shape_size_x = 10'd640;
 logic [10:0] shape_size_y = 10'd480;
-
+logic [10:0] doodle_shape_size_x = 10'd30;
+logic [10:0] doodle_shape_size_y = 10'd29;
 always_comb
     begin 
         BKG_address = (639 * DrawY) + DrawX;
         BKG_address2 = (639 * DrawY) + DrawX;
+        BKG_address3 = (639 * DrawY) + DrawX;
+        BKG_address4 = (639 * DrawY) + DrawX;
         BKG_on = 4'b1; 
         BKG_on2 = 4'b0;
+        BKG_on3 = 4'b0;
+        BKG_on4 = 4'b0;
         if(DrawY >= 0 && DrawY < shape_size_y && DrawX >= 0 && DrawX < shape_size_x) //Ball_x = 0
             begin
-                if(Score >= 12'b110000000000)
-                    begin
-                        BKG_on = 4'b0;
-                        BKG_on2 = 4'b1;
-                    end
+                if(Score >= 12'b001000000000 && Score <= 12'b011000000000)
+                    if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
+                        begin
+                            BKG_on3 = 4'b1;
+                            BKG_on  = 4'b0;
+                            BKG_on2 = 4'b0;
+                            BKG_on4 = 4'b0;
+                        end
+                    else
+                        begin
+                            BKG_on3 = 4'b0;
+                            BKG_on = 4'b0;
+                            BKG_on2 = 4'b1;
+                            BKG_on4 = 4'b0;
+                        end
+
+                else if(Score > 12'b100000000000)
+                    if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
+                        begin
+                            BKG_on3 = 4'b1;
+                            BKG_on  = 4'b0;
+                            BKG_on2 = 4'b0;
+                            BKG_on4 = 4'b0;
+                        end
+                    else
+                        begin
+                            BKG_on3 = 4'b0;
+                            BKG_on = 4'b0;
+                            BKG_on2 = 4'b0;
+                            BKG_on4 = 4'b1;
+                        end
+
                 else
-                    begin
-                        BKG_on = 4'b1;
-                        BKG_on2 = 4'b0;
-                    end
+                    if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
+                        begin
+                            BKG_on3 = 4'b1;
+                            BKG_on  = 4'b0;
+                            BKG_on2 = 4'b0;
+                            BKG_on4 = 4'b0;
+                        end
+                    else
+                        begin
+                            BKG_on3 = 4'b0;
+                            BKG_on = 4'b1;
+                            BKG_on2 = 4'b0;     
+                            BKG_on4 = 4'b0;
+                        end
+               
             end
         else
             begin
             BKG_on = 4'b0; 
             BKG_on2 = 4'b0;
-    
+            BKG_on3 = 4'b0;
+            BKG_on4 = 4'b0;
             end
     end
+
+
+   
+
+
 
 always_comb
         begin:RGB_Display
@@ -974,7 +1045,22 @@ always_comb
                     Red = BKG_out2[23:16];
                     Green = BKG_out2[15:8];
                     Blue = BKG_out2[7:0];
+                end
+
+            else if(BKG_on3 == 4'b1)
+                begin 
+                    Red = BKG_out3[23:16];
+                    Green = BKG_out3[15:8];
+                    Blue = BKG_out3[7:0];
                 end 
+
+            else if(BKG_on4 == 4'b1)
+                begin 
+                    Red = BKG_out4[23:16];
+                    Green = BKG_out4[15:8];
+                    Blue = BKG_out4[7:0];
+                end 
+
 			else 
                 begin 
                     Red = 8'hED;

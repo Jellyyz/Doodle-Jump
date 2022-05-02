@@ -18,7 +18,7 @@ logic [23:0] mem [0:25599];
 
 initial
 begin
-	 $readmemh("soccer-background.txt", mem);
+	 $readmemh("underwater-bck2.txt", mem); 
 end
 
 

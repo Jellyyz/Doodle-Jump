@@ -87,7 +87,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [8:0]plat_size_easy_X, plat_size_medium_X, plat_size_hard_X;
 	logic [8:0]plat_size_easy_Y, plat_size_medium_Y, plat_size_hard_Y;
 	logic [9:0] Doodle_Y_Motion;
-	logic [9:0] Doodle_X_Pos, plat_temp_Y;
+	logic [9:0] Doodle_X_Pos, plat_temp_Y, Doodle_Y_Pos;
 	logic refresh_en, trigger;
 	logic [7:0] displacement, airtime;
 	logic [15:0] countingss;
@@ -99,8 +99,11 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [1:0] difficulty; 
 	logic [23:0] BKG_out;
 	logic [23:0] BKG_out2;
-	logic [3:0]BKG_on;
-    logic [3:0]BKG_on2;
+	logic [23:0] BKG_out3;
+	logic [23:0] BKG_out4;
+	// logic [3:0]BKG_on;
+    // logic [3:0]BKG_on2;
+	// logic [3:0]BKG_on3;
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -167,11 +170,11 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	// HexDriver hex_driver1 (readyX[7:4], HEX1[6:0]);
 	// // assign HEX1[7] = 1'b1;
 
-	HexDriver hex_driver2 (BKG_on2[3:0], HEX2[6:0]); 
-	assign HEX2[7] = 1'b1;
+	// HexDriver hex_driver2 (BKG_on2[3:0], HEX2[6:0]); 
+	// assign HEX2[7] = 1'b1;
 
-	HexDriver hex_driver1 (BKG_on[3:0], HEX1[6:0]);
-	assign HEX1[7] = 1'b1;
+	// HexDriver hex_driver1 (BKG_on[3:0], HEX1[6:0]);
+	// assign HEX1[7] = 1'b1;
 	
 	// HexDriver hex_driver0 (readyX[3:0], HEX0[6:0]);
 	// assign HEX0[7] = 1'b1;
@@ -266,7 +269,6 @@ jumplogic jumplogic(
 	.Doodle_Y_Motion(Doodle_Y_Motion[9:0]),
 
 	.plat_temp_Y(plat_temp_Y[9:0]),
-	.Doodle_X_Pos(Doodle_X_Pos[9:0]),
 	.DoodleX(Doodlexsig[9:0]), .DoodleY(Doodleysig[9:0]), .DoodleS(Doodlesizesig[9:0]),  // 10 bits
 	.CannonX(cannonxsig[9:0]), .CannonY(cannonysig[9:0]), .CannonS(cannonsizesig[9:0]), 
 	.CannonX1(cannonxsig1[9:0]), .CannonY1(cannonysig1[9:0]),
@@ -308,8 +310,11 @@ color_mapper color(
 	.airtime(airtime[7:0]),
 	.BKG_out(BKG_out[23:0]),
 	.BKG_out2(BKG_out2[23:0]),
-	.BKG_on(BKG_on),
-	.BKG_on2(BKG_on2),
+	.BKG_out3(BKG_out3[23:0]),
+	.BKG_out4(BKG_out4[23:0]),
+	// .BKG_on(BKG_on),
+	// .BKG_on2(BKG_on2),
+	// .BKG_on3(BKG_on3),
 	.Score(Score[11:0]),
 
 	.readyX(readyX),
