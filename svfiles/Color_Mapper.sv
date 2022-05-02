@@ -1671,7 +1671,7 @@ BKG2_ram BKG2(
 ); 
 
 BKG3_ram BKG3(
-    .read_address2(BKG_address3[14:0]),
+    .read_address3(BKG_address3[14:0]),
     .Clk(Clk), 
 
     .data_Out3(BKG_out3[23:0])
@@ -1685,7 +1685,11 @@ BKG4_ram BKG4(
 ); 
 
 BKG5_ram BKG5(
+<<<<<<< HEAD
     .read_address(BKG_address5[14:0]),
+=======
+    .read_address5(BKG_address5[14:0]),
+>>>>>>> f12928735a200bd7686ead5be6cdaaf8bdee277b
     .Clk(Clk), 
 
     .data_Out5(BKG_out5[23:0])
