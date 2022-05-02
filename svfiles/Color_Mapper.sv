@@ -28,7 +28,7 @@ module  color_mapper (
 					input logic loadplat, 
                     input logic [7:0] airtime,
                     input logic [1:0] difficulty, 
-                     
+                    input logic [9:0] Doodle_Y_Motion, 
     
 						  
                     input logic [19:0] Score, 
@@ -56,9 +56,9 @@ module  color_mapper (
                     output logic [8:0] springX1, springY1, 
                     output logic [8:0] springX2, springY2, 
                     output logic [8:0] springX3, springY3, 
-                    output logic [3:0] springsizeX, springsizeY,
+                    output reg [3:0] springsizeX, springsizeY,
                     output logic [8:0] rocketX, rocketY, 
-                    output logic [3:0] rocketsizeX, rocketsizeY, 
+                    output reg [3:0] rocketsizeX, rocketsizeY, 
                     output logic [7:0] temp, 
                     output logic [31:0] countingplat,
                     output logic trigger, 
@@ -707,7 +707,7 @@ always_ff @(posedge frame_clk)
                         blue_temp_platX15 <= platX15;  
             end    
     end 
-always_ff@(posedge frame_clk)
+always_ff@(posedge Clk)
     begin 
         if(testX > 9'h0 && testX <= 9'd100)
             readyX <= testX + 9'd100;
@@ -797,142 +797,142 @@ always_ff@(posedge frame_clk)
             end 
         if(plat_offscreen[0])
             platX <= readyX; 
-        else if(plat0_color == 3'b011 && Platform_collision0 && platX < 250 && doodle_down_check)
+        else if(plat0_color == 3'b011 && Platform_collision0 && platX < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX <= platX + 250; 
-        else if(plat0_color == 3'b011 && Platform_collision0 && platX > 250 && doodle_down_check)
+        else if(plat0_color == 3'b011 && Platform_collision0 && platX > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX <= platX - 250;
         else
             platX <= platX + platX_Motion;
 
         if(plat_offscreen[1])
             platX1 <= readyX; 
-        else if(plat1_color == 3'b011 && Platform_collision1 && platX1 < 250 && doodle_down_check)
+        else if(plat1_color == 3'b011 && Platform_collision1 && platX1 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX1 <= platX1 + 250; 
-        else if(plat1_color == 3'b011 && Platform_collision1 && platX1 > 250 && doodle_down_check)
+        else if(plat1_color == 3'b011 && Platform_collision1 && platX1 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX1 <= platX1 - 250;
         else
             platX1 <= platX1 + platX1_Motion;
 
         if(plat_offscreen[2])
             platX2 <= readyX; 
-        else if(plat2_color == 3'b011 && Platform_collision2 && platX2 < 250 && doodle_down_check)
+        else if(plat2_color == 3'b011 && Platform_collision2 && platX2 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX2 <= platX2 + 250; 
-        else if(plat2_color == 3'b011 && Platform_collision2 && platX2 > 250 && doodle_down_check)
+        else if(plat2_color == 3'b011 && Platform_collision2 && platX2 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX2 <= platX2 - 250;
         else
             platX2 <= platX2 + platX2_Motion;        
 
         if(plat_offscreen[3])
             platX3 <= readyX; 
-        else if(plat3_color == 3'b011 && Platform_collision3 && platX3 < 250 && doodle_down_check)
+        else if(plat3_color == 3'b011 && Platform_collision3 && platX3 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX3 <= platX3 + 250; 
-        else if(plat3_color == 3'b011 && Platform_collision3 && platX3 > 250 && doodle_down_check)
+        else if(plat3_color == 3'b011 && Platform_collision3 && platX3 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX3 <= platX3 - 250;
         else
             platX3 <= platX3 + platX3_Motion;
 
         if(plat_offscreen[4])
             platX4 <= readyX; 
-        else if(plat4_color == 3'b011 && Platform_collision4 && platX4 < 250 && doodle_down_check)
+        else if(plat4_color == 3'b011 && Platform_collision4 && platX4 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX4 <= platX4 + 250; 
-        else if(plat4_color == 3'b011 && Platform_collision4 && platX4 > 250 && doodle_down_check)
+        else if(plat4_color == 3'b011 && Platform_collision4 && platX4 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX4 <= platX4 - 250;
         else
             platX4 <= platX4 + platX4_Motion;
 
         if(plat_offscreen[5])
             platX5 <= readyX; 
-        else if(plat5_color == 3'b011 && Platform_collision5 && platX5 < 250 && doodle_down_check)
+        else if(plat5_color == 3'b011 && Platform_collision5 && platX5 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX5 <= platX5 + 250; 
-        else if(plat5_color == 3'b011 && Platform_collision5 && platX5 > 250 && doodle_down_check)
+        else if(plat5_color == 3'b011 && Platform_collision5 && platX5 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX5 <= platX5 - 250;
         else
             platX5 <= platX5 + platX5_Motion;
         if(plat_offscreen[6])
             platX6 <= readyX; 
-        else if(plat6_color == 3'b011 && Platform_collision6 && platX6 < 250 && doodle_down_check)
+        else if(plat6_color == 3'b011 && Platform_collision6 && platX6 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX6 <= platX6 + 250; 
-        else if(plat6_color == 3'b011 && Platform_collision6 && platX6 > 250 && doodle_down_check)
+        else if(plat6_color == 3'b011 && Platform_collision6 && platX6 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX6 <= platX6 - 250;
         else
             platX6 <= platX6 + platX6_Motion;
 
         if(plat_offscreen[7])
             platX7 <= readyX; 
-        else if(plat7_color == 3'b011 && Platform_collision7 && platX7 < 250 && doodle_down_check)
+        else if(plat7_color == 3'b011 && Platform_collision7 && platX7 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX7 <= platX7 + 250; 
-        else if(plat7_color == 3'b011 && Platform_collision7 && platX7 > 250 && doodle_down_check)
+        else if(plat7_color == 3'b011 && Platform_collision7 && platX7 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX7 <= platX7 - 250;
         else
             platX7 <= platX7 + platX7_Motion;
 
         if(plat_offscreen[8])
             platX8 <= readyX; 
-        else if(plat8_color == 3'b011 && Platform_collision8 && platX8 < 250 && doodle_down_check)
+        else if(plat8_color == 3'b011 && Platform_collision8 && platX8 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX8 <= platX8 + 250; 
-        else if(plat8_color == 3'b011 && Platform_collision8 && platX8 > 250 && doodle_down_check)
+        else if(plat8_color == 3'b011 && Platform_collision8 && platX8 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX8 <= platX8 - 250;
         else
             platX8 <= platX8 + platX8_Motion;    
 
         if(plat_offscreen[9])
             platX9 <= readyX; 
-        else if(plat9_color == 3'b011 && Platform_collision9 && platX9 < 250 && doodle_down_check)
+        else if(plat9_color == 3'b011 && Platform_collision9 && platX9 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX9 <= platX9 + 250; 
-        else if(plat9_color == 3'b011 && Platform_collision9 && platX9 > 250 && doodle_down_check)
+        else if(plat9_color == 3'b011 && Platform_collision9 && platX9 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX9 <= platX9 - 250;
         else
             platX9 <= platX9 + platX9_Motion;
 
         if(plat_offscreen[10])
             platX10 <= readyX; 
-        else if(plat10_color == 3'b011 && Platform_collision10 && platX10 < 250 && doodle_down_check)
+        else if(plat10_color == 3'b011 && Platform_collision10 && platX10 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX10 <= platX10 + 250; 
-        else if(plat10_color == 3'b011 && Platform_collision10 && platX10 > 250 && doodle_down_check)
+        else if(plat10_color == 3'b011 && Platform_collision10 && platX10 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX10 <= platX10 - 250;
         else
             platX10 <= platX10 + platX10_Motion;
 
         if(plat_offscreen[11])
             platX11 <= readyX; 
-        else if(plat11_color == 3'b011 && Platform_collision11 && platX11 < 250 && doodle_down_check)
+        else if(plat11_color == 3'b011 && Platform_collision11 && platX11 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX11 <= platX11 + 250; 
-        else if(plat11_color == 3'b011 && Platform_collision11 && platX11 > 250 && doodle_down_check)
+        else if(plat11_color == 3'b011 && Platform_collision11 && platX11 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX11 <= platX11 - 250;
         else
             platX11 <= platX11 + platX11_Motion;        
 
         if(plat_offscreen[12])
             platX12 <= readyX; 
-        else if(plat12_color == 3'b011 && Platform_collision12 && platX12 < 250 && doodle_down_check)
+        else if(plat12_color == 3'b011 && Platform_collision12 && platX12 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX12 <= platX12 + 250; 
-        else if(plat12_color == 3'b011 && Platform_collision12 && platX12 > 250 && doodle_down_check)
+        else if(plat12_color == 3'b011 && Platform_collision12 && platX12 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX12 <= platX12 - 250;
         else
             platX12 <= platX12 + platX12_Motion;
 
         if(plat_offscreen[13])
             platX13 <= readyX; 
-        else if(plat13_color == 3'b011 && Platform_collision13 && platX13 < 250 && doodle_down_check)
+        else if(plat13_color == 3'b011 && Platform_collision13 && platX13 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX13 <= platX13 + 250; 
-        else if(plat13_color == 3'b011 && Platform_collision13 && platX13 > 250 && doodle_down_check)
+        else if(plat13_color == 3'b011 && Platform_collision13 && platX13 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX13 <= platX13 - 250;
         else
             platX13 <= platX13 + platX13_Motion;
 
         if(plat_offscreen[14])
             platX14 <= readyX; 
-        else if(plat14_color == 3'b011 && Platform_collision14 && platX14 < 250 && doodle_down_check)
+        else if(plat14_color == 3'b011 && Platform_collision14 && platX14 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX14 <= platX14 + 250; 
-        else if(plat14_color == 3'b011 && Platform_collision14 && platX14 > 250 && doodle_down_check)
+        else if(plat14_color == 3'b011 && Platform_collision14 && platX14 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX14 <= platX14 - 250;
         else
             platX14 <= platX14 + platX14_Motion;
         if(plat_offscreen[15])
             platX15 <= readyX; 
-        else if(plat15_color == 3'b011 && Platform_collision15 && platX15 < 250 && doodle_down_check)
+        else if(plat15_color == 3'b011 && Platform_collision15 && platX15 < 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX15 <= platX15 + 250; 
-        else if(plat15_color == 3'b011 && Platform_collision15 && platX15 > 250 && doodle_down_check)
+        else if(plat15_color == 3'b011 && Platform_collision15 && platX15 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX15 <= platX15 - 250;
         else
             platX15 <= platX15 + platX_Motion;
@@ -1685,11 +1685,7 @@ BKG4_ram BKG4(
 ); 
 
 BKG5_ram BKG5(
-<<<<<<< HEAD
-    .read_address(BKG_address5[14:0]),
-=======
     .read_address5(BKG_address5[14:0]),
->>>>>>> f12928735a200bd7686ead5be6cdaaf8bdee277b
     .Clk(Clk), 
 
     .data_Out5(BKG_out5[23:0])
@@ -1862,9 +1858,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -1892,9 +1888,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -1922,9 +1918,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -1952,9 +1948,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -1981,9 +1977,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -2010,9 +2006,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -2039,9 +2035,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -2069,9 +2065,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -2099,9 +2095,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -2128,9 +2124,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -2157,9 +2153,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -2186,9 +2182,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -2215,9 +2211,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -2244,9 +2240,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -2273,9 +2269,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 
@@ -2302,9 +2298,9 @@ always_comb
                         end
                     3'b001:
                         begin 
-                            Red = 8'hA5; 
-                            Green = 8'h2A; 
-                            Blue = 8'h2A; 
+                            Red = 8'h9B; 
+                            Green = 8'h67; 
+                            Blue = 8'h3C; 
                         end 
                     3'b010:
                         begin 

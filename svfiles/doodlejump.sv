@@ -160,75 +160,23 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign LEDR[0] = trigger; 
 	
 	//HEX drivers to convert numbers to HEX output
-	// HexDriver hex_driver5 (airtime[7:4], HEX5[6:0]);
-	// assign HEX5[7] = 1'b1;
-	
-	// HexDriver hex_driver4 (airtime[3:0], HEX4[6:0]);
-	// assign HEX4[7] = 1'b1;
-		
-	// HexDriver hex_driver3 (Doodle_Y_Motion[7:4], HEX3[6:0]); 
-	// assign HEX3[7] = 1'b1;
-
-	// HexDriver hex_driver2 (Doodle_Y_Motion[3:0], HEX2[6:0]); 
-	// assign HEX2[7] = 1'b1;
-	
-	HexDriver hex_driver5 (Score[11:8], HEX5[6:0]);
+	HexDriver hex_driver5 (airtime[7:4], HEX5[6:0]);
 	assign HEX5[7] = 1'b1;
-
-	HexDriver hex_driver4 (Score[7:4], HEX4[6:0]);
+	
+	HexDriver hex_driver4 (airtime[3:0], HEX4[6:0]);
 	assign HEX4[7] = 1'b1;
-
-    HexDriver hex_driver3 (Score[3:0], HEX3[6:0]); 
+		
+	HexDriver hex_driver3 (Doodle_Y_Motion[7:4], HEX3[6:0]); 
 	assign HEX3[7] = 1'b1;
 
-	// HexDriver hex_driver5 (testX[8], HEX5[6:0]);
-	// assign HEX5[7] = 1'b1;
-
-	// HexDriver hex_driver4 (testX[7:4], HEX4[6:0]);
-	// assign HEX4[7] = 1'b1;
-
-    // HexDriver hex_driver3 (testX[3:0], HEX3[6:0]); 
-	// assign HEX3[7] = 1'b1;
-
-	// HexDriver hex_driver2 (readyX[8], HEX2[6:0]); 
-	// assign HEX2[7] = 1'b1;
-
-	// HexDriver hex_driver1 (readyX[7:4], HEX1[6:0]);
-	// // assign HEX1[7] = 1'b1;
-
-	// HexDriver hex_driver2 (BKG_on2[3:0], HEX2[6:0]); 
-	// assign HEX2[7] = 1'b1;
-
-	// HexDriver hex_driver1 (BKG_on[3:0], HEX1[6:0]);
-	// assign HEX1[7] = 1'b1;
-	
-	// HexDriver hex_driver0 (readyX[3:0], HEX0[6:0]);
-	// assign HEX0[7] = 1'b1;
-	// HexDriver hex_driver5 (Score[11:8], HEX5[6:0]);
-	// assign HEX5[7] = 1'b1;
-
-	// HexDriver hex_driver4 (Score[7:4], HEX4[6:0]);
-	// assign HEX4[7] = 1'b1;
-
-    // HexDriver hex_driver3 (Score[3:0], HEX3[6:0]); 
-	// assign HEX3[7] = 1'b1;
-
-	// HexDriver hex_driver5 (blue_temp_platX[8], HEX5[6:0]);
-	// assign HEX5[7] = 1'b1;
-
-	// HexDriver hex_driver4 (blue_temp_platX[7:4], HEX4[6:0]);
-	// assign HEX4[7] = 1'b1;
-
-    // HexDriver hex_driver3 (blue_temp_platX[3:0], HEX3[6:0]); 
-	// assign HEX3[7] = 1'b1;
-
-	HexDriver hex_driver2 (platX_Motion[9:8], HEX2[6:0]); 
+	HexDriver hex_driver2 (Doodle_Y_Motion[3:0], HEX2[6:0]); 
 	assign HEX2[7] = 1'b1;
 
-	HexDriver hex_driver1 (platX_Motion[7:4], HEX1[6:0]);
+
+	HexDriver hex_driver1 (testX[7:4], HEX1[6:0]);
 	// assign HEX1[7] = 1'b1;
 	
-	HexDriver hex_driver0 (platX_Motion[3:0], HEX0[6:0]);
+	HexDriver hex_driver0 (testX[3:0], HEX0[6:0]);
 	assign HEX0[7] = 1'b1;
 	
 logic [8:0] blue_temp_platX; 
@@ -396,7 +344,7 @@ color_mapper color(
 	// .BKG_on3(BKG_on3),
 
 	.Score(Score[19:0]),
-
+	.Doodle_Y_Motion(Doodle_Y_Motion),
 	.Platform_collision(Platform_collision),
 	.platX_Motion(platX_Motion),
 	.rocketX(rocketX), .rocketY(rocketY),
