@@ -1,0 +1,68 @@
+module plat_type(
+    input logic Clock, Reset, 
+    input logic [2:0] type_trigger, 
+    output logic [2:0] plat_color
+);
+assign plat_color= State; 
+	enum logic [2:0] { Green, 
+					   Blue,
+                       Brown
+					   
+						}   State, Next_state;   // Internal state logic
+	always_ff @ (posedge Clock)
+	begin
+		if (Reset) 
+			State <= Green;
+		else 
+			State <= Next_state;
+	end
+
+    always_comb 
+    begin
+        // Default next state is staying at current state
+		Next_state = State;
+
+        unique case(State)
+            Green:
+                begin 
+                    unique case(type_trigger) 
+                        3'b000:
+                            Next_state = Green;
+                        3'b001:
+                            Next_state = Brown; 
+                        3'b010:
+                            Next_state = Blue;
+                    endcase
+                end 
+            Blue:
+                begin 
+                    unique case(type_trigger) 
+                        3'b000:
+                            Next_state = Green;
+                        3'b001:
+                            Next_state = Brown; 
+                        3'b010:
+                            Next_state = Blue;
+                    endcase
+                end 
+            Brown: 
+                begin 
+                    unique case(type_trigger) 
+                        3'b000:
+                            Next_state = Green;
+                        3'b001:
+                            Next_state = Brown; 
+                        3'b010:
+                            Next_state = Blue;
+                    endcase
+                end 
+		endcase 
+		
+		unique case(State)
+
+		endcase 
+
+    end
+
+
+endmodule 

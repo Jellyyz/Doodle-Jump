@@ -84,8 +84,15 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [8:0] platX13, platY13;
 	logic [8:0] platX14, platY14;
 	logic [8:0] platX15, platY15;
-	logic [8:0]plat_size_easy_X, plat_size_medium_X, plat_size_hard_X;
-	logic [8:0]plat_size_easy_Y, plat_size_medium_Y, plat_size_hard_Y;
+	logic [8:0] springX, springY;
+	logic [8:0] springX1, springY1;
+	logic [8:0] springX2, springY2;
+	logic [8:0] springX3, springY3;
+	logic [3:0] springsizeX, springsizeY;
+	logic [8:0] rocketX, rocket;
+	logic [3:0] rocketsizeX, rocketsizeY; 
+	logic [8:0] plat_size_easy_X, plat_size_medium_X, plat_size_hard_X;
+	logic [8:0] plat_size_easy_Y, plat_size_medium_Y, plat_size_hard_Y;
 	logic [9:0] Doodle_Y_Motion;
 	logic [9:0] Doodle_X_Pos, plat_temp_Y, Doodle_Y_Pos;
 	logic refresh_en, trigger;
@@ -95,7 +102,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic test;
 	logic [8:0] readyX, testX;
 	logic [7:0] temp; 
-	logic [11:0]Score;
+	logic [19:0]Score;
 	logic [1:0] difficulty; 
 	logic [23:0] BKG_out;
 	logic [23:0] BKG_out2;
@@ -104,6 +111,24 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	// logic [3:0]BKG_on;
     // logic [3:0]BKG_on2;
 	// logic [3:0]BKG_on3;
+	logic Platform_collision;
+    logic Platform_collision0;
+    logic Platform_collision1;
+    logic Platform_collision2;
+    logic Platform_collision3;
+    logic Platform_collision4;
+    logic Platform_collision5;
+    logic Platform_collision6;
+    logic Platform_collision7;
+    logic Platform_collision8;
+    logic Platform_collision9;
+    logic Platform_collision10;
+    logic Platform_collision11;
+    logic Platform_collision12;
+    logic Platform_collision13;
+    logic Platform_collision14;
+    logic Platform_collision15;
+	logic doodle_down_check; 
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -178,8 +203,35 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	
 	// HexDriver hex_driver0 (readyX[3:0], HEX0[6:0]);
 	// assign HEX0[7] = 1'b1;
+	// HexDriver hex_driver5 (Score[11:8], HEX5[6:0]);
+	// assign HEX5[7] = 1'b1;
+
+	// HexDriver hex_driver4 (Score[7:4], HEX4[6:0]);
+	// assign HEX4[7] = 1'b1;
+
+    // HexDriver hex_driver3 (Score[3:0], HEX3[6:0]); 
+	// assign HEX3[7] = 1'b1;
+
+	// HexDriver hex_driver5 (blue_temp_platX[8], HEX5[6:0]);
+	// assign HEX5[7] = 1'b1;
+
+	// HexDriver hex_driver4 (blue_temp_platX[7:4], HEX4[6:0]);
+	// assign HEX4[7] = 1'b1;
+
+    // HexDriver hex_driver3 (blue_temp_platX[3:0], HEX3[6:0]); 
+	// assign HEX3[7] = 1'b1;
+
+	HexDriver hex_driver2 (platX_Motion[9:8], HEX2[6:0]); 
+	assign HEX2[7] = 1'b1;
+
+	HexDriver hex_driver1 (platX_Motion[7:4], HEX1[6:0]);
+	// assign HEX1[7] = 1'b1;
 	
+	HexDriver hex_driver0 (platX_Motion[3:0], HEX0[6:0]);
+	assign HEX0[7] = 1'b1;
 	
+logic [8:0] blue_temp_platX; 
+logic [9:0] platX_Motion; 
 	//Assign one button to reset
 	assign {Reset_h}=~ (KEY[0]);
 
@@ -268,6 +320,8 @@ jumplogic jumplogic(
 
 	.Doodle_Y_Motion(Doodle_Y_Motion[9:0]),
 
+
+	.Platform_collision(Platform_collision),
 	.plat_temp_Y(plat_temp_Y[9:0]),
 	.DoodleX(Doodlexsig[9:0]), .DoodleY(Doodleysig[9:0]), .DoodleS(Doodlesizesig[9:0]),  // 10 bits
 	.CannonX(cannonxsig[9:0]), .CannonY(cannonysig[9:0]), .CannonS(cannonsizesig[9:0]), 
@@ -280,12 +334,36 @@ jumplogic jumplogic(
 	.platY9(platY9[8:0]), .platY10(platY10[8:0]), .platY11(platY11[8:0]), .platY12(platY12[8:0]), .platY13(platY13[8:0]), .platY14(platY14[8:0]), .platY15(platY15[8:0]),
 	.plat_size_easy_X(plat_size_easy_X[8:0]), .plat_size_medium_X(plat_size_medium_X[8:0]), .plat_size_hard_X(plat_size_hard_X[8:0]), 
 	.plat_size_easy_Y(plat_size_easy_Y[8:0]), .plat_size_medium_Y(plat_size_medium_Y[8:0]), .plat_size_hard_Y(plat_size_hard_Y[8:0]),
+	.springX(springX), .springY(springY),
+	.springX1(springX1), .springY1(springY1), 
+	.springX2(springX2), .springY2(springY2), 
+	.springX3(springX3), .springY3(springY3),
+	.springsizeX(springsizeX), .springsizeY(springsizeY),
+	.rocketX(rocketX), .rocketY(rocketY),
+	.rocketsizeX(rocketsizeX), .rocketsizeY(rocketsizeY),
 	.countingss(countingss[15:0]),
 	.refresh_en(refresh_en),
 	.displacement(displacement[7:0]), .airtime(airtime[7:0]),
 	.loadplat(loadplat),
-	.Score(Score[11:0]),
-	.difficulty(difficulty[1:0])
+	.Score(Score[19:0]),
+	.difficulty(difficulty[1:0]),
+	.Platform_collision0(Platform_collision0),
+	.Platform_collision1(Platform_collision1),
+	.Platform_collision2(Platform_collision2),
+	.Platform_collision3(Platform_collision3),
+	.Platform_collision4(Platform_collision4),
+	.Platform_collision5(Platform_collision5),
+	.Platform_collision6(Platform_collision6),
+	.Platform_collision7(Platform_collision7),
+	.Platform_collision8(Platform_collision8),
+	.Platform_collision9(Platform_collision9),
+	.Platform_collision10(Platform_collision10),
+	.Platform_collision11(Platform_collision11),
+	.Platform_collision12(Platform_collision12),
+	.Platform_collision13(Platform_collision13),
+	.Platform_collision14(Platform_collision14),
+	.Platform_collision15(Platform_collision15),
+	.doodle_down_check(doodle_down_check)
 ); 
 
 color_mapper color(
@@ -305,7 +383,6 @@ color_mapper color(
 	.plat_size_easy_X(plat_size_easy_X[8:0]), .plat_size_medium_X(plat_size_medium_X[8:0]), .plat_size_hard_X(plat_size_hard_X[8:0]), 
 	.plat_size_easy_Y(plat_size_easy_Y[8:0]), .plat_size_medium_Y(plat_size_medium_Y[8:0]), .plat_size_hard_Y(plat_size_hard_Y[8:0]), 
 	.plat_temp_Y(plat_temp_Y[8:0]),
-	.pixel_clk(pixel_clk), 
 	.loadplat(loadplat),
 	.airtime(airtime[7:0]),
 	.BKG_out(BKG_out[23:0]),
@@ -315,8 +392,18 @@ color_mapper color(
 	// .BKG_on(BKG_on),
 	// .BKG_on2(BKG_on2),
 	// .BKG_on3(BKG_on3),
-	.Score(Score[11:0]),
 
+	.Score(Score[19:0]),
+
+	.Platform_collision(Platform_collision),
+	.platX_Motion(platX_Motion),
+	.rocketX(rocketX), .rocketY(rocketY),
+	.rocketsizeX(rocketsizeX), .rocketsizeY(rocketsizeY),
+	.springX(springX), .springY(springY),
+	.springX1(springX1), .springY1(springY1), 
+	.springX2(springX2), .springY2(springY2), 
+	.springX3(springX3), .springY3(springY3),
+	.springsizeX(springsizeX), .springsizeY(springsizeY),
 	.readyX(readyX),
 	.testX(testX),
 	.keycode(keycode), 
@@ -333,8 +420,25 @@ color_mapper color(
 	.countingplat(countingplat[31:0]),
 	.test(test),
 	.temp(temp),
-	.difficulty(difficulty[1:0])
-
+	.difficulty(difficulty[1:0]),
+	.blue_temp_platX(blue_temp_platX),
+	.Platform_collision0(Platform_collision0),
+	.Platform_collision1(Platform_collision1),
+	.Platform_collision2(Platform_collision2),
+	.Platform_collision3(Platform_collision3),
+	.Platform_collision4(Platform_collision4),
+	.Platform_collision5(Platform_collision5),
+	.Platform_collision6(Platform_collision6),
+	.Platform_collision7(Platform_collision7),
+	.Platform_collision8(Platform_collision8),
+	.Platform_collision9(Platform_collision9),
+	.Platform_collision10(Platform_collision10),
+	.Platform_collision11(Platform_collision11),
+	.Platform_collision12(Platform_collision12),
+	.Platform_collision13(Platform_collision13),
+	.Platform_collision14(Platform_collision14),
+	.Platform_collision15(Platform_collision15),
+	.doodle_down_check(doodle_down_check)
 );
 
 
