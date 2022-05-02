@@ -108,6 +108,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [23:0] BKG_out2;
 	logic [23:0] BKG_out3;
 	logic [23:0] BKG_out4;
+	logic [23:0] BKG_out5;
 	// logic [3:0]BKG_on;
     // logic [3:0]BKG_on2;
 	// logic [3:0]BKG_on3;
@@ -389,6 +390,7 @@ color_mapper color(
 	.BKG_out2(BKG_out2[23:0]),
 	.BKG_out3(BKG_out3[23:0]),
 	.BKG_out4(BKG_out4[23:0]),
+	.BKG_out5(BKG_out5[23:0]),
 	// .BKG_on(BKG_on),
 	// .BKG_on2(BKG_on2),
 	// .BKG_on3(BKG_on3),

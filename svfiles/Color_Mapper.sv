@@ -75,8 +75,8 @@ module  color_mapper (
                     output logic [23:0] BKG_out,
                     output logic [23:0] BKG_out2,
                     output logic [23:0] BKG_out3,
-                    output logic [23:0] BKG_out4
-                    
+                    output logic [23:0] BKG_out4,
+                    output logic [23:0] BKG_out5,
                     output logic [8:0] blue_temp_platX
 );  
     parameter [9:0] Screen_Y_Min=0;       // Topmost point on the Y axis
@@ -1684,14 +1684,22 @@ BKG4_ram BKG4(
     .data_Out4(BKG_out4[23:0])
 ); 
 
+BKG4_ram BKG5(
+    .read_address(BKG_address5[14:0]),
+    .Clk(Clk), 
+
+    .data_Out5(BKG_out5[23:0])
+); 
 logic [3:0]BKG_on;
 logic [3:0]BKG_on2;
 logic [3:0]BKG_on3;
 logic [3:0]BKG_on4;
+logic [3:0]BKG_on5;
 logic [14:0] BKG_address; 
 logic [14:0] BKG_address2; 
 logic [14:0] BKG_address3;
 logic [14:0] BKG_address4;
+logic [14:0] BKG_address5;
 logic [10:0] shape_size_x = 10'd640;
 logic [10:0] shape_size_y = 10'd480;
 logic [10:0] doodle_shape_size_x = 10'd30;
@@ -1702,10 +1710,12 @@ always_comb
         BKG_address2 = (639 * DrawY) + DrawX;
         BKG_address3 = (639 * DrawY) + DrawX;
         BKG_address4 = (639 * DrawY) + DrawX;
+        BKG_address5 = (639 * DrawY) + DrawX;
         BKG_on = 4'b1; 
         BKG_on2 = 4'b0;
         BKG_on3 = 4'b0;
         BKG_on4 = 4'b0;
+        BKG_on5 = 4'b0;
         if(DrawY >= 0 && DrawY < shape_size_y && DrawX >= 0 && DrawX < shape_size_x) //Ball_x = 0
             begin
                 if(Score >= 12'b001000000000 && Score <= 12'b011000000000)
@@ -1715,6 +1725,7 @@ always_comb
                             BKG_on  = 4'b0;
                             BKG_on2 = 4'b0;
                             BKG_on4 = 4'b0;
+                            BKG_on5 = 4'b0;
                         end
                     else
                         begin
@@ -1722,6 +1733,7 @@ always_comb
                             BKG_on = 4'b0;
                             BKG_on2 = 4'b1;
                             BKG_on4 = 4'b0;
+                            BKG_on5 = 4'b0;
                         end
 
                 else if(Score > 12'b100000000000)
@@ -1731,6 +1743,7 @@ always_comb
                             BKG_on  = 4'b0;
                             BKG_on2 = 4'b0;
                             BKG_on4 = 4'b0;
+                            BKG_on5 = 4'b0;
                         end
                     else
                         begin
@@ -1738,6 +1751,7 @@ always_comb
                             BKG_on = 4'b0;
                             BKG_on2 = 4'b0;
                             BKG_on4 = 4'b1;
+                            BKG_on5 = 4'b0;
                         end
 
                 else
@@ -1747,6 +1761,7 @@ always_comb
                             BKG_on  = 4'b0;
                             BKG_on2 = 4'b0;
                             BKG_on4 = 4'b0;
+                            BKG_on5 = 4'b0;
                         end
                     else
                         begin
@@ -1754,6 +1769,7 @@ always_comb
                             BKG_on = 4'b1;
                             BKG_on2 = 4'b0;     
                             BKG_on4 = 4'b0;
+                            BKG_on5 = 4'b0;
                         end
                
             end
@@ -1763,6 +1779,7 @@ always_comb
             BKG_on2 = 4'b0;
             BKG_on3 = 4'b0;
             BKG_on4 = 4'b0;
+            BKG_on5 = 4'b0;
             end
     end
 
