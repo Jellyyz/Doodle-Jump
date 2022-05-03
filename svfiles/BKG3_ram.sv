@@ -4,10 +4,10 @@
  *
  */
 
-module  BKG3_ram
+module  Doodle_right_ram
 (
 		input [4:0] data_In3,
-		input [14:0] write_address3, read_address3,
+		input [9:0] write_address3, read_address3,
 		input we, Clk,
 
 		output logic [23:0] data_Out3

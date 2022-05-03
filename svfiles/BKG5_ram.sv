@@ -4,7 +4,7 @@
  *
  */
 
-module  BKG5_ram
+module  Doodle_left_ram
 (
 		input [4:0] data_In5,
 		input [14:0] write_address5, read_address5,

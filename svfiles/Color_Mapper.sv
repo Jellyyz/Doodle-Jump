@@ -1670,8 +1670,8 @@ BKG2_ram BKG2(
     .data_Out2(BKG_out2[23:0])
 ); 
 
-BKG3_ram BKG3(
-    .read_address3(BKG_address3[14:0]),
+Doodle_right_ram DRR(
+    .read_address3(BKG_address3[9:0]),
     .Clk(Clk), 
 
     .data_Out3(BKG_out3[23:0])
@@ -1684,17 +1684,18 @@ BKG4_ram BKG4(
     .data_Out4(BKG_out4[23:0])
 ); 
 
-BKG5_ram BKG5(
+Doodle_left_ram DLR(
     .read_address5(BKG_address5[14:0]),
     .Clk(Clk), 
 
     .data_Out5(BKG_out5[23:0])
 ); 
-logic [3:0]BKG_on;
-logic [3:0]BKG_on2;
-logic [3:0]BKG_on3;
-logic [3:0]BKG_on4;
-logic [3:0]BKG_on5;
+logic BKG_on;
+logic BKG_on2;
+logic BKG_on3;
+logic BKG_on4;
+logic BKG_on5;
+logic BKG_on3_bkg;
 logic [14:0] BKG_address; 
 logic [14:0] BKG_address2; 
 logic [14:0] BKG_address3;
@@ -1708,78 +1709,122 @@ always_comb
     begin 
         BKG_address = (639 * DrawY) + DrawX;
         BKG_address2 = (639 * DrawY) + DrawX;
-        BKG_address3 = (639 * DrawY) + DrawX;
+        BKG_address3 = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
         BKG_address4 = (639 * DrawY) + DrawX;
         BKG_address5 = (639 * DrawY) + DrawX;
-        BKG_on = 4'b1; 
-        BKG_on2 = 4'b0;
-        BKG_on3 = 4'b0;
-        BKG_on4 = 4'b0;
-        BKG_on5 = 4'b0;
+        BKG_on = 1; 
+        BKG_on2 = 0;
+        BKG_on3 = 0;
+        BKG_on3_bkg = 0;
+        BKG_on4 = 0;
+        BKG_on5 = 0;
         if(DrawY >= 0 && DrawY < shape_size_y && DrawX >= 0 && DrawX < shape_size_x) //Ball_x = 0
             begin
                 if(Score >= 12'b001000000000 && Score <= 12'b011000000000)
                     if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
                         begin
-                            BKG_on3 = 4'b1;
-                            BKG_on  = 4'b0;
-                            BKG_on2 = 4'b0;
-                            BKG_on4 = 4'b0;
-                            BKG_on5 = 4'b0;
+                            if(BKG_out3 == 0)
+                                begin
+                                BKG_on3 = 0;
+                                BKG_on  = 0;
+                                BKG_on2 = 1;
+                                BKG_on4 = 0;
+                                BKG_on5 = 0;
+                                BKG_on3_bkg = 1;
+                                end
+                            else
+                                begin
+                                BKG_on3 = 1;
+                                BKG_on  = 0;
+                                BKG_on2 = 0;
+                                BKG_on4 = 0;
+                                BKG_on5 = 0;
+                                BKG_on3_bkg = 0;
+                                end
                         end
                     else
                         begin
-                            BKG_on3 = 4'b0;
-                            BKG_on = 4'b0;
-                            BKG_on2 = 4'b1;
-                            BKG_on4 = 4'b0;
-                            BKG_on5 = 4'b0;
+                            BKG_on3 = 0;
+                            BKG_on = 0;
+                            BKG_on2 = 1;
+                            BKG_on4 = 0;
+                            BKG_on5 = 0;
+                            BKG_on3_bkg = 0;
                         end
 
                 else if(Score > 12'b100000000000)
                     if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
                         begin
-                            BKG_on3 = 4'b1;
-                            BKG_on  = 4'b0;
-                            BKG_on2 = 4'b0;
-                            BKG_on4 = 4'b0;
-                            BKG_on5 = 4'b0;
+                            if(BKG_out3 == 0)
+                                begin
+                                BKG_on3 = 0;
+                                BKG_on  = 0;
+                                BKG_on2 = 0;
+                                BKG_on4 = 1;
+                                BKG_on5 = 0;
+                                BKG_on3_bkg = 1;
+                                end
+                            else
+                                begin
+                                BKG_on3 = 1;
+                                BKG_on  = 0;
+                                BKG_on2 = 0;
+                                BKG_on4 = 0;
+                                BKG_on5 = 0;
+                                BKG_on3_bkg = 0;
+                                end
                         end
                     else
                         begin
-                            BKG_on3 = 4'b0;
-                            BKG_on = 4'b0;
-                            BKG_on2 = 4'b0;
-                            BKG_on4 = 4'b1;
-                            BKG_on5 = 4'b0;
+                            BKG_on3 = 0;
+                            BKG_on = 0;
+                            BKG_on2 = 0;
+                            BKG_on4 = 1;
+                            BKG_on5 = 0;
+                            BKG_on3_bkg = 0;
                         end
 
                 else
                     if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
                         begin
-                            BKG_on3 = 4'b1;
-                            BKG_on  = 4'b0;
-                            BKG_on2 = 4'b0;
-                            BKG_on4 = 4'b0;
-                            BKG_on5 = 4'b0;
+                            if(BKG_out3 == 0)
+                                begin
+                                BKG_on3 = 0;
+                                BKG_on  = 1;
+                                BKG_on2 = 0;
+                                BKG_on4 = 0;
+                                BKG_on5 = 0;
+                                BKG_on3_bkg = 1;
+                                end
+                            else
+                                begin
+                                BKG_on3 = 1;
+                                BKG_on  = 0;
+                                BKG_on2 = 0;
+                                BKG_on4 = 0;
+                                BKG_on5 = 0;
+                                BKG_on3_bkg = 0;
+                                end
                         end
                     else
                         begin
-                            BKG_on3 = 4'b0;
-                            BKG_on = 4'b1;
-                            BKG_on2 = 4'b0;     
-                            BKG_on4 = 4'b0;
-                            BKG_on5 = 4'b0;
+                            BKG_on3 = 0;
+                            BKG_on =  1;
+                            BKG_on2 = 0;     
+                            BKG_on4 = 0;
+                            BKG_on5 = 0;
+                            BKG_on3_bkg = 0;
                         end
                
             end
         else
             begin
-            BKG_on = 4'b0; 
-            BKG_on2 = 4'b0;
-            BKG_on3 = 4'b0;
-            BKG_on4 = 4'b0;
-            BKG_on5 = 4'b0;
+            BKG_on = 0; 
+            BKG_on2 = 0;
+            BKG_on3 = 0;
+            BKG_on4 = 0;
+            BKG_on5 = 0;
+            BKG_on3_bkg = 0;
             end
     end
 
@@ -1789,14 +1834,14 @@ always_comb
     always_comb
         begin:RGB_Display
         //turn on pixels for the Doodle 
-        if ((Doodle_on)) 
-            begin 
-                Red = 8'hA5;
-                Green = 8'hA5;
-                Blue = 8'h25;
-            end      
+        // if ((Doodle_on)) 
+        //     begin 
+        //         Red = 8'hA5;
+        //         Green = 8'hA5;
+        //         Blue = 8'h25;
+        //     end      
         // turn on pixels for the powerups for now, serves purely as a marker 
-        else if(spring_on)
+        if(spring_on)
             begin 
                 Red = 8'h7F;
                 Green = 8'h0;
@@ -2349,28 +2394,28 @@ always_comb
             //     Green = 8'hEE;
             //     Blue = 8'hEE;
             // end      
-            else if(BKG_on == 4'b1)
+            else if(BKG_on == 1 || (BKG_on3_bkg == 1 && BKG_on == 1))
                 begin 
                     Red = BKG_out[23:16];
                     Green = BKG_out[15:8];
                     Blue = BKG_out[7:0];
                 end 		 
 
-            else if(BKG_on2 == 4'b1)
+            else if(BKG_on2 == 1 || (BKG_on3_bkg == 1 && BKG_on2 == 1))
                 begin 
                     Red = BKG_out2[23:16];
                     Green = BKG_out2[15:8];
                     Blue = BKG_out2[7:0];
                 end
 
-            else if(BKG_on3 == 4'b1)
+            else if(BKG_on3 == 1 || BKG_on3_bkg != 1 )
                 begin 
                     Red = BKG_out3[23:16];
                     Green = BKG_out3[15:8];
                     Blue = BKG_out3[7:0];
                 end 
 
-            else if(BKG_on4 == 4'b1)
+            else if(BKG_on4 == 1 || (BKG_on3_bkg == 1 && BKG_on4 == 1))
                 begin 
                     Red = BKG_out4[23:16];
                     Green = BKG_out4[15:8];
