@@ -27,6 +27,22 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
 					input logic springsizeX, springsizeY,
 					input logic [8:0] rocketX, rocketY, 
 					input logic rocketsizeX, rocketsizeY,
+                    input logic [2:0] plat0_color,
+                    input logic [2:0] plat1_color,
+                    input logic [2:0] plat2_color,
+                    input logic [2:0] plat3_color,
+                    input logic [2:0] plat4_color,
+                    input logic [2:0] plat5_color,
+                    input logic [2:0] plat6_color,
+                    input logic [2:0] plat7_color,
+                    input logic [2:0] plat8_color,
+                    input logic [2:0] plat9_color,
+                    input logic [2:0] plat10_color,
+                    input logic [2:0] plat11_color,
+                    input logic [2:0] plat12_color,
+                    input logic [2:0] plat13_color,
+                    input logic [2:0] plat14_color,
+                    input logic [2:0] plat15_color,
 
 					output logic doodle_down_check, 
 					output logic Platform_collision,
@@ -377,9 +393,9 @@ always_ff @ (posedge Reset or posedge frame_clk)
 							Cannon_Y_Motion2 <= (1'b1 + ~CannonSpeed2); 
 						end 
 						8'd7, 8'd79:
-							Doodle_X_Motion <= 3; 
+							Doodle_X_Motion <= 4; 
 						8'd4, 8'd80:
-							Doodle_X_Motion <= -3;	 
+							Doodle_X_Motion <= -4;	 
 						default:
 							begin 
 								Doodle_X_Motion <= 0;
@@ -530,26 +546,74 @@ logic Platform_collisionE;
 logic Platform_collisionM;
 logic Platform_collisionH;
 // DETECTS IF WE HIT A PLATFORM
-	Platform_collision0 = ((Doodle_Y_Pos + Doodle_Size <= platY + plat_sizeY) && (Doodle_Y_Pos + Doodle_Size >= platY - plat_sizeY) && (platX + plat_sizeX >= Doodle_X_Pos - Doodle_Size ) && (platX - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision1 = ((Doodle_Y_Pos + Doodle_Size <= platY1 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY1 - plat_sizeY) && (platX1 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX1 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)); 
-	Platform_collision2 = ((Doodle_Y_Pos + Doodle_Size <= platY2 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY2 - plat_sizeY) && (platX2 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX2 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision3 = ((Doodle_Y_Pos + Doodle_Size <= platY3 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY3 - plat_sizeY) && (platX3 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX3 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision4 = ((Doodle_Y_Pos + Doodle_Size <= platY4 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY4 - plat_sizeY) && (platX4 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX4 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision5 = ((Doodle_Y_Pos + Doodle_Size <= platY5 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY5 - plat_sizeY) && (platX5 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX5 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision6 = ((Doodle_Y_Pos + Doodle_Size <= platY6 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY6 - plat_sizeY) && (platX6 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX6 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision7 = ((Doodle_Y_Pos + Doodle_Size <= platY7 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY7 - plat_sizeY) && (platX7 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX7 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision8 = ((Doodle_Y_Pos + Doodle_Size <= platY8 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY8 - plat_sizeY) && (platX8 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX8 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision9 = ((Doodle_Y_Pos + Doodle_Size <= platY9 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY9 - plat_sizeY) && (platX9 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX9 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision10 = ((Doodle_Y_Pos + Doodle_Size <= platY10  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY10 - plat_sizeY) && (platX10 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX10 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision11 = ((Doodle_Y_Pos + Doodle_Size <= platY11  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY11 - plat_sizeY) && (platX11 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX11 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision12 = ((Doodle_Y_Pos + Doodle_Size <= platY12  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY12 - plat_sizeY) && (platX12 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX12 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision13 = ((Doodle_Y_Pos + Doodle_Size <= platY13  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY13 - plat_sizeY) && (platX13 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX13 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision14 = ((Doodle_Y_Pos + Doodle_Size <= platY14  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY14 - plat_sizeY) && (platX14 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX14 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
-	Platform_collision15 = ((Doodle_Y_Pos + Doodle_Size <= platY15  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY15 - plat_sizeY) && (platX15 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX15 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat0_color == 3'b100)
+		Platform_collision0 = 0; 
+	else 
+		Platform_collision0 = ((Doodle_Y_Pos + Doodle_Size <= platY + plat_sizeY) && (Doodle_Y_Pos + Doodle_Size >= platY - plat_sizeY) && (platX + plat_sizeX >= Doodle_X_Pos - Doodle_Size ) && (platX - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat1_color == 3'b100)
+		Platform_collision1 = 0; 
+	else 
+		Platform_collision1 = ((Doodle_Y_Pos + Doodle_Size <= platY1 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY1 - plat_sizeY) && (platX1 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX1 - plat_sizeX <= Doodle_X_Pos + Doodle_Size)); 
+	if(plat2_color == 3'b100)
+		Platform_collision2 = 0; 
+	else 
+		Platform_collision2 = ((Doodle_Y_Pos + Doodle_Size <= platY2 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY2 - plat_sizeY) && (platX2 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX2 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat3_color == 3'b100)
+		Platform_collision3 = 0; 
+	else 
+		Platform_collision3 = ((Doodle_Y_Pos + Doodle_Size <= platY3 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY3 - plat_sizeY) && (platX3 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX3 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat4_color == 3'b100)
+		Platform_collision4 = 0; 
+	else 
+		Platform_collision4 = ((Doodle_Y_Pos + Doodle_Size <= platY4 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY4 - plat_sizeY) && (platX4 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX4 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat5_color == 3'b100)
+		Platform_collision5 = 0; 
+	else 
+		Platform_collision5 = ((Doodle_Y_Pos + Doodle_Size <= platY5 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY5 - plat_sizeY) && (platX5 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX5 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat6_color == 3'b100)
+		Platform_collision6 = 0; 
+	else 
+		Platform_collision6 = ((Doodle_Y_Pos + Doodle_Size <= platY6 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY6 - plat_sizeY) && (platX6 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX6 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat7_color == 3'b100)
+		Platform_collision7 = 0; 
+	else 
+		Platform_collision7 = ((Doodle_Y_Pos + Doodle_Size <= platY7 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY7 - plat_sizeY) && (platX7 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX7 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat8_color == 3'b100)
+		Platform_collision8 = 0; 
+	else 
+		Platform_collision8 = ((Doodle_Y_Pos + Doodle_Size <= platY8 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY8 - plat_sizeY) && (platX8 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX8 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat9_color == 3'b100)
+		Platform_collision9 = 0; 
+	else 
+		Platform_collision9 = ((Doodle_Y_Pos + Doodle_Size <= platY9 + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY9 - plat_sizeY) && (platX9 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX9 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat10_color == 3'b100)
+		Platform_collision10 = 0; 
+	else 
+		Platform_collision10 = ((Doodle_Y_Pos + Doodle_Size <= platY10  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY10 - plat_sizeY) && (platX10 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX10 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat11_color == 3'b100)
+		Platform_collision11 = 0; 
+	else 
+		Platform_collision11 = ((Doodle_Y_Pos + Doodle_Size <= platY11  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY11 - plat_sizeY) && (platX11 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX11 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat12_color == 3'b100)
+		Platform_collision12 = 0; 
+	else 
+		Platform_collision12 = ((Doodle_Y_Pos + Doodle_Size <= platY12  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY12 - plat_sizeY) && (platX12 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX12 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat13_color == 3'b100)
+		Platform_collision13 = 0; 
+	else 
+		Platform_collision13 = ((Doodle_Y_Pos + Doodle_Size <= platY13  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY13 - plat_sizeY) && (platX13 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX13 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat14_color == 3'b100)
+		Platform_collision14 = 0; 
+	else 
+		Platform_collision14 = ((Doodle_Y_Pos + Doodle_Size <= platY14  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY14 - plat_sizeY) && (platX14 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX14 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
+	if(plat15_color == 3'b100)
+		Platform_collision15 = 0; 
+	else 
+		Platform_collision15 = ((Doodle_Y_Pos + Doodle_Size <= platY15  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= platY15 - plat_sizeY) && (platX15 + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (platX15 - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
 	Platform_collisionE = ((Doodle_Y_Pos + Doodle_Size <= plat_size_easy_Y  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= plat_size_easy_Y - plat_sizeY) && (plat_size_easy_X + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (plat_size_easy_X - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
 	Platform_collisionM = ((Doodle_Y_Pos + Doodle_Size <= plat_size_medium_Y  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= plat_size_medium_Y - plat_sizeY) && (plat_size_medium_X + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (plat_size_medium_X - plat_sizeX <= Doodle_X_Pos + Doodle_Size));
 	Platform_collisionH = ((Doodle_Y_Pos + Doodle_Size <= plat_size_hard_Y  + plat_sizeY) &&(Doodle_Y_Pos + Doodle_Size >= plat_size_hard_Y - plat_sizeY) && (plat_size_hard_X + plat_sizeX >= Doodle_X_Pos - Doodle_Size) && (plat_size_hard_X - plat_sizeX <= Doodle_X_Pos + Doodle_Size));						
-Platform_collision = Platform_collision0 || Platform_collision1 || Platform_collision2 || Platform_collision3 || Platform_collision4 || Platform_collision5 || Platform_collision6 || Platform_collision7 || Platform_collision8 || Platform_collision9 || Platform_collision10 || Platform_collision11 || Platform_collision12 || Platform_collision13 || Platform_collision14 || Platform_collision15 || Platform_collisionE || Platform_collisionM || Platform_collisionH;
+	Platform_collision = Platform_collision0 || Platform_collision1 || Platform_collision2 || Platform_collision3 || Platform_collision4 || Platform_collision5 || Platform_collision6 || Platform_collision7 || Platform_collision8 || Platform_collision9 || Platform_collision10 || Platform_collision11 || Platform_collision12 || Platform_collision13 || Platform_collision14 || Platform_collision15 || Platform_collisionE || Platform_collisionM || Platform_collisionH;
 
 end 
 logic Spring_collision;

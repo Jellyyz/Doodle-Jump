@@ -129,7 +129,24 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
     logic Platform_collision13;
     logic Platform_collision14;
     logic Platform_collision15;
-	logic doodle_down_check; 
+	logic doodle_down_check;
+    logic [2:0] plat0_color;
+    logic [2:0] plat1_color;
+    logic [2:0] plat2_color;
+    logic [2:0] plat3_color;
+    logic [2:0] plat4_color;
+    logic [2:0] plat5_color;
+    logic [2:0] plat6_color;
+    logic [2:0] plat7_color;
+    logic [2:0] plat8_color;
+    logic [2:0] plat9_color;
+    logic [2:0] plat10_color;
+    logic [2:0] plat11_color;
+    logic [2:0] plat12_color;
+    logic [2:0] plat13_color;
+    logic [2:0] plat14_color;
+    logic [2:0] plat15_color;
+    logic [9:0] platX_Motion;  
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -180,7 +197,6 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign HEX0[7] = 1'b1;
 	
 logic [8:0] blue_temp_platX; 
-logic [9:0] platX_Motion; 
 	//Assign one button to reset
 	assign {Reset_h}=~ (KEY[0]);
 
@@ -312,7 +328,23 @@ jumplogic jumplogic(
 	.Platform_collision13(Platform_collision13),
 	.Platform_collision14(Platform_collision14),
 	.Platform_collision15(Platform_collision15),
-	.doodle_down_check(doodle_down_check)
+	.doodle_down_check(doodle_down_check),
+ 	.plat0_color(plat0_color),
+	.plat1_color(plat1_color),
+	.plat2_color(plat2_color),
+	.plat3_color(plat3_color),
+	.plat4_color(plat4_color),
+	.plat5_color(plat5_color),
+	.plat6_color(plat6_color),
+	.plat7_color(plat7_color),
+	.plat8_color(plat8_color),
+	.plat9_color(plat9_color),
+	.plat10_color(plat10_color),
+	.plat11_color(plat11_color),
+	.plat12_color(plat12_color),
+	.plat13_color(plat13_color),
+	.plat14_color(plat14_color),
+	.plat15_color(plat15_color)
 ); 
 
 color_mapper color(
@@ -388,7 +420,23 @@ color_mapper color(
 	.Platform_collision13(Platform_collision13),
 	.Platform_collision14(Platform_collision14),
 	.Platform_collision15(Platform_collision15),
-	.doodle_down_check(doodle_down_check)
+	.doodle_down_check(doodle_down_check),
+	.plat0_color(plat0_color),
+	.plat1_color(plat1_color),
+	.plat2_color(plat2_color),
+	.plat3_color(plat3_color),
+	.plat4_color(plat4_color),
+	.plat5_color(plat5_color),
+	.plat6_color(plat6_color),
+	.plat7_color(plat7_color),
+	.plat8_color(plat8_color),
+	.plat9_color(plat9_color),
+	.plat10_color(plat10_color),
+	.plat11_color(plat11_color),
+	.plat12_color(plat12_color),
+	.plat13_color(plat13_color),
+	.plat14_color(plat14_color),
+	.plat15_color(plat15_color)
 );
 
 

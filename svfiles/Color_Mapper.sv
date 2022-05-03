@@ -51,6 +51,22 @@ module  color_mapper (
 					input logic Platform_collision15,
                     input logic doodle_down_check, 
 
+                    output logic [2:0] plat0_color,
+                    output logic [2:0] plat1_color,
+                    output logic [2:0] plat2_color,
+                    output logic [2:0] plat3_color,
+                    output logic [2:0] plat4_color,
+                    output logic [2:0] plat5_color,
+                    output logic [2:0] plat6_color,
+                    output logic [2:0] plat7_color,
+                    output logic [2:0] plat8_color,
+                    output logic [2:0] plat9_color,
+                    output logic [2:0] plat10_color,
+                    output logic [2:0] plat11_color,
+                    output logic [2:0] plat12_color,
+                    output logic [2:0] plat13_color,
+                    output logic [2:0] plat14_color,
+                    output logic [2:0] plat15_color,
                     output logic [9:0] platX_Motion, 
                     output logic [8:0] springX, springY, 
                     output logic [8:0] springX1, springY1, 
@@ -192,8 +208,6 @@ LFSR LFSR15(
 // logic [15:0] platcolor; 
 logic [8:0] testX1, testX2, testX3, testX4, testX5, testX6, testX7,  testX8, testX9, testX10, testX11, testX12, testX13, testX14, testX15;
 logic [8:0] readyX1, readyX2, readyX3, readyX4, readyX5, readyX6, readyX7,  readyX8, readyX9, readyX10, readyX11, readyX12, readyX13, readyX14, readyX15;
-logic [2:0] plat0_color, plat1_color, plat2_color, plat3_color, plat4_color, plat5_color, plat6_color, plat7_color, plat8_color;
-logic [2:0]  plat9_color, plat10_color, plat11_color, plat12_color, plat13_color, plat14_color, plat15_color;
 //★★★★★★★★★★★★★★★★★★★★★★★★★  state machines for platform color ★★★★★★★★★★★★★★★★★★★★★★★★★ 
 logic [2:0] plat0_trigger, plat1_trigger, plat2_trigger, plat3_trigger, plat4_trigger, plat5_trigger, plat6_trigger, plat7_trigger, plat8_trigger, plat9_trigger, plat10_trigger, plat11_trigger,  plat12_trigger, plat13_trigger, plat14_trigger, plat15_trigger; 
 plat_type plat0(
@@ -801,7 +815,7 @@ always_ff@(posedge frame_clk)
             platX <= platX + (platX >> 1); 
         else if(plat0_color == 3'b011 && Platform_collision0 && platX > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX <= platX - (platX >> 1);
-        else if (plat0_color == 3'b001 && Platform_collision0 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat0_color == 3'b001 || plat0_color == 3'b100 && PlatformBrown_collision0 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX <= 0;  
         else
             platX <= platX + platX_Motion;
@@ -812,7 +826,7 @@ always_ff@(posedge frame_clk)
             platX1 <= platX1 + (platX >> 1); 
         else if(plat1_color == 3'b011 && Platform_collision1 && platX1 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX1 <= platX1 - (platX >> 1);
-        else if (plat1_color == 3'b001 && Platform_collision1 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat1_color == 3'b001 || plat1_color == 3'b100 && PlatformBrown_collision1 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX1 <= 0; 
         else
             platX1 <= platX1 + platX1_Motion;
@@ -823,7 +837,7 @@ always_ff@(posedge frame_clk)
             platX2 <= platX2 + (platX >> 1); 
         else if(plat2_color == 3'b011 && Platform_collision2 && platX2 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX2 <= platX2 - (platX >> 1);
-        else if (plat2_color == 3'b001 && Platform_collision2 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat2_color == 3'b001 || plat2_color == 3'b100 && PlatformBrown_collision2 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX2 <= 0; 
         else
             platX2 <= platX2 + platX2_Motion;        
@@ -834,7 +848,7 @@ always_ff@(posedge frame_clk)
             platX3 <= platX3 + (platX >> 1); 
         else if(plat3_color == 3'b011 && Platform_collision3 && platX3 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX3 <= platX3 - (platX >> 1);
-        else if (plat3_color == 3'b001 && Platform_collision3 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat3_color == 3'b001 || plat3_color == 3'b100 && PlatformBrown_collision3 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX3 <= 0; 
         else
             platX3 <= platX3 + platX3_Motion;
@@ -845,7 +859,7 @@ always_ff@(posedge frame_clk)
             platX4 <= platX4 + (platX >> 1); 
         else if(plat4_color == 3'b011 && Platform_collision4 && platX4 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX4 <= platX4 - (platX >> 1);
-        else if (plat4_color == 3'b001 && Platform_collision4 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat4_color == 3'b001 || plat4_color == 3'b100 && PlatformBrown_collision4 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX4 <= 0; 
         else
             platX4 <= platX4 + platX4_Motion;
@@ -856,7 +870,7 @@ always_ff@(posedge frame_clk)
             platX5 <= platX5 + (platX >> 1); 
         else if(plat5_color == 3'b011 && Platform_collision5 && platX5 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX5 <= platX5 - (platX >> 1);
-        else if (plat5_color == 3'b001 && Platform_collision5 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat5_color == 3'b001 || plat5_color == 3'b100 && PlatformBrown_collision5 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX5 <= 0; 
         else
             platX5 <= platX5 + platX5_Motion;
@@ -866,7 +880,7 @@ always_ff@(posedge frame_clk)
             platX6 <= platX6 + (platX >> 1); 
         else if(plat6_color == 3'b011 && Platform_collision6 && platX6 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX6 <= platX6 - (platX >> 1);
-        else if (plat6_color == 3'b001 && Platform_collision6 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat6_color == 3'b001 || plat6_color == 3'b100 && PlatformBrown_collision6 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX6 <= 0; 
         else
             platX6 <= platX6 + platX6_Motion;
@@ -877,7 +891,7 @@ always_ff@(posedge frame_clk)
             platX7 <= platX7 + (platX >> 1); 
         else if(plat7_color == 3'b011 && Platform_collision7 && platX7 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX7 <= platX7 - (platX >> 1);
-        else if (plat7_color == 3'b001 && Platform_collision7 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat7_color == 3'b001 || plat7_color == 3'b100 && PlatformBrown_collision7 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX7 <= 0; 
         else
             platX7 <= platX7 + platX7_Motion;
@@ -888,7 +902,7 @@ always_ff@(posedge frame_clk)
             platX8 <= platX8 + (platX >> 1); 
         else if(plat8_color == 3'b011 && Platform_collision8 && platX8 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX8 <= platX8 - (platX >> 1);
-        else if (plat8_color == 3'b001 && Platform_collision8 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat8_color == 3'b001 || plat8_color == 3'b100 && PlatformBrown_collision8 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX8 <= 0; 
         else
             platX8 <= platX8 + platX8_Motion;    
@@ -899,7 +913,7 @@ always_ff@(posedge frame_clk)
             platX9 <= platX9 + (platX >> 1); 
         else if(plat9_color == 3'b011 && Platform_collision9 && platX9 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX9 <= platX9 - (platX >> 1);
-        else if (plat9_color == 3'b001 && Platform_collision9 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat9_color == 3'b001 || plat9_color == 3'b100 && PlatformBrown_collision9 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX9 <= 0; 
         else
             platX9 <= platX9 + platX9_Motion;
@@ -910,7 +924,7 @@ always_ff@(posedge frame_clk)
             platX10 <= platX10 + (platX >> 1); 
         else if(plat10_color == 3'b011 && Platform_collision10 && platX10 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX10 <= platX10 - (platX >> 1);
-        else if (plat10_color == 3'b001 && Platform_collision10 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat10_color == 3'b001 || plat10_color == 3'b100 && PlatformBrown_collision10 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX10 <= 0; 
         else
             platX10 <= platX10 + platX10_Motion;
@@ -921,7 +935,7 @@ always_ff@(posedge frame_clk)
             platX11 <= platX11 + (platX >> 1); 
         else if(plat11_color == 3'b011 && Platform_collision11 && platX11 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX11 <= platX11 - (platX >> 1);
-        else if (plat11_color == 3'b001 && Platform_collision11 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat11_color == 3'b001 || plat11_color == 3'b100 && PlatformBrown_collision11 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX11 <= 0; 
         else
             platX11 <= platX11 + platX11_Motion;        
@@ -932,7 +946,7 @@ always_ff@(posedge frame_clk)
             platX12 <= platX12 + (platX >> 1); 
         else if(plat12_color == 3'b011 && Platform_collision12 && platX12 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX12 <= platX12 - (platX >> 1);
-        else if (plat12_color == 3'b001 && Platform_collision12 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat12_color == 3'b001 || plat12_color == 3'b100 && PlatformBrown_collision12 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX12 <= 0; 
         else
             platX12 <= platX12 + platX12_Motion;
@@ -943,7 +957,7 @@ always_ff@(posedge frame_clk)
             platX13 <= platX13 + (platX >> 1); 
         else if(plat13_color == 3'b011 && Platform_collision13 && platX13 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX13 <= platX13 - (platX >> 1);
-        else if (plat13_color == 3'b001 && Platform_collision13 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat13_color == 3'b001 || plat13_color == 3'b100 && PlatformBrown_collision13 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX13 <= 0; 
         else
             platX13 <= platX13 + platX13_Motion;
@@ -954,7 +968,7 @@ always_ff@(posedge frame_clk)
             platX14 <= platX14 + (platX >> 1); 
         else if(plat14_color == 3'b011 && Platform_collision14 && platX14 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX14 <= platX14 - (platX >> 1);
-        else if (plat14_color == 3'b001 && Platform_collision14 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat14_color == 3'b001 || plat14_color == 3'b100 && PlatformBrown_collision14 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX14 <= 0; 
         else
             platX14 <= platX14 + platX14_Motion;
@@ -964,7 +978,7 @@ always_ff@(posedge frame_clk)
             platX15 <= platX15 + (platX >> 1); 
         else if(plat15_color == 3'b011 && Platform_collision15 && platX15 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX15 <= platX15 - (platX >> 1);
-        else if (plat15_color == 3'b001 && Platform_collision15 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+        else if (plat15_color == 3'b001 || plat15_color == 3'b100 && PlatformBrown_collision15 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
             platX15 <= 0; 
         else
             platX15 <= platX15 + platX_Motion;
@@ -1001,6 +1015,8 @@ always_ff @ (posedge Clk)
                     plat0_trigger <= 3'b011;
                 else if (Score[3])
                     plat0_trigger <= 3'b001;
+                else if(plat15_trigger == 3'b000 && plat1_trigger == 3'b000)
+                    plat0_trigger <= 3'b100;
             end
         else   
             plat_offscreen[0] = 0;  
@@ -1015,6 +1031,8 @@ always_ff @ (posedge Clk)
                     plat2_trigger <= 3'b011;
                 else if (Score[3])
                     plat1_trigger <= 3'b001;
+                else if(plat0_trigger == 3'b000 && plat2_trigger == 3'b000)
+                    plat1_trigger <= 3'b100;
             end
         else   
             plat_offscreen[1] = 0;  
@@ -1029,6 +1047,8 @@ always_ff @ (posedge Clk)
                     plat2_trigger <= 3'b011;
                 else if (Score[3])
                     plat2_trigger <= 3'b001;
+                else if(plat1_trigger == 3'b000 && plat3_trigger == 3'b000)
+                    plat2_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[2] = 0;  
@@ -1043,6 +1063,8 @@ always_ff @ (posedge Clk)
                     plat3_trigger <= 3'b011;
                 else if (Score[3])
                     plat3_trigger <= 3'b001;
+                else if(plat2_trigger == 3'b000 && plat4_trigger == 3'b000)
+                    plat3_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[3] = 0;  
@@ -1057,6 +1079,8 @@ always_ff @ (posedge Clk)
                     plat4_trigger <= 3'b011;
                 else if (Score[3])
                     plat4_trigger <= 3'b001;
+                else if(plat3_trigger == 3'b000 && plat5_trigger == 3'b000)
+                    plat4_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[4] = 0;  
@@ -1071,6 +1095,8 @@ always_ff @ (posedge Clk)
                     plat5_trigger <= 3'b011;
                 else if (Score[3])
                     plat5_trigger <= 3'b001;
+                else if(plat4_trigger == 3'b000 && plat6_trigger == 3'b000)
+                    plat5_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[5] = 0;  
@@ -1085,6 +1111,8 @@ always_ff @ (posedge Clk)
                     plat6_trigger <= 3'b011;
                 else if (Score[3])
                     plat6_trigger <= 3'b001;
+                else if(plat5_trigger == 3'b000 && plat7_trigger == 3'b000)
+                    plat6_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[6] = 0;  
@@ -1099,7 +1127,9 @@ always_ff @ (posedge Clk)
                     plat7_trigger <= 3'b011;
                 else if (Score[3])
                     plat7_trigger <= 3'b001;
-            end 
+                else if(plat6_trigger == 3'b000 && plat8_trigger == 3'b000)
+                    plat7_trigger <= 3'b100; 
+             end 
         else   
             plat_offscreen[7] = 0;  
         if(platY8 - plat_sizeY > 9'd480)
@@ -1113,6 +1143,8 @@ always_ff @ (posedge Clk)
                     plat8_trigger <= 3'b011;
                 else if (Score[3])
                     plat8_trigger <= 3'b001;
+                else if(plat7_trigger == 3'b000 && plat9_trigger == 3'b000)
+                    plat8_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[8] = 0;  
@@ -1127,6 +1159,8 @@ always_ff @ (posedge Clk)
                     plat9_trigger <= 3'b011;
                 else if (Score[3])
                     plat9_trigger <= 3'b001;
+                else if(plat8_trigger == 3'b000 && plat10_trigger == 3'b000)
+                    plat9_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[9] = 0;  
@@ -1141,6 +1175,8 @@ always_ff @ (posedge Clk)
                     plat10_trigger <= 3'b011;
                 else if (Score[3])
                     plat10_trigger <= 3'b001;
+                else if(plat9_trigger == 3'b000 && plat11_trigger == 3'b000)
+                    plat10_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[10] = 0;  
@@ -1155,6 +1191,8 @@ always_ff @ (posedge Clk)
                     plat11_trigger <= 3'b011;
                 else if (Score[3])
                     plat11_trigger <= 3'b001;
+                else if(plat10_trigger == 3'b000 && plat12_trigger == 3'b000)
+                    plat11_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[11] = 0;  
@@ -1169,6 +1207,8 @@ always_ff @ (posedge Clk)
                     plat12_trigger <= 3'b011;
                 else if (Score[3])
                     plat12_trigger <= 3'b001;
+                else if(plat11_trigger == 3'b000 && plat13_trigger == 3'b000)
+                    plat12_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[12] = 0;  
@@ -1183,6 +1223,8 @@ always_ff @ (posedge Clk)
                     plat13_trigger <= 3'b011;
                 else if (Score[3])
                     plat13_trigger <= 3'b001;
+                else if(plat12_trigger == 3'b000 && plat14_trigger == 3'b000)
+                    plat13_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[13] = 0;  
@@ -1197,6 +1239,8 @@ always_ff @ (posedge Clk)
                     plat14_trigger <= 3'b011;
                 else if (Score[3])
                     plat14_trigger <= 3'b001;
+                else if(plat13_trigger == 3'b000 && plat15_trigger == 3'b000)
+                    plat14_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[14] = 0;  
@@ -1211,6 +1255,8 @@ always_ff @ (posedge Clk)
                     plat15_trigger <= 3'b011;
                 else if (Score[3])
                     plat15_trigger <= 3'b001;
+                else if(plat14_trigger == 3'b000 && plat0_trigger == 3'b000)
+                    plat15_trigger <= 3'b100;
             end 
         else   
             plat_offscreen[15] = 0;  
@@ -2508,5 +2554,47 @@ always_comb
                 
         end 
  
+
+logic PlatformBrown_collision0; 
+logic PlatformBrown_collision1; 
+logic PlatformBrown_collision2; 
+logic PlatformBrown_collision3; 
+logic PlatformBrown_collision4; 
+logic PlatformBrown_collision5; 
+logic PlatformBrown_collision6; 
+logic PlatformBrown_collision7; 
+logic PlatformBrown_collision8; 
+logic PlatformBrown_collision9; 
+logic PlatformBrown_collision10; 
+logic PlatformBrown_collision11; 
+logic PlatformBrown_collision12; 
+logic PlatformBrown_collision13; 
+logic PlatformBrown_collision14; 
+logic PlatformBrown_collision15; 
+
+always_comb 
+    begin 
+
+    PlatformBrown_collision0 = (plat0_color == 3'b100 && (DoodleY + Doodle_size <= platY + plat_sizeY) && (DoodleY + Doodle_size >= platY - plat_sizeY) && (platX + plat_sizeX >= DoodleX - Doodle_size ) && (platX - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision1 = (plat1_color == 3'b100 && (DoodleY + Doodle_size <= platY1 + plat_sizeY) &&(DoodleY + Doodle_size >= platY1 - plat_sizeY) && (platX1 + plat_sizeX >= DoodleX - Doodle_size) && (platX1 - plat_sizeX <= DoodleX + Doodle_size)); 
+	PlatformBrown_collision2 = (plat2_color == 3'b100 && (DoodleY + Doodle_size <= platY2 + plat_sizeY) &&(DoodleY + Doodle_size >= platY2 - plat_sizeY) && (platX2 + plat_sizeX >= DoodleX - Doodle_size) && (platX2 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision3 = (plat3_color == 3'b100 && (DoodleY + Doodle_size <= platY3 + plat_sizeY) &&(DoodleY + Doodle_size >= platY3 - plat_sizeY) && (platX3 + plat_sizeX >= DoodleX - Doodle_size) && (platX3 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision4 = (plat4_color == 3'b100 && (DoodleY + Doodle_size <= platY4 + plat_sizeY) &&(DoodleY + Doodle_size >= platY4 - plat_sizeY) && (platX4 + plat_sizeX >= DoodleX - Doodle_size) && (platX4 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision5 = (plat5_color == 3'b100 && (DoodleY + Doodle_size <= platY5 + plat_sizeY) &&(DoodleY + Doodle_size >= platY5 - plat_sizeY) && (platX5 + plat_sizeX >= DoodleX - Doodle_size) && (platX5 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision6 = (plat6_color == 3'b100 && (DoodleY + Doodle_size <= platY6 + plat_sizeY) &&(DoodleY + Doodle_size >= platY6 - plat_sizeY) && (platX6 + plat_sizeX >= DoodleX - Doodle_size) && (platX6 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision7 = (plat7_color == 3'b100 && (DoodleY + Doodle_size <= platY7 + plat_sizeY) &&(DoodleY + Doodle_size >= platY7 - plat_sizeY) && (platX7 + plat_sizeX >= DoodleX - Doodle_size) && (platX7 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision8 = (plat8_color == 3'b100 && (DoodleY + Doodle_size <= platY8 + plat_sizeY) &&(DoodleY + Doodle_size >= platY8 - plat_sizeY) && (platX8 + plat_sizeX >= DoodleX - Doodle_size) && (platX8 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision9 = (plat9_color == 3'b100 && (DoodleY + Doodle_size <= platY9 + plat_sizeY) &&(DoodleY + Doodle_size >= platY9 - plat_sizeY) && (platX9 + plat_sizeX >= DoodleX - Doodle_size) && (platX9 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision10 = (plat10_color == 3'b100 && (DoodleY + Doodle_size <= platY10  + plat_sizeY) &&(DoodleY + Doodle_size >= platY10 - plat_sizeY) && (platX10 + plat_sizeX >= DoodleX - Doodle_size) && (platX10 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision11 = (plat11_color == 3'b100 && (DoodleY + Doodle_size <= platY11  + plat_sizeY) &&(DoodleY + Doodle_size >= platY11 - plat_sizeY) && (platX11 + plat_sizeX >= DoodleX - Doodle_size) && (platX11 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision12 = (plat12_color == 3'b100 && (DoodleY + Doodle_size <= platY12  + plat_sizeY) &&(DoodleY + Doodle_size >= platY12 - plat_sizeY) && (platX12 + plat_sizeX >= DoodleX - Doodle_size) && (platX12 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision13 = (plat13_color == 3'b100 && (DoodleY + Doodle_size <= platY13  + plat_sizeY) &&(DoodleY + Doodle_size >= platY13 - plat_sizeY) && (platX13 + plat_sizeX >= DoodleX - Doodle_size) && (platX13 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision14 = (plat14_color == 3'b100 && (DoodleY + Doodle_size <= platY14  + plat_sizeY) &&(DoodleY + Doodle_size >= platY14 - plat_sizeY) && (platX14 + plat_sizeX >= DoodleX - Doodle_size) && (platX14 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision15 = (plat15_color == 3'b100 && (DoodleY + Doodle_size <= platY15  + plat_sizeY) &&(DoodleY + Doodle_size >= platY15 - plat_sizeY) && (platX15 + plat_sizeX >= DoodleX - Doodle_size) && (platX15 - plat_sizeX <= DoodleX + Doodle_size));
+
+
+    end
+
+
 
 endmodule
