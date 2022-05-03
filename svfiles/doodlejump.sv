@@ -129,7 +129,24 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
     logic Platform_collision13;
     logic Platform_collision14;
     logic Platform_collision15;
-	logic doodle_down_check; 
+	logic doodle_down_check;
+    logic [2:0] plat0_color;
+    logic [2:0] plat1_color;
+    logic [2:0] plat2_color;
+    logic [2:0] plat3_color;
+    logic [2:0] plat4_color;
+    logic [2:0] plat5_color;
+    logic [2:0] plat6_color;
+    logic [2:0] plat7_color;
+    logic [2:0] plat8_color;
+    logic [2:0] plat9_color;
+    logic [2:0] plat10_color;
+    logic [2:0] plat11_color;
+    logic [2:0] plat12_color;
+    logic [2:0] plat13_color;
+    logic [2:0] plat14_color;
+    logic [2:0] plat15_color;
+    logic [9:0] platX_Motion;  
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -160,79 +177,26 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign LEDR[0] = trigger; 
 	
 	//HEX drivers to convert numbers to HEX output
-	// HexDriver hex_driver5 (airtime[7:4], HEX5[6:0]);
-	// assign HEX5[7] = 1'b1;
-	
-	// HexDriver hex_driver4 (airtime[3:0], HEX4[6:0]);
-	// assign HEX4[7] = 1'b1;
-		
-	// HexDriver hex_driver3 (Doodle_Y_Motion[7:4], HEX3[6:0]); 
-	// assign HEX3[7] = 1'b1;
-
-	// HexDriver hex_driver2 (Doodle_Y_Motion[3:0], HEX2[6:0]); 
-	// assign HEX2[7] = 1'b1;
-	
-	HexDriver hex_driver5 (Score[11:8], HEX5[6:0]);
+	HexDriver hex_driver5 (airtime[7:4], HEX5[6:0]);
 	assign HEX5[7] = 1'b1;
-
-	HexDriver hex_driver4 (Score[7:4], HEX4[6:0]);
+	
+	HexDriver hex_driver4 (airtime[3:0], HEX4[6:0]);
 	assign HEX4[7] = 1'b1;
-
-    HexDriver hex_driver3 (Score[3:0], HEX3[6:0]); 
+		
+	HexDriver hex_driver3 (Doodle_Y_Motion[7:4], HEX3[6:0]); 
 	assign HEX3[7] = 1'b1;
 
-	// HexDriver hex_driver5 (testX[8], HEX5[6:0]);
-	// assign HEX5[7] = 1'b1;
-
-	// HexDriver hex_driver4 (testX[7:4], HEX4[6:0]);
-	// assign HEX4[7] = 1'b1;
-
-    // HexDriver hex_driver3 (testX[3:0], HEX3[6:0]); 
-	// assign HEX3[7] = 1'b1;
-
-	// HexDriver hex_driver2 (readyX[8], HEX2[6:0]); 
-	// assign HEX2[7] = 1'b1;
-
-	// HexDriver hex_driver1 (readyX[7:4], HEX1[6:0]);
-	// // assign HEX1[7] = 1'b1;
-
-	// HexDriver hex_driver2 (BKG_on2[3:0], HEX2[6:0]); 
-	// assign HEX2[7] = 1'b1;
-
-	// HexDriver hex_driver1 (BKG_on[3:0], HEX1[6:0]);
-	// assign HEX1[7] = 1'b1;
-	
-	// HexDriver hex_driver0 (readyX[3:0], HEX0[6:0]);
-	// assign HEX0[7] = 1'b1;
-	// HexDriver hex_driver5 (Score[11:8], HEX5[6:0]);
-	// assign HEX5[7] = 1'b1;
-
-	// HexDriver hex_driver4 (Score[7:4], HEX4[6:0]);
-	// assign HEX4[7] = 1'b1;
-
-    // HexDriver hex_driver3 (Score[3:0], HEX3[6:0]); 
-	// assign HEX3[7] = 1'b1;
-
-	// HexDriver hex_driver5 (blue_temp_platX[8], HEX5[6:0]);
-	// assign HEX5[7] = 1'b1;
-
-	// HexDriver hex_driver4 (blue_temp_platX[7:4], HEX4[6:0]);
-	// assign HEX4[7] = 1'b1;
-
-    // HexDriver hex_driver3 (blue_temp_platX[3:0], HEX3[6:0]); 
-	// assign HEX3[7] = 1'b1;
-
-	HexDriver hex_driver2 (platX_Motion[9:8], HEX2[6:0]); 
+	HexDriver hex_driver2 (Doodle_Y_Motion[3:0], HEX2[6:0]); 
 	assign HEX2[7] = 1'b1;
 
-	HexDriver hex_driver1 (platX_Motion[7:4], HEX1[6:0]);
+
+	HexDriver hex_driver1 (testX[7:4], HEX1[6:0]);
 	// assign HEX1[7] = 1'b1;
 	
-	HexDriver hex_driver0 (platX_Motion[3:0], HEX0[6:0]);
+	HexDriver hex_driver0 (testX[3:0], HEX0[6:0]);
 	assign HEX0[7] = 1'b1;
 	
 logic [8:0] blue_temp_platX; 
-logic [9:0] platX_Motion; 
 	//Assign one button to reset
 	assign {Reset_h}=~ (KEY[0]);
 
@@ -364,7 +328,23 @@ jumplogic jumplogic(
 	.Platform_collision13(Platform_collision13),
 	.Platform_collision14(Platform_collision14),
 	.Platform_collision15(Platform_collision15),
-	.doodle_down_check(doodle_down_check)
+	.doodle_down_check(doodle_down_check),
+ 	.plat0_color(plat0_color),
+	.plat1_color(plat1_color),
+	.plat2_color(plat2_color),
+	.plat3_color(plat3_color),
+	.plat4_color(plat4_color),
+	.plat5_color(plat5_color),
+	.plat6_color(plat6_color),
+	.plat7_color(plat7_color),
+	.plat8_color(plat8_color),
+	.plat9_color(plat9_color),
+	.plat10_color(plat10_color),
+	.plat11_color(plat11_color),
+	.plat12_color(plat12_color),
+	.plat13_color(plat13_color),
+	.plat14_color(plat14_color),
+	.plat15_color(plat15_color)
 ); 
 
 color_mapper color(
@@ -396,7 +376,7 @@ color_mapper color(
 	// .BKG_on3(BKG_on3),
 
 	.Score(Score[19:0]),
-
+	.Doodle_Y_Motion(Doodle_Y_Motion),
 	.Platform_collision(Platform_collision),
 	.platX_Motion(platX_Motion),
 	.rocketX(rocketX), .rocketY(rocketY),
@@ -440,7 +420,23 @@ color_mapper color(
 	.Platform_collision13(Platform_collision13),
 	.Platform_collision14(Platform_collision14),
 	.Platform_collision15(Platform_collision15),
-	.doodle_down_check(doodle_down_check)
+	.doodle_down_check(doodle_down_check),
+	.plat0_color(plat0_color),
+	.plat1_color(plat1_color),
+	.plat2_color(plat2_color),
+	.plat3_color(plat3_color),
+	.plat4_color(plat4_color),
+	.plat5_color(plat5_color),
+	.plat6_color(plat6_color),
+	.plat7_color(plat7_color),
+	.plat8_color(plat8_color),
+	.plat9_color(plat9_color),
+	.plat10_color(plat10_color),
+	.plat11_color(plat11_color),
+	.plat12_color(plat12_color),
+	.plat13_color(plat13_color),
+	.plat14_color(plat14_color),
+	.plat15_color(plat15_color)
 );
 
 
