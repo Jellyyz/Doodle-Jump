@@ -146,7 +146,9 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
     logic [2:0] plat13_color;
     logic [2:0] plat14_color;
     logic [2:0] plat15_color;
-    logic [9:0] platX_Motion;  
+    logic [9:0] platX_Motion; 
+    reg [8:0] monsterX, monsterY;
+    reg monster_trigger;
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -177,23 +179,23 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign LEDR[0] = trigger; 
 	
 	//HEX drivers to convert numbers to HEX output
-	HexDriver hex_driver5 (airtime[7:4], HEX5[6:0]);
+	HexDriver hex_driver5 (0, HEX5[6:0]);
 	assign HEX5[7] = 1'b1;
 	
-	HexDriver hex_driver4 (airtime[3:0], HEX4[6:0]);
+	HexDriver hex_driver4 (Score[19:16], HEX4[6:0]);
 	assign HEX4[7] = 1'b1;
 		
-	HexDriver hex_driver3 (Doodle_Y_Motion[7:4], HEX3[6:0]); 
+	HexDriver hex_driver3 (Score[15:12], HEX3[6:0]); 
 	assign HEX3[7] = 1'b1;
 
-	HexDriver hex_driver2 (Doodle_Y_Motion[3:0], HEX2[6:0]); 
+	HexDriver hex_driver2 (Score[11:8], HEX2[6:0]); 
 	assign HEX2[7] = 1'b1;
 
 
-	HexDriver hex_driver1 (testX[7:4], HEX1[6:0]);
-	// assign HEX1[7] = 1'b1;
+	HexDriver hex_driver1 (Score[7:4], HEX1[6:0]);
+	assign HEX1[7] = 1'b1;
 	
-	HexDriver hex_driver0 (testX[3:0], HEX0[6:0]);
+	HexDriver hex_driver0 (Score[3:0], HEX0[6:0]);
 	assign HEX0[7] = 1'b1;
 	
 logic [8:0] blue_temp_platX; 
@@ -436,7 +438,9 @@ color_mapper color(
 	.plat12_color(plat12_color),
 	.plat13_color(plat13_color),
 	.plat14_color(plat14_color),
-	.plat15_color(plat15_color)
+	.plat15_color(plat15_color),
+	.monster_trigger(monster_trigger),
+	.monsterX(monsterX), .monsterY(monsterY)
 );
 
 

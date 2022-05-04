@@ -24,9 +24,9 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
                     input logic [8:0] springX1, springY1, 
                     input logic [8:0] springX2, springY2, 
                     input logic [8:0] springX3, springY3,
-					input logic springsizeX, springsizeY,
+					input logic [8:0] springsizeX, springsizeY,
 					input logic [8:0] rocketX, rocketY, 
-					input logic rocketsizeX, rocketsizeY,
+					input logic [8:0] rocketsizeX, rocketsizeY,
                     input logic [2:0] plat0_color,
                     input logic [2:0] plat1_color,
                     input logic [2:0] plat2_color,
@@ -134,9 +134,12 @@ jumpstate jumpstate(
 	.Keycode(keycode[7:0]),
 	.trigger(trigger),
 	.refresh_en(refresh_en),
+	.game_over_trigger(game_over_trigger),
+
 	.outstate(outstate[5:0]),
 	.loadplat(loadplat)
 );
+reg game_over_trigger; 
 logic [2:0] Status, state; 
 logic [7:0] counting; 
 logic [5:0] antighosting; 
@@ -188,10 +191,12 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					refresh_en <= 0;
 					difficulty <= 2'b01;
 					Score <= 0;
+					game_over_trigger <= 0;
 				end 
 				// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣   Main Menu   ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	
 				3'b000:
 				begin 
+					game_over_trigger <= 0;
 					refresh_en <= 0;
 					plat_temp_Y <= 0; 
 					Score <= 0;
@@ -295,6 +300,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					Doodle_X_Pos <= 9'd330; 
 					Doodle_X_Motion <= 10'h0; //Doodle_X_Step;
 					Score <= 0;
+					game_over_trigger <= 0;
 				end 
 				// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	Game ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	
 				3'b010: 
@@ -358,20 +364,38 @@ always_ff @ (posedge Reset or posedge frame_clk)
 						// if the doodle is moving downwards 
 						else if(doodle_down_check)
 							begin 
-								if((airtime == 8'h0) && ((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) || Spring_collision ))
+								if((airtime == 8'h0) && Spring_collision )
 									begin 
 									// if doodle falling then allow for it to turn velocity to 0 
 										jump_reset <= 1; 
 										jump_enable <= 0;
 										Doodle_Y_Motion = (1'b1 + ~Spring_Modifier); 
 									end 
+								else if((airtime == 8'h0) && Rocket_collision )
+									begin 
+									// if doodle falling then allow for it to turn velocity to 0 
+										jump_reset <= 1; 
+										jump_enable <= 0;
+										Doodle_Y_Motion = (1'b1 + ~Rocket_Modifier); 
+									end 
 								// if the doodle is moving downwards and hitting the ground or platform 
-								else if((airtime == 8'h0) && ((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) || Platform_collision))
+								else if((airtime == 8'h0) && ((Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max) || Platform_collision) && Score[19:0] < 20'h100)
 									begin 
 									// if doodle falling then allow for it to turn velocity to 0 
 										jump_reset <= 1; 
 										jump_enable <= 0;
 										Doodle_Y_Motion = (1'b1 + ~Gravity); 
+									end
+								else if((airtime == 8'h0) && Platform_collision && Score[19:0] > 20'h100)
+									begin 
+									// if doodle falling then allow for it to turn velocity to 0 
+										jump_reset <= 1; 
+										jump_enable <= 0;
+										Doodle_Y_Motion = (1'b1 + ~Gravity); 
+									end 
+								else if((airtime == 8'h0) && Doodle_Y_Pos + Doodle_Size >= Screen_Y_Max && Score[19:0] > 20'h100)
+									begin 
+										game_over_trigger <= 1;
 									end 
 								else if(Doodle_Y_Motion != 4'hFE)
 									begin 
@@ -420,7 +444,8 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	Refresh screen  ▣	▣	▣	▣	▣	▣	▣	▣	▣	
 				3'b100:
 				begin
-						refresh_en <= 0;
+					game_over_trigger <= 0;
+					refresh_en <= 0;
 					Doodle_Y_Motion = 0; 
 					unique case(keycode)
 						8'd30:
@@ -430,9 +455,9 @@ always_ff @ (posedge Reset or posedge frame_clk)
 							Cannon_Y_Motion2 <= (1'b1 + ~CannonSpeed2); 
 						end 
 						8'd7, 8'd79:
-							Doodle_X_Motion <= 3; 
+							Doodle_X_Motion <= 4; 
 						8'd4, 8'd80:
-							Doodle_X_Motion <= -3;	 
+							Doodle_X_Motion <= -4;	 
 						default:
 							begin 
 								Doodle_X_Motion <= 0;
@@ -442,7 +467,19 @@ always_ff @ (posedge Reset or posedge frame_clk)
 							end 
 					endcase 
 				end
+				// ▣	▣	▣	▣	▣	▣	▣	▣	▣	▣	Game Over screen  ▣	   ▣	▣	▣	▣	▣	▣	▣	▣	
+				3'b110:
+					begin 
 
+					plat_temp_Y <= (1'b1 + ~Spring_Modifier); 
+					refresh_en <= 0;
+
+					if(Doodle_Y_Pos >= 500)
+						Doodle_Y_Motion = 0; 
+					else
+						Doodle_Y_Motion = Spring_Modifier;
+
+					end 
 			
 
 			endcase 
@@ -462,6 +499,8 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					Doodle_X_Pos <= Screen_X_Min + (Doodle_Size << 4); 
 				else if ( (Doodle_X_Pos - Doodle_Size) <= 10'd25) 
 					Doodle_X_Pos <= Screen_X_Max - (Doodle_Size << 4); 
+				else if (outstate == 3'b110)
+					Doodle_X_Pos <= 330; 
 				else if(outstate != 6'd0)
 				begin 
 					Doodle_Y_Pos <= (Doodle_Y_Pos + Doodle_Y_Motion);  
