@@ -454,7 +454,7 @@ color_mapper color(
 	.BKG_on3(BKG_on3),
 	.BKG_on3_bkg(BKG_on3_bkg),
 	.BKG_on5(BKG_on5),
-	.BKG_on5_bkg(BKG_on5_bkg)
+	.BKG_on5_bkg(BKG_on5_bkg),
 	.monster_trigger(monster_trigger),
 	.monsterX(monsterX), .monsterY(monsterY)
 );
