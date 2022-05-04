@@ -13,7 +13,7 @@ module jumpstate(
 					   Pause,
 					   Refreshing,
 					   INIT,
-					   Game_Over 
+					   Game_Over, 
 					   
 						}   State, Next_state;   // Internal state logic
 	always_ff @ (posedge Clock)
