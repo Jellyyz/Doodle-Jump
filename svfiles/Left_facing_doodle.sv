@@ -7,14 +7,14 @@
 module  Doodle_left_ram
 (
 		input [4:0] data_In5,
-		input [14:0] write_address5, read_address5,
+		input [7:0] write_address5, read_address5,
 		input we, Clk,
 
 		output logic [23:0] data_Out5
 );
 
 // mem has width of 23 bits and a total of 870 addresses
-logic [23:0] mem [0:869];
+logic [23:0] mem [0:255];
 
 initial
 begin

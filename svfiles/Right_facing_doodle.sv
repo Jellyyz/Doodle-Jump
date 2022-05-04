@@ -7,18 +7,18 @@
 module  Doodle_right_ram
 (
 		input [4:0] data_In3,
-		input [9:0] write_address3, read_address3,
+		input [7:0] write_address3, read_address3,
 		input we, Clk,
 
 		output logic [23:0] data_Out3
 );
 
 // mem has width of 3 bits and a total of 400 addresses
-logic [23:0] mem [0:869];
+logic [23:0] mem [0:255];
 
 initial
 begin
-	 $readmemh("doodle_right_resize.txt", mem); 
+	 $readmemh("doodle_right_resized.txt", mem); 
 end
 
 
