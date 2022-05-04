@@ -149,6 +149,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
     logic [9:0] platX_Motion; 
     reg [8:0] monsterX, monsterY;
     reg monster_trigger;
+	reg Rocket_collision; 
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -179,7 +180,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign LEDR[0] = trigger; 
 	
 	//HEX drivers to convert numbers to HEX output
-	HexDriver hex_driver5 (0, HEX5[6:0]);
+	HexDriver hex_driver5 (Rocket_collision, HEX5[6:0]);
 	assign HEX5[7] = 1'b1;
 	
 	HexDriver hex_driver4 (Score[19:16], HEX4[6:0]);
@@ -346,7 +347,8 @@ jumplogic jumplogic(
 	.plat12_color(plat12_color),
 	.plat13_color(plat13_color),
 	.plat14_color(plat14_color),
-	.plat15_color(plat15_color)
+	.plat15_color(plat15_color),
+	.Rocket_collision(Rocket_collision)
 ); 
 
 color_mapper color(

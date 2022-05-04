@@ -76,7 +76,8 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
 					output logic [15:0] countingss, 
 					output logic [7:0] displacement, airtime,
 					output logic [19:0]Score,
-					output logic [1:0] difficulty
+					output logic [1:0] difficulty,
+					output reg Rocket_collision
 					);
 
 
@@ -664,7 +665,6 @@ begin:Spring_collision_
 	((Doodle_Y_Pos + Doodle_Size <= springY3 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY3 - springsizeY) && (springX3 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size))
 	);
 end 
-logic Rocket_collision;
 
 always_comb 
 begin:Rocket_collision_
