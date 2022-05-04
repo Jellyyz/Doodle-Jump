@@ -89,7 +89,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [8:0] springX2, springY2;
 	logic [8:0] springX3, springY3;
 	logic [3:0] springsizeX, springsizeY;
-	logic [8:0] rocketX, rocket;
+	logic [8:0] rocketX, rocketY;
 	logic [3:0] rocketsizeX, rocketsizeY; 
 	logic [8:0] plat_size_easy_X, plat_size_medium_X, plat_size_hard_X;
 	logic [8:0] plat_size_easy_Y, plat_size_medium_Y, plat_size_hard_Y;
@@ -104,14 +104,14 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [7:0] temp; 
 	logic [19:0]Score;
 	logic [1:0] difficulty; 
-	logic [23:0] BKG_out;
-	logic [23:0] BKG_out2;
-	logic [23:0] BKG_out3;
-	logic [23:0] BKG_out4;
-	logic [23:0] BKG_out5;
+	logic [23:0] underwater_BKG_out;
+	logic [23:0] soccer_BKG_out;
+	logic [23:0] doodle_right_BKG_out;
+	logic [23:0] space_BKG_out;
+	logic [23:0] doodle_left_BKG_out;
 	// logic [3:0]BKG_on;
     // logic [3:0]BKG_on2;
-	// logic [3:0]BKG_on3;
+	// logic [3:0]doodle_right_BKG_on;
 	logic Platform_collision;
     logic Platform_collision0;
     logic Platform_collision1;
@@ -147,10 +147,10 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
     logic [2:0] plat14_color;
     logic [2:0] plat15_color;
     logic [9:0] platX_Motion;  
-	logic 		BKG_on3;
-	logic 		BKG_on3_bkg;
-	logic 		BKG_on5;
-	logic 		BKG_on5_bkg;
+	logic 		doodle_right_BKG_on;
+	logic 		doodle_right_BKG_on3_bkg;
+	logic 		doodle_left_BKG_on;
+	logic 		doodle_left_BKG_on5_bkg;
     reg [8:0] monsterX, monsterY;
     reg monster_trigger;
 	reg Rocket_collision; 
@@ -380,14 +380,14 @@ color_mapper color(
 	.plat_temp_Y(plat_temp_Y[8:0]),
 	.loadplat(loadplat),
 	.airtime(airtime[7:0]),
-	.BKG_out(BKG_out[23:0]),
-	.BKG_out2(BKG_out2[23:0]),
-	.BKG_out3(BKG_out3[23:0]),
-	.BKG_out4(BKG_out4[23:0]),
-	.BKG_out5(BKG_out5[23:0]),
+	.underwater_BKG_out(underwater_BKG_out[23:0]),
+	.soccer_BKG_out(soccer_BKG_out[23:0]),
+	.doodle_right_BKG_out(doodle_right_BKG_out[23:0]),
+	.space_BKG_out(space_BKG_out[23:0]),
+	.doodle_left_BKG_out(doodle_left_BKG_out[23:0]),
 	// .BKG_on(BKG_on),
 	// .BKG_on2(BKG_on2),
-	// .BKG_on3(BKG_on3),
+	// .doodle_right_BKG_on(doodle_right_BKG_on),
 
 	.Score(Score[19:0]),
 	.Doodle_Y_Motion(Doodle_Y_Motion),
@@ -453,10 +453,10 @@ color_mapper color(
 	.plat15_color(plat15_color),
 
 	//1 bit
-	.BKG_on3(BKG_on3),
-	.BKG_on3_bkg(BKG_on3_bkg),
-	.BKG_on5(BKG_on5),
-	.BKG_on5_bkg(BKG_on5_bkg),
+	.doodle_right_BKG_on(doodle_right_BKG_on),
+	.doodle_right_BKG_on3_bkg(doodle_right_BKG_on3_bkg),
+	.doodle_left_BKG_on(doodle_left_BKG_on),
+	.doodle_left_BKG_on5_bkg(doodle_left_BKG_on5_bkg),
 	.monster_trigger(monster_trigger),
 	.monsterX(monsterX), .monsterY(monsterY)
 );

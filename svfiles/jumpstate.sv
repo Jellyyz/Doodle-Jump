@@ -95,7 +95,7 @@ end
 				Next_state = Main_Menu;
 			Game_Over:
 				 begin
-					if(Keycode != 9'h0) // esc 
+					if(Keycode == 8'd41) // esc 
 						Next_state = Main_Menu; 
 					else 
 						Next_state = Game_Over; 

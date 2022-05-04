@@ -88,16 +88,16 @@ module  color_mapper (
                     output logic [8:0] plat_size_easy_Y, plat_size_medium_Y, plat_size_hard_Y,
                     output logic plat_enable, plat_reset, test, 
                     output logic [8:0] readyX, testX,
-                    output logic [23:0] BKG_out,
-                    output logic [23:0] BKG_out2,
-                    output logic [23:0] BKG_out3,
-                    output logic [23:0] BKG_out4,
-                    output logic [23:0] BKG_out5,
+                    output logic [23:0] underwater_BKG_out,
+                    output logic [23:0] soccer_BKG_out,
+                    output logic [23:0] doodle_right_BKG_out,
+                    output logic [23:0] space_BKG_out,
+                    output logic [23:0] doodle_left_BKG_out,
                     output logic [8:0] blue_temp_platX,
-                    output logic 		BKG_on3,
-	                output logic 		BKG_on3_bkg,
-	                output logic 		BKG_on5,
-	                output logic 		BKG_on5_bkg,
+                    output logic 		doodle_right_BKG_on,
+	                output logic 		doodle_right_BKG_on3_bkg,
+	                output logic 		doodle_left_BKG_on,
+	                output logic 		doodle_left_BKG_on5_bkg,
                     output reg [8:0] monsterX, monsterY,
                     output reg monster_trigger 
 );  
@@ -1913,43 +1913,51 @@ BKG_ram BKG(
     .read_address(BKG_address[14:0]),
     .Clk(Clk), 
 
-    .data_Out(BKG_out[23:0])
+    .data_Out(underwater_BKG_out[23:0])
 ); 
 
 BKG2_ram BKG2(
     .read_address(BKG_address2[14:0]),
     .Clk(Clk), 
 
-    .data_Out2(BKG_out2[23:0])
+    .data_Out2(soccer_BKG_out[23:0])
 ); 
 
 Doodle_right_ram DRR(
     .read_address3(BKG_address3[7:0]),
     .Clk(Clk), 
 
-    .data_Out3(BKG_out3[23:0])
+    .data_Out3(doodle_right_BKG_out[23:0])
 ); 
 
 BKG4_ram BKG4(
     .read_address(BKG_address4[15:0]),
     .Clk(Clk), 
 
-    .data_Out4(BKG_out4[23:0])
+    .data_Out4(space_BKG_out[23:0])
 ); 
 
 Doodle_left_ram DLR(
     .read_address5(BKG_address5[7:0]),
     .Clk(Clk), 
 
-    .data_Out5(BKG_out5[23:0])
+    .data_Out5(doodle_left_BKG_out[23:0])
 ); 
-logic BKG_on;
-logic BKG_on2;
-// logic BKG_on3;
-logic BKG_on4;
-// logic BKG_on5;
-// logic BKG_on3_bkg;
-// logic BKG_on5_bkg;
+
+logic direction; 
+
+doodle_direction doodle_direction(
+    .Clock(Clk),
+    .Reset(Reset),
+    .frame_clk(frame_clk), 
+    .Keycode(keycode), 
+
+    .direction(direction)
+    
+);
+logic underwater_BKG_on;
+logic soccer_BKG_on;
+logic space_BKG_on;
 logic [14:0] BKG_address; 
 logic [14:0] BKG_address2; 
 logic [7:0]  BKG_address3;
@@ -1959,135 +1967,71 @@ logic [10:0] shape_size_x = 10'd640;
 logic [10:0] shape_size_y = 10'd480;
 logic [10:0] doodle_shape_size_x = 10'd16;
 logic [10:0] doodle_shape_size_y = 10'd16;
-
-always_comb
+reg right_temp; 
+reg left_temp; 
+always_comb 
     begin 
         BKG_address = (639 * DrawY) + DrawX;
         BKG_address2 = (639 * DrawY) + DrawX;
         BKG_address3 = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
         BKG_address4 = (639 * DrawY) + DrawX;
         BKG_address5 = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
-        BKG_on = 1; 
-        BKG_on2 = 0;
-        BKG_on3 = 0;
-        BKG_on3_bkg = 0;
-        BKG_on4 = 0;
-        BKG_on5 = 0;
-        BKG_on5_bkg = 0;
-     
+        underwater_BKG_on = 1; 
+        soccer_BKG_on = 0;
+        space_BKG_on = 0;
         if(DrawY >= 0 && DrawY < shape_size_y && DrawX >= 0 && DrawX < shape_size_x) //Ball_x = 0
             begin
                 if(Score >= 20'b00000000010000000000 && Score <= 20'b00000000011000000000) //BKG2--grassland
                     begin
                     if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
                         begin//inside the doodle hitbox 
-                            if((keycode == 8'd7) || (keycode == 8'd79)) //right key
+                            if(direction == 1'b1) //right key
                                 begin
-                                    if(BKG_out3 == 24'b111111110000000011111111) //background in the doodle image
+                                    if(doodle_right_BKG_out == 24'b111111110000000011111111) //background in the doodle image
                                         begin
-                                        BKG_on3 = 0;
-                                        BKG_on  = 0; 
-                                        BKG_on2 = 1;
-                                        BKG_on4 = 0;
-                                        BKG_on5 = 0;
-                                        BKG_on3_bkg = 1;
-                                        BKG_on5_bkg = 0;
+                                            underwater_BKG_on = 0; 
+                                            soccer_BKG_on = 1;
+                                            space_BKG_on = 0;
+                                            doodle_right_BKG_on = 0;
+                                            doodle_left_BKG_on = 0;
                                         end
                                     else
                                         begin
-                                        BKG_on3 = 1;
-                                        BKG_on  = 0;
-                                        BKG_on2 = 0;
-                                        BKG_on4 = 0;
-                                        BKG_on5 = 0;
-                                        BKG_on3_bkg = 0;
-                                        BKG_on5_bkg = 0;
+                                            underwater_BKG_on  = 0;
+                                            soccer_BKG_on = 0;
+                                            space_BKG_on = 0;
+                                            doodle_right_BKG_on = 1;
+                                            doodle_left_BKG_on = 0;
                                         end
                                 end
-                            else if((keycode == 8'd4) || (keycode == 8'd80)) //left key
+                            else
                                 begin
-                                    if(BKG_out5 == 24'b111111100100010111100010)
+                                    if(doodle_left_BKG_out == 24'b111111100100010111100010)
                                         begin
-                                        BKG_on3 = 0;
-                                        BKG_on  = 0;
-                                        BKG_on2 = 1;
-                                        BKG_on4 = 0;
-                                        BKG_on5 = 0;
-                                        BKG_on3_bkg = 0;
-                                        BKG_on5_bkg = 1;
+                                            underwater_BKG_on  = 0;
+                                            soccer_BKG_on = 1;
+                                            space_BKG_on = 0;
+                                            doodle_right_BKG_on = 0;
+                                            doodle_left_BKG_on = 0;
                                         end
                                     else
                                         begin
-                                        BKG_on3 = 0;
-                                        BKG_on  = 0;
-                                        BKG_on2 = 0;
-                                        BKG_on4 = 0;
-                                        BKG_on5 = 1;
-                                        BKG_on3_bkg = 0;
-                                        BKG_on5_bkg = 0;
+                                            underwater_BKG_on  = 0;
+                                            soccer_BKG_on = 0;
+                                            space_BKG_on = 0;
+                                            doodle_right_BKG_on = 0;
+                                            doodle_left_BKG_on = 1;
                                         end
                                 end
-
-                            else //keys are released
-                                begin
-                                    if((BKG_on3_bkg = 1) || (BKG_on3 = 1)) //after pressed right key
-                                        begin
-                                            if(BKG_out3 == 24'b111111110000000011111111) //background in the doodle image
-                                                begin
-                                                BKG_on3 = 0;
-                                                BKG_on  = 0;
-                                                BKG_on2 = 1;
-                                                BKG_on4 = 0;
-                                                BKG_on5 = 0;
-                                                BKG_on3_bkg = 1;
-                                                BKG_on5_bkg = 0;
-                                                end
-                                            else
-                                                begin
-                                                BKG_on3 = 1;
-                                                BKG_on  = 0;
-                                                BKG_on2 = 0;
-                                                BKG_on4 = 0;
-                                                BKG_on5 = 0;
-                                                BKG_on3_bkg = 0;
-                                                BKG_on5_bkg = 0;
-                                                end   
-                                        end
-
-                                    else if((BKG_on5_bkg = 1) || (BKG_on5 = 1)) //after pressed left key
-                                        begin
-                                            if(BKG_out5 == 24'b111111100100010111100010) //background in the doodle image
-                                                begin
-                                                BKG_on3 = 0;
-                                                BKG_on  = 0;
-                                                BKG_on2 = 1;
-                                                BKG_on4 = 0;
-                                                BKG_on5 = 0;
-                                                BKG_on3_bkg = 0;
-                                                BKG_on5_bkg = 1;
-                                                end
-                                            else
-                                                begin
-                                                BKG_on3 = 0;
-                                                BKG_on  = 0;
-                                                BKG_on2 = 0;
-                                                BKG_on4 = 0;
-                                                BKG_on5 = 1;
-                                                BKG_on3_bkg = 0;
-                                                BKG_on5_bkg = 0;
-                                                end
-                                        end
-                                end
+             
                         end
                     else //outside of the doodle hitbox 
                         begin
-                            BKG_on3 = 0;
-                            BKG_on =  0;
-                            BKG_on2 = 1;
-                            BKG_on4 = 0;
-                            BKG_on5 = 0;
-                            BKG_on3_bkg = 0;
-                            BKG_on5_bkg = 0;
+                            doodle_right_BKG_on = 0;
+                            underwater_BKG_on =  0;
+                            soccer_BKG_on = 1;
+                            space_BKG_on = 0;
+                            doodle_left_BKG_on = 0;
                         end
                     end
                 
@@ -2096,101 +2040,42 @@ always_comb
                     begin
                     if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
                         begin //inside the doodle hitbox 
-                            if((keycode == 8'd7) || (keycode == 8'd79)) //right key
+                            if(direction == 1'b1) //right key
                                 begin
-                                    if(BKG_out3 == 24'b111111110000000011111111) //background in the doodle image
+                                    if(doodle_right_BKG_out == 24'b111111110000000011111111) //background in the doodle image
                                         begin
-                                        BKG_on3 = 0;
-                                        BKG_on  = 0;
-                                        BKG_on2 = 0;
-                                        BKG_on4 = 1;
-                                        BKG_on5 = 0;
-                                        BKG_on3_bkg = 1;
-                                        BKG_on5_bkg = 0;
+                                            doodle_right_BKG_on = 0;
+                                            underwater_BKG_on  = 0;
+                                            soccer_BKG_on = 0;
+                                            space_BKG_on = 1;
+                                            doodle_left_BKG_on = 0;
                                         end
                                     else
                                         begin
-                                        BKG_on3 = 1;
-                                        BKG_on  = 0;
-                                        BKG_on2 = 0;
-                                        BKG_on4 = 0;
-                                        BKG_on5 = 0;
-                                        BKG_on3_bkg = 0;
-                                        BKG_on5_bkg = 0;
+                                            doodle_right_BKG_on = 1;
+                                            underwater_BKG_on  = 0;
+                                            soccer_BKG_on = 0;
+                                            space_BKG_on = 0;
+                                            doodle_left_BKG_on = 0;
                                         end
                                 end
-                            else if((keycode == 8'd4) || (keycode == 8'd80)) //left key
-                                begin
-                                    if(BKG_out5 == 24'b111111100100010111100010) //background in the doodle image
-                                        begin
-                                        BKG_on3 = 0;
-                                        BKG_on  = 0;
-                                        BKG_on2 = 0;
-                                        BKG_on4 = 1;
-                                        BKG_on5 = 0;
-                                        BKG_on3_bkg = 0;
-                                        BKG_on5_bkg = 1;
-                                        end
-                                    else
-                                        begin
-                                        BKG_on3 = 0;
-                                        BKG_on  = 0;
-                                        BKG_on2 = 0;
-                                        BKG_on4 = 0;
-                                        BKG_on5 = 1;
-                                        BKG_on3_bkg = 0;
-                                        BKG_on5_bkg = 0;
-                                        end
-                                end
-                                
                             else
                                 begin
-                                if((BKG_on3_bkg = 1) || (BKG_on3 = 1)) //after pressed right key
+                                    if(doodle_left_BKG_out == 24'b111111100100010111100010) //background in the doodle image
                                         begin
-                                            if(BKG_out3 == 24'b111111110000000011111111) //background in the doodle image
-                                                begin
-                                                BKG_on3 = 0;
-                                                BKG_on  = 0;
-                                                BKG_on2 = 0;
-                                                BKG_on4 = 1;
-                                                BKG_on5 = 0;
-                                                BKG_on3_bkg = 1;
-                                                BKG_on5_bkg = 0;
-                                                end
-                                            else
-                                                begin
-                                                BKG_on3 = 1;
-                                                BKG_on  = 0;
-                                                BKG_on2 = 0;
-                                                BKG_on4 = 0;
-                                                BKG_on5 = 0;
-                                                BKG_on3_bkg = 0;
-                                                BKG_on5_bkg = 0;
-                                                end   
-
+                                            doodle_right_BKG_on = 0;
+                                            underwater_BKG_on  = 0;
+                                            soccer_BKG_on = 0;
+                                            space_BKG_on = 1;
+                                            doodle_left_BKG_on = 0;
                                         end
-                                    else if((BKG_on5_bkg = 1) || (BKG_on5 = 1)) //after pressed left key
+                                    else
                                         begin
-                                            if(BKG_out5 == 24'b111111100100010111100010) //background in the doodle image
-                                                begin
-                                                BKG_on3 = 0;
-                                                BKG_on  = 0;
-                                                BKG_on2 = 0;
-                                                BKG_on4 = 1;
-                                                BKG_on5 = 0;
-                                                BKG_on3_bkg = 0;
-                                                BKG_on5_bkg = 1;
-                                                end
-                                            else
-                                                begin
-                                                BKG_on3 = 0;
-                                                BKG_on  = 0;
-                                                BKG_on2 = 0;
-                                                BKG_on4 = 0;
-                                                BKG_on5 = 1;
-                                                BKG_on3_bkg = 0;
-                                                BKG_on5_bkg = 0;
-                                                end
+                                            doodle_right_BKG_on = 0;
+                                            underwater_BKG_on  = 0;
+                                            soccer_BKG_on = 0;
+                                            space_BKG_on = 0;
+                                            doodle_left_BKG_on = 1;
                                         end
                                 end
                         end
@@ -2198,12 +2083,11 @@ always_comb
 
                     else //outside of the doodle gitbox 
                         begin
-                            BKG_on3 = 0;
-                            BKG_on = 0;
-                            BKG_on2 = 0;
-                            BKG_on4 = 1;
-                            BKG_on5 = 0;
-                            BKG_on3_bkg = 0;
+                            doodle_right_BKG_on = 0;
+                            underwater_BKG_on = 0;
+                            soccer_BKG_on = 0;
+                            space_BKG_on = 1;
+                            doodle_left_BKG_on = 0;
                         end
                     end
 
@@ -2211,125 +2095,62 @@ always_comb
                     begin
                         if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
                             begin //inside the doodle hitbox 
-                                if((keycode == 8'd7) || (keycode == 8'd79)) //right key
+                                if(direction == 1'b1) //right key
                                     begin
-                                        if(BKG_out3 == 24'b111111110000000011111111) //background in the doodle image
+                                        if(doodle_right_BKG_out == 24'b111111110000000011111111) //background in the doodle image
                                             begin
-                                            BKG_on3 = 0;
-                                            BKG_on  = 1;
-                                            BKG_on2 = 0;
-                                            BKG_on4 = 0;
-                                            BKG_on5 = 0;
-                                            BKG_on3_bkg = 1;
-                                            BKG_on5_bkg = 0;
+                                                doodle_right_BKG_on = 0;
+                                                underwater_BKG_on  = 1;
+                                                soccer_BKG_on = 0;
+                                                space_BKG_on = 0;
+                                                doodle_left_BKG_on = 0;
                                             end
                                         else
                                             begin
-                                            BKG_on3 = 1;
-                                            BKG_on  = 0;
-                                            BKG_on2 = 0;
-                                            BKG_on4 = 0;
-                                            BKG_on5 = 0;
-                                            BKG_on3_bkg = 0;
-                                            BKG_on5_bkg = 0;
+                                                doodle_right_BKG_on = 1;
+                                                underwater_BKG_on  = 0;
+                                                soccer_BKG_on = 0;
+                                                space_BKG_on = 0;
+                                                doodle_left_BKG_on = 0;
                                             end
                                     end
-                                else if((keycode == 8'd4) || (keycode == 8'd80)) //left key
-                                    begin
-                                        if(BKG_out5 == 24'b111111100100010111100010) //background in the doodle image
-                                            begin
-                                            BKG_on3 = 0;
-                                            BKG_on  = 1;
-                                            BKG_on2 = 0;
-                                            BKG_on4 = 0;
-                                            BKG_on5 = 0;
-                                            BKG_on3_bkg = 0;
-                                            BKG_on5_bkg = 1;
-                                            end
-                                        else
-                                            begin
-                                            BKG_on3 = 0;
-                                            BKG_on  = 0;
-                                            BKG_on2 = 0;
-                                            BKG_on4 = 0;
-                                            BKG_on5 = 1;
-                                            BKG_on3_bkg = 0;
-                                            BKG_on5_bkg = 0;
-                                            end
-                                    end
-
                                 else
                                     begin
-                                    if((BKG_on3_bkg = 1) || (BKG_on3 = 1)) //after pressed right key
-                                        begin
-                                            if(BKG_out3 == 24'b111111110000000011111111) //background in the doodle image
-                                                begin
-                                                BKG_on3 = 0;
-                                                BKG_on  = 1;
-                                                BKG_on2 = 0;
-                                                BKG_on4 = 0;
-                                                BKG_on5 = 0;
-                                                BKG_on3_bkg = 1;
-                                                BKG_on5_bkg = 0;
-                                                end
-                                            else
-                                                begin
-                                                BKG_on3 = 1;
-                                                BKG_on  = 0;
-                                                BKG_on2 = 0;
-                                                BKG_on4 = 0;
-                                                BKG_on5 = 0;
-                                                BKG_on3_bkg = 0;
-                                                BKG_on5_bkg = 0;
-                                                end   
-
-                                        end
-                                    else if((BKG_on5_bkg = 1) || (BKG_on5 = 1)) //after pressed left key
-                                        begin
-                                            if(BKG_out5 == 24'b111111100100010111100010) //background in the doodle image
-                                                begin
-                                                BKG_on3 = 0;
-                                                BKG_on  = 1;
-                                                BKG_on2 = 0;
-                                                BKG_on4 = 0;
-                                                BKG_on5 = 0;
-                                                BKG_on3_bkg = 0;
-                                                BKG_on5_bkg = 1;
-                                                end
-                                            else
-                                                begin
-                                                BKG_on3 = 0;
-                                                BKG_on  = 0;
-                                                BKG_on2 = 0;
-                                                BKG_on4 = 0;
-                                                BKG_on5 = 1;
-                                                BKG_on3_bkg = 0;
-                                                BKG_on5_bkg = 0;
-                                                end
+                                        if(doodle_left_BKG_out == 24'b111111100100010111100010) //background in the doodle image
+                                            begin
+                                                doodle_right_BKG_on = 0;
+                                                underwater_BKG_on  = 1;
+                                                soccer_BKG_on = 0;
+                                                space_BKG_on = 0;
+                                                doodle_left_BKG_on = 0;
+                                            end
+                                        else
+                                            begin
+                                                doodle_right_BKG_on = 0;
+                                                underwater_BKG_on  = 0;
+                                                soccer_BKG_on = 0;
+                                                space_BKG_on = 0;
+                                                doodle_left_BKG_on = 1;
+                                            end
                                     end
-                            end
                             end    
                         else //outside of the doodle gitbox 
                             begin
-                                BKG_on3 = 0;
-                                BKG_on =  1;
-                                BKG_on2 = 0;
-                                BKG_on4 = 0;
-                                BKG_on5 = 0;
-                                BKG_on3_bkg = 0;
-                                BKG_on5_bkg = 0;
+                                doodle_right_BKG_on = 0;
+                                underwater_BKG_on =  1;
+                                soccer_BKG_on = 0;
+                                space_BKG_on = 0;
+                                doodle_left_BKG_on = 0;
                         end
                     end    
             end
         else //DrawX/Y out of the screen
             begin
-            BKG_on = 0; 
-            BKG_on2 = 0;
-            BKG_on3 = 0;
-            BKG_on4 = 0;
-            BKG_on5 = 0;
-            BKG_on3_bkg = 0;
-            BKG_on5_bkg = 0;
+                underwater_BKG_on = 0; 
+                soccer_BKG_on = 0;
+                doodle_right_BKG_on = 0;
+                space_BKG_on = 0;
+                doodle_left_BKG_on = 0;
             end
     end
 
@@ -2966,6 +2787,41 @@ always_comb
                 end
          
         // turn on pixels for the cannon 
+            else if(underwater_BKG_on == 1)
+                begin 
+                    Red = underwater_BKG_out[23:16];
+                    Green = underwater_BKG_out[15:8];
+                    Blue = underwater_BKG_out[7:0];
+                end 		 
+
+            else if(soccer_BKG_on == 1)
+                begin 
+                    Red = soccer_BKG_out[23:16];
+                    Green = soccer_BKG_out[15:8];
+                    Blue = soccer_BKG_out[7:0];
+                end
+
+            else if(doodle_right_BKG_on == 1)
+                begin 
+                    Red = doodle_right_BKG_out[23:16];
+                    Green = doodle_right_BKG_out[15:8];
+                    Blue = doodle_right_BKG_out[7:0];
+                end 
+
+            else if(space_BKG_on == 1)
+                begin 
+                    Red = space_BKG_out[23:16];
+                    Green = space_BKG_out[15:8];
+                    Blue = space_BKG_out[7:0];
+                end 
+            
+            else if(doodle_left_BKG_on == 1)
+                begin 
+                    Red = doodle_left_BKG_out[23:16];
+                    Green = doodle_left_BKG_out[15:8];
+                    Blue = doodle_left_BKG_out[7:0];
+                end
+
             else if(cannon_on)
             begin 
                 Red = 8'hFF; 
@@ -2984,53 +2840,6 @@ always_comb
                 Green = 8'h66; 
                 Blue = 8'h66; 
             end 
-        // turn on pixels for the background
-            // else if(outstate == 3'b000)
-            // begin 
-            //     Red = 8'h00; 
-            //     Green = 8'h00;
-            //     Blue = 8'h00;
-            // end  
-            // else 
-            // begin 
-            //     Red = 8'hEE; 
-            //     Green = 8'hEE;
-            //     Blue = 8'hEE;
-            // end      
-            else if((BKG_on == 1) || ((BKG_on3_bkg == 1) && (BKG_on == 1)) || ((BKG_on5_bkg == 1) && (BKG_on == 1)))
-                begin 
-                    Red = BKG_out[23:16];
-                    Green = BKG_out[15:8];
-                    Blue = BKG_out[7:0];
-                end 		 
-
-            else if((BKG_on2 == 1) | ((BKG_on3_bkg == 1) && (BKG_on2 == 1)) || ((BKG_on5_bkg == 1) && (BKG_on2 == 1)))
-                begin 
-                    Red = BKG_out2[23:16];
-                    Green = BKG_out2[15:8];
-                    Blue = BKG_out2[7:0];
-                end
-
-            else if((BKG_on3 == 1) && (BKG_on3_bkg != 1) )
-                begin 
-                    Red = BKG_out3[23:16];
-                    Green = BKG_out3[15:8];
-                    Blue = BKG_out3[7:0];
-                end 
-
-            else if((BKG_on4 == 1) || ((BKG_on3_bkg == 1) && (BKG_on4 == 1)) || ((BKG_on5_bkg == 1) && (BKG_on4 == 1)))
-                begin 
-                    Red = BKG_out4[23:16];
-                    Green = BKG_out4[15:8];
-                    Blue = BKG_out4[7:0];
-                end 
-            
-            else if((BKG_on5 == 1) && (BKG_on5_bkg != 1) )
-                begin 
-                    Red = BKG_out5[23:16];
-                    Green = BKG_out5[15:8];
-                    Blue = BKG_out5[7:0];
-                end
 
 			else 
                 begin 
