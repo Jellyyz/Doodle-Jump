@@ -2787,6 +2787,24 @@ always_comb
                 end
          
         // turn on pixels for the cannon 
+            else if(cannon_on)
+            begin 
+                Red = 8'hFF; 
+                Green = 8'h00; 
+                Blue = 8'h00; 
+            end 
+            else if(cannon_on1)
+            begin 
+                Red = 8'hFF; 
+                Green = 8'h33; 
+                Blue = 8'h33; 
+            end 
+            else if(cannon_on2)
+            begin 
+                Red = 8'hFF; 
+                Green = 8'h66; 
+                Blue = 8'h66; 
+            end 
             else if(underwater_BKG_on == 1)
                 begin 
                     Red = underwater_BKG_out[23:16];
@@ -2821,26 +2839,6 @@ always_comb
                     Green = doodle_left_BKG_out[15:8];
                     Blue = doodle_left_BKG_out[7:0];
                 end
-
-            else if(cannon_on)
-            begin 
-                Red = 8'hFF; 
-                Green = 8'h00; 
-                Blue = 8'h00; 
-            end 
-            else if(cannon_on1)
-            begin 
-                Red = 8'hFF; 
-                Green = 8'h33; 
-                Blue = 8'h33; 
-            end 
-            else if(cannon_on2)
-            begin 
-                Red = 8'hFF; 
-                Green = 8'h66; 
-                Blue = 8'h66; 
-            end 
-
 			else 
                 begin 
                     Red = 8'hED;
