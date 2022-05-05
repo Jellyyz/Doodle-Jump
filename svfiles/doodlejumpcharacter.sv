@@ -519,7 +519,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 					end
 				if(Cannon_Y_Motion <= 0 && outstate != 3'b011)
 					begin 
-						Cannon_Y_Pos <= Doodle_Y_Pos; 
+						Cannon_Y_Pos <= Doodle_Y_Pos + 16; 
 						Cannon_X_Pos <= Doodle_X_Pos; 
 					end
 				else 
