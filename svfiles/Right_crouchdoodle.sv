@@ -1,10 +1,5 @@
-/*
- * ECE385-HelperTools/PNG-To-Txt
- * Author: Rishi Thakkar
- *
- */
 
-module  Doodle_right_ram
+module  Doodle_rightC_ram
 (
 		input [4:0] data_In3,
 		input [10:0] write_address3, read_address3,
@@ -18,7 +13,7 @@ logic [23:0] mem [0:1023];
 
 initial
 begin
-	 $readmemh("right32.txt", mem); 
+	 $readmemh("right_crouch32.txt", mem); 
 end
 
 

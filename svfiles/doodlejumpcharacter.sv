@@ -102,7 +102,8 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
 	parameter [4:0] CannonSpeed = 5'd14;
 	parameter [4:0] CannonSpeed1 = 5'd10;
     parameter [2:0] CannonSpeed2 = 3'd6;
-	assign Doodle_Size = 16;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
+	logic [5:0] Doodle_Size; 
+	assign Doodle_Size = 32;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
 	assign Cannon_Size = 2; 
 counter counter(
 	.Reset(jump_reset), 
@@ -511,7 +512,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				// Update Cannon position 
 				if(Cannon_Y_Pos - Cannon_Size <= 10'd25)
 					begin 
-						Cannon_Y_Pos <= Doodle_Y_Pos; 
+						Cannon_Y_Pos <= Doodle_Y_Pos + 16; 
 						Cannon_X_Pos <= Doodle_X_Pos; 
 						Cannon_X_Motion <= 0; 
 						Cannon_Y_Motion <= 0; 

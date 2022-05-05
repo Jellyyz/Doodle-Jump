@@ -1,0 +1,19 @@
+module modifiedcounter(
+    input Reset, 
+    input Clk, 
+    output [31:0] outM
+
+);
+
+always_ff @ (posedge Clk)begin
+
+    if(Reset)
+        outM <= 32'b0;
+    else 
+        out <= out + 1; 
+        if(out == 6'b111111)
+            outM <= 0;
+        else   
+            outM <= out; 
+end
+endmodule 
