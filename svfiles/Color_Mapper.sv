@@ -1586,16 +1586,6 @@ always_ff @ (posedge frame_clk or posedge loadplat)
             cannon_on2 = 1'b0;
     end 
        
-    always_comb
-    begin:Doodle_on_proc
-         if ((DrawX >= DoodleX - Doodle_size) &&
-            (DrawX <= DoodleX + Doodle_size) &&
-            (DrawY >= DoodleY - Doodle_size) &&
-            (DrawY <= DoodleY + Doodle_size)) 
-            Doodle_on = 1'b1;
-        else 
-            Doodle_on = 1'b0;
-    end 
 // ~~~~~~~~~ POWERUP ~~~~~~~~~~~~~~~~~~~~~~~~~ this should cause for the platforms to be drawn on the screen 
 logic spring_on; 
     always_comb 
@@ -1910,6 +1900,24 @@ logic spring_on;
 
 // ~~~~~~Platforms~~~~~~~~~~~~~       
 // writing to the screen
+cannon_ram cannon_ram(
+    .read_address(cannon_ram_address[6:0]),
+    .Clk(Clk), 
+
+    .data_Out(cannon_BKG_out[23:0])
+);
+cannon_ram1 cannon_ram1(
+    .read_address(cannon1_ram_address[6:0]),
+    .Clk(Clk), 
+
+    .data_Out(cannon1_BKG_out[23:0])
+);  
+cannon_ram2 cannon_ram2(
+    .read_address(cannon2_ram_address[6:0]),
+    .Clk(Clk), 
+
+    .data_Out(cannon2_BKG_out[23:0])
+); 
 BKG_ram BKG(
     .read_address(BKG_address[14:0]),
     .Clk(Clk), 
@@ -1924,12 +1932,6 @@ BKG2_ram BKG2(
     .data_Out2(soccer_BKG_out[23:0])
 ); 
 
-Doodle_right_ram DRR(
-    .read_address3(BKG_address3[7:0]),
-    .Clk(Clk), 
-
-    .data_Out3(doodle_right_BKG_out[23:0])
-); 
 
 BKG4_ram BKG4(
     .read_address(BKG_address4[15:0]),
@@ -1938,12 +1940,33 @@ BKG4_ram BKG4(
     .data_Out4(space_BKG_out[23:0])
 ); 
 
+
+Doodle_right_ram DRR(
+    .read_address3(doodle_right_address[10:0]),
+    .Clk(Clk), 
+
+    .data_Out3(doodle_right_BKG_out[23:0])
+); 
 Doodle_left_ram DLR(
-    .read_address5(BKG_address5[7:0]),
+    .read_address5(doodle_left_address[10:0]),
     .Clk(Clk), 
 
     .data_Out5(doodle_left_BKG_out[23:0])
 ); 
+
+Doodle_rightC_ram DRRC(
+    .read_address3(doodle_right_address[10:0]),
+    .Clk(Clk), 
+
+    .data_Out3(doodle_rightC_BKG_out[23:0])
+); 
+Doodle_leftC_ram DLRC(
+    .read_address5(doodle_left_address[10:0]),
+    .Clk(Clk), 
+
+    .data_Out5(doodle_leftC_BKG_out[23:0])
+); 
+
 
 logic direction; 
 
@@ -1956,6 +1979,7 @@ doodle_direction doodle_direction(
     .direction(direction)
     
 );
+<<<<<<< HEAD
 
 A A(
     .read_address_A(BKG_address_A[9:0]),
@@ -1963,15 +1987,24 @@ A A(
 
     .data_Out_A(A_BKG_out[23:0])
 ); 
+=======
+logic [6:0] cannon_ram_address,cannon1_ram_address, cannon2_ram_address;
+logic [23:0] cannon_BKG_out, cannon1_BKG_out, cannon2_BKG_out; 
+
+>>>>>>> 78c5e1421d5d51f40858fed70a99e3abe68d0f18
 
 logic underwater_BKG_on;
 logic soccer_BKG_on;
 logic space_BKG_on;
+<<<<<<< HEAD
 logic A_on;
+=======
+
+>>>>>>> 78c5e1421d5d51f40858fed70a99e3abe68d0f18
 logic [14:0] BKG_address; 
 logic [14:0] BKG_address2; 
-logic [7:0]  BKG_address3;
 logic [15:0] BKG_address4;
+<<<<<<< HEAD
 logic [7:0]  BKG_address5;
 logic [9:0]  BKG_address_A;
 
@@ -1981,22 +2014,66 @@ logic [10:0] shape_size_y = 10'd480;
 logic [10:0] doodle_shape_size_x = 10'd32;
 logic [10:0] doodle_shape_size_y = 10'd32;
 logic [10:0] letter_size = 10'd32;
+=======
+
+logic [10:0] doodle_left_address;
+logic [10:0] doodle_right_address;
+
+logic [10:0] doodle_leftC_address;
+logic [10:0] doodle_rightC_address;
+logic [23:0] doodle_leftC_BKG_out; 
+logic [23:0] doodle_rightC_BKG_out; 
+logic doodle_leftC_BKG_on;
+logic doodle_rightC_BKG_on;
+
+logic [10:0] shape_size_x = 10'd640;
+logic [10:0] shape_size_y = 10'd480;
+
+logic [10:0] doodle_shape_size_x = 10'd32;
+logic [10:0] doodle_shape_size_y = 10'd32;
+
+
+
+>>>>>>> 78c5e1421d5d51f40858fed70a99e3abe68d0f18
 reg right_temp; 
 reg left_temp; 
-always_comb 
+logic [5:0] legsupr, legsupl; 
+modifiedcounter platformlegsl(
+	.Reset(Platform_collision && direction == 1'b0), 
+    .Clk(frame_clk), 
+
+    .outM(legsupl[4:0])
+);
+modifiedcounter platformlegsr(
+	.Reset(Platform_collision && direction == 1'b1), 
+    .Clk(frame_clk), 
+
+    .outM(legsupr[4:0])
+);
+always_comb
     begin 
         BKG_address = (639 * DrawY) + DrawX;
         BKG_address2 = (639 * DrawY) + DrawX;
-        BKG_address3 = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
         BKG_address4 = (639 * DrawY) + DrawX;
+<<<<<<< HEAD
         BKG_address5 = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
         BKG_address_A = (letter_size * DrawY) + DrawX; 
+=======
+        
+        cannon_ram_address = (CannonS * (DrawY - (CannonY + CannonS)) + (DrawX - (CannonX + CannonS)));
+        cannon1_ram_address = (CannonS * (DrawY - (CannonY1 + CannonS)) + (DrawX - (CannonX1 + CannonS)));
+        cannon2_ram_address = (CannonS * (DrawY - (CannonY2 + CannonS)) + (DrawX - (CannonX2 + CannonS)));
+        
+        doodle_right_address = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
+        doodle_left_address = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
+        
+>>>>>>> 78c5e1421d5d51f40858fed70a99e3abe68d0f18
         underwater_BKG_on = 1; 
         soccer_BKG_on = 0;
         space_BKG_on = 0;
         if(DrawY >= 0 && DrawY < shape_size_y && DrawX >= 0 && DrawX < shape_size_x) //Ball_x = 0
             begin
-                if(Score >= 20'b00000000010000000000 && Score <= 20'b00000000011000000000) //BKG2--grassland
+                if(Score >= 20'h500 && Score <= 20'h1000) //BKG2--grassland
                     begin
 
                     if(DrawX <= letter_size && DrawY <= letter_size)
@@ -2025,57 +2102,121 @@ always_comb
                         begin//inside the doodle hitbox 
                             if(direction == 1'b1) //right key
                                 begin
-                                    if(doodle_right_BKG_out == 24'b111111110000000011111111) //background in the doodle image
-                                        begin
-                                            underwater_BKG_on = 0; 
-                                            soccer_BKG_on = 1;
-                                            space_BKG_on = 0;
-                                            doodle_right_BKG_on = 0;
-                                            doodle_left_BKG_on = 0;
-                                        end
-                                    else
-                                        begin
-                                            underwater_BKG_on  = 0;
-                                            soccer_BKG_on = 0;
-                                            space_BKG_on = 0;
-                                            doodle_right_BKG_on = 1;
-                                            doodle_left_BKG_on = 0;
-                                        end
+                                    if(legsupr[4:0] == 6'b000000)
+                                        begin 
+                                            if(doodle_right_BKG_out == 24'hfe43e3) //background in the doodle image
+                                                begin
+                                                    underwater_BKG_on = 0; 
+                                                    soccer_BKG_on = 1;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;                                                    
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 1;
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                        end 
+                                    else 
+                                        begin 
+                                            if(doodle_rightC_BKG_out == 24'hfe43e3) //background in the doodle image
+                                                begin
+                                                    underwater_BKG_on = 0; 
+                                                    soccer_BKG_on = 1;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;                                                    
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 1;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end                                            
+                                        end 
                                 end
                             else
                                 begin
-                                    if(doodle_left_BKG_out == 24'b111111100100010111100010)
-                                        begin
-                                            underwater_BKG_on  = 0;
-                                            soccer_BKG_on = 1;
-                                            space_BKG_on = 0;
-                                            doodle_right_BKG_on = 0;
-                                            doodle_left_BKG_on = 0;
-                                        end
-                                    else
-                                        begin
-                                            underwater_BKG_on  = 0;
-                                            soccer_BKG_on = 0;
-                                            space_BKG_on = 0;
-                                            doodle_right_BKG_on = 0;
-                                            doodle_left_BKG_on = 1;
-                                        end
+                                    if(legsupl[4:0] == 6'b000000)
+                                        begin 
+                                            if(doodle_left_BKG_out == 24'hfe43e3)
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 1;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;
+                                                    doodle_left_BKG_on = 1;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                        end 
+                                    else 
+                                        begin 
+                                            if(doodle_leftC_BKG_out == 24'hfe43e3) //background in the doodle image
+                                                begin
+                                                    underwater_BKG_on = 0; 
+                                                    soccer_BKG_on = 1;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;                                                    
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 1;
+                                                end                                            
+                                        end  
+                                
                                 end
              
                         end
-                    else //outside of the doodle hitbox 
-                        begin
-                            doodle_right_BKG_on = 0;
-                            underwater_BKG_on =  0;
-                            soccer_BKG_on = 1;
-                            space_BKG_on = 0;
-                            doodle_left_BKG_on = 0;
-                        end
+                        else //outside of the doodle hitbox 
+                            begin
+                                underwater_BKG_on = 0; 
+                                soccer_BKG_on = 1;
+                                doodle_right_BKG_on = 0;
+                                space_BKG_on = 0;
+                                doodle_left_BKG_on = 0;
+                                doodle_rightC_BKG_on = 0;
+                                doodle_leftC_BKG_on = 0;
+                            end
                     end
                 
 
-                else if(Score > 20'b00000000011000000000) //BKG4 -- stats and space
+                else if(Score > 20'h1000) //BKG4 -- stats and space
                     begin
+<<<<<<< HEAD
                     
                     if(DrawX <= letter_size && DrawY <= letter_size)
                     begin
@@ -2101,59 +2242,126 @@ always_comb
 
                    else if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
                         begin //inside the doodle hitbox 
+=======
+                    if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
+                        begin//inside the doodle hitbox 
+>>>>>>> 78c5e1421d5d51f40858fed70a99e3abe68d0f18
                             if(direction == 1'b1) //right key
                                 begin
-                                    if(doodle_right_BKG_out == 24'b111111110000000011111111) //background in the doodle image
-                                        begin
-                                            doodle_right_BKG_on = 0;
-                                            underwater_BKG_on  = 0;
-                                            soccer_BKG_on = 0;
-                                            space_BKG_on = 1;
-                                            doodle_left_BKG_on = 0;
-                                        end
-                                    else
-                                        begin
-                                            doodle_right_BKG_on = 1;
-                                            underwater_BKG_on  = 0;
-                                            soccer_BKG_on = 0;
-                                            space_BKG_on = 0;
-                                            doodle_left_BKG_on = 0;
-                                        end
+                                    if(legsupr[4:0] == 6'b000000)
+                                        begin 
+                                            if(doodle_right_BKG_out == 24'hfe43e3) //background in the doodle image
+                                                begin
+                                                    underwater_BKG_on = 0; 
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 1;
+                                                    doodle_right_BKG_on = 0;                                                    
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 1;
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                        end 
+                                    else 
+                                        begin 
+                                            if(doodle_rightC_BKG_out == 24'hfe43e3) //background in the doodle image
+                                                begin
+                                                    underwater_BKG_on = 0; 
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 1;
+                                                    doodle_right_BKG_on = 0;                                                    
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 1;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end                                            
+                                        end 
                                 end
                             else
                                 begin
-                                    if(doodle_left_BKG_out == 24'b111111100100010111100010) //background in the doodle image
-                                        begin
-                                            doodle_right_BKG_on = 0;
-                                            underwater_BKG_on  = 0;
-                                            soccer_BKG_on = 0;
-                                            space_BKG_on = 1;
-                                            doodle_left_BKG_on = 0;
-                                        end
-                                    else
-                                        begin
-                                            doodle_right_BKG_on = 0;
-                                            underwater_BKG_on  = 0;
-                                            soccer_BKG_on = 0;
-                                            space_BKG_on = 0;
-                                            doodle_left_BKG_on = 1;
-                                        end
+                                    if(legsupl[4:0] == 6'b000000)
+                                        begin 
+                                            if(doodle_left_BKG_out == 24'hfe43e3)
+                                                begin
+                                                    underwater_BKG_on = 0; 
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 1;
+                                                    doodle_right_BKG_on = 0;                                                    
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;
+                                                    doodle_left_BKG_on = 1;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                        end 
+                                    else 
+                                        begin 
+                                            if(doodle_leftC_BKG_out == 24'hfe43e3) //background in the doodle image
+                                                begin
+                                                    underwater_BKG_on = 0; 
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 1;
+                                                    doodle_right_BKG_on = 0;                                                    
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 1;
+                                                end                                            
+                                        end  
+                                
                                 end
+             
                         end
-                    
-
                     else //outside of the doodle gitbox 
                         begin
-                            doodle_right_BKG_on = 0;
                             underwater_BKG_on = 0;
                             soccer_BKG_on = 0;
                             space_BKG_on = 1;
+                            doodle_right_BKG_on = 0;
                             doodle_left_BKG_on = 0;
+                            doodle_rightC_BKG_on = 0;
+                            doodle_leftC_BKG_on = 0;
                         end
                     end
 
                 else //BKG1 -- ocean
                     begin
+<<<<<<< HEAD
 
                         if(DrawX <= letter_size && DrawY <= letter_size)
                         begin
@@ -2218,13 +2426,120 @@ always_comb
                                             end
                                     end
                             end    
+=======
+                        if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
+                        begin//inside the doodle hitbox 
+                            if(direction == 1'b1) //right key
+                                begin
+                                    if(legsupr[4:0] == 6'b000000)
+                                        begin 
+                                            if(doodle_right_BKG_out == 24'hfe43e3) //background in the doodle image
+                                                begin
+                                                    underwater_BKG_on = 1; 
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;                                                    
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 1;
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                        end 
+                                    else 
+                                        begin 
+                                            if(doodle_rightC_BKG_out == 24'hfe43e3) //background in the doodle image
+                                                begin
+                                                    underwater_BKG_on = 1; 
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;                                                    
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 1;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end                                            
+                                        end 
+                                end
+                            else
+                                begin
+                                    if(legsupl[4:0] == 6'b000000)
+                                        begin 
+                                            if(doodle_left_BKG_out == 24'hfe43e3)
+                                                begin
+                                                    underwater_BKG_on = 1; 
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;                                                    
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;
+                                                    doodle_left_BKG_on = 1;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                        end 
+                                    else 
+                                        begin 
+                                            if(doodle_leftC_BKG_out == 24'hfe43e3) //background in the doodle image
+                                                begin
+                                                    underwater_BKG_on = 1; 
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;                                                    
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 0;
+                                                end
+                                            else
+                                                begin
+                                                    underwater_BKG_on  = 0;
+                                                    soccer_BKG_on = 0;
+                                                    space_BKG_on = 0;
+                                                    doodle_right_BKG_on = 0;
+                                                    doodle_left_BKG_on = 0;
+                                                    doodle_rightC_BKG_on = 0;                                            
+                                                    doodle_leftC_BKG_on = 1;
+                                                end                                            
+                                        end  
+                                
+                                end
+             
+                        end
+>>>>>>> 78c5e1421d5d51f40858fed70a99e3abe68d0f18
                         else //outside of the doodle gitbox 
                             begin
-                                doodle_right_BKG_on = 0;
-                                underwater_BKG_on =  1;
+                                underwater_BKG_on = 1;
                                 soccer_BKG_on = 0;
                                 space_BKG_on = 0;
+                                doodle_right_BKG_on = 0;
                                 doodle_left_BKG_on = 0;
+                                doodle_rightC_BKG_on = 0;
+                                doodle_leftC_BKG_on = 0;
                         end
                     end    
             end
@@ -2235,6 +2550,8 @@ always_comb
                 doodle_right_BKG_on = 0;
                 space_BKG_on = 0;
                 doodle_left_BKG_on = 0;
+                doodle_rightC_BKG_on = 0;
+                doodle_leftC_BKG_on = 0;
             end
     end
 
@@ -2245,14 +2562,31 @@ always_comb
     always_comb
         begin:RGB_Display
         //turn on pixels for the Doodle 
-        // if ((Doodle_on)) 
-        //     begin 
-        //         Red = 8'hA5;
-        //         Green = 8'hA5;
-        //         Blue = 8'h25;
-        //     end      
-        // turn on pixels for the powerups for now, serves purely as a marker 
-        if(spring_on)
+        if(doodle_rightC_BKG_on == 1)
+            begin 
+                Red = doodle_rightC_BKG_out[23:16];
+                Green = doodle_rightC_BKG_out[15:8];
+                Blue = doodle_rightC_BKG_out[7:0];
+            end 
+        else if(doodle_leftC_BKG_on == 1)
+            begin 
+                Red = doodle_leftC_BKG_out[23:16];
+                Green = doodle_leftC_BKG_out[15:8];
+                Blue = doodle_leftC_BKG_out[7:0];
+            end
+        else if(doodle_right_BKG_on == 1)
+            begin 
+                Red = doodle_right_BKG_out[23:16];
+                Green = doodle_right_BKG_out[15:8];
+                Blue = doodle_right_BKG_out[7:0];
+            end 
+        else if(doodle_left_BKG_on == 1)
+            begin 
+                Red = doodle_left_BKG_out[23:16];
+                Green = doodle_left_BKG_out[15:8];
+                Blue = doodle_left_BKG_out[7:0];
+            end
+        else if(spring_on)
             begin 
                 Red = 8'h7F;
                 Green = 8'h0;
@@ -2872,23 +3206,23 @@ always_comb
          
         // turn on pixels for the cannon 
             else if(cannon_on)
-            begin 
-                Red = 8'hFF; 
-                Green = 8'h00; 
-                Blue = 8'h00; 
-            end 
+                begin 
+                    Red = cannon_BKG_out[23:16]; 
+                    Green = cannon_BKG_out[15:8]; 
+                    Blue = cannon_BKG_out[7:0]; 
+                end 
             else if(cannon_on1)
-            begin 
-                Red = 8'hFF; 
-                Green = 8'h33; 
-                Blue = 8'h33; 
-            end 
+                begin 
+                    Red = cannon1_BKG_out[23:16]; 
+                    Green = cannon1_BKG_out[15:8]; 
+                    Blue = cannon1_BKG_out[7:0]; 
+                end 
             else if(cannon_on2)
-            begin 
-                Red = 8'hFF; 
-                Green = 8'h66; 
-                Blue = 8'h66; 
-            end 
+                begin 
+                    Red = cannon2_BKG_out[23:16]; 
+                    Green = cannon2_BKG_out[15:8]; 
+                    Blue = cannon2_BKG_out[7:0]; 
+                end 
             else if(underwater_BKG_on == 1)
                 begin 
                     Red = underwater_BKG_out[23:16];
@@ -2902,20 +3236,13 @@ always_comb
                     Green = soccer_BKG_out[15:8];
                     Blue = soccer_BKG_out[7:0];
                 end
-
-            else if(doodle_right_BKG_on == 1)
-                begin 
-                    Red = doodle_right_BKG_out[23:16];
-                    Green = doodle_right_BKG_out[15:8];
-                    Blue = doodle_right_BKG_out[7:0];
-                end 
-
             else if(space_BKG_on == 1)
                 begin 
                     Red = space_BKG_out[23:16];
                     Green = space_BKG_out[15:8];
                     Blue = space_BKG_out[7:0];
                 end 
+<<<<<<< HEAD
             
             else if(doodle_left_BKG_on == 1)
                 begin 
@@ -2930,6 +3257,8 @@ always_comb
                     Green = A_BKG_out[15:8];
                     Blue = A_BKG_out[7:0];
                 end
+=======
+>>>>>>> 78c5e1421d5d51f40858fed70a99e3abe68d0f18
 
 			else 
                 begin 
