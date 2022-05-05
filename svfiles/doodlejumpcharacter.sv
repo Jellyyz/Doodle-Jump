@@ -102,7 +102,7 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
 	parameter [4:0] CannonSpeed = 5'd14;
 	parameter [4:0] CannonSpeed1 = 5'd10;
     parameter [2:0] CannonSpeed2 = 3'd6;
-	assign Doodle_Size = 16;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
+	assign Doodle_Size = 32;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
 	assign Cannon_Size = 2; 
 counter counter(
 	.Reset(jump_reset), 

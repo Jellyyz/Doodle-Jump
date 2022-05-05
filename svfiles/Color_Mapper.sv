@@ -93,6 +93,7 @@ module  color_mapper (
                     output logic [23:0] doodle_right_BKG_out,
                     output logic [23:0] space_BKG_out,
                     output logic [23:0] doodle_left_BKG_out,
+                    output logic [23:0] A_BKG_out,
                     output logic [8:0] blue_temp_platX,
                     output logic 		doodle_right_BKG_on,
 	                output logic 		doodle_right_BKG_on3_bkg,
@@ -1955,18 +1956,31 @@ doodle_direction doodle_direction(
     .direction(direction)
     
 );
+
+A A(
+    .read_address_A(BKG_address_A[9:0]),
+    .Clk(Clk), 
+
+    .data_Out_A(A_BKG_out[23:0])
+); 
+
 logic underwater_BKG_on;
 logic soccer_BKG_on;
 logic space_BKG_on;
+logic A_on;
 logic [14:0] BKG_address; 
 logic [14:0] BKG_address2; 
 logic [7:0]  BKG_address3;
 logic [15:0] BKG_address4;
 logic [7:0]  BKG_address5;
+logic [9:0]  BKG_address_A;
+
+
 logic [10:0] shape_size_x = 10'd640;
 logic [10:0] shape_size_y = 10'd480;
-logic [10:0] doodle_shape_size_x = 10'd16;
-logic [10:0] doodle_shape_size_y = 10'd16;
+logic [10:0] doodle_shape_size_x = 10'd32;
+logic [10:0] doodle_shape_size_y = 10'd32;
+logic [10:0] letter_size = 10'd32;
 reg right_temp; 
 reg left_temp; 
 always_comb 
@@ -1976,6 +1990,7 @@ always_comb
         BKG_address3 = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
         BKG_address4 = (639 * DrawY) + DrawX;
         BKG_address5 = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
+        BKG_address_A = (letter_size * DrawY) + DrawX; 
         underwater_BKG_on = 1; 
         soccer_BKG_on = 0;
         space_BKG_on = 0;
@@ -1983,7 +1998,30 @@ always_comb
             begin
                 if(Score >= 20'b00000000010000000000 && Score <= 20'b00000000011000000000) //BKG2--grassland
                     begin
-                    if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
+
+                    if(DrawX <= letter_size && DrawY <= letter_size)
+                    begin
+                        if(A_BKG_out == 0)
+                            begin
+                                A_on = 0;
+                                soccer_BKG_on = 1;
+                                underwater_BKG_on = 0;
+                                space_BKG_on = 0;
+                                doodle_right_BKG_on = 0;
+                                doodle_left_BKG_on = 0;
+                            end
+                        else
+                            begin
+                                A_on = 1;
+                                soccer_BKG_on = 0;
+                                underwater_BKG_on = 0;
+                                space_BKG_on = 0;
+                                doodle_right_BKG_on = 0;
+                                doodle_left_BKG_on = 0;
+                            end
+                        end
+
+                    else if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
                         begin//inside the doodle hitbox 
                             if(direction == 1'b1) //right key
                                 begin
@@ -2038,7 +2076,30 @@ always_comb
 
                 else if(Score > 20'b00000000011000000000) //BKG4 -- stats and space
                     begin
-                    if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
+                    
+                    if(DrawX <= letter_size && DrawY <= letter_size)
+                    begin
+                        if(A_BKG_out == 0)
+                            begin
+                                A_on = 0;
+                                underwater_BKG_on = 0;
+                                soccer_BKG_on = 0;
+                                space_BKG_on = 1;
+                                doodle_right_BKG_on = 0;
+                                doodle_left_BKG_on = 0;
+                            end
+                        else
+                            begin
+                                A_on = 1;
+                                underwater_BKG_on = 0;
+                                soccer_BKG_on = 0;
+                                space_BKG_on = 0;
+                                doodle_right_BKG_on = 0;
+                                doodle_left_BKG_on = 0;
+                            end
+                        end
+
+                   else if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
                         begin //inside the doodle hitbox 
                             if(direction == 1'b1) //right key
                                 begin
@@ -2093,7 +2154,30 @@ always_comb
 
                 else //BKG1 -- ocean
                     begin
-                        if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
+
+                        if(DrawX <= letter_size && DrawY <= letter_size)
+                        begin
+                            if(A_BKG_out == 0)
+                                begin
+                                    A_on = 0;
+                                    underwater_BKG_on = 1;
+                                    soccer_BKG_on = 0;
+                                    space_BKG_on = 0;
+                                    doodle_right_BKG_on = 0;
+                                    doodle_left_BKG_on = 0;
+                                end
+                            else
+                                begin 
+                                    A_on = 1;
+                                    underwater_BKG_on = 0;
+                                    soccer_BKG_on = 0;
+                                    space_BKG_on = 0;
+                                    doodle_right_BKG_on = 0;
+                                    doodle_left_BKG_on = 0;
+                                end
+                            end
+
+                        else if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
                             begin //inside the doodle hitbox 
                                 if(direction == 1'b1) //right key
                                     begin
@@ -2839,6 +2923,14 @@ always_comb
                     Green = doodle_left_BKG_out[15:8];
                     Blue = doodle_left_BKG_out[7:0];
                 end
+
+            else if(A_on == 1)
+                begin 
+                    Red = A_BKG_out[23:16];
+                    Green = A_BKG_out[15:8];
+                    Blue = A_BKG_out[7:0];
+                end
+
 			else 
                 begin 
                     Red = 8'hED;
