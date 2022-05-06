@@ -2068,9 +2068,9 @@ modifiedcounter platformlegsr(
 );
 always_comb
     begin 
-        BKG_address = (639 * DrawY) + DrawX;
-        BKG_address2 = (639 * DrawY) + DrawX;
-        BKG_address4 = (639 * DrawY) + DrawX;
+        BKG_address = (640 * DrawY) + DrawX;
+        BKG_address2 = (640 * DrawY) + DrawX;
+        BKG_address4 = (640 * DrawY) + DrawX;
         
         cannon_ram_address = (CannonS * (DrawY - (CannonY)) + (DrawX - (CannonX + CannonS)));
         cannon1_ram_address = (CannonS * (DrawY - (CannonY1)) + (DrawX - (CannonX1 + CannonS)));

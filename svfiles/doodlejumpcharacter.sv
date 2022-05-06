@@ -531,14 +531,14 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				// Update Cannon1 position 
 				if(Cannon_Y_Pos1 - Cannon_Size <= 10'd25)
 					begin 
-						Cannon_Y_Pos1 <= Doodle_Y_Pos; 
+						Cannon_Y_Pos1 <= Doodle_Y_Pos + 16; 
 						Cannon_X_Pos1 <= Doodle_X_Pos; 
 						Cannon_X_Motion1 <= 0; 
 						Cannon_Y_Motion1 <= 0; 
 					end
 				if(Cannon_Y_Motion1 <= 0 && outstate != 3'b011)
 					begin 
-						Cannon_Y_Pos1 <= Doodle_Y_Pos; 
+						Cannon_Y_Pos1 <= Doodle_Y_Pos + 16; 
 						Cannon_X_Pos1 <= Doodle_X_Pos; 
 					end
 				else 
@@ -550,14 +550,14 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				// Update Cannon2 position 
 				if(Cannon_Y_Pos2 - Cannon_Size <= 10'd25)
 					begin 
-						Cannon_Y_Pos2 <= Doodle_Y_Pos; 
+						Cannon_Y_Pos2 <= Doodle_Y_Pos + 16; 
 						Cannon_X_Pos2 <= Doodle_X_Pos; 
 						Cannon_X_Motion2 <= 0; 
 						Cannon_Y_Motion2 <= 0; 
 					end
 				if(Cannon_Y_Motion2 <= 0 && outstate != 3'b011)
 					begin 
-						Cannon_Y_Pos2 <= Doodle_Y_Pos; 
+						Cannon_Y_Pos2 <= Doodle_Y_Pos + 16; 
 						Cannon_X_Pos2 <= Doodle_X_Pos; 
 					end
 				else 
