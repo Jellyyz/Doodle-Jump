@@ -1954,6 +1954,8 @@ cannon_ram2 cannon_ram2(
 
     .data_Out(cannon2_BKG_out[23:0])
 ); 
+
+// ram for each of the backgrounds
 BKG_ram BKG(
     .read_address(BKG_address[14:0]),
     .Clk(Clk), 
@@ -1976,7 +1978,7 @@ BKG4_ram BKG4(
     .data_Out4(space_BKG_out[23:0])
 ); 
 
-
+// ram for doodle characters
 Doodle_right_ram DRR(
     .read_address3(doodle_right_address[10:0]),
     .Clk(Clk), 
@@ -2003,6 +2005,47 @@ Doodle_leftC_ram DLRC(
     .data_Out5(doodle_leftC_BKG_out[23:0])
 ); 
 
+// ram for the platforms
+greenplat16 greenplat16(
+    .read_address(greenplat16addr[7:0]),
+    .Clk(Clk), 
+
+    .data_Out(greenplat16_out[23:0])
+); 
+greenplat32 greenplat32(
+    .read_address(greenplat32addr[8:0]),
+    .Clk(Clk), 
+
+    .data_Out(greenplat32_out[23:0])
+); 
+greenplat64 greenplat64(
+    .read_address(greenplat64addr[9:0]),
+    .Clk(Clk), 
+
+    .data_Out(greenplat64_out[23:0])
+); 
+
+// ram for springs and rocket 
+spring_ram spring_ram(
+    .read_address(spring_addr[8:0]),
+    .Clk(Clk), 
+
+    .data_Out(spring_out[23:0])
+); 
+jetpack_ram jetpack_ram(
+    .read_address(jetpack_addr[8:0]),
+    .Clk(Clk), 
+
+    .data_Out(jetpack_out[23:0])
+); 
+
+logic [8:0] spring_addr, jetpack_addr; 
+logic [23:0] jetpack_out, spring_out; 
+
+logic [7:0] greenplat16addr;
+logic [8:0] greenplat32addr;
+logic [9:0] greenplat64addr;
+logic [23:0] greenplat16_out, greenplat32_out, greenplat64_out;
 
 logic direction; 
 
@@ -4185,14 +4228,20 @@ always_comb
 
 always_comb
     begin 
-        BKG_address = (639 * DrawY) + DrawX;
-        BKG_address2 = (639 * DrawY) + DrawX;
-        BKG_address4 = (639 * DrawY) + DrawX;
+        BKG_address = (640 * DrawY) + DrawX;
+        BKG_address2 = (640 * DrawY) + DrawX;
+        BKG_address4 = (640 * DrawY) + DrawX;
         
+<<<<<<< HEAD
         
         cannon_ram_address = (CannonS * (DrawY - (CannonY + CannonS)) + (DrawX - (CannonX + CannonS)));
         cannon1_ram_address = (CannonS * (DrawY - (CannonY1 + CannonS)) + (DrawX - (CannonX1 + CannonS)));
         cannon2_ram_address = (CannonS * (DrawY - (CannonY2 + CannonS)) + (DrawX - (CannonX2 + CannonS)));
+=======
+        cannon_ram_address = (CannonS * (DrawY - (CannonY)) + (DrawX - (CannonX + CannonS)));
+        cannon1_ram_address = (CannonS * (DrawY - (CannonY1)) + (DrawX - (CannonX1 + CannonS)));
+        cannon2_ram_address = (CannonS * (DrawY - (CannonY2)) + (DrawX - (CannonX2 + CannonS)));
+>>>>>>> 0ddb7b5da55827d7e41d1d115a281311aaeddd52
         
         doodle_right_address = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
         doodle_left_address = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
