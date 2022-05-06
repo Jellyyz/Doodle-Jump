@@ -665,9 +665,9 @@ logic Spring_collision;
 always_comb
 begin:Spring_collision_
 	Spring_collision = (((Doodle_Y_Pos + Doodle_Size <= springY + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY - springsizeY) && (springX + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
-	((Doodle_Y_Pos + Doodle_Size <= springY1 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY1 - springsizeY) && (springX1 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
-	((Doodle_Y_Pos + Doodle_Size <= springY2 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY2 - springsizeY) && (springX2 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
-	((Doodle_Y_Pos + Doodle_Size <= springY3 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY3 - springsizeY) && (springX3 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size))
+	((Doodle_Y_Pos + Doodle_Size <= springY1 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY1 - springsizeY) && (springX1 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX1 - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
+	((Doodle_Y_Pos + Doodle_Size <= springY2 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY2 - springsizeY) && (springX2 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX2 - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
+	((Doodle_Y_Pos + Doodle_Size <= springY3 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY3 - springsizeY) && (springX3 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX3 - springsizeX <= Doodle_X_Pos + Doodle_Size))
 	);
 end 
 
