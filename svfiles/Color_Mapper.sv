@@ -93,6 +93,43 @@ module  color_mapper (
                     output logic [23:0] doodle_right_BKG_out,
                     output logic [23:0] space_BKG_out,
                     output logic [23:0] doodle_left_BKG_out,
+                    output logic [23:0] zero_BKG_out,
+                    output logic [23:0] one_BKG_out,
+                    output logic [23:0] two_BKG_out,
+                    output logic [23:0] three_BKG_out,
+                    output logic [23:0] four_BKG_out,
+                    output logic [23:0] five_BKG_out,
+                    output logic [23:0] six_BKG_out,
+                    output logic [23:0] seven_BKG_out,
+                    output logic [23:0] eight_BKG_out,
+                    output logic [23:0] nine_BKG_out,
+                    output logic [23:0] A_BKG_out,
+                    output logic [23:0] B_BKG_out,
+                    output logic [23:0] C_BKG_out,
+                    output logic [23:0] D_BKG_out,
+                    output logic [23:0] E_BKG_out,
+                    output logic [23:0] F_BKG_out,
+                    output logic [23:0] G_BKG_out,
+                    output logic [23:0] H_BKG_out,
+                    output logic [23:0] I_BKG_out,
+                    output logic [23:0] J_BKG_out,
+                    output logic [23:0] K_BKG_out,
+                    output logic [23:0] L_BKG_out,
+                    output logic [23:0] M_BKG_out,
+                    output logic [23:0] N_BKG_out,
+                    output logic [23:0] O_BKG_out,
+                    output logic [23:0] P_BKG_out,
+                    output logic [23:0] Q_BKG_out,
+                    output logic [23:0] R_BKG_out,
+                    output logic [23:0] S_BKG_out,
+                    output logic [23:0] T_BKG_out,
+                    output logic [23:0] U_BKG_out,
+                    output logic [23:0] V_BKG_out,
+                    output logic [23:0] W_BKG_out,
+                    output logic [23:0] X_BKG_out,
+                    output logic [23:0] Y_BKG_out,
+                    output logic [23:0] Z_BKG_out,
+
                     output logic [8:0] blue_temp_platX,
                     output logic 		doodle_right_BKG_on,
 	                output logic 		doodle_right_BKG_on3_bkg,
@@ -2021,6 +2058,263 @@ doodle_direction doodle_direction(
     .direction(direction)
     
 );
+
+Zero zero(
+    .read_address_zero(BKG_address_zero[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_zero(zero_BKG_out[23:0])
+); 
+
+One one(
+    .read_address_one(BKG_address_one[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_one(one_BKG_out[23:0])
+); 
+
+Two two(
+    .read_address_two(BKG_address_two[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_two(two_BKG_out[23:0])
+); 
+
+Three three(
+    .read_address_three(BKG_address_three[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_three(three_BKG_out[23:0])
+); 
+
+Four four(
+    .read_address_four(BKG_address_four[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_four(four_BKG_out[23:0])
+); 
+
+Five five(
+    .read_address_five(BKG_address_five[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_five(five_BKG_out[23:0])
+); 
+
+Six six(
+    .read_address_six(BKG_address_six[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_six(six_BKG_out[23:0])
+); 
+
+Seven seven(
+    .read_address_seven(BKG_address_seven[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_seven(seven_BKG_out[23:0])
+); 
+
+Eight eight(
+    .read_address_eight(BKG_address_eight[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_eight(eight_BKG_out[23:0])
+); 
+
+Nine nine(
+    .read_address_nine(BKG_address_nine[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_nine(nine_BKG_out[23:0])
+); 
+
+A a(
+    .read_address_A(BKG_address_A[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_A(A_BKG_out[23:0])
+); 
+
+B b(
+    .read_address_B(BKG_address_B[10:0]),
+    .Clk(Clk), 
+
+    .data_Out_B(B_BKG_out[23:0])
+); 
+
+
+C c(
+    .read_address(BKG_address_C[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(C_BKG_out[23:0])
+); 
+
+D d(
+    .read_address(BKG_address_D[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(D_BKG_out[23:0])
+); 
+
+E e(
+    .read_address(BKG_address_E[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(E_BKG_out[23:0])
+); 
+
+F f(
+    .read_address(BKG_address_F[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(F_BKG_out[23:0])
+); 
+
+G g(
+    .read_address(BKG_address_G[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(G_BKG_out[23:0])
+); 
+
+H h(
+    .read_address(BKG_address_H[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(H_BKG_out[23:0])
+); 
+
+I i(
+    .read_address(BKG_address_I[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(I_BKG_out[23:0])
+); 
+
+J j(
+    .read_address(BKG_address_J[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(J_BKG_out[23:0])
+); 
+
+K k(
+    .read_address(BKG_address_K[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(K_BKG_out[23:0])
+); 
+
+L l(
+    .read_address(BKG_address_L[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(L_BKG_out[23:0])
+); 
+
+M m(
+    .read_address(BKG_address_M[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(M_BKG_out[23:0])
+); 
+
+N n(
+    .read_address(BKG_address_N[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(N_BKG_out[23:0])
+); 
+
+O o(
+    .read_address(BKG_address_O[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(O_BKG_out[23:0])
+); 
+
+P p(
+    .read_address(BKG_address_P[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(P_BKG_out[23:0])
+); 
+
+Q q(
+    .read_address(BKG_address_Q[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(Q_BKG_out[23:0])
+); 
+
+R r(
+    .read_address(BKG_address_R[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(R_BKG_out[23:0])
+); 
+
+S s(
+    .read_address(BKG_address_S[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(S_BKG_out[23:0])
+); 
+
+T t(
+    .read_address(BKG_address_T[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(T_BKG_out[23:0])
+); 
+
+U u(
+    .read_address(BKG_address_U[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(U_BKG_out[23:0])
+); 
+
+V v(
+    .read_address(BKG_address_V[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(V_BKG_out[23:0])
+); 
+
+W w(
+    .read_address(BKG_address_W[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(W_BKG_out[23:0])
+); 
+
+X x(
+    .read_address(BKG_address_X[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(X_BKG_out[23:0])
+); 
+
+Y y(
+    .read_address(BKG_address_Y[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(Y_BKG_out[23:0])
+); 
+
+Z z(
+    .read_address(BKG_address_Z[10:0]),
+    .Clk(Clk), 
+
+    .data_Out(Z_BKG_out[23:0])
+); 
+
+
+
+
 logic [6:0] cannon_ram_address,cannon1_ram_address, cannon2_ram_address;
 logic [23:0] cannon_BKG_out, cannon1_BKG_out, cannon2_BKG_out; 
 
@@ -2028,10 +2322,93 @@ logic [23:0] cannon_BKG_out, cannon1_BKG_out, cannon2_BKG_out;
 logic underwater_BKG_on;
 logic soccer_BKG_on;
 logic space_BKG_on;
+logic zero_on;
+logic one_on;
+logic two_on;
+logic three_on;
+logic four_on;
+logic five_on;
+logic six_on;
+logic seven_on;
+logic eight_on;
+logic nine_on;
+logic A_on;
+logic B_on;
+logic C_on;
+logic D_on;
+logic E_on;
+logic F_on;
+logic G_on;
+logic H_on;
+logic I_on;
+logic J_on;
+logic K_on;
+logic L_on;
+logic M_on;
+logic N_on;
+logic O_on;
+logic P_on;
+logic Q_on;
+logic R_on;
+logic S_on;
+logic T_on;
+logic U_on;
+logic V_on;
+logic W_on;
+logic X_on;
+logic Y_on;
+logic Z_on;
+
 
 logic [14:0] BKG_address; 
 logic [14:0] BKG_address2; 
 logic [15:0] BKG_address4;
+logic [7:0]  BKG_address5;
+logic [10:0]  BKG_address_zero;
+logic [10:0]  BKG_address_one;
+logic [10:0]  BKG_address_two;
+logic [10:0]  BKG_address_three;
+logic [10:0]  BKG_address_four;
+logic [10:0]  BKG_address_five;
+logic [10:0]  BKG_address_six;
+logic [10:0]  BKG_address_seven;
+logic [10:0]  BKG_address_eight;
+logic [10:0]  BKG_address_nine;
+logic [10:0]  BKG_address_A;
+logic [10:0]  BKG_address_B;
+logic [10:0]  BKG_address_C;
+logic [10:0]  BKG_address_D;
+logic [10:0]  BKG_address_E;
+logic [10:0]  BKG_address_F;
+logic [10:0]  BKG_address_G;
+logic [10:0]  BKG_address_H;
+logic [10:0]  BKG_address_I;
+logic [10:0]  BKG_address_J;
+logic [10:0]  BKG_address_K;
+logic [10:0]  BKG_address_L;
+logic [10:0]  BKG_address_M;
+logic [10:0]  BKG_address_N;
+logic [10:0]  BKG_address_O;
+logic [10:0]  BKG_address_P;
+logic [10:0]  BKG_address_Q;
+logic [10:0]  BKG_address_R;
+logic [10:0]  BKG_address_S;
+logic [10:0]  BKG_address_T;
+logic [10:0]  BKG_address_U;
+logic [10:0]  BKG_address_V;
+logic [10:0]  BKG_address_W;
+logic [10:0]  BKG_address_X;
+logic [10:0]  BKG_address_Y;
+logic [10:0]  BKG_address_Z;
+
+
+
+
+logic [10:0] shape_size_x = 10'd640;
+logic [10:0] shape_size_y = 10'd480;
+logic [10:0] doodle_shape_size_x = 10'd32;
+logic [10:0] doodle_shape_size_y = 10'd32;
+logic [10:0] letter_size = 10'd32;
 
 logic [10:0] doodle_left_address;
 logic [10:0] doodle_right_address;
@@ -2040,16 +2417,14 @@ logic [10:0] doodle_leftC_address;
 logic [10:0] doodle_rightC_address;
 logic [23:0] doodle_leftC_BKG_out; 
 logic [23:0] doodle_rightC_BKG_out; 
+
 logic doodle_leftC_BKG_on;
 logic doodle_rightC_BKG_on;
-
-logic [10:0] shape_size_x = 10'd640;
-logic [10:0] shape_size_y = 10'd480;
-
-logic [10:0] doodle_shape_size_x = 10'd32;
-logic [10:0] doodle_shape_size_y = 10'd32;
-
-
+logic [3:0]first_digit;
+logic [3:0]second_digit;
+logic [3:0]third_digit;
+logic [3:0]fourth_digit;
+logic [3:0]fifth_digit;
 
 reg right_temp; 
 reg left_temp; 
@@ -2066,15 +2441,1807 @@ modifiedcounter platformlegsr(
 
     .outM(legsupr[4:0])
 );
+
+always_comb 
+    begin 
+        BKG_address_S = (letter_size * (DrawY - letter_size) + DrawX);
+        BKG_address_C = (letter_size * (DrawY - letter_size) + (DrawX - letter_size));
+        BKG_address_O = (letter_size * (DrawY - letter_size) + (DrawX - 2 * letter_size));
+        BKG_address_R = (letter_size * (DrawY - letter_size) + (DrawX - 3 * letter_size));
+        BKG_address_E = (letter_size * (DrawY - letter_size) + (DrawX - 4 * letter_size));
+
+        if(DrawY >= letter_size && DrawX >= 0 && DrawX <= letter_size && DrawY <= (2 * letter_size))
+            begin
+                if(S_BKG_out != 24'h0)
+                    begin
+                        S_on = 1;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end
+                else
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end
+            end
+
+        else if(DrawY >= letter_size && DrawX >= letter_size && DrawX <= (2 * letter_size) && DrawY <= (2 * letter_size))
+            begin
+                if(C_BKG_out != 24'h0)
+                    begin
+                        S_on = 0;
+                        C_on = 1;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end
+                else
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end
+            end
+        
+        else if(DrawY >= letter_size && DrawX >= (2 * letter_size) && DrawX <= (3 * letter_size) && DrawY <= (2 * letter_size))
+            begin
+                if(O_BKG_out != 24'h0)
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 1;
+                        R_on = 0;
+                        E_on = 0; 
+                    end
+                else
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end 
+            end
+
+        else if(DrawY >= letter_size && DrawX >= (3 *letter_size) && DrawX <= (4 * letter_size) && DrawY <= (2 * letter_size))
+            begin
+                if(R_BKG_out != 24'h0)
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 1;
+                        E_on = 0; 
+                    end
+                else
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end 
+            end
+
+        else if(DrawY >= letter_size && DrawX >= (4 *letter_size) && DrawX <= (5 * letter_size) && DrawY <= (2 * letter_size))
+            begin
+                if(E_BKG_out != 24'h0)
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 1; 
+                    end
+                else
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0;  
+                    end
+            end
+
+        else
+            begin
+                S_on = 0;
+                C_on = 0;
+                O_on = 0;
+                R_on = 0;
+                E_on = 0; 
+            end 
+    end
+                
+
+
+
+
+always_comb 
+    begin 
+        first_digit = Score[3:0];
+        second_digit = Score[7:4];
+        third_digit = Score[11:8];
+        fourth_digit = Score[15:12];
+        fifth_digit = Score[19:16];
+        BKG_address_zero = (letter_size * DrawY) + DrawX;
+        BKG_address_one = (letter_size * DrawY) + DrawX;
+        BKG_address_two = (letter_size * DrawY) + DrawX;
+        BKG_address_three = (letter_size * DrawY) + DrawX;
+        BKG_address_four = (letter_size * DrawY) + DrawX;
+        BKG_address_five = (letter_size * DrawY) + DrawX;
+        BKG_address_six = (letter_size * DrawY) + DrawX;
+        BKG_address_seven = (letter_size * DrawY) + DrawX;
+        BKG_address_eight = (letter_size * DrawY) + DrawX;
+        BKG_address_nine = (letter_size * DrawY) + DrawX;
+        
+        if(DrawY >= 0 && DrawX >= 0 && DrawX <= letter_size && DrawY <= letter_size)
+            begin
+            unique case(fifth_digit)
+                4'b0000: 
+                    begin
+                        if(zero_BKG_out != 24'h0)
+                            begin
+                                zero_on = 1;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+                4'b0001:
+                    begin
+                        if(one_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 1;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                                end 
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0010:
+                    begin
+                        if(two_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 1;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+                
+                4'b0011:
+                    begin
+                        if(three_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 1;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                                end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0100:
+                    begin
+                        if(four_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 1;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+                            end
+                    end
+
+                4'b0101:
+                    begin
+                        if(five_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 1;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0110:
+                    begin
+                        if(six_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 1;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0111:
+                    begin
+                        if(seven_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 1;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b1000:
+                    begin
+                        if(eight_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 1;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b1001:
+                    begin
+                        if(nine_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 1;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+            endcase
+
+           
+        end 
+
+        else if(DrawY >= 0 && DrawX <= (2 * letter_size) && DrawX > letter_size && DrawY <= letter_size)
+            begin
+            unique case(fourth_digit)
+                4'b0000: 
+                    begin
+                        if(zero_BKG_out != 24'h0)
+                            begin
+                                zero_on = 1;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+                4'b0001:
+                    begin
+                        if(one_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 1;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                                end 
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0010:
+                    begin
+                        if(two_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 1;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+                
+                4'b0011:
+                    begin
+                        if(three_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 1;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                                end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0100:
+                    begin
+                        if(four_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 1;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+                            end
+                    end
+
+                4'b0101:
+                    begin
+                        if(five_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 1;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0110:
+                    begin
+                        if(six_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 1;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0111:
+                    begin
+                        if(seven_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 1;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b1000:
+                    begin
+                        if(eight_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 1;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b1001:
+                    begin
+                        if(nine_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 1;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+            endcase
+
+           
+        end 
+
+        else if(DrawY >= 0 && DrawX <= (3 * letter_size) && DrawX > (2 * letter_size) && DrawY <= letter_size)
+            begin
+            unique case(third_digit)
+                4'b0000: 
+                    begin
+                        if(zero_BKG_out != 24'h0)
+                            begin
+                                zero_on = 1;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+                4'b0001:
+                    begin
+                        if(one_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 1;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                                end 
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0010:
+                    begin
+                        if(two_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 1;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+                
+                4'b0011:
+                    begin
+                        if(three_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 1;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                                end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0100:
+                    begin
+                        if(four_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 1;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+                            end
+                    end
+
+                4'b0101:
+                    begin
+                        if(five_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 1;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0110:
+                    begin
+                        if(six_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 1;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0111:
+                    begin
+                        if(seven_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 1;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b1000:
+                    begin
+                        if(eight_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 1;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b1001:
+                    begin
+                        if(nine_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 1;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+            endcase
+
+           
+        end 
+
+        else if(DrawY >= 0 && DrawX <= (4 * letter_size) && DrawX > (3 * letter_size) && DrawY <= letter_size)
+            begin
+            unique case(second_digit)
+                4'b0000: 
+                    begin
+                        if(zero_BKG_out != 24'h0)
+                            begin
+                                zero_on = 1;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+                4'b0001:
+                    begin
+                        if(one_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 1;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                                end 
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0010:
+                    begin
+                        if(two_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 1;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+                
+                4'b0011:
+                    begin
+                        if(three_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 1;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                                end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0100:
+                    begin
+                        if(four_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 1;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+                            end
+                    end
+
+                4'b0101:
+                    begin
+                        if(five_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 1;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0110:
+                    begin
+                        if(six_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 1;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0111:
+                    begin
+                        if(seven_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 1;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b1000:
+                    begin
+                        if(eight_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 1;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b1001:
+                    begin
+                        if(nine_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 1;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+            endcase
+
+           
+        end 
+
+        else if(DrawY >= 0 && DrawX <= (5 * letter_size) && DrawX > (4 * letter_size) && DrawY <= letter_size)
+            begin
+            unique case(first_digit)
+                4'b0000: 
+                    begin
+                        if(zero_BKG_out != 24'h0)
+                            begin
+                                zero_on = 1;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+                4'b0001:
+                    begin
+                        if(one_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 1;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                                end 
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0010:
+                    begin
+                        if(two_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 1;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+                
+                4'b0011:
+                    begin
+                        if(three_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 1;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                                end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0100:
+                    begin
+                        if(four_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 1;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+                            end
+                    end
+
+                4'b0101:
+                    begin
+                        if(five_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 1;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0110:
+                    begin
+                        if(six_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 1;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b0111:
+                    begin
+                        if(seven_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 1;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b1000:
+                    begin
+                        if(eight_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 1;
+                                nine_on = 0;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+
+                4'b1001:
+                    begin
+                        if(nine_BKG_out != 24'h0)
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 1;
+
+                            end
+                        else
+                            begin
+                                zero_on = 0;
+                                one_on = 0;
+                                two_on = 0;
+                                three_on = 0;
+                                four_on = 0;
+                                five_on = 0;
+                                six_on = 0;
+                                seven_on = 0;
+                                eight_on = 0;
+                                nine_on = 0;
+
+                            end
+                    end
+            endcase
+
+           
+        end 
+
+
+
+        else 
+            begin 
+                zero_on = 0;
+                one_on = 0;
+                two_on = 0;
+                three_on = 0;
+                four_on = 0;
+                five_on = 0;
+                six_on = 0;
+                seven_on = 0;
+                eight_on = 0;
+                nine_on = 0;
+            end 
+    end 
+
+
+
 always_comb
     begin 
         BKG_address = (640 * DrawY) + DrawX;
         BKG_address2 = (640 * DrawY) + DrawX;
         BKG_address4 = (640 * DrawY) + DrawX;
         
+<<<<<<< HEAD
+        
+        cannon_ram_address = (CannonS * (DrawY - (CannonY + CannonS)) + (DrawX - (CannonX + CannonS)));
+        cannon1_ram_address = (CannonS * (DrawY - (CannonY1 + CannonS)) + (DrawX - (CannonX1 + CannonS)));
+        cannon2_ram_address = (CannonS * (DrawY - (CannonY2 + CannonS)) + (DrawX - (CannonX2 + CannonS)));
+=======
         cannon_ram_address = (CannonS * (DrawY - (CannonY)) + (DrawX - (CannonX + CannonS)));
         cannon1_ram_address = (CannonS * (DrawY - (CannonY1)) + (DrawX - (CannonX1 + CannonS)));
         cannon2_ram_address = (CannonS * (DrawY - (CannonY2)) + (DrawX - (CannonX2 + CannonS)));
+>>>>>>> 0ddb7b5da55827d7e41d1d115a281311aaeddd52
         
         doodle_right_address = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
         doodle_left_address = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
@@ -2082,6 +4249,7 @@ always_comb
         underwater_BKG_on = 1; 
         soccer_BKG_on = 0;
         space_BKG_on = 0;
+
         if(DrawY >= 0 && DrawY < shape_size_y && DrawX >= 0 && DrawX < shape_size_x) //Ball_x = 0
             begin
                 if(Score >= 20'h500 && Score <= 20'h1000) //BKG2--grassland
@@ -2111,6 +4279,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                    
                                                 end
                                         end 
                                     else 
@@ -2124,6 +4293,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                    
                                                 end
                                             else
                                                 begin
@@ -2134,6 +4304,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 1;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                  
                                                 end                                            
                                         end 
                                 end
@@ -2150,6 +4321,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                  
                                                 end
                                             else
                                                 begin
@@ -2160,6 +4332,7 @@ always_comb
                                                     doodle_left_BKG_on = 1;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                    
                                                 end
                                         end 
                                     else 
@@ -2173,6 +4346,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                   
                                                 end
                                             else
                                                 begin
@@ -2183,6 +4357,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 1;
+                                                    
                                                 end                                            
                                         end  
                                 
@@ -2198,6 +4373,7 @@ always_comb
                                 doodle_left_BKG_on = 0;
                                 doodle_rightC_BKG_on = 0;
                                 doodle_leftC_BKG_on = 0;
+                               
                             end
                     end
                 
@@ -2205,7 +4381,7 @@ always_comb
                 else if(Score > 20'h1000) //BKG4 -- stats and space
                     begin
                     if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
-                        begin//inside the doodle hitbox 
+                        begin //inside the doodle hitbox 
                             if(direction == 1'b1) //right key
                                 begin
                                     if(legsupr[4:0] == 6'b000000)
@@ -2219,6 +4395,8 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                    
+                                                    
                                                 end
                                             else
                                                 begin
@@ -2229,6 +4407,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                   
                                                 end
                                         end 
                                     else 
@@ -2242,6 +4421,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                   
                                                 end
                                             else
                                                 begin
@@ -2252,6 +4432,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 1;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                    
                                                 end                                            
                                         end 
                                 end
@@ -2268,6 +4449,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                   
                                                 end
                                             else
                                                 begin
@@ -2278,6 +4460,7 @@ always_comb
                                                     doodle_left_BKG_on = 1;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                   
                                                 end
                                         end 
                                     else 
@@ -2291,6 +4474,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                   
                                                 end
                                             else
                                                 begin
@@ -2301,6 +4485,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 1;
+                                                   
                                                 end                                            
                                         end  
                                 
@@ -2316,11 +4501,12 @@ always_comb
                             doodle_left_BKG_on = 0;
                             doodle_rightC_BKG_on = 0;
                             doodle_leftC_BKG_on = 0;
+                           
                         end
                     end
 
                 else //BKG1 -- ocean
-                    begin
+                    begin   
                         if(DrawY >= (DoodleY + Doodle_size - doodle_shape_size_y) && DrawY < (DoodleY + Doodle_size) && DrawX >= (DoodleX - (doodle_shape_size_x /2) ) && DrawX < (DoodleX + (doodle_shape_size_x /2)))
                         begin//inside the doodle hitbox 
                             if(direction == 1'b1) //right key
@@ -2336,6 +4522,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                    
                                                 end
                                             else
                                                 begin
@@ -2346,6 +4533,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                   
                                                 end
                                         end 
                                     else 
@@ -2359,6 +4547,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                   
                                                 end
                                             else
                                                 begin
@@ -2369,6 +4558,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 1;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                   
                                                 end                                            
                                         end 
                                 end
@@ -2385,6 +4575,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                    
                                                 end
                                             else
                                                 begin
@@ -2395,6 +4586,7 @@ always_comb
                                                     doodle_left_BKG_on = 1;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                   
                                                 end
                                         end 
                                     else 
@@ -2408,6 +4600,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 0;
+                                                    
                                                 end
                                             else
                                                 begin
@@ -2418,6 +4611,7 @@ always_comb
                                                     doodle_left_BKG_on = 0;
                                                     doodle_rightC_BKG_on = 0;                                            
                                                     doodle_leftC_BKG_on = 1;
+                                                   
                                                 end                                            
                                         end  
                                 
@@ -2433,6 +4627,7 @@ always_comb
                                 doodle_left_BKG_on = 0;
                                 doodle_rightC_BKG_on = 0;
                                 doodle_leftC_BKG_on = 0;
+                                
                         end
                     end    
             end
@@ -2445,8 +4640,12 @@ always_comb
                 doodle_left_BKG_on = 0;
                 doodle_rightC_BKG_on = 0;
                 doodle_leftC_BKG_on = 0;
+               
             end
     end
+
+
+
 
 
 
@@ -2536,6 +4735,42 @@ always_comb
                 Blue = 8'h00; 
             end         
 // ~~~~~~~~~~~~~~~~~~~~~~~~~platform color logic 
+
+        else if(S_on)
+            begin 
+                Red = S_BKG_out[23:16];
+                Green = S_BKG_out[15:8];
+                Blue = S_BKG_out[7:0];
+            end
+
+        else if(C_on)
+            begin 
+                Red = C_BKG_out[23:16];
+                Green = C_BKG_out[15:8];
+                Blue = C_BKG_out[7:0];
+            end
+
+        else if(O_on)
+            begin 
+                Red = O_BKG_out[23:16];
+                Green = O_BKG_out[15:8];
+                Blue = O_BKG_out[7:0];
+            end
+
+        else if(R_on)
+            begin 
+                Red = R_BKG_out[23:16];
+                Green = R_BKG_out[15:8];
+                Blue = R_BKG_out[7:0];
+            end
+
+        else if(E_on)
+            begin 
+                Red = E_BKG_out[23:16];
+                Green = E_BKG_out[15:8];
+                Blue = E_BKG_out[7:0];
+            end
+
         else if(platform_on)
             begin 
                 unique case(plat0_color)
@@ -3116,6 +5351,84 @@ always_comb
                     Green = cannon2_BKG_out[15:8]; 
                     Blue = cannon2_BKG_out[7:0]; 
                 end 
+            
+            else if(doodle_left_BKG_on == 1)
+                begin 
+                    Red = doodle_left_BKG_out[23:16];
+                    Green = doodle_left_BKG_out[15:8];
+                    Blue = doodle_left_BKG_out[7:0];
+                end
+
+            else if(one_on == 1)
+                begin 
+                    Red = one_BKG_out[23:16];
+                    Green = one_BKG_out[15:8];
+                    Blue = one_BKG_out[7:0];
+                end
+            
+            else if(two_on == 1)
+                begin 
+                    Red = two_BKG_out[23:16];
+                    Green = two_BKG_out[15:8];
+                    Blue = two_BKG_out[7:0];
+                end
+
+            else if(three_on == 1)
+                begin 
+                    Red = three_BKG_out[23:16];
+                    Green = three_BKG_out[15:8];
+                    Blue = three_BKG_out[7:0];
+                end
+
+            else if(four_on == 1)
+                begin 
+                    Red = four_BKG_out[23:16];
+                    Green = four_BKG_out[15:8];
+                    Blue = four_BKG_out[7:0];
+                end
+
+            else if(five_on == 1)
+                begin 
+                    Red = five_BKG_out[23:16];
+                    Green = five_BKG_out[15:8];
+                    Blue = five_BKG_out[7:0];
+                end
+
+            else if(six_on == 1)
+                begin 
+                    Red = six_BKG_out[23:16];
+                    Green = six_BKG_out[15:8];
+                    Blue = six_BKG_out[7:0];
+                end
+
+            else if(seven_on == 1)
+                begin 
+                    Red = seven_BKG_out[23:16];
+                    Green = seven_BKG_out[15:8];
+                    Blue = seven_BKG_out[7:0];
+                end
+
+            else if(eight_on == 1)
+                begin 
+                    Red = eight_BKG_out[23:16];
+                    Green = eight_BKG_out[15:8];
+                    Blue = eight_BKG_out[7:0];
+                end
+
+            else if(nine_on == 1)
+                begin 
+                    Red = nine_BKG_out[23:16];
+                    Green = nine_BKG_out[15:8];
+                    Blue = nine_BKG_out[7:0];
+                end
+
+            else if(zero_on == 1)
+                begin 
+                    Red = zero_BKG_out[23:16];
+                    Green = zero_BKG_out[15:8];
+                    Blue = zero_BKG_out[7:0];
+                end
+
             else if(underwater_BKG_on == 1)
                 begin 
                     Red = underwater_BKG_out[23:16];

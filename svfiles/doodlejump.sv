@@ -109,9 +109,20 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [23:0] doodle_right_BKG_out;
 	logic [23:0] space_BKG_out;
 	logic [23:0] doodle_left_BKG_out;
-	// logic [3:0]BKG_on;
-    // logic [3:0]BKG_on2;
-	// logic [3:0]doodle_right_BKG_on;
+
+	logic [23:0] zero_BKG_out;
+	logic [23:0] one_BKG_out;
+	logic [23:0] two_BKG_out;
+	logic [23:0] three_BKG_out;
+	logic [23:0] four_BKG_out;
+	logic [23:0] five_BKG_out;
+	logic [23:0] six_BKG_out;
+	logic [23:0] seven_BKG_out;
+	logic [23:0] eight_BKG_out;
+	logic [23:0] nine_BKG_out;
+	
+
+
 	logic Platform_collision;
     logic Platform_collision0;
     logic Platform_collision1;
@@ -385,9 +396,18 @@ color_mapper color(
 	.doodle_right_BKG_out(doodle_right_BKG_out[23:0]),
 	.space_BKG_out(space_BKG_out[23:0]),
 	.doodle_left_BKG_out(doodle_left_BKG_out[23:0]),
-	// .BKG_on(BKG_on),
-	// .BKG_on2(BKG_on2),
-	// .doodle_right_BKG_on(doodle_right_BKG_on),
+	.zero_BKG_out(zero_BKG_out[23:0]),
+	.one_BKG_out(one_BKG_out[23:0]),
+	.two_BKG_out(two_BKG_out[23:0]),
+	.three_BKG_out(three_BKG_out[23:0]),
+	.four_BKG_out(four_BKG_out[23:0]),
+	.five_BKG_out(five_BKG_out[23:0]),
+	.six_BKG_out(six_BKG_out[23:0]),
+	.seven_BKG_out(seven_BKG_out[23:0]),
+	.eight_BKG_out(eight_BKG_out[23:0]),
+	.nine_BKG_out(nine_BKG_out[23:0]),
+
+
 
 	.Score(Score[19:0]),
 	.Doodle_Y_Motion(Doodle_Y_Motion),
