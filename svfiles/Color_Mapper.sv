@@ -1445,70 +1445,70 @@ always_ff @ (posedge frame_clk or posedge loadplat)
             end 
         else if(outstate == 3'b110)
             begin 
-                if(platY >= 460)
-                    platY <= 480;
+                if(platY <= 25)
+                    platY <= 0;
                 else 
-                    platY  <= platY - plat_temp_Y;
-                if(platY1 >= 460)
-                    platY1 <= 480; 
+                    platY  <= platY + plat_temp_Y;
+                if(platY1 <= 25)
+                    platY1 <= 0; 
                 else 
-                    platY1 <= platY1 - plat_temp_Y;
-                if(platY2 >= 460)
-                    platY2 <= 480;
+                    platY1 <= platY1 + plat_temp_Y;
+                if(platY2 <= 25)
+                    platY2 <= 0;
                 else 
-                    platY2 <= platY2 - plat_temp_Y; 
-                if(platY3 >= 460)
-                    platY3 <= 480;
+                    platY2 <= platY2 + plat_temp_Y; 
+                if(platY3 <= 25)
+                    platY3 <= 0;
                 else 
-                    platY3 <= platY3 - plat_temp_Y;
-                if(platY4 >= 460)
-                    platY4 <= 480;
+                    platY3 <= platY3 + plat_temp_Y;
+                if(platY4 <= 25)
+                    platY4 <= 0;
                 else 
-                    platY4 <= platY4 - plat_temp_Y;
-                if(platY5 >= 460)
-                    platY5 <= 480;
+                    platY4 <= platY4 + plat_temp_Y;
+                if(platY5 <= 25)
+                    platY5 <= 0;
                 else 
-                    platY5 <= platY5 - plat_temp_Y;
-                if(platY6 >= 460)
-                    platY6 <= 480;
+                    platY5 <= platY5 + plat_temp_Y;
+                if(platY6 <= 25)
+                    platY6 <= 0;
                 else 
-                    platY6 <= platY6 - plat_temp_Y;
-                if(platY7 >= 460)
-                    platY7 <= 480;
+                    platY6 <= platY6 + plat_temp_Y;
+                if(platY7 <= 25)
+                    platY7 <= 0;
                 else 
-                    platY7 <= platY7 - plat_temp_Y;
-                if(platY8 >= 460)
-                    platY8 <= 480;
+                    platY7 <= platY7 + plat_temp_Y;
+                if(platY8 <= 25)
+                    platY8 <= 0;
                 else
-                    platY8 <= platY8 - plat_temp_Y;
-                if(platY9 >= 460)
-                    platY9 <= 480;
+                    platY8 <= platY8 + plat_temp_Y;
+                if(platY9 <= 25)
+                    platY9 <= 0;
                 else 
-                    platY9 <= platY9 - plat_temp_Y;
-                if(platY10 >= 460)
-                    platY10 <= 480;
+                    platY9 <= platY9 + plat_temp_Y;
+                if(platY10 <= 25)
+                    platY10 <= 0;
                 else 
-                    platY10 <= platY10 - plat_temp_Y;
-                if(platY11 >= 460)
-                    platY11 <= 480;
+                    platY10 <= platY10 + plat_temp_Y;
+                if(platY11 <= 25)
+                    platY11 <= 0;
                 else 
-                    platY11 <= platY11 - plat_temp_Y;
-                if(platY12 >= 460)
-                    platY12 <= 480;
+                    platY11 <= platY11 + plat_temp_Y;
+                if(platY12 <= 25)
+                    platY12 <= 0;
                 else 
-                    platY12 <= platY12 - plat_temp_Y;
-                if(platY13 >= 460)
-                    platY13 <= 480;
+                    platY12 <= platY12 + plat_temp_Y;
+                if(platY13 <= 25)
+                    platY13 <= 0;
                 else 
-                    platY13 <= platY13 - plat_temp_Y;
-                if(platY14 >= 460)
-                    platY14 <= 480;
+                    platY13 <= platY13 + plat_temp_Y;
+                if(platY14 <= 25)
+                    platY14 <= 0;
                 else 
-                    platY14 <= platY14 - plat_temp_Y;
-                if(platY15 >= 460)
-                    platY15 <= 480;
+                    platY14 <= platY14 + plat_temp_Y;
+                if(platY15 <= 25)
+                    platY15 <= 0;
                 else 
-                    platY15 <= platY15 - plat_temp_Y;
+                    platY15 <= platY15 + plat_temp_Y;
 
             end  
         else 
