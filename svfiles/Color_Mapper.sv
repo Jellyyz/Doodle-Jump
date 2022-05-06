@@ -1970,36 +1970,36 @@ Doodle_leftC_ram DLRC(
 
 // ram for the platforms
 greenplat16 greenplat16(
-    .read_address5(greenplat16addr[7:0]),
+    .read_address(greenplat16addr[7:0]),
     .Clk(Clk), 
 
-    .data_Out5(greenplat16_out[23:0])
+    .data_Out(greenplat16_out[23:0])
 ); 
 greenplat32 greenplat32(
-    .read_address5(greenplat16addr[8:0]),
+    .read_address(greenplat32addr[8:0]),
     .Clk(Clk), 
 
-    .data_Out5(greenplat32_out[23:0])
+    .data_Out(greenplat32_out[23:0])
 ); 
 greenplat64 greenplat64(
-    .read_address5(greenplat16addr[9:0]),
+    .read_address(greenplat64addr[9:0]),
     .Clk(Clk), 
 
-    .data_Out5(greenplat64_out[23:0])
+    .data_Out(greenplat64_out[23:0])
 ); 
 
 // ram for springs and rocket 
 spring_ram spring_ram(
-    .read_address5(spring_addr[8:0]),
+    .read_address(spring_addr[8:0]),
     .Clk(Clk), 
 
-    .data_Out5(spring_out[23:0])
+    .data_Out(spring_out[23:0])
 ); 
 jetpack_ram jetpack_ram(
-    .read_address5(jetpack_addr[8:0]),
+    .read_address(jetpack_addr[8:0]),
     .Clk(Clk), 
 
-    .data_Out5(jetpack_out[23:0])
+    .data_Out(jetpack_out[23:0])
 ); 
 
 logic [8:0] spring_addr, jetpack_addr; 

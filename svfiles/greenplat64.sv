@@ -1,4 +1,4 @@
-module  plat64
+module  greenplat64
 (
 		input [4:0] data_In,
 		input [9:0] write_address, read_address,
@@ -18,8 +18,8 @@ end
 
 always_ff @ (posedge Clk) begin
 	if (we)
-		mem[write_address3] <= data_In3;
-	data_Out3<= mem[read_address3];
+		mem[write_address] <= data_In;
+	data_Out<= mem[read_address];
 end
 
 endmodule
