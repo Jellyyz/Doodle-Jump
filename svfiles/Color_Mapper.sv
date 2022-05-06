@@ -4232,16 +4232,9 @@ always_comb
         BKG_address2 = (640 * DrawY) + DrawX;
         BKG_address4 = (640 * DrawY) + DrawX;
         
-<<<<<<< HEAD
-        
-        cannon_ram_address = (CannonS * (DrawY - (CannonY + CannonS)) + (DrawX - (CannonX + CannonS)));
-        cannon1_ram_address = (CannonS * (DrawY - (CannonY1 + CannonS)) + (DrawX - (CannonX1 + CannonS)));
-        cannon2_ram_address = (CannonS * (DrawY - (CannonY2 + CannonS)) + (DrawX - (CannonX2 + CannonS)));
-=======
         cannon_ram_address = (CannonS * (DrawY - (CannonY)) + (DrawX - (CannonX + CannonS)));
         cannon1_ram_address = (CannonS * (DrawY - (CannonY1)) + (DrawX - (CannonX1 + CannonS)));
         cannon2_ram_address = (CannonS * (DrawY - (CannonY2)) + (DrawX - (CannonX2 + CannonS)));
->>>>>>> 0ddb7b5da55827d7e41d1d115a281311aaeddd52
         
         doodle_right_address = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
         doodle_left_address = (doodle_shape_size_x * (DrawY - (DoodleY + Doodle_size - doodle_shape_size_y)) + (DrawX - (DoodleX - (doodle_shape_size_x / 2))));
