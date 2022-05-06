@@ -96,7 +96,7 @@ end
 			Game_Over:
 				 begin
 					if(Keycode == 8'd41) // esc 
-						Next_state = Main_Menu; 
+						Next_state = INIT; 
 					else 
 						Next_state = Game_Over; 
 				end

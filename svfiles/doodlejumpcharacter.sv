@@ -103,7 +103,7 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
 	parameter [4:0] CannonSpeed1 = 5'd10;
     parameter [2:0] CannonSpeed2 = 3'd6;
 	logic [5:0] Doodle_Size; 
-	assign Doodle_Size = 32;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
+	assign Doodle_Size = 16;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
 	assign Cannon_Size = 2; 
 counter counter(
 	.Reset(jump_reset), 
@@ -475,11 +475,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 
 					plat_temp_Y <= (1'b1 + ~Spring_Modifier); 
 					refresh_en <= 0;
-
-					if(Doodle_Y_Pos >= 500)
-						Doodle_Y_Motion = 0; 
-					else
-						Doodle_Y_Motion = Spring_Modifier;
+					Doodle_Y_Motion = 0;
 
 					end 
 			
@@ -497,12 +493,20 @@ always_ff @ (posedge Reset or posedge frame_clk)
 
 				// Update Doodle position
 				// wrap around screen condition  
-				if((Doodle_X_Pos + Doodle_Size) >= (Screen_X_Max - 10'd25))  
-					Doodle_X_Pos <= Screen_X_Min + (Doodle_Size << 4); 
-				else if ( (Doodle_X_Pos - Doodle_Size) <= 10'd25) 
-					Doodle_X_Pos <= Screen_X_Max - (Doodle_Size << 4); 
+				if(outstate == 3'b101)
+					begin 
+						Doodle_Y_Pos <= 9'd100;
+						Doodle_X_Pos <= 9'd330;
+					end 
 				else if (outstate == 3'b110)
-					Doodle_X_Pos <= 330; 
+					begin 
+						Doodle_X_Pos <= 0; 
+						Doodle_Y_Pos <= 9'd100; 
+					end 
+				else if((Doodle_X_Pos + Doodle_Size) >= (Screen_X_Max - 10'd25))  
+					Doodle_X_Pos <= Screen_X_Min + (Doodle_Size << 3); 
+				else if ( (Doodle_X_Pos - Doodle_Size) <= 10'd25) 
+					Doodle_X_Pos <= Screen_X_Max - (Doodle_Size << 3); 
 				else if(outstate != 6'd0)
 				begin 
 					Doodle_Y_Pos <= (Doodle_Y_Pos + Doodle_Y_Motion);  
@@ -512,14 +516,14 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				// Update Cannon position 
 				if(Cannon_Y_Pos - Cannon_Size <= 10'd25)
 					begin 
-						Cannon_Y_Pos <= Doodle_Y_Pos + 16; 
+						Cannon_Y_Pos <= Doodle_Y_Pos + 4; 
 						Cannon_X_Pos <= Doodle_X_Pos; 
 						Cannon_X_Motion <= 0; 
 						Cannon_Y_Motion <= 0; 
 					end
 				if(Cannon_Y_Motion <= 0 && outstate != 3'b011)
 					begin 
-						Cannon_Y_Pos <= Doodle_Y_Pos + 16; 
+						Cannon_Y_Pos <= Doodle_Y_Pos + 4; 
 						Cannon_X_Pos <= Doodle_X_Pos; 
 					end
 				else 
@@ -531,14 +535,14 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				// Update Cannon1 position 
 				if(Cannon_Y_Pos1 - Cannon_Size <= 10'd25)
 					begin 
-						Cannon_Y_Pos1 <= Doodle_Y_Pos + 16; 
+						Cannon_Y_Pos1 <= Doodle_Y_Pos + 4; 
 						Cannon_X_Pos1 <= Doodle_X_Pos; 
 						Cannon_X_Motion1 <= 0; 
 						Cannon_Y_Motion1 <= 0; 
 					end
 				if(Cannon_Y_Motion1 <= 0 && outstate != 3'b011)
 					begin 
-						Cannon_Y_Pos1 <= Doodle_Y_Pos + 16; 
+						Cannon_Y_Pos1 <= Doodle_Y_Pos + 4; 
 						Cannon_X_Pos1 <= Doodle_X_Pos; 
 					end
 				else 
@@ -550,14 +554,14 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				// Update Cannon2 position 
 				if(Cannon_Y_Pos2 - Cannon_Size <= 10'd25)
 					begin 
-						Cannon_Y_Pos2 <= Doodle_Y_Pos + 16; 
+						Cannon_Y_Pos2 <= Doodle_Y_Pos + 4; 
 						Cannon_X_Pos2 <= Doodle_X_Pos; 
 						Cannon_X_Motion2 <= 0; 
 						Cannon_Y_Motion2 <= 0; 
 					end
 				if(Cannon_Y_Motion2 <= 0 && outstate != 3'b011)
 					begin 
-						Cannon_Y_Pos2 <= Doodle_Y_Pos + 16; 
+						Cannon_Y_Pos2 <= Doodle_Y_Pos + 4; 
 						Cannon_X_Pos2 <= Doodle_X_Pos; 
 					end
 				else 
@@ -568,7 +572,7 @@ always_ff @ (posedge Reset or posedge frame_clk)
 		
 				Current_Y <= 240;
 				
-				if(Doodle_Y_Pos < Current_Y)
+				if(Doodle_Y_Pos < Current_Y && outstate != 3'b110)
 					begin
 						Score_diff <= (Current_Y - Doodle_Y_Pos);
 						Current_Y <= Doodle_Y_Pos; 
@@ -661,9 +665,9 @@ logic Spring_collision;
 always_comb
 begin:Spring_collision_
 	Spring_collision = (((Doodle_Y_Pos + Doodle_Size <= springY + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY - springsizeY) && (springX + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
-	((Doodle_Y_Pos + Doodle_Size <= springY1 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY1 - springsizeY) && (springX1 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
-	((Doodle_Y_Pos + Doodle_Size <= springY2 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY2 - springsizeY) && (springX2 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
-	((Doodle_Y_Pos + Doodle_Size <= springY3 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY3 - springsizeY) && (springX3 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX - springsizeX <= Doodle_X_Pos + Doodle_Size))
+	((Doodle_Y_Pos + Doodle_Size <= springY1 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY1 - springsizeY) && (springX1 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX1 - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
+	((Doodle_Y_Pos + Doodle_Size <= springY2 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY2 - springsizeY) && (springX2 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX2 - springsizeX <= Doodle_X_Pos + Doodle_Size)) ||
+	((Doodle_Y_Pos + Doodle_Size <= springY3 + springsizeY) && (Doodle_Y_Pos + Doodle_Size >= springY3 - springsizeY) && (springX3 + springsizeX >= Doodle_X_Pos - Doodle_Size ) && (springX3 - springsizeX <= Doodle_X_Pos + Doodle_Size))
 	);
 end 
 
