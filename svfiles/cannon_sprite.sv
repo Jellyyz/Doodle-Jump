@@ -1,9 +1,9 @@
 module  cannon_ram
 (
-		input [14:0] write_address, read_address,
+		input [6:0] write_address, read_address,
 		input we, Clk,
 
-		output logic [6:0] data_Out
+		output logic [23:0] data_Out
 );
 
 // mem has width of 3 bits and a total of 400 addresses

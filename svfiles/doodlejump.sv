@@ -110,16 +110,6 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic [23:0] space_BKG_out;
 	logic [23:0] doodle_left_BKG_out;
 
-	logic [23:0] zero_BKG_out;
-	logic [23:0] one_BKG_out;
-	logic [23:0] two_BKG_out;
-	logic [23:0] three_BKG_out;
-	logic [23:0] four_BKG_out;
-	logic [23:0] five_BKG_out;
-	logic [23:0] six_BKG_out;
-	logic [23:0] seven_BKG_out;
-	logic [23:0] eight_BKG_out;
-	logic [23:0] nine_BKG_out;
 	
 
 
@@ -141,6 +131,16 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
     logic Platform_collision14;
     logic Platform_collision15;
 	logic doodle_down_check;
+	logic [23:0] zero_BKG_out;
+    logic [23:0] one_BKG_out;
+    logic [23:0] two_BKG_out;
+    logic [23:0] three_BKG_out;
+    logic [23:0] four_BKG_out;
+    logic [23:0] five_BKG_out;
+    logic [23:0] six_BKG_out;
+    logic [23:0] seven_BKG_out;
+    logic [23:0] eight_BKG_out;
+    logic [23:0] nine_BKG_out;
     logic [2:0] plat0_color;
     logic [2:0] plat1_color;
     logic [2:0] plat2_color;
@@ -163,6 +163,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	logic 		doodle_left_BKG_on;
 	logic 		doodle_left_BKG_on5_bkg;
     reg [8:0] monsterX, monsterY;
+	reg [4:0] monstersizeX, monstersizeY; 
     reg monster_trigger;
 	reg Rocket_collision; 
 //=======================================================
@@ -195,7 +196,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign LEDR[0] = trigger; 
 	
 	//HEX drivers to convert numbers to HEX output
-	HexDriver hex_driver5 (Rocket_collision, HEX5[6:0]);
+	HexDriver hex_driver5 (outstate, HEX5[6:0]);
 	assign HEX5[7] = 1'b1;
 	
 	HexDriver hex_driver4 (Score[19:16], HEX4[6:0]);
@@ -225,7 +226,7 @@ logic [8:0] blue_temp_platX;
 	assign {Reset_h}=~ (KEY[0]);
 
 	// output to the screen 
-	always_ff @ (posedge MAX10_CLK1_50)
+	always_ff @ (posedge pxl_clk)
 	begin 
 		if(!blank)
 			begin 
@@ -369,7 +370,9 @@ jumplogic jumplogic(
 	.plat13_color(plat13_color),
 	.plat14_color(plat14_color),
 	.plat15_color(plat15_color),
-	.Rocket_collision(Rocket_collision)
+	.Rocket_collision(Rocket_collision),
+	.monsterX(monsterX), .monsterY(monsterY),
+	.monstersizeX(monstersizeX), .monstersizeY(monstersizeY)
 ); 
 
 color_mapper color(
@@ -478,7 +481,8 @@ color_mapper color(
 	.doodle_left_BKG_on(doodle_left_BKG_on),
 	.doodle_left_BKG_on5_bkg(doodle_left_BKG_on5_bkg),
 	.monster_trigger(monster_trigger),
-	.monsterX(monsterX), .monsterY(monsterY)
+	.monsterX(monsterX), .monsterY(monsterY),
+	.monstersizeX(monstersizeX), .monstersizeY(monstersizeY)
 );
 
 

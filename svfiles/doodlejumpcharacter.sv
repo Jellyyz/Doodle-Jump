@@ -43,6 +43,9 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
                     input logic [2:0] plat13_color,
                     input logic [2:0] plat14_color,
                     input logic [2:0] plat15_color,
+                    input reg [8:0] monsterX, monsterY,
+                    input reg [4:0] monstersizeX, monstersizeY, 		
+
 
 					output logic doodle_down_check, 
 					output logic Platform_collision,
@@ -104,7 +107,7 @@ module  jumplogic(  input logic Reset, frame_clk, Clk,
     parameter [2:0] CannonSpeed2 = 3'd6;
 	logic [5:0] Doodle_Size; 
 	assign Doodle_Size = 16;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
-	assign Cannon_Size = 2; 
+	assign Cannon_Size = 4; 
 counter counter(
 	.Reset(jump_reset), 
 	.enable(jump_enable), 
@@ -137,6 +140,7 @@ jumpstate jumpstate(
 	.trigger(trigger),
 	.refresh_en(refresh_en),
 	.game_over_trigger(game_over_trigger),
+	.monster_collision(monster_collision),
 
 	.outstate(outstate[5:0]),
 	.loadplat(loadplat)
@@ -212,6 +216,12 @@ always_ff @ (posedge Reset or posedge frame_clk)
 								jump_reset <= 1; 
 								jump_enable <= 0; 
 								Doodle_Y_Motion = Gravity;  // allow for the doodle to start falling at peak 
+							end 
+						else if(Doodle_Y_Pos > 240)
+							begin
+								jump_reset <= 1;  // reset the counter for velocity 
+								jump_enable <= 0; 	// begin the convergence of velocity toward 0 
+								Doodle_Y_Motion = Gravity;  // allow for the doodle to "jump"
 							end 
 						else if(Platform_collision)
 							begin
@@ -473,13 +483,14 @@ always_ff @ (posedge Reset or posedge frame_clk)
 				3'b110:
 					begin 
 
-					plat_temp_Y <= (1'b1 + ~Spring_Modifier); 
-					refresh_en <= 0;
-					Doodle_Y_Motion = 0;
-
+						plat_temp_Y <= (1'b1 + ~Spring_Modifier); 
+						refresh_en <= 0;
+						if(Doodle_Y_Pos + Doodle_Size>= 460)
+							Doodle_Y_Motion = 0;
+						else
+							Doodle_Y_Motion = (1'b1 + ~Gravity);  
 					end 
-			
-
+					
 			endcase 
 // △△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△			
 // △△△△△△△△△△△△△△△△△△△△△△△STATE MACHINE FOR THE DOODLE GAME EOF△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△
@@ -498,11 +509,8 @@ always_ff @ (posedge Reset or posedge frame_clk)
 						Doodle_Y_Pos <= 9'd100;
 						Doodle_X_Pos <= 9'd330;
 					end 
-				else if (outstate == 3'b110)
-					begin 
-						Doodle_X_Pos <= 0; 
-						Doodle_Y_Pos <= 9'd100; 
-					end 
+				else if(outstate == 3'b110)
+					Doodle_X_Pos <= 9'd330; 
 				else if((Doodle_X_Pos + Doodle_Size) >= (Screen_X_Max - 10'd25))  
 					Doodle_X_Pos <= Screen_X_Min + (Doodle_Size << 3); 
 				else if ( (Doodle_X_Pos - Doodle_Size) <= 10'd25) 
@@ -572,7 +580,9 @@ always_ff @ (posedge Reset or posedge frame_clk)
 		
 				Current_Y <= 240;
 				
-				if(Doodle_Y_Pos < Current_Y && outstate != 3'b110)
+				if(outstate == 3'b101 || outstate == 3'b000 || outstate == 3'b001)
+					Score <= 0; 
+				else if(Doodle_Y_Pos < Current_Y)
 					begin
 						Score_diff <= (Current_Y - Doodle_Y_Pos);
 						Current_Y <= Doodle_Y_Pos; 
@@ -584,6 +594,15 @@ always_ff @ (posedge Reset or posedge frame_clk)
 
 
 assign doodle_down_check = Doodle_Y_Motion[7:4] >= 4'h0 && Doodle_Y_Motion[7:4] <= 4'hA; 
+
+reg monster_collison; 
+always_comb	
+begin:monster_coll
+
+	monster_collision = ((Doodle_Y_Pos + Doodle_Size <= monsterY + monstersizeY) && (Doodle_Y_Pos + Doodle_Size >= monsterY - monstersizeY) && (monsterX + monstersizeX >= Doodle_X_Pos - Doodle_Size ) && (monsterX - monstersizeX <= Doodle_X_Pos + Doodle_Size));
+
+end 
+
 always_comb
 begin:Plat_coll
 
