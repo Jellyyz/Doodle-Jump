@@ -2717,7 +2717,7 @@ always_comb
         BKG_address_O = (temp_letter_size * (DrawY - temp_O_Y ) + (DrawX - temp_O_X));
         BKG_address_R = (temp_letter_size * (DrawY - temp_R_Y) + (DrawX - temp_R_X));
         BKG_address_E = (temp_letter_size * (DrawY - temp_E_Y) + (DrawX - temp_E_X));
-    if(outstate == 3'b010 || outstate == 3'b011)
+    if(outstate == 3'b010 || outstate == 3'b011 || outstate == 3'b110 || outstate == 3'b100)
         begin
         if(DrawY >= letter_size && DrawX >= 0 && DrawX <= letter_size && DrawY <= (2 * letter_size))
             begin
@@ -3018,7 +3018,7 @@ always_comb
             C_on = 0;
             O_on = 0;
             R_on = 0;
-            E_on = 1; 
+            E_on = 0; 
         end
 end
 
@@ -3031,9 +3031,9 @@ always_comb
         
         if(outstate == 3'b110)
         begin
-            if(DrawX >= 206 && DrawX <= 238 && DrawY >= 224 && DrawY <= 256) 
+            if(DrawX >= 288 && DrawX <= 320 && DrawY >= 224 && DrawY <= 256) 
                 begin
-                temp_G_X = 206;
+                temp_G_X = 288;
                 temp_G_Y = 224;
                 temp_letter_size = letter_size;
                     if(G_BKG_out != 24'h0)
@@ -3046,9 +3046,9 @@ always_comb
                         end
                 end
                     
-            else if(DrawX >= 242 && DrawX <= 274 && DrawY >= 224 && DrawY <= 256) 
+            else if(DrawX >= 322 && DrawX <= 354 && DrawY >= 224 && DrawY <= 256) 
                 begin
-                temp_G_X = 242;
+                temp_G_X = 322;
                 temp_G_Y = 224;
                 temp_letter_size = letter_size;
                     if(G_BKG_out != 24'h0)
@@ -3112,7 +3112,7 @@ always_comb
         BKG_address_seven = (letter_size * DrawY) + DrawX;
         BKG_address_eight = (letter_size * DrawY) + DrawX;
         BKG_address_nine = (letter_size * DrawY) + DrawX;
-    if(outstate == 3'b010 || outstate == 3'b011 || outstate == 3'b100) 
+    if(outstate == 3'b010 || outstate == 3'b011 || outstate == 3'b100 || outstate == 3'b110) 
         begin   
         if(DrawY >= 0 && DrawX >= 0 && DrawX <= letter_size && DrawY <= letter_size)
             begin
@@ -5356,11 +5356,80 @@ always_comb
 
         else if(G_on)
             begin 
-                Red = G_BKG_out[23:16];
-                Green = G_BKG_out[15:8];
-                Blue = G_BKG_out[7:0];
+                Red = 8'h00;
+                Green = 8'h00;
+                Blue = 8'h00;
             end
 
+        else if(one_on == 1)
+                begin 
+                    Red = one_BKG_out[23:16];
+                    Green = one_BKG_out[15:8];
+                    Blue = one_BKG_out[7:0];
+                end
+            
+        else if(two_on == 1)
+            begin 
+                Red = two_BKG_out[23:16];
+                Green = two_BKG_out[15:8];
+                Blue = two_BKG_out[7:0];
+            end
+
+        else if(three_on == 1)
+            begin 
+                Red = three_BKG_out[23:16];
+                Green = three_BKG_out[15:8];
+                Blue = three_BKG_out[7:0];
+            end
+
+        else if(four_on == 1)
+            begin 
+                Red = four_BKG_out[23:16];
+                Green = four_BKG_out[15:8];
+                Blue = four_BKG_out[7:0];
+            end
+
+        else if(five_on == 1)
+            begin 
+                Red = five_BKG_out[23:16];
+                Green = five_BKG_out[15:8];
+                Blue = five_BKG_out[7:0];
+            end
+
+        else if(six_on == 1)
+            begin 
+                Red = six_BKG_out[23:16];
+                Green = six_BKG_out[15:8];
+                Blue = six_BKG_out[7:0];
+            end
+
+        else if(seven_on == 1)
+            begin 
+                Red = seven_BKG_out[23:16];
+                Green = seven_BKG_out[15:8];
+                Blue = seven_BKG_out[7:0];
+            end
+
+        else if(eight_on == 1)
+            begin 
+                Red = eight_BKG_out[23:16];
+                Green = eight_BKG_out[15:8];
+                Blue = eight_BKG_out[7:0];
+            end
+
+        else if(nine_on == 1)
+            begin 
+                Red = nine_BKG_out[23:16];
+                Green = nine_BKG_out[15:8];
+                Blue = nine_BKG_out[7:0];
+            end
+
+        else if(zero_on == 1)
+            begin 
+                Red = zero_BKG_out[23:16];
+                Green = zero_BKG_out[15:8];
+                Blue = zero_BKG_out[7:0];
+            end
 
         else if(greenplat16_on)
             begin   
@@ -5586,76 +5655,6 @@ always_comb
                     Red = doodle_left_BKG_out[23:16];
                     Green = doodle_left_BKG_out[15:8];
                     Blue = doodle_left_BKG_out[7:0];
-                end
-
-            else if(one_on == 1)
-                begin 
-                    Red = one_BKG_out[23:16];
-                    Green = one_BKG_out[15:8];
-                    Blue = one_BKG_out[7:0];
-                end
-            
-            else if(two_on == 1)
-                begin 
-                    Red = two_BKG_out[23:16];
-                    Green = two_BKG_out[15:8];
-                    Blue = two_BKG_out[7:0];
-                end
-
-            else if(three_on == 1)
-                begin 
-                    Red = three_BKG_out[23:16];
-                    Green = three_BKG_out[15:8];
-                    Blue = three_BKG_out[7:0];
-                end
-
-            else if(four_on == 1)
-                begin 
-                    Red = four_BKG_out[23:16];
-                    Green = four_BKG_out[15:8];
-                    Blue = four_BKG_out[7:0];
-                end
-
-            else if(five_on == 1)
-                begin 
-                    Red = five_BKG_out[23:16];
-                    Green = five_BKG_out[15:8];
-                    Blue = five_BKG_out[7:0];
-                end
-
-            else if(six_on == 1)
-                begin 
-                    Red = six_BKG_out[23:16];
-                    Green = six_BKG_out[15:8];
-                    Blue = six_BKG_out[7:0];
-                end
-
-            else if(seven_on == 1)
-                begin 
-                    Red = seven_BKG_out[23:16];
-                    Green = seven_BKG_out[15:8];
-                    Blue = seven_BKG_out[7:0];
-                end
-
-            else if(eight_on == 1)
-                begin 
-                    Red = eight_BKG_out[23:16];
-                    Green = eight_BKG_out[15:8];
-                    Blue = eight_BKG_out[7:0];
-                end
-
-            else if(nine_on == 1)
-                begin 
-                    Red = nine_BKG_out[23:16];
-                    Green = nine_BKG_out[15:8];
-                    Blue = nine_BKG_out[7:0];
-                end
-
-            else if(zero_on == 1)
-                begin 
-                    Red = zero_BKG_out[23:16];
-                    Green = zero_BKG_out[15:8];
-                    Blue = zero_BKG_out[7:0];
                 end
 
             else if(underwater_BKG_on == 1)
