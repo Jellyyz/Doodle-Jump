@@ -2479,6 +2479,66 @@ modifiedcounter platformlegsr(
     .outM(legsupr[4:0])
 );
 
+always_comb 
+    begin
+        BKG_address_D = (letter_size * (DrawY - 400) + (DrawX - 180));
+        BKG_address_O = (letter_size * (DrawY - 400) + (DrawX - 230));
+        BKG_address_L = (letter_size * (DrawY - 400) + (DrawX - 380));         
+        BKG_address_E = (letter_size * (DrawY - 400) + (DrawX - 430));
+        
+        if(outstate = 3'b000)
+            begin
+                if((DrawX >= 180 && DrawX <= 212 && DrawY >= 400 && DrawY <= 432) || (DrawX >= 330 && DrawX <= 362 && DrawY >= 400 && DrawY <= 432))
+                    begin
+                        O_on = 0;
+                        D_on = 1;
+                        L_on = 0;
+                        E_on = 0;
+                    end
+                
+                else if((DrawX >= 230 && DrawX <= 262 && DrawY >= 400 && DrawY <= 432) || (DrawX >= 280 && DrawX <= 312 && DrawY >= 400 && DrawY <= 432)) 
+                    begin
+                        O_on = 1;
+                        D_on = 0;
+                        L_on = 0;
+                        E_on = 0;
+                    end
+
+                else if(DrawX >= 380 && DrawX <= 412 && DrawY >= 400 && DrawY <= 432) 
+                    begin
+                        O_on = 0;
+                        D_on = 0;
+                        L_on = 1;
+                        E_on = 0;
+                    end
+
+                else if(DrawX >= 430 && DrawX <= 462 && DrawY >= 400 && DrawY <= 432) 
+                    begin
+                        O_on = 0;
+                        D_on = 0;
+                        L_on = 0;
+                        E_on = 1; 
+                    end
+
+                else
+                    begin
+                        O_on = 0;
+                        D_on = 0;
+                        L_on = 0;
+                        E_on = 0; 
+                    end
+            end
+        else
+            begin
+                O_on = 0;
+                D_on = 0;
+                L_on = 0;
+                E_on = 0;
+            end
+    end
+
+
+
 
 always_comb
     begin
@@ -5617,6 +5677,36 @@ always_comb
                 Green = E_BKG_out[15:8];
                 Blue = E_BKG_out[7:0];
             end
+
+        else if(D_on)
+            begin
+                Red = 8'h00;
+                Green = 8'h00;
+                Blue = 8'h00;
+            end
+
+        else if(L_on)
+            begin
+                Red = 8'h00;
+                Green = 8'h00;
+                Blue = 8'h00;
+            end
+
+
+        else if(O_on == 1 && outstate == 3'b000)
+            begin
+                Red = 8'h00;
+                Green = 8'h00;
+                Blue = 8'h00;
+            end
+
+        else if(E_on == 1 && outstate == 3'b000) 
+            begin 
+                Red = 8'h00;
+                Green = 8'h00;
+                Blue = 8'h00;
+            end
+        
 
         else if(greenplat16_on)
             begin
