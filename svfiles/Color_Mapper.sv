@@ -313,7 +313,7 @@ logic [2:0] plat0_trigger, plat1_trigger, plat2_trigger, plat3_trigger, plat4_tr
 plat_type plat0(
     .Clk(Clk),
     .Reset(Reset), 
-    .type_trigger(1'b001),
+    .type_trigger(plat0_trigger),
     .plat_color(plat0_color[2:0])
 ); 
 plat_type plat1(
@@ -1161,7 +1161,7 @@ always_ff @ (posedge Clk)
             end
         default:
         begin 
-            if(platY - plat_sizeY > 9'd480)
+            if(platY - plat_sizeY >= 9'd478)
                 begin
                     plat_offscreen[0] = 1;
                     if(!Score[0])
@@ -1172,12 +1172,12 @@ always_ff @ (posedge Clk)
                         plat0_trigger <= 3'b011; // yellow
                     else if (!Score[2])
                         plat0_trigger <= 3'b001; // white 
-                    else if(plat15_trigger == 3'b000 && plat1_trigger == 3'b000)
+                    else if(plat15_trigger == 3'b000 || plat15_trigger == 3'b010 && plat1_trigger == 3'b000 || plat1_trigger == 3'b010)
                         plat0_trigger <= 3'b100; // brown 
                 end
             else   
                 plat_offscreen[0] = 0;  
-            if(platY1 - plat_sizeY > 9'd480)
+            if(platY1 - plat_sizeY >= 9'd478)
                 begin
                     plat_offscreen[1] = 1;
                     if(!Score[0])
@@ -1188,12 +1188,12 @@ always_ff @ (posedge Clk)
                         plat2_trigger <= 3'b011;
                     else if (!Score[2])
                         plat1_trigger <= 3'b001;
-                    else if(plat0_trigger == 3'b000 && plat2_trigger == 3'b000)
+                    else if(plat0_trigger == 3'b000 || plat0_trigger == 3'b010 && plat2_trigger == 3'b000 || plat2_trigger == 3'b010)
                         plat1_trigger <= 3'b100;
                 end
             else   
                 plat_offscreen[1] = 0;  
-            if(platY2 - plat_sizeY > 9'd480)
+            if(platY2 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[2] = 1;
                     if(!Score[0])
@@ -1204,12 +1204,12 @@ always_ff @ (posedge Clk)
                         plat2_trigger <= 3'b011;
                     else if (!Score[2])
                         plat2_trigger <= 3'b001;
-                    else if(plat1_trigger == 3'b000 && plat3_trigger == 3'b000)
+                    else if(plat1_trigger == 3'b000 || plat1_trigger == 3'b010 && plat3_trigger == 3'b000 || plat3_trigger == 3'b010)
                         plat2_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[2] = 0;  
-            if(platY3 - plat_sizeY > 9'd480)
+            if(platY3 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[3] = 1;
                     if(!Score[0])
@@ -1220,12 +1220,12 @@ always_ff @ (posedge Clk)
                         plat3_trigger <= 3'b011;
                     else if (!Score[2])
                         plat3_trigger <= 3'b001;
-                    else if(plat2_trigger == 3'b000 && plat4_trigger == 3'b000)
+                    else if(plat2_trigger == 3'b000 || plat2_trigger == 3'b010 && plat4_trigger == 3'b000 || plat4_trigger == 3'b010)
                         plat3_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[3] = 0;  
-            if(platY4 - plat_sizeY > 9'd480)
+            if(platY4 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[4] = 1;
                     if(!Score[0])
@@ -1236,12 +1236,12 @@ always_ff @ (posedge Clk)
                         plat4_trigger <= 3'b011;
                     else if (!Score[2])
                         plat4_trigger <= 3'b001;
-                    else if(plat3_trigger == 3'b000 && plat5_trigger == 3'b000)
+                    else if(plat3_trigger == 3'b000 || plat3_trigger == 3'b010 && plat5_trigger == 3'b000 || plat5_trigger == 3'b010)
                         plat4_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[4] = 0;  
-            if(platY5 - plat_sizeY > 9'd480)
+            if(platY5 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[5] = 1;
                     if(!Score[0])
@@ -1252,12 +1252,12 @@ always_ff @ (posedge Clk)
                         plat5_trigger <= 3'b011;
                     else if (!Score[2])
                         plat5_trigger <= 3'b001;
-                    else if(plat4_trigger == 3'b000 && plat6_trigger == 3'b000)
+                    else if(plat4_trigger == 3'b000 || plat4_trigger == 3'b010 && plat6_trigger == 3'b000 || plat6_trigger == 3'b010)
                         plat5_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[5] = 0;  
-            if(platY6 - plat_sizeY > 9'd480)
+            if(platY6 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[6] = 1;
                     if(!Score[0])
@@ -1268,12 +1268,12 @@ always_ff @ (posedge Clk)
                         plat6_trigger <= 3'b011;
                     else if (!Score[2])
                         plat6_trigger <= 3'b001;
-                    else if(plat5_trigger == 3'b000 && plat7_trigger == 3'b000)
+                    else if(plat5_trigger == 3'b000 || plat5_trigger == 3'b010 && plat7_trigger == 3'b000 || plat7_trigger == 3'b010)
                         plat6_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[6] = 0;  
-            if(platY7 - plat_sizeY > 9'd480)
+            if(platY7 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[7] = 1;
                     if(!Score[0])
@@ -1284,12 +1284,12 @@ always_ff @ (posedge Clk)
                         plat7_trigger <= 3'b011;
                     else if (!Score[2])
                         plat7_trigger <= 3'b001;
-                    else if(plat6_trigger == 3'b000 && plat8_trigger == 3'b000)
+                    else if(plat6_trigger == 3'b000 || plat6_trigger == 3'b010 && plat8_trigger == 3'b000 || plat8_trigger == 3'b010)
                         plat7_trigger <= 3'b100; 
                 end 
             else   
                 plat_offscreen[7] = 0;  
-            if(platY8 - plat_sizeY > 9'd480)
+            if(platY8 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[8] = 1;
                     if(!Score[0])
@@ -1300,12 +1300,12 @@ always_ff @ (posedge Clk)
                         plat8_trigger <= 3'b011;
                     else if (!Score[2])
                         plat8_trigger <= 3'b001;
-                    else if(plat7_trigger == 3'b000 && plat9_trigger == 3'b000)
+                    else if(plat7_trigger == 3'b000 || plat7_trigger == 3'b010 && plat9_trigger == 3'b000 || plat9_trigger == 3'b010)
                         plat8_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[8] = 0;  
-            if(platY9 - plat_sizeY > 9'd480)
+            if(platY9 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[9] = 1;
                     if(!Score[0])
@@ -1316,12 +1316,12 @@ always_ff @ (posedge Clk)
                         plat9_trigger <= 3'b011;
                     else if (!Score[2])
                         plat9_trigger <= 3'b001;
-                    else if(plat8_trigger == 3'b000 && plat10_trigger == 3'b000)
+                    else if(plat8_trigger == 3'b000 || plat8_trigger == 3'b010 && plat10_trigger == 3'b000 || plat10_trigger == 3'b010)
                         plat9_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[9] = 0;  
-            if(platY10 - plat_sizeY > 9'd480)
+            if(platY10 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[10] = 1;
                     if(!Score[0])
@@ -1332,12 +1332,12 @@ always_ff @ (posedge Clk)
                         plat10_trigger <= 3'b011;
                     else if (!Score[2])
                         plat10_trigger <= 3'b001;
-                    else if(plat9_trigger == 3'b000 && plat11_trigger == 3'b000)
+                    else if(plat9_trigger == 3'b000 || plat9_trigger == 3'b010 && plat11_trigger == 3'b000 || plat11_trigger == 3'b010)
                         plat10_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[10] = 0;  
-            if(platY11 - plat_sizeY > 9'd480)
+            if(platY11 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[11] = 1;
                     if(!Score[0])
@@ -1348,12 +1348,12 @@ always_ff @ (posedge Clk)
                         plat11_trigger <= 3'b011;
                     else if (!Score[2])
                         plat11_trigger <= 3'b001;
-                    else if(plat10_trigger == 3'b000 && plat12_trigger == 3'b000)
+                    else if(plat10_trigger == 3'b000 || plat10_trigger == 3'b010 && plat12_trigger == 3'b000 || plat12_trigger == 3'b010)
                         plat11_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[11] = 0;  
-            if(platY12 - plat_sizeY > 9'd480)
+            if(platY12 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[12] = 1;
                     if(!Score[0])
@@ -1364,12 +1364,12 @@ always_ff @ (posedge Clk)
                         plat12_trigger <= 3'b011;
                     else if (!Score[2])
                         plat12_trigger <= 3'b001;
-                    else if(plat11_trigger == 3'b000 && plat13_trigger == 3'b000)
+                    else if(plat11_trigger == 3'b000 || plat11_trigger == 3'b010 && plat13_trigger == 3'b000 || plat13_trigger == 3'b010)
                         plat12_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[12] = 0;  
-            if(platY13 - plat_sizeY > 9'd480)
+            if(platY13 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[13] = 1;
                     if(!Score[0])
@@ -1380,12 +1380,12 @@ always_ff @ (posedge Clk)
                         plat13_trigger <= 3'b011;
                     else if (!Score[2])
                         plat13_trigger <= 3'b001;
-                    else if(plat12_trigger == 3'b000 && plat14_trigger == 3'b000)
+                    else if(plat12_trigger == 3'b000 || plat12_trigger == 3'b010 && plat14_trigger == 3'b000 || plat14_trigger == 3'b010)
                         plat13_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[13] = 0;  
-            if(platY14 - plat_sizeY > 9'd480)
+            if(platY14 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[14] = 1;
                     if(!Score[0])
@@ -1396,12 +1396,12 @@ always_ff @ (posedge Clk)
                         plat14_trigger <= 3'b011;
                     else if (!Score[2])
                         plat14_trigger <= 3'b001;
-                    else if(plat13_trigger == 3'b000 && plat15_trigger == 3'b000)
+                    else if(plat13_trigger == 3'b000 || plat13_trigger == 3'b010 && plat15_trigger == 3'b000 || plat15_trigger == 3'b010)
                         plat14_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[14] = 0;  
-            if(platY15 - plat_sizeY > 9'd480)
+            if(platY15 - plat_sizeY >= 9'd478)
                 begin
                 plat_offscreen[15] = 1;
                     if(!Score[0])
@@ -1412,7 +1412,7 @@ always_ff @ (posedge Clk)
                         plat15_trigger <= 3'b011;
                     else if (!Score[2])
                         plat15_trigger <= 3'b001;
-                    else if(plat14_trigger == 3'b000 && plat0_trigger == 3'b000)
+                    else if(plat14_trigger == 3'b000 || plat14_trigger == 3'b010 && plat0_trigger == 3'b000 || plat0_trigger == 3'b010)
                         plat15_trigger <= 3'b100;
                 end 
             else   
@@ -1804,14 +1804,14 @@ cannon_ram2 cannon_ram2(
 
 // ram for each of the backgrounds
 BKG_ram BKG(
-    .read_address(BKG_address[14:0]),
+    .read_address(BKG_address[12:0]),
     .Clk(Clk), 
 
     .data_Out(underwater_BKG_out[23:0])
 ); 
 
 BKG2_ram BKG2(
-    .read_address(BKG_address2[14:0]),
+    .read_address(BKG_address2[12:0]),
     .Clk(Clk), 
 
     .data_Out2(soccer_BKG_out[23:0])
@@ -2217,8 +2217,8 @@ logic Y_on;
 logic Z_on;
 
 
-logic [14:0] BKG_address; 
-logic [14:0] BKG_address2; 
+logic [12:0] BKG_address; 
+logic [12:0] BKG_address2; 
 logic [15:0] BKG_address4;
 logic [7:0]  BKG_address5;
 logic [10:0]  BKG_address_zero;
