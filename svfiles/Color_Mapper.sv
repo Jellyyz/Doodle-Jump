@@ -103,36 +103,32 @@ module  color_mapper (
                     output logic [23:0] seven_BKG_out,
                     output logic [23:0] eight_BKG_out,
                     output logic [23:0] nine_BKG_out,
-                    // output logic [23:0] A_BKG_out,
-                    // output logic [23:0] B_BKG_out,
+                    output logic [23:0] A_BKG_out,
+                    output logic [23:0] B_BKG_out,
                     output logic [23:0] C_BKG_out,
                     output logic [23:0] D_BKG_out,
-                    output logic [23:0] D2_BKG_out,
                     output logic [23:0] E_BKG_out,
-                    output logic [23:0] E2_BKG_out,
-                    // output logic [23:0] F_BKG_out,
-                    // output logic [23:0] G_BKG_out,
-                    // output logic [23:0] H_BKG_out,
-                    // output logic [23:0] I_BKG_out,
+                    output logic [23:0] F_BKG_out,
+                    output logic [23:0] G_BKG_out,
+                    output logic [23:0] H_BKG_out,
+                    output logic [23:0] I_BKG_out,
                     output logic [23:0] J_BKG_out,
-                    // output logic [23:0] K_BKG_out,
+                    output logic [23:0] K_BKG_out,
                     output logic [23:0] L_BKG_out,
                     output logic [23:0] M_BKG_out,
-                    // output logic [23:0] N_BKG_out,
+                    output logic [23:0] N_BKG_out,
                     output logic [23:0] O_BKG_out,
-                    output logic [23:0] O2_BKG_out,
-                    output logic [23:0] O3_BKG_out,
                     output logic [23:0] P_BKG_out,
-                    // output logic [23:0] Q_BKG_out,
+                    output logic [23:0] Q_BKG_out,
                     output logic [23:0] R_BKG_out,
                     output logic [23:0] S_BKG_out,
-                    // output logic [23:0] T_BKG_out,
+                    output logic [23:0] T_BKG_out,
                     output logic [23:0] U_BKG_out,
-                    // output logic [23:0] V_BKG_out,
-                    // output logic [23:0] W_BKG_out,
-                    // output logic [23:0] X_BKG_out,
-                    // output logic [23:0] Y_BKG_out,
-                    // output logic [23:0] Z_BKG_out,
+                    output logic [23:0] V_BKG_out,
+                    output logic [23:0] W_BKG_out,
+                    output logic [23:0] X_BKG_out,
+                    output logic [23:0] Y_BKG_out,
+                    output logic [23:0] Z_BKG_out,
 
 
                     output logic [8:0] blue_temp_platX,
@@ -2010,19 +2006,12 @@ C c(
     .data_Out(C_BKG_out[23:0])
 ); 
 
-D d(
-    .read_address(BKG_address_D[10:0]),
-    .Clk(Clk), 
+// D d(
+//     .read_address(BKG_address_D[10:0]),
+//     .Clk(Clk), 
 
-    .data_Out(D_BKG_out[23:0])
-); 
-
-D d2(
-    .read_address(BKG_address_D2[10:0]),
-    .Clk(Clk), 
-
-    .data_Out(D2_BKG_out[23:0])
-); 
+//     .data_Out(D_BKG_out[23:0])
+// ); 
 
 E e(
     .read_address(BKG_address_E[10:0]),
@@ -2030,14 +2019,6 @@ E e(
 
     .data_Out(E_BKG_out[23:0])
 ); 
-
-E e2(
-    .read_address(BKG_address_E2[10:0]),
-    .Clk(Clk), 
-
-    .data_Out(E2_BKG_out[23:0])
-); 
-
 
 // F f(
 //     .read_address(BKG_address_F[10:0]),
@@ -2081,12 +2062,12 @@ J j(
 //     .data_Out(K_BKG_out[23:0])
 // ); 
 
-L l(
-    .read_address(BKG_address_L[10:0]),
-    .Clk(Clk), 
+// L l(
+//     .read_address(BKG_address_L[10:0]),
+//     .Clk(Clk), 
 
-    .data_Out(L_BKG_out[23:0])
-); 
+//     .data_Out(L_BKG_out[23:0])
+// ); 
 
 M m(
     .read_address(BKG_address_M[10:0]),
@@ -2109,26 +2090,12 @@ O o(
     .data_Out(O_BKG_out[23:0])
 ); 
 
-O o2(
-    .read_address(BKG_address_O2[10:0]),
-    .Clk(Clk), 
+// P p(
+//     .read_address(BKG_address_P[10:0]),
+//     .Clk(Clk), 
 
-    .data_Out(O2_BKG_out[23:0])
-); 
-
-O o3(
-    .read_address(BKG_address_O3[10:0]),
-    .Clk(Clk), 
-
-    .data_Out(O3_BKG_out[23:0])
-); 
-
-P p(
-    .read_address(BKG_address_P[10:0]),
-    .Clk(Clk), 
-
-    .data_Out(P_BKG_out[23:0])
-); 
+//     .data_Out(P_BKG_out[23:0])
+// ); 
 
 // Q q(
 //     .read_address(BKG_address_Q[10:0]),
@@ -2226,9 +2193,7 @@ logic A_on;
 logic B_on;
 logic C_on;
 logic D_on;
-logic D2_on;
 logic E_on;
-logic E2_on;
 logic F_on;
 logic G_on;
 logic H_on;
@@ -2239,8 +2204,6 @@ logic L_on;
 logic M_on;
 logic N_on;
 logic O_on;
-logic O2_on;
-logic O3_on;
 logic P_on;
 logic Q_on;
 logic R_on;
@@ -2268,36 +2231,32 @@ logic [10:0]  BKG_address_six;
 logic [10:0]  BKG_address_seven;
 logic [10:0]  BKG_address_eight;
 logic [10:0]  BKG_address_nine;
-logic [10:0]  BKG_address_A;
-logic [10:0]  BKG_address_B;
+// logic [10:0]  BKG_address_A;
+// logic [10:0]  BKG_address_B;
 logic [10:0]  BKG_address_C;
-logic [10:0]  BKG_address_D;
-logic [10:0]  BKG_address_D2;
+// logic [10:0]  BKG_address_D;
 logic [10:0]  BKG_address_E;
-logic [10:0]  BKG_address_E2;
-logic [10:0]  BKG_address_F;
-logic [10:0]  BKG_address_G;
-logic [10:0]  BKG_address_H;
-logic [10:0]  BKG_address_I;
+// logic [10:0]  BKG_address_F;
+// logic [10:0]  BKG_address_G;
+// logic [10:0]  BKG_address_H;
+// logic [10:0]  BKG_address_I;
 logic [10:0]  BKG_address_J;
-logic [10:0]  BKG_address_K;
-logic [10:0]  BKG_address_L;
+// logic [10:0]  BKG_address_K;
+// logic [10:0]  BKG_address_L;
 logic [10:0]  BKG_address_M;
-logic [10:0]  BKG_address_N;
+// logic [10:0]  BKG_address_N;
 logic [10:0]  BKG_address_O;
-logic [10:0]  BKG_address_O2;
-logic [10:0]  BKG_address_O3;
-logic [10:0]  BKG_address_P;
-logic [10:0]  BKG_address_Q;
+// logic [10:0]  BKG_address_P;
+// logic [10:0]  BKG_address_Q;
 logic [10:0]  BKG_address_R;
 logic [10:0]  BKG_address_S;
-logic [10:0]  BKG_address_T;
+// logic [10:0]  BKG_address_T;
 logic [10:0]  BKG_address_U;
-logic [10:0]  BKG_address_V;
-logic [10:0]  BKG_address_W;
-logic [10:0]  BKG_address_X;
-logic [10:0]  BKG_address_Y;
-logic [10:0]  BKG_address_Z;
+// logic [10:0]  BKG_address_V;
+// logic [10:0]  BKG_address_W;
+// logic [10:0]  BKG_address_X;
+// logic [10:0]  BKG_address_Y;
+// logic [10:0]  BKG_address_Z;
 
 
 
@@ -2368,394 +2327,19 @@ platcolor_on(
 ); 
 reg [8:0] temp_platY; 
 reg [8:0] temp_platX; 
-<<<<<<< HEAD
-reg [8:0] temp_letterX;
-reg [8:0] temp_letterY;
-reg [8:0] temp_scoreX;
-reg [8:0] temp_scoreY;
-reg [8:0] temp_letter_size;
-reg [8:0] temp_D_X;
-reg [8:0] temp_D_Y;
-reg [8:0] temp_L_X;
-reg [8:0] temp_L_Y;
+logic [8:0] monster_addr;
+logic [23:0] monster_BKG_out; 
+
 reg [8:0] temp_J_X;
 reg [8:0] temp_J_Y;
 reg [8:0] temp_U_X;
 reg [8:0] temp_U_Y;
 reg [8:0] temp_M_X;
 reg [8:0] temp_M_Y;
-reg [8:0] temp_P_X;
-reg [8:0] temp_P_Y;
-reg [8:0] temp_S_X;
-reg [8:0] temp_S_Y;
-reg [8:0] temp_C_X;
-reg [8:0] temp_C_Y;
-reg [8:0] temp_O_X;
-reg [8:0] temp_O_Y;
-reg [8:0] temp_R_X;
-reg [8:0] temp_R_Y;
-reg [8:0] temp_E_X;
-reg [8:0] temp_E_Y;
-reg [8:0] temp_game_O_X;
-reg [8:0] temp_game_O_Y;
-reg [8:0] temp_game_E_X;
-reg [8:0] temp_game_E_Y;
+// reg [8:0] temp_P_X;
+// reg [8:0] temp_P_Y;
 
-
-
-always_comb 
-    begin
-        BKG_address_E2 = (letter_size * (DrawY - 300) + (DrawX - 430)); 
-        BKG_address_O2 = (letter_size * (DrawY - 300) + (DrawX - 230)); 
-        BKG_address_O3 = (letter_size * (DrawY - 300) + (DrawX - 280)); 
-        BKG_address_D = (letter_size * (DrawY - 300) + (DrawX - 330)); 
-        BKG_address_D2 = (letter_size * (DrawY - 300) + (DrawX - 180));
-        BKG_address_L = (letter_size * (DrawY - 300) + (DrawX - 380));         
-        BKG_address_J = (letter_size * (DrawY - 350) + (DrawX - 180)); 
-        BKG_address_U = (letter_size * (DrawY - 350) + (DrawX - 230)); 
-        BKG_address_M = (letter_size * (DrawY - 350) + (DrawX - 280)); 
-        BKG_address_P = (letter_size * (DrawY - 350) + (DrawX - 330));   
-        
-        if(outstate == 3'b000)
-            begin
-                if(DrawX >= 180 && DrawX <= 212 && DrawY >= 300 && DrawY <= 332)
-                    begin
-                        if(D_BKG_out != 24'h0)
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;  
-                            E2_on = 0;
-                            D_on = 1;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                        else
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;  
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                    end
-
-                else if(DrawX >= 330 && DrawX <= 362 && DrawY >= 300 && DrawY <= 332)
-                    begin
-                        if(D_BKG_out != 24'h0)
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;  
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 1;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                        else
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;  
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                    end
-                
-                else if(DrawX >= 230 && DrawX <= 262 && DrawY >= 300 && DrawY <= 332)
-                    begin
-                        if(O_BKG_out != 24'h0)
-                            begin
-                            O2_on = 1;
-                            O3_on = 0;  
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                        else
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;  
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                    end
-
-                else if(DrawX >= 280 && DrawX <= 312 && DrawY >= 300 && DrawY <= 332) 
-                    begin
-
-                        if(O_BKG_out != 24'h0)
-                            begin
-                            O2_on = 0;
-                            O3_on = 1; 
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                        else
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;  
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                    end
-
-                else if(DrawX >= 380 && DrawX <= 412 && DrawY >= 300 && DrawY <= 332) 
-                    begin
-                        if(L_BKG_out != 24'h0)
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 1;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                        else
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                    end
-
-                else if(DrawX >= 430 && DrawX <= 462 && DrawY >= 300 && DrawY <= 332) 
-                    begin
-                        if(E_BKG_out != 24'h0)
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 1;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                        else
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                    end
-
-                else if(DrawX >= 180 && DrawX <= 212 && DrawY >= 350 && DrawY <= 382) 
-                    begin
-                        if(J_BKG_out != 24'h0)
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 1;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                        else
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                    end
-                
-                else if(DrawX >= 230 && DrawX <= 262 && DrawY >= 350 && DrawY <= 382) 
-                    begin
-                        if(U_BKG_out != 24'h0)
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 1;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                        else
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                    end
-
-                else if(DrawX >= 280 && DrawX <= 312 && DrawY >= 350 && DrawY <= 382) 
-                    begin
-                        if(M_BKG_out != 24'h0)
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 1;
-                            P_on = 0;
-                            end
-                        else
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                    end
-                
-                else if(DrawX >= 330 && DrawX <= 362 && DrawY >= 350 && DrawY <= 382) 
-                    begin
-                    
-                        if(P_BKG_out != 24'h0)
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 1;               
-                            end
-                        else
-                            begin
-                            O2_on = 0;
-                            O3_on = 0;   
-                            E2_on = 0;
-                            D_on = 0;
-                            D2_on = 0;
-                            L_on = 0;
-                            J_on = 0;
-                            U_on = 0;
-                            M_on = 0;
-                            P_on = 0;
-                            end
-                    end
-
-                else
-                    begin
-                    D_on = 0;
-                    L_on = 0;
-                    J_on = 0;
-                    U_on = 0;
-                    M_on = 0;
-                    P_on = 0;
-                    O2_on = 0;
-                    E2_on = 0;
-                    end
-            end
-
-        else
-            begin
-            O2_on = 0;
-            O3_on = 0;   
-            E2_on = 0;
-            D_on = 0;
-            D2_on = 0;
-            L_on = 0;
-            J_on = 0;
-            U_on = 0;
-            M_on = 0;
-            P_on = 0;
-            end
-    end
-
-
-
-
-
-=======
-logic [8:0] monster_addr;
-logic [23:0] monster_BKG_out; 
->>>>>>> 86249f8608129ba7979e90c68f1206cb6f89b1bf
+reg [8:0] temp_letter_size;
 // game platforms 
 // ~~~~~~Platforms~~~~~~~~~~~~~    
 always_comb
@@ -2766,1068 +2350,451 @@ always_comb
         greenplat32addr = (2 * plat_sizeX * (DrawY - (temp_platY - (plat_sizeY))) + (DrawX - (temp_platX - (plat_sizeX))));
         greenplat64addr = (2 * plat_sizeX * (DrawY - (temp_platY - (plat_sizeY))) + (DrawX - (temp_platX - (plat_sizeX))));
 
-<<<<<<< HEAD
-        if (difficulty == 2'b10)
-            begin
-            if(DrawX >= (platX - (plat_sizeX)) && DrawX <= (platX + (plat_sizeX)) && DrawY >= (platY - (plat_sizeY)) && DrawY <= (platY + (plat_sizeY)))
-                begin
-                    temp_platX = platX;  
-                    temp_platY = platY; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX1 - (plat_sizeX)) && DrawX <= (platX1 + (plat_sizeX)) && DrawY >= (platY1 - (plat_sizeY )) && DrawY <= (platY1 + (plat_sizeY )))
-                begin
-                    temp_platX = platX1;  
-                    temp_platY = platY1; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX2 - (plat_sizeX)) && DrawX <= (platX2 + (plat_sizeX)) && DrawY >= (platY2 - (plat_sizeY )) && DrawY <= (platY2 + (plat_sizeY )))
-                begin
-                    temp_platX = platX2;  
-                    temp_platY = platY2; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX3 - (plat_sizeX)) && DrawX <= (platX3 + (plat_sizeX)) && DrawY >= (platY3 - (plat_sizeY )) && DrawY <= (platY3 + (plat_sizeY )))
-                begin
-                    temp_platX = platX3;  
-                    temp_platY = platY3; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX4 - (plat_sizeX)) && DrawX <= (platX4 + (plat_sizeX)) && DrawY >= (platY4 - (plat_sizeY )) && DrawY <= (platY4 + (plat_sizeY )))
-                begin
-                    temp_platX = platX4;  
-                    temp_platY = platY4; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX5 - (plat_sizeX)) && DrawX <= (platX5 + (plat_sizeX)) && DrawY >= (platY5 - (plat_sizeY )) && DrawY <= (platY5 + (plat_sizeY )))
-                begin
-                    temp_platX = platX5;  
-                    temp_platY = platY5; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX6 - (plat_sizeX)) && DrawX <= (platX6 + (plat_sizeX)) && DrawY >= (platY6 - (plat_sizeY )) && DrawY <= (platY6 + (plat_sizeY )))
-                begin
-                    temp_platX = platX6;  
-                    temp_platY = platY6; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX7 - (plat_sizeX)) && DrawX <= (platX7 + (plat_sizeX)) && DrawY >= (platY7 - (plat_sizeY )) && DrawY <= (platY7 + (plat_sizeY )))
-                begin
-                    temp_platX = platX7; 
-                    temp_platY = platY7; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX8 - (plat_sizeX)) && DrawX <= (platX8 + (plat_sizeX)) && DrawY >= (platY8 - (plat_sizeY )) && DrawY <= (platY8 + (plat_sizeY )))
-                begin
-                    temp_platX = platX8; 
-                    temp_platY = platY8; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX9 - (plat_sizeX)) && DrawX <= (platX9 + (plat_sizeX)) && DrawY >= (platY9 - (plat_sizeY )) && DrawY <= (platY9 + (plat_sizeY )))
-                begin
-                    temp_platX = platX9; 
-                    temp_platY = platY9; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX10 - (plat_sizeX)) && DrawX <= (platX10 + (plat_sizeX)) && DrawY >= (platY10 - (plat_sizeY )) && DrawY <= (platY10 + (plat_sizeY )))
-                begin
-                    temp_platX = platX10; 
-                    temp_platY = platY10; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX11 - (plat_sizeX)) && DrawX <= (platX11 + (plat_sizeX)) && DrawY >= (platY11 - (plat_sizeY )) && DrawY <= (platY11 + (plat_sizeY )))
-                begin
-                    temp_platX = platX11; 
-                    temp_platY = platY11; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX12 - (plat_sizeX)) && DrawX <= (platX12 + (plat_sizeX)) && DrawY >= (platY12 - (plat_sizeY )) && DrawY <= (platY12 + (plat_sizeY )))
-                begin
-                    temp_platX = platX12; 
-                    temp_platY = platY12; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX13 - (plat_sizeX)) && DrawX <= (platX13 + (plat_sizeX)) && DrawY >= (platY13 - (plat_sizeY )) && DrawY <= (platY13 + (plat_sizeY )))
-                begin
-                    temp_platX = platX13; 
-                    temp_platY = platY13; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX14 - (plat_sizeX)) && DrawX <= (platX14 + (plat_sizeX)) && DrawY >= (platY14 - (plat_sizeY )) && DrawY <= (platY14 + (plat_sizeY )))
-                begin
-                    temp_platX = platX14; 
-                    temp_platY = platY14; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX15 - (plat_sizeX)) && DrawX <= (platX15 + (plat_sizeX)) && DrawY >= (platY15 - (plat_sizeY )) && DrawY <= (platY15 + (plat_sizeY )))
-                begin
-                    temp_platX = platX15; 
-                    temp_platY = platY15; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else 
-                    begin
-                        temp_platX = platX; 
-                        temp_platY = platY; 
-                        greenplat16_on = 0;
-                        greenplat32_on = 0;
-                        greenplat64_on = 0;
-                    end
-        end 
-
-        else if (difficulty == 2'b01)
-            begin
-            if(DrawX >= (platX - (plat_sizeX)) && DrawX <= (platX + (plat_sizeX)) && DrawY >= (platY - (plat_sizeY )) && DrawY <= (platY + (plat_sizeY )))
-                begin
-                    temp_platX = platX; 
-                    temp_platY = platY; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX1 - (plat_sizeX)) && DrawX <= (platX1 + (plat_sizeX)) && DrawY >= (platY1 - (plat_sizeY )) && DrawY <= (platY1 + (plat_sizeY )))
-                begin
-                    temp_platX = platX1; 
-                    temp_platY = platY1; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX2 - (plat_sizeX)) && DrawX <= (platX2 + (plat_sizeX)) && DrawY >= (platY2 - (plat_sizeY )) && DrawY <= (platY2 + (plat_sizeY )))
-                begin
-                    temp_platX = platX2; 
-                    temp_platY = platY2; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX3 - (plat_sizeX)) && DrawX <= (platX3 + (plat_sizeX)) && DrawY >= (platY3 - (plat_sizeY )) && DrawY <= (platY3 + (plat_sizeY )))
-                begin
-                    temp_platX = platX3; 
-                    temp_platY = platY3; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX4 - (plat_sizeX)) && DrawX <= (platX4 + (plat_sizeX)) && DrawY >= (platY4 - (plat_sizeY )) && DrawY <= (platY4 + (plat_sizeY )))
-                begin
-                    temp_platX = platX4; 
-                    temp_platY = platY4; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX5 - (plat_sizeX)) && DrawX <= (platX5 + (plat_sizeX)) && DrawY >= (platY5 - (plat_sizeY )) && DrawY <= (platY5 + (plat_sizeY )))
-                begin
-                    temp_platX = platX5; 
-                    temp_platY = platY5; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX6 - (plat_sizeX)) && DrawX <= (platX6 + (plat_sizeX)) && DrawY >= (platY6 - (plat_sizeY )) && DrawY <= (platY6 + (plat_sizeY )))
-                begin
-                    temp_platX = platX6; 
-                    temp_platY = platY6; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX7 - (plat_sizeX)) && DrawX <= (platX7 + (plat_sizeX)) && DrawY >= (platY7 - (plat_sizeY )) && DrawY <= (platY7 + (plat_sizeY )))
-                begin
-                    temp_platX = platX7; 
-                    temp_platY = platY7; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX8 - (plat_sizeX)) && DrawX <= (platX8 + (plat_sizeX)) && DrawY >= (platY8 - (plat_sizeY )) && DrawY <= (platY8 + (plat_sizeY )))
-                begin
-                    temp_platX = platX8; 
-                    temp_platY = platY8; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX9 - (plat_sizeX)) && DrawX <= (platX9 + (plat_sizeX)) && DrawY >= (platY9 - (plat_sizeY )) && DrawY <= (platY9 + (plat_sizeY )))
-                begin
-                    temp_platX = platX9; 
-                    temp_platY = platY9; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX10 - (plat_sizeX)) && DrawX <= (platX10 + (plat_sizeX)) && DrawY >= (platY10 - (plat_sizeY )) && DrawY <= (platY10 + (plat_sizeY )))
-                begin
-                    temp_platX = platX10; 
-                    temp_platY = platY10; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX11 - (plat_sizeX)) && DrawX <= (platX11 + (plat_sizeX)) && DrawY >= (platY11 - (plat_sizeY )) && DrawY <= (platY11 + (plat_sizeY )))
-                begin
-                    temp_platX = platX11; 
-                    temp_platY = platY11; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX12 - (plat_sizeX)) && DrawX <= (platX12 + (plat_sizeX)) && DrawY >= (platY12 - (plat_sizeY )) && DrawY <= (platY12 + (plat_sizeY )))
-                begin
-                    temp_platX = platX12; 
-                    temp_platY = platY12; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX13 - (plat_sizeX)) && DrawX <= (platX13 + (plat_sizeX)) && DrawY >= (platY13 - (plat_sizeY )) && DrawY <= (platY13 + (plat_sizeY )))
-                begin
-                    temp_platX = platX13; 
-                    temp_platY = platY13; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX14 - (plat_sizeX)) && DrawX <= (platX14 + (plat_sizeX)) && DrawY >= (platY14 - (plat_sizeY )) && DrawY <= (platY14 + (plat_sizeY )))
-                begin
-                    temp_platX = platX14; 
-                    temp_platY = platY14; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX15 - (plat_sizeX)) && DrawX <= (platX15 + (plat_sizeX)) && DrawY >= (platY15 - (plat_sizeY )) && DrawY <= (platY15 + (plat_sizeY )))
-                begin
-                    temp_platX = platX15; 
-                    temp_platY = platY15; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else 
-                    begin
-                        temp_platX = platX; 
-                        temp_platY = platY1; 
-                        greenplat16_on = 0;
-                        greenplat32_on = 0;
-                        greenplat64_on = 0;
-                    end
-        end 
-
-        else if (difficulty == 2'b00)
-            begin
-            if(DrawX >= (platX - (plat_sizeX)) && DrawX <= (platX + (plat_sizeX)) && DrawY >= (platY - (plat_sizeY )) && DrawY <= (platY + (plat_sizeY )))
-                begin
-                    temp_platX = platX; 
-                    temp_platY = platY; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX1 - (plat_sizeX)) && DrawX <= (platX1 + (plat_sizeX)) && DrawY >= (platY1 - (plat_sizeY )) && DrawY <= (platY1 + (plat_sizeY )))
-                begin
-                    temp_platX = platX1; 
-                    temp_platY = platY1; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX2 - (plat_sizeX)) && DrawX <= (platX2 + (plat_sizeX)) && DrawY >= (platY2 - (plat_sizeY )) && DrawY <= (platY2 + (plat_sizeY )))
-                begin
-                    temp_platX = platX2; 
-                    temp_platY = platY2; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX3 - (plat_sizeX)) && DrawX <= (platX3 + (plat_sizeX)) && DrawY >= (platY3 - (plat_sizeY )) && DrawY <= (platY3 + (plat_sizeY )))
-                begin
-                    temp_platX = platX3; 
-                    temp_platY = platY3; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX4 - (plat_sizeX)) && DrawX <= (platX4 + (plat_sizeX)) && DrawY >= (platY4 - (plat_sizeY )) && DrawY <= (platY4 + (plat_sizeY )))
-                begin
-                    temp_platX = platX4; 
-                    temp_platY = platY4; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX5 - (plat_sizeX)) && DrawX <= (platX5 + (plat_sizeX)) && DrawY >= (platY5 - (plat_sizeY )) && DrawY <= (platY5 + (plat_sizeY )))
-                begin
-                    temp_platX = platX5; 
-                    temp_platY = platY5; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX6 - (plat_sizeX)) && DrawX <= (platX6 + (plat_sizeX)) && DrawY >= (platY6 - (plat_sizeY )) && DrawY <= (platY6 + (plat_sizeY )))
-                begin
-                    temp_platX = platX6; 
-                    temp_platY = platY6; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX7 - (plat_sizeX)) && DrawX <= (platX7 + (plat_sizeX)) && DrawY >= (platY7 - (plat_sizeY )) && DrawY <= (platY7 + (plat_sizeY )))
-                begin
-                    temp_platX = platX7; 
-                    temp_platY = platY7; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX8 - (plat_sizeX)) && DrawX <= (platX8 + (plat_sizeX)) && DrawY >= (platY8 - (plat_sizeY )) && DrawY <= (platY8 + (plat_sizeY )))
-                begin
-                    temp_platX = platX8; 
-                    temp_platY = platY8; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX9 - (plat_sizeX)) && DrawX <= (platX9 + (plat_sizeX)) && DrawY >= (platY9 - (plat_sizeY )) && DrawY <= (platY9 + (plat_sizeY )))
-                begin
-                    temp_platX = platX9; 
-                    temp_platY = platY9; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX10 - (plat_sizeX)) && DrawX <= (platX10 + (plat_sizeX)) && DrawY >= (platY10 - (plat_sizeY )) && DrawY <= (platY10 + (plat_sizeY )))
-                begin
-                    temp_platX = platX10; 
-                    temp_platY = platY10; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX11 - (plat_sizeX)) && DrawX <= (platX11 + (plat_sizeX)) && DrawY >= (platY11 - (plat_sizeY )) && DrawY <= (platY11 + (plat_sizeY )))
-                begin
-                    temp_platX = platX11; 
-                    temp_platY = platY11; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX12 - (plat_sizeX)) && DrawX <= (platX12 + (plat_sizeX)) && DrawY >= (platY12 - (plat_sizeY )) && DrawY <= (platY12 + (plat_sizeY )))
-                begin
-                    temp_platX = platX12; 
-                    temp_platY = platY12; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX13 - (plat_sizeX)) && DrawX <= (platX13 + (plat_sizeX)) && DrawY >= (platY13 - (plat_sizeY )) && DrawY <= (platY13 + (plat_sizeY )))
-                begin
-                    temp_platX = platX13; 
-                    temp_platY = platY13; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX14 - (plat_sizeX)) && DrawX <= (platX14 + (plat_sizeX)) && DrawY >= (platY14 - (plat_sizeY )) && DrawY <= (platY14 + (plat_sizeY )))
-                begin
-                    temp_platX = platX14; 
-                    temp_platY = platY14; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX15 - (plat_sizeX)) && DrawX <= (platX15 + (plat_sizeX)) && DrawY >= (platY15 - (plat_sizeY )) && DrawY <= (platY15 + (plat_sizeY )))
-                begin
-                    temp_platX = platX15; 
-                    temp_platY = platY15; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else 
-                    begin
-                        temp_platX = platX1; 
-                        temp_platY = platY; 
-                        greenplat16_on = 0;
-                        greenplat32_on = 0;
-                        greenplat64_on = 0;
-                    end
-            end 
-
-        else
-            begin
-                temp_platX = platX1; 
-                temp_platY = platY; 
-                greenplat16_on = 0;
-                greenplat32_on = 0;
-                greenplat64_on = 0;
-            end
-    end
-
-=======
     end 
->>>>>>> 86249f8608129ba7979e90c68f1206cb6f89b1bf
-
 
 always_comb 
     begin
-        BKG_address_S = (letter_size * (DrawY - letter_size) + DrawX);
-        BKG_address_C = (letter_size * (DrawY - letter_size) + (DrawX - letter_size));
-        BKG_address_O = (letter_size * (DrawY - letter_size) + (DrawX - 2 * letter_size));
-        BKG_address_R = (letter_size * (DrawY - letter_size) + (DrawX - 3 * letter_size));
-        BKG_address_E = (letter_size * (DrawY - letter_size) + (DrawX - 4 * letter_size));
+        // BKG_address_E = (temp_letter_size * (DrawY - temp_E_Y) + (DrawX - temp_E_X));
+        // BKG_address_D = (temp_letter_size * (DrawY - temp_D_Y) + (DrawX - temp_D_X));
+        // BKG_address_L = (temp_letter_size * (DrawY - temp_L_Y) + (DrawX - temp_L_X));         
+        BKG_address_J = (temp_letter_size * (DrawY - temp_J_Y ) + (DrawX - temp_J_X));
+        BKG_address_U = (temp_letter_size * (DrawY - temp_U_Y) + (DrawX - temp_U_X));
+        BKG_address_M = (temp_letter_size * (DrawY - temp_M_Y) + (DrawX - temp_M_X));
+        // BKG_address_P = (letter_size * (DrawY - 350) + (DrawX - 330));  
 
-//      // BKG_address_E = (letter_size * (DrawY - tempx) + (DrawX - tempy));
-//         // if(inside the e of the score region)
-//         //     temp x = letter size
-//         //     temp y = 4 letter size 
-//         //     e_on 
-//         // if(outstate == main menu )
-//         //     if(inside region )
-//         //         tempx = 300
-//         //         tempy = 300
-//         //         e_on
-
-        if(outstate == 3'b010)
+     // BKG_address_E = (letter_size * (DrawY - tempx) + (DrawX - tempy));
+        // if(inside the e of the score region)
+        //     temp x = letter size
+        //     temp y = 4 letter size 
+        //     e_on 
+        // if(outstate == main menu )
+        //     if(inside region )
+        //         tempx = 300
+        //         tempy = 300
+        //         e_on
+        if(outstate == 3'b000)
             begin
-            if(DrawY >= letter_size && DrawX >= 0 && DrawX <= letter_size && DrawY <= (2 * letter_size))
-                begin
-                    if(S_BKG_out != 24'h0)
+            if(DrawX >= 180 && DrawX <= 212 && DrawY >= 350 && DrawY <= 382) 
                         begin
-                            S_on = 1;
-                            C_on = 0;
-                            O_on = 0;
-                            R_on = 0;
-                            E_on = 0; 
+                        // temp_D_X = 330;
+                        // temp_D_Y = 300;
+                        // temp_L_X = 380;
+                        // temp_L_Y = 300;
+                        temp_J_X = 180;
+                        temp_J_Y = 350;
+                        temp_U_X = 0;
+                        temp_U_Y = 0;
+                        temp_M_X = 0;
+                        temp_M_Y = 0;
+                        // temp_P_X = 0;
+                        // temp_P_Y = 0;
+                        temp_letter_size = letter_size;
+                            if(J_BKG_out != 24'h0)
+                                begin
+                                // D_on = 0;
+                                // L_on = 0;
+                                J_on = 1;
+                                U_on = 0;
+                                M_on = 0;
+                                // P_on = 0;
+                                // O2_on = 0;
+                                // E2_on = 0;
+                                end
+                            else
+                                begin
+                                // D_on = 0;
+                                // L_on = 0;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 0;
+                                // P_on = 0;
+                                // O2_on = 0;
+                                // E2_on = 0;
+                                end
                         end
-                    else
+                    else if(DrawX >= 230 && DrawX <= 262 && DrawY >= 350 && DrawY <= 382) 
                         begin
-                            S_on = 0;
-                            C_on = 0;
-                            O_on = 0;
-                            R_on = 0;
-                            E_on = 0; 
+                    //     // temp_D_X = 330;
+                    //     // temp_D_Y = 300;
+                    //     // temp_L_X = 380;
+                    //     // temp_L_Y = 300;
+                        temp_J_X = 0;
+                        temp_J_Y = 0;
+                        temp_U_X = 230;
+                        temp_U_Y = 350;
+                        temp_M_X = 0;
+                        temp_M_Y = 0;
+                    //     // temp_P_X = 0;
+                    //     // temp_P_Y = 0;
+                        temp_letter_size = letter_size;
+                            if(U_BKG_out != 24'h0)
+                                begin
+                    //             // D_on = 0;
+                    //             // L_on = 0;
+                                J_on = 0;
+                                U_on = 1;
+                                M_on = 0;
+                    //             P_on = 0;
+                                end
+                            else
+                                begin
+                    //             // D_on = 0;
+                    //             // L_on = 0;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 0;
+                    //             P_on = 0;
+                                end
                         end
-                end
 
-            else if(DrawY >= letter_size && DrawX >= letter_size && DrawX <= (2 * letter_size) && DrawY <= (2 * letter_size))
-                begin
-                    if(C_BKG_out != 24'h0)
+                    else if(DrawX >= 280 && DrawX <= 312 && DrawY >= 350 && DrawY <= 382) 
                         begin
-                            S_on = 0;
-                            C_on = 1;
-                            O_on = 0;
-                            R_on = 0;
-                            E_on = 0; 
+                    //     // temp_D_X = 330;
+                    //     // temp_D_Y = 300;
+                    //     // temp_L_X = 380;
+                    //     // temp_L_Y = 300;
+                        temp_J_X = 0;
+                        temp_J_Y = 0;
+                        temp_U_X = 0;
+                        temp_U_Y = 0;
+                        temp_M_X = 280;
+                        temp_M_Y = 350;
+                    //     // temp_P_X = 0;
+                    //     // temp_P_Y = 0;
+                        temp_letter_size = letter_size;
+                            if(M_BKG_out != 24'h0)
+                                begin
+                                // D_on = 0;
+                                // L_on = 0;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 1;
+                                // P_on = 0;
+                                end
+                            else
+                                begin
+                                // D_on = 0;
+                                // L_on = 0;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 0;
+                                // P_on = 0;
+                                end
                         end
-                    else
-                        begin
-                            S_on = 0;
-                            C_on = 0;
-                            O_on = 0;
-                            R_on = 0;
-                            E_on = 0;
-                        end
-                end
 
-            else if(DrawY >= letter_size && DrawX >= (2 * letter_size) && DrawX <= (3 * letter_size) && DrawY <= (2 * letter_size))
-                begin
-                   if(O_BKG_out != 24'h0)
-                        begin
-                            S_on = 0;
-                            C_on = 0;
-                            O_on = 1;
-                            R_on = 0;
-                            E_on = 0; 
-                            end
-                    else
-                        begin
-                            S_on = 0;
-                            C_on = 0;
-                            O_on = 0;
-                            R_on = 0;
-                            E_on = 0; 
-                            end 
-                end
-
-            else if(DrawY >= letter_size && DrawX >= (3 *letter_size) && DrawX <= (4 * letter_size) && DrawY <= (2 * letter_size))
-                begin
-                   if(R_BKG_out != 24'h0)
-                        begin
-                            S_on = 0;
-                            C_on = 0;
-                            O_on = 0;
-                            R_on = 1;
-                            E_on = 0; 
-                        end
-                    else
-                        begin
-                            S_on = 0;
-                            C_on = 0;
-                            O_on = 0;
-                            R_on = 0;
-                            E_on = 0; 
-                        end 
-                end
-
-            else if(DrawY >= letter_size && DrawX >= (4 *letter_size) && DrawX <= (5 * letter_size) && DrawY <= (2 * letter_size))
-                begin
-                   if(E_BKG_out != 24'h0)
-                        begin
-                            S_on = 0;
-                            C_on = 0;
-                            O_on = 0;
-                            R_on = 0;
-                            E_on = 1; 
-                        end
-                    else
-                        begin
-                            S_on = 0;
-                            C_on = 0;
-                            O_on = 0;
-                            R_on = 0;
-                            E_on = 0;  
-                        end
-                end
+                    // else if(DrawX >= 330 && DrawX <= 362 && DrawY >= 350 && DrawY <= 382) 
+                    //     begin
+                    //     // temp_D_X = 330;
+                    //     // temp_D_Y = 300;
+                    //     // temp_L_X = 380;
+                    //     // temp_L_Y = 300;
+                    //     // temp_J_X = 0;
+                    //     // temp_J_Y = 0;
+                    //     // temp_U_X = 0;
+                    //     // temp_U_Y = 0;
+                    //     // temp_M_X = 0;
+                    //     // temp_M_Y = 0;
+                    //     // temp_P_X = 330;
+                    //     // temp_P_Y = 350;
+                    //     // temp_letter_size = letter_size;
+                    //         if(P_BKG_out != 24'h0)
+                    //             begin
+                    //             // D_on = 0;
+                    //             // L_on = 0;
+                    //             J_on = 0;
+                    //             U_on = 0;
+                    //             M_on = 0;
+                    //             P_on = 1;              
+                    //             end
+                    //         else
+                    //             begin
+                    //             // D_on = 0;
+                    //             // L_on = 0;
+                    //             J_on = 0;
+                    //             U_on = 0;
+                    //             M_on = 0;
+                    //             P_on = 0;
+                    //             end
+                    //     end
 
             else
                 begin
-                    S_on = 0;
-                    C_on = 0;
-                    O_on = 0;
-                    R_on = 0;
-                    E_on = 0; 
-                end 
+                // temp_D_X = 330;
+                // temp_D_Y = 300;
+                // temp_L_X = 380;
+                // temp_L_Y = 300;
+                temp_J_X = 0;
+                temp_J_Y = 0;
+                temp_U_X = 0;
+                temp_U_Y = 0;
+                temp_M_X = 0;
+                temp_M_Y = 0;
+                // temp_P_X = 0;
+                // temp_P_Y = 0;
+                temp_letter_size = 0;
+                // D_on = 0;
+                // L_on = 0;
+                J_on = 0;
+                U_on = 0;
+                M_on = 0;
+                // P_on = 0;
+                end
+            end
+        else
+            begin
+            temp_J_X = 0;
+            temp_J_Y = 0;  
+            temp_U_X = 0;
+            temp_U_Y = 0;
+            temp_M_X = 0; 
+            temp_M_Y = 0;
+            J_on = 0;
+            U_on = 0;
+            M_on = 0;
+            temp_letter_size = 0;
+            end
+    end
+
+        // else
+        //     begin
+        //     temp_D_X = 330;
+        //     temp_D_Y = 300;
+        //     temp_L_X = 380;
+        //     temp_L_Y = 300;
+        //     temp_J_X = 0;
+        //     temp_J_Y = 0;
+        //     temp_U_X = 0;
+        //     temp_U_Y = 0;
+        //     temp_M_X = 0;
+        //     temp_M_Y = 0;
+        //     temp_P_X = 0;
+        //     temp_P_Y = 0;
+        //     temp_letter_size = 0;
+        //     D_on = 0;
+        //     L_on = 0;
+        //     J_on = 0;
+        //     U_on = 0;
+        //     M_on = 0;
+        //     P_on = 0;
+        //     end
+    
+        // end
+
+    
+reg [8:0] temp_Score_size;
+reg [8:0] temp_S_X;
+reg [8:0] temp_S_Y;
+reg [8:0] temp_C_X;
+reg [8:0] temp_C_Y;
+reg [8:0] temp_O_X;
+reg [8:0] temp_O_Y;
+reg [8:0] temp_R_X;
+reg [8:0] temp_R_Y;
+reg [8:0] temp_E_X;
+reg [8:0] temp_E_Y;
+
+always_comb 
+    begin 
+    if(outstate == 3'b010 || outstate == 3'b011 || outstate == 3'b100)
+        begin
+        BKG_address_S = (temp_letter_size * (DrawY - temp_S_Y) + DrawX);
+        BKG_address_C = (temp_letter_size * (DrawY - temp_C_Y) + (DrawX - temp_C_X));
+        BKG_address_O = (temp_letter_size * (DrawY - temp_O_Y ) + (DrawX - temp_O_X));
+        BKG_address_R = (temp_letter_size * (DrawY - temp_R_Y) + (DrawX - temp_R_X));
+        BKG_address_E = (temp_letter_size * (DrawY - temp_E_Y) + (DrawX - temp_E_X));
+        begin
+        if(DrawY >= letter_size && DrawX >= 0 && DrawX <= letter_size && DrawY <= (2 * letter_size))
+            begin
+                temp_S_Y = letter_size; 
+                temp_C_X = 0;
+                temp_C_Y = 0;
+                temp_O_X = 0;
+                temp_O_Y = 0;
+                temp_R_X = 0;
+                temp_R_Y = 0;
+                temp_E_X = 0;
+                temp_E_Y = 0;
+                temp_letter_size = letter_size;
+
+                if(S_BKG_out != 24'h0)
+                    begin
+                        S_on = 1;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end
+                else
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end
+            end
+
+        else if(DrawY >= letter_size && DrawX >= letter_size && DrawX <= (2 * letter_size) && DrawY <= (2 * letter_size))
+            begin
+                temp_S_Y = 0; 
+                temp_C_X = letter_size;
+                temp_C_Y = letter_size;
+                temp_O_X = 0;
+                temp_O_Y = 0;
+                temp_R_X = 0;
+                temp_R_Y = 0;
+                temp_E_X = 0;
+                temp_E_Y = 0;
+                temp_letter_size = letter_size;
+                if(C_BKG_out != 24'h0)
+                    begin
+                        S_on = 0;
+                        C_on = 1;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end
+                else
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end
+            end
+        
+        else if(DrawY >= letter_size && DrawX >= (2 * letter_size) && DrawX <= (3 * letter_size) && DrawY <= (2 * letter_size))
+            begin
+                temp_S_Y = 0;
+                temp_C_X = 0;
+                temp_C_Y = 0;
+                temp_O_X = 2 * letter_size;
+                temp_O_Y = letter_size;
+                temp_R_X = 0;
+                temp_R_Y = 0;
+                temp_E_X = 0;
+                temp_E_Y = 0;
+                temp_letter_size = letter_size;
+                if(O_BKG_out != 24'h0)
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 1;
+                        R_on = 0;
+                        E_on = 0; 
+                    end
+                else
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end 
+            end
+
+        else if(DrawY >= letter_size && DrawX >= (3 *letter_size) && DrawX <= (4 * letter_size) && DrawY <= (2 * letter_size))
+            begin
+                temp_S_Y = 0; 
+                temp_C_X = 0;
+                temp_C_Y = 0;
+                temp_O_X = 0;
+                temp_O_Y = 0;
+                temp_R_X = 3 * letter_size;
+                temp_R_Y = letter_size;
+                temp_E_X = 0;
+                temp_E_Y = 0;
+                temp_letter_size = letter_size;
+                if(R_BKG_out != 24'h0)
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 1;
+                        E_on = 0; 
+                    end
+                else
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0; 
+                    end 
+            end
+
+        else if(DrawY >= letter_size && DrawX >= (4 *letter_size) && DrawX <= (5 * letter_size) && DrawY <= (2 * letter_size))
+            begin
+                temp_S_Y = 0; 
+                temp_C_X = 0;
+                temp_C_Y = 0;
+                temp_O_X = 0;
+                temp_O_Y = 0;
+                temp_R_X = 0;
+                temp_R_Y = 0;
+                temp_E_X = 4 * letter_size;
+                temp_E_Y = letter_size;
+                temp_letter_size = letter_size;
+
+                if(E_BKG_out != 24'h0)
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 1; 
+                    end
+                else
+                    begin
+                        S_on = 0;
+                        C_on = 0;
+                        O_on = 0;
+                        R_on = 0;
+                        E_on = 0;  
+                    end
             end
 
         else
             begin
+                temp_S_Y = 0; 
+                temp_C_X = 0;
+                temp_C_Y = 0;
+                temp_O_X = 0;
+                temp_O_Y = 0;
+                temp_R_X = 0;
+                temp_R_Y = 0;
+                temp_E_X = 0;
+                temp_E_Y = 0;
+                temp_letter_size = letter_size;
+                S_on = 0;
+                C_on = 0;
+                O_on = 0;
+                R_on = 0;
+                E_on = 0; 
+            end
+        end
+        end
+    else 
+        begin
+            temp_S_Y = 0; 
+            temp_C_X = 0;
+            temp_C_Y = 0;
+            temp_O_X = 0;
+            temp_O_Y = 0;
+            temp_R_X = 0;
+            temp_R_Y = 0;
+            temp_E_X = 0;
+            temp_E_Y = 0;
+            temp_letter_size = letter_size;
             S_on = 0;
             C_on = 0;
             O_on = 0;
             R_on = 0;
             E_on = 0; 
-            end
+        end
 
-    end
-
-
-
-
-    
+end
                 
 
 bin2bcd bin2bcd(
@@ -6035,68 +5002,35 @@ always_comb
                 Green = E_BKG_out[15:8];
                 Blue = E_BKG_out[7:0];
             end
-
         
-
-        else if(D_on)
-            begin
-                Red = 8'h00;
-                Green = 8'h00;
-                Blue = 8'h00;
-            end
-
-        else if(L_on)
-            begin
-                Red = 8'h00;
-                Green = 8'h00;
-                Blue = 8'h00;
-            end
-
-
-        else if(O2_on == 1)
-            begin
-                Red = 8'h00;
-                Green = 8'h00;
-                Blue = 8'h00;
-            end
-
-        else if(E2_on == 1) 
-            begin 
-                Red = 8'h00;
-                Green = 8'h00;
-                Blue = 8'h00;
-            end
-
         else if(J_on)
-            begin
-                Red = 8'h00;
-                Green = 8'h00;
-                Blue = 8'h00;
+            begin 
+                Red = J_BKG_out[23:16];
+                Green = J_BKG_out[15:8];
+                Blue = J_BKG_out[7:0];
             end
 
         else if(U_on)
-            begin
-                Red = 8'h00;
-                Green = 8'h00;
-                Blue = 8'h00;
+            begin 
+                Red = U_BKG_out[23:16];
+                Green = U_BKG_out[15:8];
+                Blue = U_BKG_out[7:0];
             end
 
         else if(M_on)
-            begin
-                Red = 8'h00;
-                Green = 8'h00;
-                Blue = 8'h00;
+            begin 
+                Red = M_BKG_out[23:16];
+                Green = M_BKG_out[15:8];
+                Blue = M_BKG_out[7:0];
             end
 
         else if(P_on)
-            begin
-                Red = 8'h00;
-                Green = 8'h00;
-                Blue = 8'h00;
+            begin 
+                Red = P_BKG_out[23:16];
+                Green = P_BKG_out[15:8];
+                Blue = P_BKG_out[7:0];
             end
 
-        
-        
 
         else if(greenplat16_on)
             begin   
