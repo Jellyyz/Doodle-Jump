@@ -130,6 +130,7 @@ module  color_mapper (
                     output logic [23:0] Y_BKG_out,
                     output logic [23:0] Z_BKG_out,
 
+
                     output logic [8:0] blue_temp_platX,
                     output logic 		doodle_right_BKG_on,
 	                output logic 		doodle_right_BKG_on3_bkg,
@@ -2044,13 +2045,15 @@ greenplat16 greenplat16(
 
     .data_Out(greenplat16_out[23:0])
 ); 
-greenplat32 greenplat32(
+
+greenplat32 greenplat32_8(
     .read_address(greenplat32addr[8:0]),
     .Clk(Clk), 
 
     .data_Out(greenplat32_out[23:0])
 ); 
-greenplat64 greenplat64(
+
+greenplat64 greenplat64_9(
     .read_address(greenplat64addr[9:0]),
     .Clk(Clk), 
 
@@ -2350,7 +2353,9 @@ Z z(
 logic [6:0] cannon_ram_address,cannon1_ram_address, cannon2_ram_address;
 logic [23:0] cannon_BKG_out, cannon1_BKG_out, cannon2_BKG_out; 
 
-
+logic greenplat16_on; 
+logic greenplat32_on;
+logic greenplat64_on;
 logic underwater_BKG_on;
 logic soccer_BKG_on;
 logic space_BKG_on;
@@ -2473,6 +2478,823 @@ modifiedcounter platformlegsr(
 
     .outM(legsupr[4:0])
 );
+
+
+always_comb
+    begin
+        greenplat16addr = (plat_sizeX * (DrawY - (platY - (plat_sizeY / 2))) + (DrawX - (platX - (plat_sizeX / 2))));
+        greenplat32addr = (plat_sizeX * (DrawY - (platY - (plat_sizeY / 2))) + (DrawX - (platX - (plat_sizeX / 2))));
+        greenplat64addr = (plat_sizeX * (DrawY - (platY - (plat_sizeY / 2))) + (DrawX - (platX - (plat_sizeX / 2))));
+
+        if (difficulty == 2'b10)
+            begin
+            if(DrawX >= (platX - (plat_sizeX / 2)) && DrawX <= (platX + (plat_sizeX / 2)) && DrawY >= (platY - (plat_sizeY / 2)) && DrawY <= (platY + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX1 - (plat_sizeX / 2)) && DrawX <= (platX1 + (plat_sizeX / 2)) && DrawY >= (platY1 - (plat_sizeY / 2)) && DrawY <= (platY1 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX2 - (plat_sizeX / 2)) && DrawX <= (platX2 + (plat_sizeX / 2)) && DrawY >= (platY2 - (plat_sizeY / 2)) && DrawY <= (platY2 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX3 - (plat_sizeX / 2)) && DrawX <= (platX3 + (plat_sizeX / 2)) && DrawY >= (platY3 - (plat_sizeY / 2)) && DrawY <= (platY3 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX4 - (plat_sizeX / 2)) && DrawX <= (platX4 + (plat_sizeX / 2)) && DrawY >= (platY4 - (plat_sizeY / 2)) && DrawY <= (platY4 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX5 - (plat_sizeX / 2)) && DrawX <= (platX5 + (plat_sizeX / 2)) && DrawY >= (platY5 - (plat_sizeY / 2)) && DrawY <= (platY5 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX6 - (plat_sizeX / 2)) && DrawX <= (platX6 + (plat_sizeX / 2)) && DrawY >= (platY6 - (plat_sizeY / 2)) && DrawY <= (platY6 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX7 - (plat_sizeX / 2)) && DrawX <= (platX7 + (plat_sizeX / 2)) && DrawY >= (platY7 - (plat_sizeY / 2)) && DrawY <= (platY7 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX8 - (plat_sizeX / 2)) && DrawX <= (platX8 + (plat_sizeX / 2)) && DrawY >= (platY8 - (plat_sizeY / 2)) && DrawY <= (platY8 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX9 - (plat_sizeX / 2)) && DrawX <= (platX9 + (plat_sizeX / 2)) && DrawY >= (platY9 - (plat_sizeY / 2)) && DrawY <= (platY9 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX10 - (plat_sizeX / 2)) && DrawX <= (platX10 + (plat_sizeX / 2)) && DrawY >= (platY10 - (plat_sizeY / 2)) && DrawY <= (platY10 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX11 - (plat_sizeX / 2)) && DrawX <= (platX11 + (plat_sizeX / 2)) && DrawY >= (platY11 - (plat_sizeY / 2)) && DrawY <= (platY11 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX12 - (plat_sizeX / 2)) && DrawX <= (platX12 + (plat_sizeX / 2)) && DrawY >= (platY12 - (plat_sizeY / 2)) && DrawY <= (platY12 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX13 - (plat_sizeX / 2)) && DrawX <= (platX13 + (plat_sizeX / 2)) && DrawY >= (platY13 - (plat_sizeY / 2)) && DrawY <= (platY13 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX14 - (plat_sizeX / 2)) && DrawX <= (platX14 + (plat_sizeX / 2)) && DrawY >= (platY14 - (plat_sizeY / 2)) && DrawY <= (platY14 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX15 - (plat_sizeX / 2)) && DrawX <= (platX15 + (plat_sizeX / 2)) && DrawY >= (platY15 - (plat_sizeY / 2)) && DrawY <= (platY15 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat16_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 1;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else 
+                    begin
+                        greenplat16_on = 0;
+                        greenplat32_on = 0;
+                        greenplat64_on = 0;
+                    end
+        end 
+
+        else if (difficulty == 2'b01)
+            begin
+            if(DrawX >= (platX - (plat_sizeX / 2)) && DrawX <= (platX + (plat_sizeX / 2)) && DrawY >= (platY - (plat_sizeY / 2)) && DrawY <= (platY + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX1 - (plat_sizeX / 2)) && DrawX <= (platX1 + (plat_sizeX / 2)) && DrawY >= (platY1 - (plat_sizeY / 2)) && DrawY <= (platY1 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX2 - (plat_sizeX / 2)) && DrawX <= (platX2 + (plat_sizeX / 2)) && DrawY >= (platY2 - (plat_sizeY / 2)) && DrawY <= (platY2 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX3 - (plat_sizeX / 2)) && DrawX <= (platX3 + (plat_sizeX / 2)) && DrawY >= (platY3 - (plat_sizeY / 2)) && DrawY <= (platY3 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX4 - (plat_sizeX / 2)) && DrawX <= (platX4 + (plat_sizeX / 2)) && DrawY >= (platY4 - (plat_sizeY / 2)) && DrawY <= (platY4 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX5 - (plat_sizeX / 2)) && DrawX <= (platX5 + (plat_sizeX / 2)) && DrawY >= (platY5 - (plat_sizeY / 2)) && DrawY <= (platY5 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX6 - (plat_sizeX / 2)) && DrawX <= (platX6 + (plat_sizeX / 2)) && DrawY >= (platY6 - (plat_sizeY / 2)) && DrawY <= (platY6 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX7 - (plat_sizeX / 2)) && DrawX <= (platX7 + (plat_sizeX / 2)) && DrawY >= (platY7 - (plat_sizeY / 2)) && DrawY <= (platY7 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX8 - (plat_sizeX / 2)) && DrawX <= (platX8 + (plat_sizeX / 2)) && DrawY >= (platY8 - (plat_sizeY / 2)) && DrawY <= (platY8 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX9 - (plat_sizeX / 2)) && DrawX <= (platX9 + (plat_sizeX / 2)) && DrawY >= (platY9 - (plat_sizeY / 2)) && DrawY <= (platY9 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX10 - (plat_sizeX / 2)) && DrawX <= (platX10 + (plat_sizeX / 2)) && DrawY >= (platY10 - (plat_sizeY / 2)) && DrawY <= (platY10 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX11 - (plat_sizeX / 2)) && DrawX <= (platX11 + (plat_sizeX / 2)) && DrawY >= (platY11 - (plat_sizeY / 2)) && DrawY <= (platY11 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX12 - (plat_sizeX / 2)) && DrawX <= (platX12 + (plat_sizeX / 2)) && DrawY >= (platY12 - (plat_sizeY / 2)) && DrawY <= (platY12 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX13 - (plat_sizeX / 2)) && DrawX <= (platX13 + (plat_sizeX / 2)) && DrawY >= (platY13 - (plat_sizeY / 2)) && DrawY <= (platY13 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX14 - (plat_sizeX / 2)) && DrawX <= (platX14 + (plat_sizeX / 2)) && DrawY >= (platY14 - (plat_sizeY / 2)) && DrawY <= (platY14 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX15 - (plat_sizeX / 2)) && DrawX <= (platX15 + (plat_sizeX / 2)) && DrawY >= (platY15 - (plat_sizeY / 2)) && DrawY <= (platY15 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat32_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 1;
+                            greenplat64_on = 0;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else 
+                    begin
+                        greenplat16_on = 0;
+                        greenplat32_on = 0;
+                        greenplat64_on = 0;
+                    end
+        end 
+
+        else if (difficulty == 2'b00)
+            begin
+            if(DrawX >= (platX - (plat_sizeX / 2)) && DrawX <= (platX + (plat_sizeX / 2)) && DrawY >= (platY - (plat_sizeY / 2)) && DrawY <= (platY + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX1 - (plat_sizeX / 2)) && DrawX <= (platX1 + (plat_sizeX / 2)) && DrawY >= (platY1 - (plat_sizeY / 2)) && DrawY <= (platY1 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX2 - (plat_sizeX / 2)) && DrawX <= (platX2 + (plat_sizeX / 2)) && DrawY >= (platY2 - (plat_sizeY / 2)) && DrawY <= (platY2 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX3 - (plat_sizeX / 2)) && DrawX <= (platX3 + (plat_sizeX / 2)) && DrawY >= (platY3 - (plat_sizeY / 2)) && DrawY <= (platY3 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX4 - (plat_sizeX / 2)) && DrawX <= (platX4 + (plat_sizeX / 2)) && DrawY >= (platY4 - (plat_sizeY / 2)) && DrawY <= (platY4 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX5 - (plat_sizeX / 2)) && DrawX <= (platX5 + (plat_sizeX / 2)) && DrawY >= (platY5 - (plat_sizeY / 2)) && DrawY <= (platY5 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX6 - (plat_sizeX / 2)) && DrawX <= (platX6 + (plat_sizeX / 2)) && DrawY >= (platY6 - (plat_sizeY / 2)) && DrawY <= (platY6 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+            else if(DrawX >= (platX7 - (plat_sizeX / 2)) && DrawX <= (platX7 + (plat_sizeX / 2)) && DrawY >= (platY7 - (plat_sizeY / 2)) && DrawY <= (platY7 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX8 - (plat_sizeX / 2)) && DrawX <= (platX8 + (plat_sizeX / 2)) && DrawY >= (platY8 - (plat_sizeY / 2)) && DrawY <= (platY8 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX9 - (plat_sizeX / 2)) && DrawX <= (platX9 + (plat_sizeX / 2)) && DrawY >= (platY9 - (plat_sizeY / 2)) && DrawY <= (platY9 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX10 - (plat_sizeX / 2)) && DrawX <= (platX10 + (plat_sizeX / 2)) && DrawY >= (platY10 - (plat_sizeY / 2)) && DrawY <= (platY10 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX11 - (plat_sizeX / 2)) && DrawX <= (platX11 + (plat_sizeX / 2)) && DrawY >= (platY11 - (plat_sizeY / 2)) && DrawY <= (platY11 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX12 - (plat_sizeX / 2)) && DrawX <= (platX12 + (plat_sizeX / 2)) && DrawY >= (platY12 - (plat_sizeY / 2)) && DrawY <= (platY12 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX13 - (plat_sizeX / 2)) && DrawX <= (platX13 + (plat_sizeX / 2)) && DrawY >= (platY13 - (plat_sizeY / 2)) && DrawY <= (platY13 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX14 - (plat_sizeX / 2)) && DrawX <= (platX14 + (plat_sizeX / 2)) && DrawY >= (platY14 - (plat_sizeY / 2)) && DrawY <= (platY14 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else if(DrawX >= (platX15 - (plat_sizeX / 2)) && DrawX <= (platX15 + (plat_sizeX / 2)) && DrawY >= (platY15 - (plat_sizeY / 2)) && DrawY <= (platY15 + (plat_sizeY / 2)))
+                begin
+                    if(greenplat64_out != 24'hfe43e3)
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 1;
+                        end
+                    else
+                        begin
+                            greenplat16_on = 0;
+                            greenplat32_on = 0;
+                            greenplat64_on = 0;
+                        end
+                end
+
+                else 
+                    begin
+                        greenplat16_on = 0;
+                        greenplat32_on = 0;
+                        greenplat64_on = 0;
+                    end
+            end 
+
+        else
+            begin
+                greenplat16_on = 0;
+                greenplat32_on = 0;
+                greenplat64_on = 0;
+            end
+    end
+
+
+
+
 
 always_comb 
     begin 
@@ -4796,566 +5618,588 @@ always_comb
                 Blue = E_BKG_out[7:0];
             end
 
-        else if(platform_on)
-            begin 
-                unique case(plat0_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end                
-                endcase 
-            end 
-        else if(platform_on1)
-            begin 
-                unique case(plat1_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase 
-            end 
-        else if(platform_on2)
-            begin 
-                unique case(plat2_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase 
-            end 
-        else if(platform_on3)
-            begin 
-                unique case(plat3_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end                
-                endcase 
-            end 
-        else if(platform_on4)
-            begin 
-                unique case(plat4_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase            
-            end 
-        else if(platform_on5)
-            begin 
-                unique case(plat5_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase            
-            end 
-        else if(platform_on6)
-            begin 
-                unique case(plat6_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase 
-            end 
-        else if(platform_on7)
-            begin 
-                unique case(plat7_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase 
-            end 
-        else if(platform_on8)
-            begin 
-                unique case(plat8_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase            
-            end 
-        else if(platform_on9)
-            begin 
-                unique case(plat9_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase            
-            end 
-        else if(platform_on10) 
-            begin 
-                unique case(plat10_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase            
-            end 
-        else if(platform_on11)
-            begin 
-                unique case(plat11_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase            
-            end 
-        else if(platform_on12)
-            begin 
-                unique case(plat12_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase            
-            end 
-        else if(platform_on13)
-            begin 
-                unique case(plat13_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase            
-            end 
-        else if(platform_on14) 
-            begin 
-                unique case(plat14_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase            
-            end 
-        else if(platform_on15)
-            begin 
-                unique case(plat15_color)
-                    3'b000:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'hFF; 
-                            Blue = 8'h00; 
-                        end
-                    3'b001:
-                        begin 
-                            Red = 8'hEE; 
-                            Green = 8'hEE; 
-                            Blue = 8'hEE; 
-                        end
-                    3'b010:
-                        begin 
-                            Red = 8'h00; 
-                            Green = 8'h00; 
-                            Blue = 8'hFF; 
-                        end
-                    3'b011:
-                        begin 
-                            Red = 8'hFF; 
-                            Green = 8'hFF;
-                            Blue = 8'h00; 
-                        end  
-                    3'b100:
-                        begin 
-                            Red = 8'h9B; 
-                            Green = 8'h67; 
-                            Blue = 8'h3C; 
-                        end
-                endcase            
-                end
+        else if(greenplat16_on)
+            begin
+                Red = greenplat16_out[23:16];
+                Green = greenplat16_out[15:8];
+                Blue = greenplat16_out[7:0];
+            end
+
+        else if(greenplat32_on)
+            begin
+                Red = greenplat32_out[23:16];
+                Green = greenplat32_out[15:8];
+                Blue = greenplat32_out[7:0];
+            end
+        
+        else if(greenplat64_on)
+            begin
+                Red = greenplat64_out[23:16];
+                Green = greenplat64_out[15:8];
+                Blue = greenplat64_out[7:0];
+            end
+        
+
+        // else if(platform_on)
+        //     begin 
+        //         unique case(plat0_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end                
+        //         endcase 
+        //     end 
+        // else if(platform_on1)
+        //     begin 
+        //         unique case(plat1_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase 
+        //     end 
+        // else if(platform_on2)
+        //     begin 
+        //         unique case(plat2_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase 
+        //     end 
+        // else if(platform_on3)
+        //     begin 
+        //         unique case(plat3_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end                
+        //         endcase 
+        //     end 
+        // else if(platform_on4)
+        //     begin 
+        //         unique case(plat4_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase            
+        //     end 
+        // else if(platform_on5)
+        //     begin 
+        //         unique case(plat5_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase            
+        //     end 
+        // else if(platform_on6)
+        //     begin 
+        //         unique case(plat6_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase 
+        //     end 
+        // else if(platform_on7)
+        //     begin 
+        //         unique case(plat7_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase 
+        //     end 
+        // else if(platform_on8)
+        //     begin 
+        //         unique case(plat8_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase            
+        //     end 
+        // else if(platform_on9)
+        //     begin 
+        //         unique case(plat9_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase            
+        //     end 
+        // else if(platform_on10) 
+        //     begin 
+        //         unique case(plat10_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase            
+        //     end 
+        // else if(platform_on11)
+        //     begin 
+        //         unique case(plat11_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase            
+        //     end 
+        // else if(platform_on12)
+        //     begin 
+        //         unique case(plat12_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase            
+        //     end 
+        // else if(platform_on13)
+        //     begin 
+        //         unique case(plat13_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase            
+        //     end 
+        // else if(platform_on14) 
+        //     begin 
+        //         unique case(plat14_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase            
+        //     end 
+        // else if(platform_on15)
+        //     begin 
+        //         unique case(plat15_color)
+        //             3'b000:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'hFF; 
+        //                     Blue = 8'h00; 
+        //                 end
+        //             3'b001:
+        //                 begin 
+        //                     Red = 8'hEE; 
+        //                     Green = 8'hEE; 
+        //                     Blue = 8'hEE; 
+        //                 end
+        //             3'b010:
+        //                 begin 
+        //                     Red = 8'h00; 
+        //                     Green = 8'h00; 
+        //                     Blue = 8'hFF; 
+        //                 end
+        //             3'b011:
+        //                 begin 
+        //                     Red = 8'hFF; 
+        //                     Green = 8'hFF;
+        //                     Blue = 8'h00; 
+        //                 end  
+        //             3'b100:
+        //                 begin 
+        //                     Red = 8'h9B; 
+        //                     Green = 8'h67; 
+        //                     Blue = 8'h3C; 
+        //                 end
+        //         endcase            
+        //         end
          
         // turn on pixels for the cannon 
             else if(cannon_on)
