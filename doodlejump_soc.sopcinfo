@@ -5,11 +5,11 @@
  version="1.0"
  fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2022.04.15.22:12:31 -->
+ <!-- 2022.04.27.22:02:34 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1650078750</value>
+  <value>1651114954</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -36,7 +36,7 @@
  </parameter>
  <parameter name="AUTO_DEVICE">
   <type>java.lang.String</type>
-  <value>10M50DCF484C7G</value>
+  <value>10M50DAF484C7G</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -8844,7 +8844,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_DEVICE">
    <type>java.lang.String</type>
-   <value>10M50DCF484C7G</value>
+   <value>10M50DAF484C7G</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -13937,7 +13937,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1650078750</value>
+   <value>1651114954</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -13957,7 +13957,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1650078750</value>
+   <value>1651114954</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -13973,7 +13973,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1650078750</value>
+   <value>1651114954</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>

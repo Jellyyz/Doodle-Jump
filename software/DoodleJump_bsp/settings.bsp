@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Apr 19, 2022 8:53:23 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1650419603522</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Apr 28, 2022 3:24:00 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1651177440423</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\gally\Desktop\Doodle-Jump\software\DoodleJump_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\doodlejump_soc.sopcinfo</SopcDesignFile>

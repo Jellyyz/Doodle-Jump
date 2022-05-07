@@ -1,9 +1,141 @@
 
+State Machine - |doodlejump|color_mapper:color|plat_type:plat15|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat14|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat13|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat12|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat11|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat10|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat9|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat8|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat7|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat6|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat5|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat4|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat3|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat2|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat1|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
+State Machine - |doodlejump|color_mapper:color|plat_type:plat0|State
+Name State.Yellow State.Blue State.White State.Green State.Brown 
+State.Green 0 0 0 0 0 
+State.White 0 0 1 1 0 
+State.Blue 0 1 0 1 0 
+State.Yellow 1 0 0 1 0 
+State.Brown 0 0 0 1 1 
+
 State Machine - |doodlejump|jumplogic:jumplogic|jumpstate:jumpstate|State
-Name State.Main_Menu State.Pause State.Game 
-State.Main_Menu 0 0 0 
-State.Game 1 0 1 
-State.Pause 1 1 0 
+Name State.Game_Over State.Main_Menu State.Refreshing State.Pause State.Game State.Loading State.INIT 
+State.INIT 0 0 0 0 0 0 0 
+State.Loading 0 0 0 0 0 1 1 
+State.Game 0 0 0 0 1 0 1 
+State.Pause 0 0 0 1 0 0 1 
+State.Refreshing 0 0 1 0 0 0 1 
+State.Main_Menu 0 1 0 0 0 0 1 
+State.Game_Over 1 0 0 0 0 0 1 
 
 State Machine - |doodlejump|doodlejump_soc:u0|doodlejump_soc_sdram:sdram|m_next
 Name m_next.010000000 m_next.000010000 m_next.000001000 m_next.000000001 

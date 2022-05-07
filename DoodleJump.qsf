@@ -432,14 +432,41 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name SYSTEMVERILOG_FILE svfiles/LFSR.sv
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (SystemVerilog)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "SYSTEMVERILOG HDL" -section_id eda_simulation
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/platcolor_on.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/BDCFROMONLINE.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/monstersprite.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/font_rom.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/Alphabet_sprites.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/spring_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/jetpack_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/greenplat64.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/greenplat32.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/greenplat16.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/modifiedcounter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/Right_crouchdoodle.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/Left_crouchdoodle.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/cannon2_sprite.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/cannon1_sprite.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/cannon_sprite.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/Right_facing_doodle.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/Left_facing_doodle.sv
 set_global_assignment -name QIP_FILE doodlejump_soc/synthesis/doodlejump_soc.qip
 set_global_assignment -name SYSTEMVERILOG_FILE svfiles/VGA_controller.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/plat_type.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/LFSR.sv
 set_global_assignment -name SYSTEMVERILOG_FILE svfiles/jumpstate.sv
 set_global_assignment -name SYSTEMVERILOG_FILE svfiles/HexDriver.sv
 set_global_assignment -name SYSTEMVERILOG_FILE svfiles/doodlejumpcharacter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE svfiles/doodlejump.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/direction_doodle.sv
 set_global_assignment -name SYSTEMVERILOG_FILE svfiles/counter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/countdown.sv
 set_global_assignment -name SYSTEMVERILOG_FILE svfiles/Color_Mapper.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/blue_plat_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/BKG4_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/BKG2_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE svfiles/BKG_ram.sv
 set_global_assignment -name SYSTEMVERILOG_FILE svfiles/ADC.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

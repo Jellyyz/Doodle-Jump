@@ -1,0 +1,1198 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/gally/Desktop/Doodle-Jump/simulation/modelsim
+valtera_avalon_sc_fifo
+Z1 !s110 1650753614
+!i10b 1
+!s100 4mK@em][G=j]om3zJIhOc0
+IX<Rg<<2Gbao:kZ;:NQ4oH0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1650419338
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_avalon_sc_fifo.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_avalon_sc_fifo.v
+Z4 L0 21
+Z5 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z6 !s108 1650753614.000000
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_avalon_sc_fifo.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_avalon_sc_fifo.v|
+!i113 1
+Z7 o-vlog01compat -work doodlejump_soc
+Z8 !s92 -vlog01compat -work doodlejump_soc +incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules
+Z9 tCvgOpt 0
+valtera_reset_controller
+Z10 !s110 1650753613
+!i10b 1
+!s100 z[H_hRO9gO=:^2E3_jWH03
+I[oRhn]>P`OW`:`^TOFA=51
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_reset_controller.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_reset_controller.v
+L0 42
+R5
+r1
+!s85 0
+31
+Z11 !s108 1650753613.000000
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_reset_controller.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_reset_controller.v|
+!i113 1
+R7
+R8
+R9
+valtera_reset_synchronizer
+R10
+!i10b 1
+!s100 oWLYmSO[EOX[G0PgQhZ2=0
+In@lnn_W9UJHdA;eFa_hSR0
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_reset_synchronizer.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_reset_synchronizer.v
+L0 24
+R5
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_reset_synchronizer.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/altera_reset_synchronizer.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc
+R10
+!i10b 1
+!s100 0]5ZOb^?S0:JT>Ydm@MX61
+I98HkQhb:TElmji`S4hgmN1
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/doodlejump_soc.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/doodlejump_soc.v
+L0 6
+R5
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/doodlejump_soc.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/doodlejump_soc.v|
+!i113 1
+R7
+!s92 -vlog01compat -work doodlejump_soc +incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis
+R9
+vdoodlejump_soc_accumulate
+!s110 1650753615
+!i10b 1
+!s100 88J9Zh>0VjfoBBUK>N8TM0
+I5z_Z^1S8<TTmD`Omz?Eh92
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_accumulate.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_accumulate.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_accumulate.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_accumulate.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_altpll_0
+R1
+!i10b 1
+!s100 Y2?U]Be5Yg^^h4J>X55g00
+I?>NG;F?BKaG^KRXad>F5g2
+R2
+R0
+R3
+Z12 8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_altpll_0.v
+Z13 FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_altpll_0.v
+L0 217
+R5
+r1
+!s85 0
+31
+R6
+Z14 !s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_altpll_0.v|
+Z15 !s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_altpll_0.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_altpll_0_altpll_vg92
+R1
+!i10b 1
+!s100 c;e]^j=X>IFmcLK63FQ[K0
+I276k8F^EOffP@z=n5GLO>1
+R2
+R0
+R3
+R12
+R13
+L0 130
+R5
+r1
+!s85 0
+31
+R6
+R14
+R15
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_altpll_0_dffpipe_l2c
+R1
+!i10b 1
+!s100 7[`TnNnkHhV=:MZ`LWH__3
+IKD13<1Qe`4EQFSZoH@RiZ0
+R2
+R0
+R3
+R12
+R13
+L0 37
+R5
+r1
+!s85 0
+31
+R6
+R14
+R15
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_altpll_0_stdsync_sv6
+R1
+!i10b 1
+!s100 AcMFDX`F?Sln0k2b^f[4a0
+I[R0:1[Nm`i4VnjVYIIBaK3
+R2
+R0
+R3
+R12
+R13
+L0 98
+R5
+r1
+!s85 0
+31
+R6
+R14
+R15
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_hex_digits_pio
+R1
+!i10b 1
+!s100 OP;^I2QgaZGW4k2QT3Ybh2
+IB`7L:aiA5K0oXb1Dd0mIg3
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_hex_digits_pio.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_hex_digits_pio.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_hex_digits_pio.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_hex_digits_pio.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_jtag_uart_0
+R1
+!i10b 1
+!s100 aFX8Cg?IJH=_BAL83JR4T2
+I1=1?2_XE?`P6adIYzzIA]0
+R2
+R0
+R3
+Z16 8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_jtag_uart_0.v
+Z17 FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_jtag_uart_0.v
+L0 331
+R5
+r1
+!s85 0
+31
+R6
+Z18 !s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_jtag_uart_0.v|
+Z19 !s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_jtag_uart_0.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_jtag_uart_0_scfifo_r
+R1
+!i10b 1
+!s100 cm5G<JibPokM2TGKfT7=E1
+IQJjSV=GG@;m1Lf9^h?iAz1
+R2
+R0
+R3
+R16
+R17
+L0 243
+R5
+r1
+!s85 0
+31
+R6
+R18
+R19
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_jtag_uart_0_scfifo_w
+R1
+!i10b 1
+!s100 eZ;D[oTD7k:_?=M7d[obS0
+IcYDBjW<emGO<MHdW@nIGh0
+R2
+R0
+R3
+R16
+R17
+L0 78
+R5
+r1
+!s85 0
+31
+R6
+R18
+R19
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_jtag_uart_0_sim_scfifo_r
+R1
+!i10b 1
+!s100 I<Jaj70XO^AJzh9W]H?F;0
+IM?2n6C3cSF0Cg;T7Ub?@J0
+R2
+R0
+R3
+R16
+R17
+L0 164
+R5
+r1
+!s85 0
+31
+R6
+R18
+R19
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_jtag_uart_0_sim_scfifo_w
+R1
+!i10b 1
+!s100 ^gF[g:URB5VbBXh:X2ZS81
+IEeF3<_6QE7Vk^BM;4<l2n2
+R2
+R0
+R3
+R16
+R17
+R4
+R5
+r1
+!s85 0
+31
+R6
+R18
+R19
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_key
+R1
+!i10b 1
+!s100 HGWHBiXYlmhQ9NENT8Y:A3
+I`_SncklHhMe0hG;fe=Mg;2
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_key.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_key.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_key.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_key.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_keycode
+R1
+!i10b 1
+!s100 meGjK=;_oRFiRGP7LIGbg2
+IaJV;D6iccZJ5BUSRDIEF52
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_keycode.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_keycode.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_keycode.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_keycode.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_leds_pio
+R1
+!i10b 1
+!s100 l6AmXX7a4BjdjS<AAN3Ka2
+IQPaTORTz=g`<PehTYc=RV1
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_leds_pio.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_leds_pio.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_leds_pio.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_leds_pio.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_mm_interconnect_0
+R10
+!i10b 1
+!s100 mY=OcST1^bYZg0H==9a@Z3
+I;nB=T9ETc>Z=>V55jmg1n1
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0.v
+L0 9
+R5
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_mm_interconnect_0_avalon_st_adapter
+R10
+!i10b 1
+!s100 VEja:eD[F>>ziSAe`Dh9F3
+IWDPjdAQ[A::SRi6c8jJ2_3
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0_avalon_st_adapter.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0_avalon_st_adapter.v
+L0 9
+R5
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0_avalon_st_adapter.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0_avalon_st_adapter.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_mm_interconnect_0_avalon_st_adapter_005
+R10
+!i10b 1
+!s100 O6ba3GP?G^d:NXzl0`WMf0
+IX;jdEc]:Whbb;RL_zQQHM2
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0_avalon_st_adapter_005.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0_avalon_st_adapter_005.v
+L0 9
+R5
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0_avalon_st_adapter_005.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_mm_interconnect_0_avalon_st_adapter_005.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0
+R1
+!i10b 1
+!s100 RgnTXeI07L>9oWUInhocY2
+I@zY?8:<?gGPKmKd^[9ZVB0
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0.v
+L0 9
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu
+R1
+!i10b 1
+!s100 <=M9kKn21S4TI;K5N9:kz0
+I3I`@?9X;^T?][Vbj3S3eU0
+R2
+R0
+R3
+Z20 8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu.v
+Z21 FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu.v
+L0 2834
+R5
+r1
+!s85 0
+31
+R6
+Z22 !s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu.v|
+Z23 !s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_debug_slave_sysclk
+R1
+!i10b 1
+!s100 7LVTAm2Z3aV>0iA;nTa8X2
+I@hK2PFQ`^kBhWQ9Z7I_GD0
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_sysclk.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_sysclk.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_sysclk.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_sysclk.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_debug_slave_tck
+R1
+!i10b 1
+!s100 9QGCkX6<8jlJc051?03gZ2
+I>S`oil]<S>Iz`][ZNN@h01
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_tck.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_tck.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_tck.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_tck.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_debug_slave_wrapper
+R1
+!i10b 1
+!s100 AT5[_^:09fA:aa8ZRFR?k2
+Idhhgl1bZhP<<OWhK8;>Tk0
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_wrapper.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_wrapper.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_wrapper.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_debug_slave_wrapper.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_avalon_reg
+R1
+!i10b 1
+!s100 `ZQUgNYS2L6aaPf9h`E2N2
+I3CD8jXU<KdZh4<JMb<65M1
+R2
+R0
+R3
+R20
+R21
+L0 2023
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci
+R1
+!i10b 1
+!s100 z4onXnICnzbhF`f99G7IW3
+IG1?_NQ>Won6W1@E;9YzLK1
+R2
+R0
+R3
+R20
+R21
+L0 2362
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_break
+R1
+!i10b 1
+!s100 Mlo8Qig<`]S0fRfk_R]0m3
+IKcdicfYhfVDeT@Fl[i5^[1
+R2
+R0
+R3
+R20
+R21
+L0 295
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_compute_input_tm_cnt
+R1
+!i10b 1
+!s100 JTzYG`k^[90L8?Jc0kjA<2
+IkWI8NaoWa[mCm_kLnR7<D2
+R2
+R0
+R3
+R20
+R21
+L0 1265
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_dbrk
+R1
+!i10b 1
+!s100 N=BUeNH:dYU3^jkYm?2TP3
+I4ikkVKzI=oTB[o^4`k6kO1
+R2
+R0
+R3
+R20
+R21
+L0 795
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_debug
+R1
+!i10b 1
+!s100 a:<=`VnW^2^6i8?1Vc:b[2
+IMfQ0kHCml38RCa2`0kIhf1
+R2
+R0
+R3
+R20
+R21
+L0 153
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_dtrace
+R1
+!i10b 1
+!s100 :j?_7T;mXSlWaJ_I4WM]S2
+IH5Pb[o4SikIWii>LW=PeT1
+R2
+R0
+R3
+R20
+R21
+L0 1183
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_fifo
+R1
+!i10b 1
+!s100 bhb@QnS]mO:@3SZU>_Ihd0
+I2lcTH03^OF358OCc@ojN_1
+R2
+R0
+R3
+R20
+R21
+L0 1427
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_fifo_cnt_inc
+R1
+!i10b 1
+!s100 lFR0VCEKBAm3SIkR4chlE2
+I]Mb=Sh3PKeDYl4753XhI81
+R2
+R0
+R3
+R20
+R21
+L0 1380
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_fifo_wrptr_inc
+R1
+!i10b 1
+!s100 NI^oJ:g_cKzSXHnd8FL[a1
+I9O^IH@Tge6;`VTC<bCz]l0
+R2
+R0
+R3
+R20
+R21
+L0 1337
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_im
+R1
+!i10b 1
+!s100 _hR0U:P`nCgA4;^_C[3bL3
+IE@X^8dU]YPOX8O5diKJn<2
+R2
+R0
+R3
+R20
+R21
+L0 1936
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_itrace
+R1
+!i10b 1
+!s100 UzcWE;=CNB>b2A>V><>NC2
+I84f?17:MY@`laTN>]cC=51
+R2
+R0
+R3
+R20
+R21
+L0 982
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_pib
+R1
+!i10b 1
+!s100 h=0Z5VEz1LH3DZZd[[F;V2
+IQcIE6mj6<lV:QZDKdEQ^30
+R2
+R0
+R3
+R20
+R21
+L0 1913
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_td_mode
+R1
+!i10b 1
+!s100 J[FcgDImoWiDA_3PeWO^L2
+IZ;l_LCTB<0>Vf77WP0kz41
+R2
+R0
+R3
+R20
+R21
+L0 1115
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_oci_xbrk
+R1
+!i10b 1
+!s100 [KXm2e1Zm4Z:@9E1jiYDO1
+IZ1EF@J9b<^ISC5YW7CEHz0
+R2
+R0
+R3
+R20
+R21
+L0 588
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_ocimem
+R1
+!i10b 1
+!s100 fO4IXh0l?mQ64HD>c2WZO0
+I?VoFNT;O;S3fH<z1c>A>61
+R2
+R0
+R3
+R20
+R21
+L0 2181
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_nios2_performance_monitors
+R1
+!i10b 1
+!s100 ^?`Fd;R^;WFVlB?6zSfAZ2
+IIhaUm]dNzn10IFKX64lJG0
+R2
+R0
+R3
+R20
+R21
+L0 2006
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_ociram_sp_ram_module
+R1
+!i10b 1
+!s100 a_l0H<B^M0S<Z_DMDX?Cc3
+IM:Y8`DX60_U4bZ_6H:hXZ2
+R2
+R0
+R3
+R20
+R21
+L0 2116
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_register_bank_a_module
+R1
+!i10b 1
+!s100 @[TY2h^]i<m0FkDbW=2bG3
+IPM8iD:H2f=Y4LPUfC`0;U2
+R2
+R0
+R3
+R20
+R21
+R4
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_register_bank_b_module
+R1
+!i10b 1
+!s100 gDAKmhkX>7]<5UNLMab;B3
+IKF@SVACc?[`8i;n3PhNQX1
+R2
+R0
+R3
+R20
+R21
+L0 87
+R5
+r1
+!s85 0
+31
+R6
+R22
+R23
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_nios2_gen2_0_cpu_test_bench
+R1
+!i10b 1
+!s100 Y2ma1GkXndY2;W2W5G<bB1
+IO43VDW<R@76C;loSfe61D2
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_test_bench.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_test_bench.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_test_bench.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_nios2_gen2_0_cpu_test_bench.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_onchip_memory2_0
+R1
+!i10b 1
+!s100 ILKC`:dG`^OjV@3c:<<Uc2
+IHfhlYaD4i>N0idQHHlmYk0
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_onchip_memory2_0.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_onchip_memory2_0.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_onchip_memory2_0.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_onchip_memory2_0.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_sdram
+R1
+!i10b 1
+!s100 ODAza5kh5^VMTne[U:nVV1
+IK4?CUZW?DV6N1FhdQ_lW;0
+R2
+R0
+R3
+Z24 8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_sdram.v
+Z25 FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_sdram.v
+L0 159
+R5
+r1
+!s85 0
+31
+R6
+Z26 !s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_sdram.v|
+Z27 !s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_sdram.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_sdram_input_efifo_module
+R1
+!i10b 1
+!s100 ^K<?>N^;Ol1naSNe:1`lY3
+I;NWQCS85839LVP@Z0MFUI1
+R2
+R0
+R3
+R24
+R25
+R4
+R5
+r1
+!s85 0
+31
+R6
+R26
+R27
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_spi_0
+R1
+!i10b 1
+!s100 Xd7D]oZ^IdkH@Z86@G47G3
+I0ahPOd6:[RlCH]9kPNlZm0
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_spi_0.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_spi_0.v
+L0 41
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_spi_0.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_spi_0.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_sysid_qsys_0
+R1
+!i10b 1
+!s100 >W;DazB__0k?zYMo]^[c11
+IcL=g_DYUP<^^6f4KP6zkn3
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_sysid_qsys_0.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_sysid_qsys_0.v
+L0 34
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_sysid_qsys_0.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_sysid_qsys_0.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_timer_0
+R1
+!i10b 1
+!s100 2;mNhkd91d2M6Uzo44:TM3
+I8I9i1<G`Bm57ffIYY:=R;0
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_timer_0.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_timer_0.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_timer_0.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_timer_0.v|
+!i113 1
+R7
+R8
+R9
+vdoodlejump_soc_usb_rst
+R1
+!i10b 1
+!s100 n96?d6dloG:]fUG8EI=5b3
+II_08:9957i:UiEKVSQoPB2
+R2
+R0
+R3
+8C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_usb_rst.v
+FC:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_usb_rst.v
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_usb_rst.v|
+!s90 -reportprogress|300|-vlog01compat|-work|doodlejump_soc|+incdir+C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules|C:/Users/gally/Desktop/Doodle-Jump/doodlejump_soc/synthesis/submodules/doodlejump_soc_usb_rst.v|
+!i113 1
+R7
+R8
+R9
