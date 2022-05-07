@@ -2298,7 +2298,33 @@ modifiedcounter platformlegsr(
 
     .outM(legsupr[4:0])
 );
-
+platcolor_on(
+    .DrawX(DrawX), .DrawY(DrawY),
+    .plat0_color(plat0_color), .plat1_color(plat1_color), .plat2_color(plat2_color), .plat3_color(plat3_color), .plat4_color(plat4_color), .plat5_color(plat5_color), .plat6_color(plat6_color), .plat7_color(plat7_color), .plat8_color(plat8_color), .plat9_color(plat9_color), .plat10_color(plat10_color), .plat11_color(plat11_color), .plat12_color(plat12_color), .plat13_color(plat13_color), .plat14_color(plat14_color), .plat15_color(plat15_color),
+    .platX1(platX1[8:0]), .platX2(platX2[8:0]), .platX3(platX3[8:0]), .platX4(platX4[8:0]), .platX5(platX5[8:0]), .platX6(platX6[8:0]), .platX7(platX7[8:0]), .platX8(platX8[8:0]),
+	.platX9(platX9[8:0]), .platX10(platX10[8:0]), .platX11(platX11[8:0]), .platX12(platX12[8:0]), .platX13(platX13[8:0]), .platX14(platX14[8:0]), .platX15(platX15[8:0]),
+	.platY1(platY1[8:0]), .platY2(platY2[8:0]), .platY3(platY3[8:0]), .platY4(platY4[8:0]), .platY5(platY5[8:0]), .platY6(platY6[8:0]), .platY7(platY7[8:0]), .platY8(platY8[8:0]),
+	.platY9(platY9[8:0]), .platY10(platY10[8:0]), .platY11(platY11[8:0]), .platY12(platY12[8:0]), .platY13(platY13[8:0]), .platY14(platY14[8:0]), .platY15(platY15[8:0]),
+    .platX(platX[8:0]), .platY(platY[8:0]), .plat_sizeX(plat_sizeX[8:0]), .plat_sizeY(plat_sizeY[8:0]),	//9 btis
+    .difficulty(difficulty),
+    .greenplat16_on(greenplat16_on), 
+    .greenplat32_on(greenplat32_on),
+    .greenplat64_on(greenplat64_on),
+    .blueplat16_on(blueplat16_on), 
+    .blueplat32_on(blueplat32_on), 
+    .blueplat64_on(blueplat64_on), 
+    .yellowplat16_on(yellowplat16_on),
+    .yellowplat32_on(yellowplat32_on),
+    .yellowplat64_on(yellowplat64_on),
+    .whiteplat16_on(whiteplat16_on), 
+    .whiteplat32_on(whiteplat32_on), 
+    .whiteplat64_on(whiteplat64_on), 
+    .brownplat16_on(brownplat16_on),
+    .brownplat32_on(brownplat32_on),
+    .brownplat64_on(brownplat64_on),
+    .greenplat16_out(greenplat16_out), .greenplat32_out(greenplat32_out), .greenplat64_out(greenplat64_out),
+    .temp_platX(temp_platX), .temp_platY(temp_platY)
+); 
 reg [8:0] temp_platY; 
 reg [8:0] temp_platX; 
 logic [8:0] monster_addr;
@@ -2313,918 +2339,7 @@ always_comb
         greenplat32addr = (2 * plat_sizeX * (DrawY - (temp_platY - (plat_sizeY))) + (DrawX - (temp_platX - (plat_sizeX))));
         greenplat64addr = (2 * plat_sizeX * (DrawY - (temp_platY - (plat_sizeY))) + (DrawX - (temp_platX - (plat_sizeX))));
 
-        if (difficulty == 2'b10)
-            begin
-            if(DrawX >= (platX - (plat_sizeX)) && DrawX <= (platX + (plat_sizeX)) && DrawY >= (platY - (plat_sizeY)) && DrawY <= (platY + (plat_sizeY)))
-                begin
-                    temp_platX = platX;  
-                    temp_platY = platY; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX1 - (plat_sizeX)) && DrawX <= (platX1 + (plat_sizeX)) && DrawY >= (platY1 - (plat_sizeY )) && DrawY <= (platY1 + (plat_sizeY )))
-                begin
-                    temp_platX = platX1;  
-                    temp_platY = platY1; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX2 - (plat_sizeX)) && DrawX <= (platX2 + (plat_sizeX)) && DrawY >= (platY2 - (plat_sizeY )) && DrawY <= (platY2 + (plat_sizeY )))
-                begin
-                    temp_platX = platX2;  
-                    temp_platY = platY2; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX3 - (plat_sizeX)) && DrawX <= (platX3 + (plat_sizeX)) && DrawY >= (platY3 - (plat_sizeY )) && DrawY <= (platY3 + (plat_sizeY )))
-                begin
-                    temp_platX = platX3;  
-                    temp_platY = platY3; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX4 - (plat_sizeX)) && DrawX <= (platX4 + (plat_sizeX)) && DrawY >= (platY4 - (plat_sizeY )) && DrawY <= (platY4 + (plat_sizeY )))
-                begin
-                    temp_platX = platX4;  
-                    temp_platY = platY4; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX5 - (plat_sizeX)) && DrawX <= (platX5 + (plat_sizeX)) && DrawY >= (platY5 - (plat_sizeY )) && DrawY <= (platY5 + (plat_sizeY )))
-                begin
-                    temp_platX = platX5;  
-                    temp_platY = platY5; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX6 - (plat_sizeX)) && DrawX <= (platX6 + (plat_sizeX)) && DrawY >= (platY6 - (plat_sizeY )) && DrawY <= (platY6 + (plat_sizeY )))
-                begin
-                    temp_platX = platX6;  
-                    temp_platY = platY6; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX7 - (plat_sizeX)) && DrawX <= (platX7 + (plat_sizeX)) && DrawY >= (platY7 - (plat_sizeY )) && DrawY <= (platY7 + (plat_sizeY )))
-                begin
-                    temp_platX = platX7; 
-                    temp_platY = platY7; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX8 - (plat_sizeX)) && DrawX <= (platX8 + (plat_sizeX)) && DrawY >= (platY8 - (plat_sizeY )) && DrawY <= (platY8 + (plat_sizeY )))
-                begin
-                    temp_platX = platX8; 
-                    temp_platY = platY8; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX9 - (plat_sizeX)) && DrawX <= (platX9 + (plat_sizeX)) && DrawY >= (platY9 - (plat_sizeY )) && DrawY <= (platY9 + (plat_sizeY )))
-                begin
-                    temp_platX = platX9; 
-                    temp_platY = platY9; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX10 - (plat_sizeX)) && DrawX <= (platX10 + (plat_sizeX)) && DrawY >= (platY10 - (plat_sizeY )) && DrawY <= (platY10 + (plat_sizeY )))
-                begin
-                    temp_platX = platX10; 
-                    temp_platY = platY10; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX11 - (plat_sizeX)) && DrawX <= (platX11 + (plat_sizeX)) && DrawY >= (platY11 - (plat_sizeY )) && DrawY <= (platY11 + (plat_sizeY )))
-                begin
-                    temp_platX = platX11; 
-                    temp_platY = platY11; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX12 - (plat_sizeX)) && DrawX <= (platX12 + (plat_sizeX)) && DrawY >= (platY12 - (plat_sizeY )) && DrawY <= (platY12 + (plat_sizeY )))
-                begin
-                    temp_platX = platX12; 
-                    temp_platY = platY12; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX13 - (plat_sizeX)) && DrawX <= (platX13 + (plat_sizeX)) && DrawY >= (platY13 - (plat_sizeY )) && DrawY <= (platY13 + (plat_sizeY )))
-                begin
-                    temp_platX = platX13; 
-                    temp_platY = platY13; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX14 - (plat_sizeX)) && DrawX <= (platX14 + (plat_sizeX)) && DrawY >= (platY14 - (plat_sizeY )) && DrawY <= (platY14 + (plat_sizeY )))
-                begin
-                    temp_platX = platX14; 
-                    temp_platY = platY14; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX15 - (plat_sizeX)) && DrawX <= (platX15 + (plat_sizeX)) && DrawY >= (platY15 - (plat_sizeY )) && DrawY <= (platY15 + (plat_sizeY )))
-                begin
-                    temp_platX = platX15; 
-                    temp_platY = platY15; 
-                    if(greenplat16_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 1;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else 
-                    begin
-                        temp_platX = platX; 
-                        temp_platY = platY; 
-                        greenplat16_on = 0;
-                        greenplat32_on = 0;
-                        greenplat64_on = 0;
-                    end
-        end 
-
-        else if (difficulty == 2'b01)
-            begin
-            if(DrawX >= (platX - (plat_sizeX)) && DrawX <= (platX + (plat_sizeX)) && DrawY >= (platY - (plat_sizeY )) && DrawY <= (platY + (plat_sizeY )))
-                begin
-                    temp_platX = platX; 
-                    temp_platY = platY; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX1 - (plat_sizeX)) && DrawX <= (platX1 + (plat_sizeX)) && DrawY >= (platY1 - (plat_sizeY )) && DrawY <= (platY1 + (plat_sizeY )))
-                begin
-                    temp_platX = platX1; 
-                    temp_platY = platY1; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX2 - (plat_sizeX)) && DrawX <= (platX2 + (plat_sizeX)) && DrawY >= (platY2 - (plat_sizeY )) && DrawY <= (platY2 + (plat_sizeY )))
-                begin
-                    temp_platX = platX2; 
-                    temp_platY = platY2; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX3 - (plat_sizeX)) && DrawX <= (platX3 + (plat_sizeX)) && DrawY >= (platY3 - (plat_sizeY )) && DrawY <= (platY3 + (plat_sizeY )))
-                begin
-                    temp_platX = platX3; 
-                    temp_platY = platY3; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX4 - (plat_sizeX)) && DrawX <= (platX4 + (plat_sizeX)) && DrawY >= (platY4 - (plat_sizeY )) && DrawY <= (platY4 + (plat_sizeY )))
-                begin
-                    temp_platX = platX4; 
-                    temp_platY = platY4; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX5 - (plat_sizeX)) && DrawX <= (platX5 + (plat_sizeX)) && DrawY >= (platY5 - (plat_sizeY )) && DrawY <= (platY5 + (plat_sizeY )))
-                begin
-                    temp_platX = platX5; 
-                    temp_platY = platY5; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX6 - (plat_sizeX)) && DrawX <= (platX6 + (plat_sizeX)) && DrawY >= (platY6 - (plat_sizeY )) && DrawY <= (platY6 + (plat_sizeY )))
-                begin
-                    temp_platX = platX6; 
-                    temp_platY = platY6; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX7 - (plat_sizeX)) && DrawX <= (platX7 + (plat_sizeX)) && DrawY >= (platY7 - (plat_sizeY )) && DrawY <= (platY7 + (plat_sizeY )))
-                begin
-                    temp_platX = platX7; 
-                    temp_platY = platY7; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX8 - (plat_sizeX)) && DrawX <= (platX8 + (plat_sizeX)) && DrawY >= (platY8 - (plat_sizeY )) && DrawY <= (platY8 + (plat_sizeY )))
-                begin
-                    temp_platX = platX8; 
-                    temp_platY = platY8; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX9 - (plat_sizeX)) && DrawX <= (platX9 + (plat_sizeX)) && DrawY >= (platY9 - (plat_sizeY )) && DrawY <= (platY9 + (plat_sizeY )))
-                begin
-                    temp_platX = platX9; 
-                    temp_platY = platY9; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX10 - (plat_sizeX)) && DrawX <= (platX10 + (plat_sizeX)) && DrawY >= (platY10 - (plat_sizeY )) && DrawY <= (platY10 + (plat_sizeY )))
-                begin
-                    temp_platX = platX10; 
-                    temp_platY = platY10; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX11 - (plat_sizeX)) && DrawX <= (platX11 + (plat_sizeX)) && DrawY >= (platY11 - (plat_sizeY )) && DrawY <= (platY11 + (plat_sizeY )))
-                begin
-                    temp_platX = platX11; 
-                    temp_platY = platY11; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX12 - (plat_sizeX)) && DrawX <= (platX12 + (plat_sizeX)) && DrawY >= (platY12 - (plat_sizeY )) && DrawY <= (platY12 + (plat_sizeY )))
-                begin
-                    temp_platX = platX12; 
-                    temp_platY = platY12; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX13 - (plat_sizeX)) && DrawX <= (platX13 + (plat_sizeX)) && DrawY >= (platY13 - (plat_sizeY )) && DrawY <= (platY13 + (plat_sizeY )))
-                begin
-                    temp_platX = platX13; 
-                    temp_platY = platY13; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX14 - (plat_sizeX)) && DrawX <= (platX14 + (plat_sizeX)) && DrawY >= (platY14 - (plat_sizeY )) && DrawY <= (platY14 + (plat_sizeY )))
-                begin
-                    temp_platX = platX14; 
-                    temp_platY = platY14; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX15 - (plat_sizeX)) && DrawX <= (platX15 + (plat_sizeX)) && DrawY >= (platY15 - (plat_sizeY )) && DrawY <= (platY15 + (plat_sizeY )))
-                begin
-                    temp_platX = platX15; 
-                    temp_platY = platY15; 
-                    if(greenplat32_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 1;
-                            greenplat64_on = 0;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else 
-                    begin
-                        temp_platX = platX; 
-                        temp_platY = platY1; 
-                        greenplat16_on = 0;
-                        greenplat32_on = 0;
-                        greenplat64_on = 0;
-                    end
-        end 
-
-        else if (difficulty == 2'b00)
-            begin
-            if(DrawX >= (platX - (plat_sizeX)) && DrawX <= (platX + (plat_sizeX)) && DrawY >= (platY - (plat_sizeY )) && DrawY <= (platY + (plat_sizeY )))
-                begin
-                    temp_platX = platX; 
-                    temp_platY = platY; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX1 - (plat_sizeX)) && DrawX <= (platX1 + (plat_sizeX)) && DrawY >= (platY1 - (plat_sizeY )) && DrawY <= (platY1 + (plat_sizeY )))
-                begin
-                    temp_platX = platX1; 
-                    temp_platY = platY1; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX2 - (plat_sizeX)) && DrawX <= (platX2 + (plat_sizeX)) && DrawY >= (platY2 - (plat_sizeY )) && DrawY <= (platY2 + (plat_sizeY )))
-                begin
-                    temp_platX = platX2; 
-                    temp_platY = platY2; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX3 - (plat_sizeX)) && DrawX <= (platX3 + (plat_sizeX)) && DrawY >= (platY3 - (plat_sizeY )) && DrawY <= (platY3 + (plat_sizeY )))
-                begin
-                    temp_platX = platX3; 
-                    temp_platY = platY3; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX4 - (plat_sizeX)) && DrawX <= (platX4 + (plat_sizeX)) && DrawY >= (platY4 - (plat_sizeY )) && DrawY <= (platY4 + (plat_sizeY )))
-                begin
-                    temp_platX = platX4; 
-                    temp_platY = platY4; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX5 - (plat_sizeX)) && DrawX <= (platX5 + (plat_sizeX)) && DrawY >= (platY5 - (plat_sizeY )) && DrawY <= (platY5 + (plat_sizeY )))
-                begin
-                    temp_platX = platX5; 
-                    temp_platY = platY5; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX6 - (plat_sizeX)) && DrawX <= (platX6 + (plat_sizeX)) && DrawY >= (platY6 - (plat_sizeY )) && DrawY <= (platY6 + (plat_sizeY )))
-                begin
-                    temp_platX = platX6; 
-                    temp_platY = platY6; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-            else if(DrawX >= (platX7 - (plat_sizeX)) && DrawX <= (platX7 + (plat_sizeX)) && DrawY >= (platY7 - (plat_sizeY )) && DrawY <= (platY7 + (plat_sizeY )))
-                begin
-                    temp_platX = platX7; 
-                    temp_platY = platY7; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX8 - (plat_sizeX)) && DrawX <= (platX8 + (plat_sizeX)) && DrawY >= (platY8 - (plat_sizeY )) && DrawY <= (platY8 + (plat_sizeY )))
-                begin
-                    temp_platX = platX8; 
-                    temp_platY = platY8; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX9 - (plat_sizeX)) && DrawX <= (platX9 + (plat_sizeX)) && DrawY >= (platY9 - (plat_sizeY )) && DrawY <= (platY9 + (plat_sizeY )))
-                begin
-                    temp_platX = platX9; 
-                    temp_platY = platY9; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX10 - (plat_sizeX)) && DrawX <= (platX10 + (plat_sizeX)) && DrawY >= (platY10 - (plat_sizeY )) && DrawY <= (platY10 + (plat_sizeY )))
-                begin
-                    temp_platX = platX10; 
-                    temp_platY = platY10; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX11 - (plat_sizeX)) && DrawX <= (platX11 + (plat_sizeX)) && DrawY >= (platY11 - (plat_sizeY )) && DrawY <= (platY11 + (plat_sizeY )))
-                begin
-                    temp_platX = platX11; 
-                    temp_platY = platY11; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX12 - (plat_sizeX)) && DrawX <= (platX12 + (plat_sizeX)) && DrawY >= (platY12 - (plat_sizeY )) && DrawY <= (platY12 + (plat_sizeY )))
-                begin
-                    temp_platX = platX12; 
-                    temp_platY = platY12; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX13 - (plat_sizeX)) && DrawX <= (platX13 + (plat_sizeX)) && DrawY >= (platY13 - (plat_sizeY )) && DrawY <= (platY13 + (plat_sizeY )))
-                begin
-                    temp_platX = platX13; 
-                    temp_platY = platY13; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX14 - (plat_sizeX)) && DrawX <= (platX14 + (plat_sizeX)) && DrawY >= (platY14 - (plat_sizeY )) && DrawY <= (platY14 + (plat_sizeY )))
-                begin
-                    temp_platX = platX14; 
-                    temp_platY = platY14; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else if(DrawX >= (platX15 - (plat_sizeX)) && DrawX <= (platX15 + (plat_sizeX)) && DrawY >= (platY15 - (plat_sizeY )) && DrawY <= (platY15 + (plat_sizeY )))
-                begin
-                    temp_platX = platX15; 
-                    temp_platY = platY15; 
-                    if(greenplat64_out != 24'hfe43e3)
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 1;
-                        end
-                    else
-                        begin
-                            greenplat16_on = 0;
-                            greenplat32_on = 0;
-                            greenplat64_on = 0;
-                        end
-                end
-
-                else 
-                    begin
-                        temp_platX = platX1; 
-                        temp_platY = platY; 
-                        greenplat16_on = 0;
-                        greenplat32_on = 0;
-                        greenplat64_on = 0;
-                    end
-            end 
-
-        else
-            begin
-                temp_platX = platX1; 
-                temp_platY = platY; 
-                greenplat16_on = 0;
-                greenplat32_on = 0;
-                greenplat64_on = 0;
-            end
-    end
-
-
-
+    end 
 
 
 always_comb 
@@ -5553,24 +4668,202 @@ always_comb
             end
 
         else if(greenplat16_on)
-            begin
+            begin   
                 Red = greenplat16_out[23:16];
                 Green = greenplat16_out[15:8];
                 Blue = greenplat16_out[7:0];
             end
-
+        else if(blueplat16_on)
+            begin  
+                if(greenplat16_out == 24'h0)
+                begin  
+                    Red = greenplat16_out[23:16];
+                    Green = greenplat16_out[15:8];
+                    Blue = greenplat16_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 0;
+                    Green = 0; 
+                    Blue = 8'hFF;
+                end 
+            end
+        else if(yellowplat16_on)
+            begin  
+                if(greenplat16_out == 24'h0)
+                begin  
+                    Red = greenplat16_out[23:16];
+                    Green = greenplat16_out[15:8];
+                    Blue = greenplat16_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 8'hFF;
+                    Green = 8'hFF; 
+                    Blue = 8'h0;
+                end 
+            end
+        else if(whiteplat16_on)
+            begin  
+                if(greenplat16_out == 24'h0)
+                begin  
+                    Red = greenplat16_out[23:16];
+                    Green = greenplat16_out[15:8];
+                    Blue = greenplat16_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 8'hFF;
+                    Green = 8'hFF; 
+                    Blue = 8'hFF;
+                end 
+            end
+        else if(brownplat16_on)
+            begin  
+                if(greenplat16_out == 24'h0)
+                begin  
+                    Red = greenplat16_out[23:16];
+                    Green = greenplat16_out[15:8];
+                    Blue = greenplat16_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 8'hA5;
+                    Green = 8'h2A; 
+                    Blue = 8'h2A;
+                end 
+            end
         else if(greenplat32_on)
-            begin
+            begin   
                 Red = greenplat32_out[23:16];
                 Green = greenplat32_out[15:8];
                 Blue = greenplat32_out[7:0];
             end
-        
+        else if(blueplat32_on)
+            begin  
+                if(greenplat32_out == 24'h0)
+                begin  
+                    Red = greenplat32_out[23:16];
+                    Green = greenplat32_out[15:8];
+                    Blue = greenplat32_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 0;
+                    Green = 0; 
+                    Blue = 8'hFF;
+                end 
+            end
+        else if(yellowplat32_on)
+            begin  
+                if(greenplat32_out == 24'h0)
+                begin  
+                    Red = greenplat32_out[23:16];
+                    Green = greenplat32_out[15:8];
+                    Blue = greenplat32_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 8'hFF;
+                    Green = 8'hFF; 
+                    Blue = 8'h0;
+                end 
+            end
+        else if(whiteplat32_on)
+            begin  
+                if(greenplat32_out == 24'h0)
+                begin  
+                    Red = greenplat32_out[23:16];
+                    Green = greenplat32_out[15:8];
+                    Blue = greenplat32_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 8'hFF;
+                    Green = 8'hFF; 
+                    Blue = 8'hFF;
+                end 
+            end
+        else if(brownplat32_on)
+            begin  
+                if(greenplat32_out == 24'h0)
+                begin  
+                    Red = greenplat32_out[23:16];
+                    Green = greenplat32_out[15:8];
+                    Blue = greenplat32_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 8'hA5;
+                    Green = 8'h2A; 
+                    Blue = 8'h2A;
+                end 
+            end        
         else if(greenplat64_on)
-            begin
+            begin   
                 Red = greenplat64_out[23:16];
                 Green = greenplat64_out[15:8];
                 Blue = greenplat64_out[7:0];
+            end
+        else if(blueplat64_on)
+            begin  
+                if(greenplat64_out == 24'h0)
+                begin  
+                    Red = greenplat64_out[23:16];
+                    Green = greenplat64_out[15:8];
+                    Blue = greenplat64_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 0;
+                    Green = 0; 
+                    Blue = 8'hFF;
+                end 
+            end
+        else if(yellowplat64_on)
+            begin  
+                if(greenplat64_out == 24'h0)
+                begin  
+                    Red = greenplat64_out[23:16];
+                    Green = greenplat64_out[15:8];
+                    Blue = greenplat64_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 8'hFF;
+                    Green = 8'hFF; 
+                    Blue = 8'h0;
+                end 
+            end
+        else if(whiteplat64_on)
+            begin  
+                if(greenplat64_out == 24'h0)
+                begin  
+                    Red = greenplat64_out[23:16];
+                    Green = greenplat64_out[15:8];
+                    Blue = greenplat64_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 8'hFF;
+                    Green = 8'hFF; 
+                    Blue = 8'hFF;
+                end 
+            end
+        else if(brownplat64_on)
+            begin  
+                if(greenplat64_out == 24'h0)
+                begin  
+                    Red = greenplat64_out[23:16];
+                    Green = greenplat64_out[15:8];
+                    Blue = greenplat64_out[7:0];
+                end 
+                else 
+                begin
+                    Red = 8'hA5;
+                    Green = 8'h2A; 
+                    Blue = 8'h2A;
+                end 
             end
         
         // turn on pixels for the cannon 
