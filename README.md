@@ -8,10 +8,10 @@ In order to run the program add all files in main/svfiles && main/doodlejump_soc
 Credits go to:
 
 Rishi's Helper Tools for Sprite Making
+https://github.com/Atrifex/ECE385-HelperTools
 
 
 as well as the algorithm for BCD on the screen 
-
 https://www.realdigital.org/doc/6dae6583570fd816d1d675b93578203d
 
 
