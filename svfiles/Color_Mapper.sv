@@ -8,11 +8,11 @@
 //                                                                       --
 //    Fall 2014 Distribution                                             --
 //                                                                       --
-//    For use with ECE 385 Lab 7                                         --
 //    University of Illinois ECE Department                              --
 //    Modifed by Gally && Feng Zhao April/May 2022                       --
 //    Everything for terrain is generated here                           --
-//    University of Illinois ECE Department                              --
+//    University of Illinois ECE Department                                               --
+//    For use with ECE 385 Lab 7                        --
 //-------------------------------------------------------------------------
 
 
@@ -2006,12 +2006,12 @@ C c(
     .data_Out(C_BKG_out[23:0])
 ); 
 
-// D d(
-//     .read_address(BKG_address_D[10:0]),
-//     .Clk(Clk), 
+D d(
+    .read_address(BKG_address_D[10:0]),
+    .Clk(Clk), 
 
-//     .data_Out(D_BKG_out[23:0])
-// ); 
+    .data_Out(D_BKG_out[23:0])
+); 
 
 E e(
     .read_address(BKG_address_E[10:0]),
@@ -2027,12 +2027,12 @@ E e(
 //     .data_Out(F_BKG_out[23:0])
 // ); 
 
-// G g(
-//     .read_address(BKG_address_G[10:0]),
-//     .Clk(Clk), 
+G g(
+    .read_address(BKG_address_G[10:0]),
+    .Clk(Clk), 
 
-//     .data_Out(G_BKG_out[23:0])
-// ); 
+    .data_Out(G_BKG_out[23:0])
+); 
 
 // H h(
 //     .read_address(BKG_address_H[10:0]),
@@ -2062,12 +2062,12 @@ J j(
 //     .data_Out(K_BKG_out[23:0])
 // ); 
 
-// L l(
-//     .read_address(BKG_address_L[10:0]),
-//     .Clk(Clk), 
+L l(
+    .read_address(BKG_address_L[10:0]),
+    .Clk(Clk), 
 
-//     .data_Out(L_BKG_out[23:0])
-// ); 
+    .data_Out(L_BKG_out[23:0])
+); 
 
 M m(
     .read_address(BKG_address_M[10:0]),
@@ -2090,12 +2090,12 @@ O o(
     .data_Out(O_BKG_out[23:0])
 ); 
 
-// P p(
-//     .read_address(BKG_address_P[10:0]),
-//     .Clk(Clk), 
+P p(
+    .read_address(BKG_address_P[10:0]),
+    .Clk(Clk), 
 
-//     .data_Out(P_BKG_out[23:0])
-// ); 
+    .data_Out(P_BKG_out[23:0])
+); 
 
 // Q q(
 //     .read_address(BKG_address_Q[10:0]),
@@ -2234,19 +2234,19 @@ logic [10:0]  BKG_address_nine;
 // logic [10:0]  BKG_address_A;
 // logic [10:0]  BKG_address_B;
 logic [10:0]  BKG_address_C;
-// logic [10:0]  BKG_address_D;
+logic [10:0]  BKG_address_D;
 logic [10:0]  BKG_address_E;
 // logic [10:0]  BKG_address_F;
-// logic [10:0]  BKG_address_G;
+logic [10:0]  BKG_address_G;
 // logic [10:0]  BKG_address_H;
 // logic [10:0]  BKG_address_I;
 logic [10:0]  BKG_address_J;
 // logic [10:0]  BKG_address_K;
-// logic [10:0]  BKG_address_L;
+logic [10:0]  BKG_address_L;
 logic [10:0]  BKG_address_M;
 // logic [10:0]  BKG_address_N;
 logic [10:0]  BKG_address_O;
-// logic [10:0]  BKG_address_P;
+logic [10:0]  BKG_address_P;
 // logic [10:0]  BKG_address_Q;
 logic [10:0]  BKG_address_R;
 logic [10:0]  BKG_address_S;
@@ -2330,14 +2330,18 @@ reg [8:0] temp_platX;
 logic [8:0] monster_addr;
 logic [23:0] monster_BKG_out; 
 
+reg [8:0] temp_D_X;
+reg [8:0] temp_D_Y;
+reg [8:0] temp_L_X;
+reg [8:0] temp_L_Y;
 reg [8:0] temp_J_X;
 reg [8:0] temp_J_Y;
 reg [8:0] temp_U_X;
 reg [8:0] temp_U_Y;
 reg [8:0] temp_M_X;
 reg [8:0] temp_M_Y;
-// reg [8:0] temp_P_X;
-// reg [8:0] temp_P_Y;
+reg [8:0] temp_P_X;
+reg [8:0] temp_P_Y;
 
 reg [8:0] temp_letter_size;
 // game platforms 
@@ -2355,12 +2359,12 @@ always_comb
 always_comb 
     begin
         // BKG_address_E = (temp_letter_size * (DrawY - temp_E_Y) + (DrawX - temp_E_X));
-        // BKG_address_D = (temp_letter_size * (DrawY - temp_D_Y) + (DrawX - temp_D_X));
-        // BKG_address_L = (temp_letter_size * (DrawY - temp_L_Y) + (DrawX - temp_L_X));         
+        BKG_address_D = (temp_letter_size * (DrawY - temp_D_Y) + (DrawX - temp_D_X));
+        BKG_address_L = (temp_letter_size * (DrawY - temp_L_Y) + (DrawX - temp_L_X));         
         BKG_address_J = (temp_letter_size * (DrawY - temp_J_Y ) + (DrawX - temp_J_X));
         BKG_address_U = (temp_letter_size * (DrawY - temp_U_Y) + (DrawX - temp_U_X));
         BKG_address_M = (temp_letter_size * (DrawY - temp_M_Y) + (DrawX - temp_M_X));
-        // BKG_address_P = (letter_size * (DrawY - 350) + (DrawX - 330));  
+        BKG_address_P = (temp_letter_size * (DrawY - temp_P_Y) + (DrawX - temp_P_X));  
 
      // BKG_address_E = (letter_size * (DrawY - tempx) + (DrawX - tempy));
         // if(inside the e of the score region)
@@ -2374,214 +2378,314 @@ always_comb
         //         e_on
         if(outstate == 3'b000)
             begin
-            if(DrawX >= 180 && DrawX <= 212 && DrawY >= 350 && DrawY <= 382) 
+                    if(DrawX >= 180 && DrawX <= 212 && DrawY >= 350 && DrawY <= 382) 
                         begin
-                        // temp_D_X = 330;
-                        // temp_D_Y = 300;
-                        // temp_L_X = 380;
-                        // temp_L_Y = 300;
+                        temp_D_X = 0;
+                        temp_D_Y = 0;
+                        temp_L_X = 0;
+                        temp_L_Y = 0;
                         temp_J_X = 180;
                         temp_J_Y = 350;
                         temp_U_X = 0;
                         temp_U_Y = 0;
                         temp_M_X = 0;
                         temp_M_Y = 0;
-                        // temp_P_X = 0;
-                        // temp_P_Y = 0;
+                        temp_P_X = 0;
+                        temp_P_Y = 0;
                         temp_letter_size = letter_size;
                             if(J_BKG_out != 24'h0)
                                 begin
-                                // D_on = 0;
-                                // L_on = 0;
+                                D_on = 0;
+                                L_on = 0;
                                 J_on = 1;
                                 U_on = 0;
                                 M_on = 0;
-                                // P_on = 0;
+                                P_on = 0;
                                 // O2_on = 0;
                                 // E2_on = 0;
                                 end
                             else
                                 begin
-                                // D_on = 0;
-                                // L_on = 0;
+                                D_on = 0;
+                                L_on = 0;
                                 J_on = 0;
                                 U_on = 0;
                                 M_on = 0;
-                                // P_on = 0;
+                                P_on = 0;
                                 // O2_on = 0;
                                 // E2_on = 0;
                                 end
                         end
+                    
+                    else if(DrawX >= 180 && DrawX <= 212 && DrawY >= 300 && DrawY <= 332) 
+                        begin
+                        temp_D_X = 180;
+                        temp_D_Y = 300;
+                        temp_L_X = 0;
+                        temp_L_Y = 0;
+                        temp_J_X = 0;
+                        temp_J_Y = 0;
+                        temp_U_X = 0;
+                        temp_U_Y = 0;
+                        temp_M_X = 0;
+                        temp_M_Y = 0;
+                        temp_P_X = 0;
+                        temp_P_Y = 0;
+                        temp_letter_size = letter_size;
+                            if(D_BKG_out != 24'h0)
+                                begin
+                                D_on = 1;
+                                L_on = 0;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 0;
+                                P_on = 0;
+                                // O2_on = 0;
+                                // E2_on = 0;
+                                end
+                            else
+                                begin
+                                D_on = 0;
+                                L_on = 0;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 0;
+                                P_on = 0;
+                                // O2_on = 0;
+                                // E2_on = 0;
+                                end
+                        end
+
+                    else if(DrawX >= 330 && DrawX <= 362 && DrawY >= 300 && DrawY <= 332) 
+                        begin
+                        temp_D_X = 330;
+                        temp_D_Y = 300;
+                        temp_L_X = 0;
+                        temp_L_Y = 0;
+                        temp_J_X = 0;
+                        temp_J_Y = 0;
+                        temp_U_X = 0;
+                        temp_U_Y = 0;
+                        temp_M_X = 0;
+                        temp_M_Y = 0;
+                        temp_P_X = 0;
+                        temp_P_Y = 0;
+                        temp_letter_size = letter_size;
+                            if(D_BKG_out != 24'h0)
+                                begin
+                                D_on = 1;
+                                L_on = 0;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 0;
+                                P_on = 0;
+                                // O2_on = 0;
+                                // E2_on = 0;
+                                end
+                            else
+                                begin
+                                D_on = 0;
+                                L_on = 0;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 0;
+                                P_on = 0;
+                                // O2_on = 0;
+                                // E2_on = 0;
+                                end
+                        end
+
+                    else if(DrawX >= 380 && DrawX <= 412 && DrawY >= 300 && DrawY <= 332) 
+                        begin
+                        temp_D_X = 0;
+                        temp_D_Y = 0;
+                        temp_L_X = 380;
+                        temp_L_Y = 300;
+                        temp_J_X = 0;
+                        temp_J_Y = 0;
+                        temp_U_X = 0;
+                        temp_U_Y = 0;
+                        temp_M_X = 0;
+                        temp_M_Y = 0;
+                        temp_P_X = 0;
+                        temp_P_Y = 0;
+                        temp_letter_size = letter_size;
+                            if(L_BKG_out != 24'h0)
+                                begin
+                                D_on = 0;
+                                L_on = 1;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 0;
+                                P_on = 0;
+                                end
+                            else
+                                begin
+                                D_on = 0;
+                                L_on = 0;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 0;
+                                P_on = 0;
+                                end
+                        end
+
                     else if(DrawX >= 230 && DrawX <= 262 && DrawY >= 350 && DrawY <= 382) 
                         begin
-                    //     // temp_D_X = 330;
-                    //     // temp_D_Y = 300;
-                    //     // temp_L_X = 380;
-                    //     // temp_L_Y = 300;
+                        temp_D_X = 0;
+                        temp_D_Y = 0;
+                        temp_L_X = 0;
+                        temp_L_Y = 0;
                         temp_J_X = 0;
                         temp_J_Y = 0;
                         temp_U_X = 230;
                         temp_U_Y = 350;
                         temp_M_X = 0;
                         temp_M_Y = 0;
-                    //     // temp_P_X = 0;
-                    //     // temp_P_Y = 0;
+                        temp_P_X = 0;
+                        temp_P_Y = 0;
                         temp_letter_size = letter_size;
                             if(U_BKG_out != 24'h0)
                                 begin
-                    //             // D_on = 0;
-                    //             // L_on = 0;
+                                D_on = 0;
+                                L_on = 0;
                                 J_on = 0;
                                 U_on = 1;
                                 M_on = 0;
-                    //             P_on = 0;
+                                P_on = 0;
                                 end
                             else
                                 begin
-                    //             // D_on = 0;
-                    //             // L_on = 0;
+                                D_on = 0;
+                                L_on = 0;
                                 J_on = 0;
                                 U_on = 0;
                                 M_on = 0;
-                    //             P_on = 0;
+                                P_on = 0;
                                 end
                         end
 
                     else if(DrawX >= 280 && DrawX <= 312 && DrawY >= 350 && DrawY <= 382) 
                         begin
-                    //     // temp_D_X = 330;
-                    //     // temp_D_Y = 300;
-                    //     // temp_L_X = 380;
-                    //     // temp_L_Y = 300;
+                        temp_D_X = 0;
+                        temp_D_Y = 0;
+                        temp_L_X = 0;
+                        temp_L_Y = 0;
                         temp_J_X = 0;
                         temp_J_Y = 0;
                         temp_U_X = 0;
                         temp_U_Y = 0;
                         temp_M_X = 280;
                         temp_M_Y = 350;
-                    //     // temp_P_X = 0;
-                    //     // temp_P_Y = 0;
+                        temp_P_X = 0;
+                        temp_P_Y = 0;
                         temp_letter_size = letter_size;
                             if(M_BKG_out != 24'h0)
                                 begin
-                                // D_on = 0;
-                                // L_on = 0;
+                                D_on = 0;
+                                L_on = 0;
                                 J_on = 0;
                                 U_on = 0;
                                 M_on = 1;
-                                // P_on = 0;
+                                P_on = 0;
                                 end
                             else
                                 begin
-                                // D_on = 0;
-                                // L_on = 0;
+                                D_on = 0;
+                                L_on = 0;
                                 J_on = 0;
                                 U_on = 0;
                                 M_on = 0;
-                                // P_on = 0;
+                                P_on = 0;
                                 end
                         end
 
-                    // else if(DrawX >= 330 && DrawX <= 362 && DrawY >= 350 && DrawY <= 382) 
-                    //     begin
-                    //     // temp_D_X = 330;
-                    //     // temp_D_Y = 300;
-                    //     // temp_L_X = 380;
-                    //     // temp_L_Y = 300;
-                    //     // temp_J_X = 0;
-                    //     // temp_J_Y = 0;
-                    //     // temp_U_X = 0;
-                    //     // temp_U_Y = 0;
-                    //     // temp_M_X = 0;
-                    //     // temp_M_Y = 0;
-                    //     // temp_P_X = 330;
-                    //     // temp_P_Y = 350;
-                    //     // temp_letter_size = letter_size;
-                    //         if(P_BKG_out != 24'h0)
-                    //             begin
-                    //             // D_on = 0;
-                    //             // L_on = 0;
-                    //             J_on = 0;
-                    //             U_on = 0;
-                    //             M_on = 0;
-                    //             P_on = 1;              
-                    //             end
-                    //         else
-                    //             begin
-                    //             // D_on = 0;
-                    //             // L_on = 0;
-                    //             J_on = 0;
-                    //             U_on = 0;
-                    //             M_on = 0;
-                    //             P_on = 0;
-                    //             end
-                    //     end
+                    else if(DrawX >= 330 && DrawX <= 362 && DrawY >= 350 && DrawY <= 382) 
+                        begin
+                        temp_D_X = 0;
+                        temp_D_Y = 0;
+                        temp_L_X = 0;
+                        temp_L_Y = 0;
+                        temp_J_X = 0;
+                        temp_J_Y = 0;
+                        temp_U_X = 0;
+                        temp_U_Y = 0;
+                        temp_M_X = 0;
+                        temp_M_Y = 0;
+                        temp_P_X = 330;
+                        temp_P_Y = 350;
+                        temp_letter_size = letter_size;
+                            if(P_BKG_out != 24'h0)
+                                begin
+                                D_on = 0;
+                                L_on = 0;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 0;
+                                P_on = 1;              
+                                end
+                            else
+                                begin
+                                D_on = 0;
+                                L_on = 0;
+                                J_on = 0;
+                                U_on = 0;
+                                M_on = 0;
+                                P_on = 0;
+                                end
+                        end
 
-            else
-                begin
-                // temp_D_X = 330;
-                // temp_D_Y = 300;
-                // temp_L_X = 380;
-                // temp_L_Y = 300;
-                temp_J_X = 0;
-                temp_J_Y = 0;
-                temp_U_X = 0;
-                temp_U_Y = 0;
-                temp_M_X = 0;
-                temp_M_Y = 0;
-                // temp_P_X = 0;
-                // temp_P_Y = 0;
-                temp_letter_size = 0;
-                // D_on = 0;
-                // L_on = 0;
-                J_on = 0;
-                U_on = 0;
-                M_on = 0;
-                // P_on = 0;
-                end
+                    else
+                        begin
+                        temp_D_X = 0;
+                        temp_D_Y = 0;
+                        temp_L_X = 0;
+                        temp_L_Y = 0;
+                        temp_J_X = 0;
+                        temp_J_Y = 0;
+                        temp_U_X = 0;
+                        temp_U_Y = 0;
+                        temp_M_X = 0;
+                        temp_M_Y = 0;
+                        temp_P_X = 0;
+                        temp_P_Y = 0;
+                        temp_letter_size = letter_size;
+                        D_on = 0;
+                        L_on = 0;
+                        J_on = 0;
+                        U_on = 0;
+                        M_on = 0;
+                        P_on = 0;
+                        end
             end
+
         else
             begin
+            temp_D_X = 0;
+            temp_D_Y = 0;
+            temp_L_X = 0;
+            temp_L_Y = 0;
             temp_J_X = 0;
             temp_J_Y = 0;  
             temp_U_X = 0;
             temp_U_Y = 0;
             temp_M_X = 0; 
             temp_M_Y = 0;
+            temp_P_X = 0;
+            temp_P_Y = 0;
+            temp_letter_size = letter_size;
+            D_on = 0;
+            L_on = 0;
             J_on = 0;
             U_on = 0;
             M_on = 0;
-            temp_letter_size = 0;
+            P_on = 0;
+            
             end
     end
 
-        // else
-        //     begin
-        //     temp_D_X = 330;
-        //     temp_D_Y = 300;
-        //     temp_L_X = 380;
-        //     temp_L_Y = 300;
-        //     temp_J_X = 0;
-        //     temp_J_Y = 0;
-        //     temp_U_X = 0;
-        //     temp_U_Y = 0;
-        //     temp_M_X = 0;
-        //     temp_M_Y = 0;
-        //     temp_P_X = 0;
-        //     temp_P_Y = 0;
-        //     temp_letter_size = 0;
-        //     D_on = 0;
-        //     L_on = 0;
-        //     J_on = 0;
-        //     U_on = 0;
-        //     M_on = 0;
-        //     P_on = 0;
-        //     end
-    
-        // end
 
     
-reg [8:0] temp_Score_size;
 reg [8:0] temp_S_X;
 reg [8:0] temp_S_Y;
 reg [8:0] temp_C_X;
@@ -2595,13 +2699,12 @@ reg [8:0] temp_E_Y;
 
 always_comb 
     begin 
-    if(outstate == 3'b010 || outstate == 3'b011 || outstate == 3'b100)
-        begin
         BKG_address_S = (temp_letter_size * (DrawY - temp_S_Y) + DrawX);
         BKG_address_C = (temp_letter_size * (DrawY - temp_C_Y) + (DrawX - temp_C_X));
         BKG_address_O = (temp_letter_size * (DrawY - temp_O_Y ) + (DrawX - temp_O_X));
         BKG_address_R = (temp_letter_size * (DrawY - temp_R_Y) + (DrawX - temp_R_X));
         BKG_address_E = (temp_letter_size * (DrawY - temp_E_Y) + (DrawX - temp_E_X));
+    if(outstate == 3'b010 || outstate == 3'b011)
         begin
         if(DrawY >= letter_size && DrawX >= 0 && DrawX <= letter_size && DrawY <= (2 * letter_size))
             begin
@@ -2773,8 +2876,119 @@ always_comb
                 R_on = 0;
                 E_on = 0; 
             end
+        
         end
+    else if(outstate == 3'b000)
+        begin
+            if(DrawX >= 230 && DrawX <= 262 && DrawY >= 300 && DrawY <= 332)
+                begin
+                    temp_S_Y = 0; 
+                    temp_C_X = 0;
+                    temp_C_Y = 0;
+                    temp_O_X = 230;
+                    temp_O_Y = 300;
+                    temp_R_X = 0;
+                    temp_R_Y = 0;
+                    temp_E_X = 0;
+                    temp_E_Y = 0;
+                    temp_letter_size = letter_size;
+                    if(O_BKG_out != 24'h0)
+                        begin
+                            S_on = 0;
+                            C_on = 0;
+                            O_on = 1;
+                            R_on = 0;
+                            E_on = 0; 
+                        end
+                    else
+                        begin
+                            S_on = 0;
+                            C_on = 0;
+                            O_on = 0;
+                            R_on = 0;
+                            E_on = 0;  
+                        end
+                end
+            
+            else if(DrawX >= 280 && DrawX <= 312 && DrawY >= 300 && DrawY <= 332)
+                begin
+                    temp_S_Y = 0; 
+                    temp_C_X = 0;
+                    temp_C_Y = 0;
+                    temp_O_X = 280;
+                    temp_O_Y = 300;
+                    temp_R_X = 0;
+                    temp_R_Y = 0;
+                    temp_E_X = 0;
+                    temp_E_Y = 0;
+                    temp_letter_size = letter_size;
+                    if(O_BKG_out != 24'h0)
+                        begin
+                            S_on = 0;
+                            C_on = 0;
+                            O_on = 1;
+                            R_on = 0;
+                            E_on = 0; 
+                        end
+                    else
+                        begin
+                            S_on = 0;
+                            C_on = 0;
+                            O_on = 0;
+                            R_on = 0;
+                            E_on = 0;  
+                        end
+                end  
+
+            else if(DrawX >= 430 && DrawX <= 462 && DrawY >= 300 && DrawY <= 332)
+                begin
+                    temp_S_Y = 0; 
+                    temp_C_X = 0;
+                    temp_C_Y = 0;
+                    temp_O_X = 0;
+                    temp_O_Y = 0;
+                    temp_R_X = 0;
+                    temp_R_Y = 0;
+                    temp_E_X = 430;
+                    temp_E_Y = 300;
+                    temp_letter_size = letter_size;
+                    if(E_BKG_out != 24'h0)
+                        begin
+                            S_on = 0;
+                            C_on = 0;
+                            O_on = 0;
+                            R_on = 0;
+                            E_on = 1; 
+                        end
+                    else
+                        begin
+                            S_on = 0;
+                            C_on = 0;
+                            O_on = 0;
+                            R_on = 0;
+                            E_on = 0;  
+                        end
+                end        
+            else 
+                begin
+                    temp_S_Y = 0; 
+                    temp_C_X = 0;
+                    temp_C_Y = 0;
+                    temp_O_X = 0;
+                    temp_O_Y = 0;
+                    temp_R_X = 0;
+                    temp_R_Y = 0;
+                    temp_E_X = 0;
+                    temp_E_Y = 0;
+                    temp_letter_size = letter_size;
+                    S_on = 0;
+                    C_on = 0;
+                    O_on = 0;
+                    R_on = 0;
+                    E_on = 0;
+                end
         end
+
     else 
         begin
             temp_S_Y = 0; 
@@ -2791,11 +3005,70 @@ always_comb
             C_on = 0;
             O_on = 0;
             R_on = 0;
-            E_on = 0; 
+            E_on = 1; 
+        end
+end
+
+
+reg [8:0] temp_G_X;
+reg [8:0] temp_G_Y;
+always_comb 
+    begin
+        BKG_address_G = (temp_letter_size * (DrawY - temp_G_Y) + (DrawX - temp_G_X));
+        
+        if(outstate == 3'b110)
+        begin
+            if(DrawX >= 206 && DrawX <= 238 && DrawY >= 224 && DrawY <= 256) 
+                begin
+                temp_G_X = 206;
+                temp_G_Y = 224;
+                temp_letter_size = letter_size;
+                    if(G_BKG_out != 24'h0)
+                        begin
+                        G_on = 1;
+                        end
+                    else
+                        begin
+                        G_on = 0;
+                        end
+                end
+                    
+            else if(DrawX >= 242 && DrawX <= 274 && DrawY >= 224 && DrawY <= 256) 
+                begin
+                temp_G_X = 242;
+                temp_G_Y = 224;
+                temp_letter_size = letter_size;
+                    if(G_BKG_out != 24'h0)
+                        begin
+                        G_on = 1;
+                        end
+                    else
+                        begin
+                        G_on = 0;
+                        end
+                end
+
+            else
+                begin
+                temp_G_X = 0;
+                temp_G_Y = 0;
+                temp_letter_size = letter_size;
+                G_on = 0;
+                end
         end
 
-end
-                
+    else
+        begin
+        temp_G_X = 0;
+        temp_G_Y = 0;
+        temp_letter_size = letter_size;
+        G_on = 0;
+        end
+end         
+
+
+
+
 
 bin2bcd bin2bcd(
     .bin(Score[13:0]),
@@ -2820,7 +3093,8 @@ always_comb
         BKG_address_seven = (letter_size * DrawY) + DrawX;
         BKG_address_eight = (letter_size * DrawY) + DrawX;
         BKG_address_nine = (letter_size * DrawY) + DrawX;
-        
+    if(outstate == 3'b010 || outstate == 3'b011 || outstate == 3'b100) 
+        begin   
         if(DrawY >= 0 && DrawX >= 0 && DrawX <= letter_size && DrawY <= letter_size)
             begin
             unique case(fifth_digit)
@@ -4461,7 +4735,23 @@ always_comb
                 eight_on = 0;
                 nine_on = 0;
             end 
-    end 
+    end
+
+    else 
+        begin
+        zero_on = 0;
+        one_on = 0;
+        two_on = 0;
+        three_on = 0;
+        four_on = 0;
+        five_on = 0;
+        six_on = 0;
+        seven_on = 0;
+        eight_on = 0;
+        nine_on = 0;
+        end
+
+end 
 
 
 
@@ -5003,6 +5293,13 @@ always_comb
                 Blue = E_BKG_out[7:0];
             end
         
+        else if(D_on)
+            begin 
+                Red = D_BKG_out[23:16];
+                Green = D_BKG_out[15:8];
+                Blue = D_BKG_out[7:0];
+            end
+
         else if(J_on)
             begin 
                 Red = J_BKG_out[23:16];
@@ -5029,6 +5326,20 @@ always_comb
                 Red = P_BKG_out[23:16];
                 Green = P_BKG_out[15:8];
                 Blue = P_BKG_out[7:0];
+            end
+
+        else if(L_on)
+            begin 
+                Red = L_BKG_out[23:16];
+                Green = L_BKG_out[15:8];
+                Blue = L_BKG_out[7:0];
+            end
+
+        else if(G_on)
+            begin 
+                Red = G_BKG_out[23:16];
+                Green = G_BKG_out[15:8];
+                Blue = G_BKG_out[7:0];
             end
 
 
