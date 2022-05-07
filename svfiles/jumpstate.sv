@@ -1,6 +1,7 @@
 module jumpstate(
     input logic Clock, Reset, trigger, frame_clk,
 	input logic [7:0] Keycode,
+	input logic monster_collision, 
 	input logic refresh_en, 
 	input logic game_over_trigger, 
 	output logic [2:0] outstate,
@@ -72,6 +73,8 @@ end
 						Next_state = Pause;
 					else if(game_over_trigger)
 						Next_state = Game_Over;  
+					else if(monster_collision)
+						Next_state = Game_Over; 
 					else if(refresh_en)
 						Next_state = Refreshing;
 					else 
