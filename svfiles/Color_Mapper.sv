@@ -154,6 +154,8 @@ reg [2:0] monsterspeed;
 reg [8:0] monsterX_Motion, monsterY_Motion; 
 reg [8:0] monster_tempX; 
 reg [8:0] monster_readyX;
+reg monster_dead; 
+reg monster_dead2;
 always_ff @(posedge frame_clk)
     begin 
         unique case(outstate)
@@ -161,20 +163,31 @@ always_ff @(posedge frame_clk)
         begin 
             monster_tempX <= 250;  
             monsterY <= 0; 
+            monster_dead <= 0;
+            monster_dead2 <= 0;
         end 
         default:
         begin 
 
-        if(CannonX - CannonS <= monsterX + monstersizeX && CannonX + CannonS >= monsterX - monstersizeX  && CannonY + CannonS <= monsterY + monstersizeY && CannonY + CannonS >= monsterY - monstersizeY ||
-           CannonX1 - CannonS <= monsterX + monstersizeX && CannonX1 + CannonS >= monsterX - monstersizeX  && CannonY1 + CannonS <= monsterY + monstersizeY && CannonY1 + CannonS >= monsterY - monstersizeY ||
-           CannonX2 - CannonS <= monsterX + monstersizeX && CannonX2 + CannonS >= monsterX - monstersizeX  && CannonY2 + CannonS <= monsterY + monstersizeY && CannonY2 + CannonS >= monsterY - monstersizeY)
+        if(CannonX - CannonS <= monsterX + monstersizeX && CannonX + CannonS >= monsterX - monstersizeX  && CannonY - CannonS <= monsterY + monstersizeY && CannonY + CannonS >= monsterY - monstersizeY ||
+           CannonX1 - CannonS <= monsterX + monstersizeX && CannonX1 + CannonS >= monsterX - monstersizeX  && CannonY1 - CannonS <= monsterY + monstersizeY && CannonY1 + CannonS >= monsterY - monstersizeY ||
+           CannonX2 - CannonS <= monsterX + monstersizeX && CannonX2 + CannonS >= monsterX - monstersizeX  && CannonY2 - CannonS <= monsterY + monstersizeY && CannonY2 + CannonS >= monsterY - monstersizeY)
+            begin 
             monsterY <= 0; 
-        
-        if(Score[11])
+            monster_dead <= 1;
+            if(monster_dead) 
+                monster_dead2 <= 1; 
+            end 
+        else if(Score[11] && !monster_dead)
+            begin 
             monsterY <= 60;
-        else if(monsterY != 0)
-            monsterY <= monsterY - plat_temp_Y; 
-
+            monster_dead <= 0; 
+            end 
+        else if(Score[13] && !monster_dead2)
+            begin 
+            monsterY <= 60;
+            monster_dead2 <= 0; 
+            end
         end 
 		  endcase
         if(outstate == 3'b011)
@@ -917,7 +930,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX <= platX + (platX >> 1); 
                 else if(plat0_color == 3'b011 && Platform_collision0 && platX > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX <= platX - (platX >> 1);
-                else if (plat0_color == 3'b100 && Platform_collision0 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat0_color == 3'b100 && PlatformBrown_collision0 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX <= 0;  
                 else if (plat0_color == 3'b001 && Platform_collision0 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX <= 0;  
@@ -930,7 +943,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX1 <= platX1 + (platX >> 1); 
                 else if(plat1_color == 3'b011 && Platform_collision1 && platX1 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX1 <= platX1 - (platX >> 1);
-                else if (plat1_color == 3'b100 && Platform_collision1 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat1_color == 3'b100 && PlatformBrown_collision1 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX1 <= 0;  
                 else if (plat1_color == 3'b001 && Platform_collision1 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX1 <= 0;  
@@ -943,7 +956,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX2 <= platX2 + (platX >> 1); 
                 else if(plat2_color == 3'b011 && Platform_collision2 && platX2 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX2 <= platX2 - (platX >> 1);
-                else if (plat2_color == 3'b100 && Platform_collision2 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat2_color == 3'b100 && PlatformBrown_collision2 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX2 <= 0;  
                 else if (plat2_color == 3'b001 && Platform_collision2 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX2 <= 0;  
@@ -956,7 +969,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX3 <= platX3 + (platX >> 1); 
                 else if(plat3_color == 3'b011 && Platform_collision3 && platX3 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX3 <= platX3 - (platX >> 1);
-                else if (plat3_color == 3'b100 && Platform_collision3 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat3_color == 3'b100 && PlatformBrown_collision3 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX3 <= 0;  
                 else if (plat3_color == 3'b001 && Platform_collision3 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX3 <= 0;   
@@ -969,7 +982,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX4 <= platX4 + (platX >> 1); 
                 else if(plat4_color == 3'b011 && Platform_collision4 && platX4 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX4 <= platX4 - (platX >> 1);
-                else if (plat4_color == 3'b100 && Platform_collision4 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat4_color == 3'b100 && PlatformBrown_collision4 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX4 <= 0;  
                 else if (plat4_color == 3'b001 && Platform_collision4 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX4 <= 0;  
@@ -982,7 +995,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX5 <= platX5 + (platX >> 1); 
                 else if(plat5_color == 3'b011 && Platform_collision5 && platX5 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX5 <= platX5 - (platX >> 1);
-                else if (plat5_color == 3'b100 && Platform_collision5 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat5_color == 3'b100 && PlatformBrown_collision5 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX5 <= 0;  
                 else if (plat5_color == 3'b001 && Platform_collision5 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX5 <= 0;  
@@ -994,7 +1007,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX6 <= platX6 + (platX >> 1); 
                 else if(plat6_color == 3'b011 && Platform_collision6 && platX6 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX6 <= platX6 - (platX >> 1);
-                else if (plat6_color == 3'b100 && Platform_collision6 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat6_color == 3'b100 && PlatformBrown_collision6 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX6 <= 0;  
                 else if (plat6_color == 3'b001 && Platform_collision6 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX6 <= 0; 
@@ -1007,7 +1020,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX7 <= platX7 + (platX >> 1); 
                 else if(plat7_color == 3'b011 && Platform_collision7 && platX7 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX7 <= platX7 - (platX >> 1);
-                else if (plat7_color == 3'b100 && Platform_collision7 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat7_color == 3'b100 && PlatformBrown_collision7 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX7 <= 0;  
                 else if (plat7_color == 3'b001 && Platform_collision7 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX7 <= 0;  
@@ -1020,7 +1033,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX8 <= platX8 + (platX >> 1); 
                 else if(plat8_color == 3'b011 && Platform_collision8 && platX8 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX8 <= platX8 - (platX >> 1);
-                else if (plat8_color == 3'b100 && Platform_collision8 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat8_color == 3'b100 && PlatformBrown_collision8 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX8 <= 0;  
                 else if (plat8_color == 3'b001 && Platform_collision8 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX8 <= 0;  
@@ -1033,7 +1046,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX9 <= platX9 + (platX >> 1); 
                 else if(plat9_color == 3'b011 && Platform_collision9 && platX9 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX9 <= platX9 - (platX >> 1);
-                else if (plat9_color == 3'b100 && Platform_collision9 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat9_color == 3'b100 && PlatformBrown_collision9 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX9 <= 0;  
                 else if (plat9_color == 3'b001 && Platform_collision9 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX9 <= 0;  
@@ -1046,7 +1059,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX10 <= platX10 + (platX >> 1); 
                 else if(plat10_color == 3'b011 && Platform_collision10 && platX10 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX10 <= platX10 - (platX >> 1);
-                else if (plat10_color == 3'b100 && Platform_collision10 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat10_color == 3'b100 && PlatformBrown_collision10 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX10 <= 0;  
                 else if (plat10_color == 3'b001 && Platform_collision10 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX10 <= 0;  
@@ -1059,7 +1072,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX11 <= platX11 + (platX >> 1); 
                 else if(plat11_color == 3'b011 && Platform_collision11 && platX11 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX11 <= platX11 - (platX >> 1);
-                else if (plat11_color == 3'b100 && Platform_collision11 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat11_color == 3'b100 && PlatformBrown_collision11 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX11 <= 0;  
                 else if (plat11_color == 3'b001 && Platform_collision11 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX11 <= 0;  
@@ -1072,9 +1085,9 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX12 <= platX12 + (platX >> 1); 
                 else if(plat12_color == 3'b011 && Platform_collision12 && platX12 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX12 <= platX12 - (platX >> 1);
-                else if (plat12_color == 3'b100 && Platform_collision12 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat12_color == 3'b100 && PlatformBrown_collision11 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX12 <= 0;  
-                else if (plat12_color == 3'b001 && Platform_collision12 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat12_color == 3'b001 && Platform_collision11 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX12 <= 0;  
                 else
                     platX12 <= platX12 + platX12_Motion;
@@ -1085,7 +1098,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX13 <= platX13 + (platX >> 1); 
                 else if(plat13_color == 3'b011 && Platform_collision13 && platX13 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX13 <= platX13 - (platX >> 1);
-                else if (plat13_color == 3'b100 && Platform_collision13 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat13_color == 3'b100 && PlatformBrown_collision13 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX13 <= 0;  
                 else if (plat13_color == 3'b001 && Platform_collision13 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX13 <= 0;  
@@ -1098,9 +1111,9 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX14 <= platX14 + (platX >> 1); 
                 else if(plat14_color == 3'b011 && Platform_collision14 && platX14 > 250 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX14 <= platX14 - (platX >> 1);
-                else if (plat14_color == 3'b100 && Platform_collision14 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat14_color == 3'b100 && PlatformBrown_collision13 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX14 <= 0;  
-                else if (plat14_color == 3'b001 && Platform_collision14 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat14_color == 3'b001 && Platform_collision13 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX14 <= 0;  
                 else
                     platX14 <= platX14 + platX14_Motion;
@@ -1112,7 +1125,7 @@ always_ff@(posedge frame_clk or posedge loadplat)
                     platX15 <= platX15 - (platX >> 1);
                 else if (plat15_color == 3'b100 && Platform_collision15 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX15 <= 0;  
-                else if (plat15_color == 3'b001 && Platform_collision15 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
+                else if (plat15_color == 3'b001 && PlatformBrown_collision15 && Doodle_Y_Motion >= 10'd3 && Doodle_Y_Motion <= 10'd7)
                     platX15 <= 0;  
                 else
                     platX15 <= platX15 + platX_Motion;
@@ -1161,7 +1174,7 @@ always_ff @ (posedge Clk)
             end
         default:
         begin 
-            if(platY - plat_sizeY >= 9'd478)
+            if(platY - plat_sizeY >= 9'd480)
                 begin
                     plat_offscreen[0] = 1;
                     if(!Score[0])
@@ -1172,12 +1185,12 @@ always_ff @ (posedge Clk)
                         plat0_trigger <= 3'b011; // yellow
                     else if (!Score[2])
                         plat0_trigger <= 3'b001; // white 
-                    else if(plat15_trigger == 3'b000 || plat15_trigger == 3'b010 && plat1_trigger == 3'b000 || plat1_trigger == 3'b010)
+                    else if(plat15_color == 3'b000 || plat15_color == 3'b010 && plat1_color == 3'b000 || plat1_color == 3'b010)
                         plat0_trigger <= 3'b100; // brown 
                 end
             else   
                 plat_offscreen[0] = 0;  
-            if(platY1 - plat_sizeY >= 9'd478)
+            if(platY1 - plat_sizeY >= 9'd480)
                 begin
                     plat_offscreen[1] = 1;
                     if(!Score[0])
@@ -1188,12 +1201,12 @@ always_ff @ (posedge Clk)
                         plat2_trigger <= 3'b011;
                     else if (!Score[2])
                         plat1_trigger <= 3'b001;
-                    else if(plat0_trigger == 3'b000 || plat0_trigger == 3'b010 && plat2_trigger == 3'b000 || plat2_trigger == 3'b010)
+                    else if(plat0_color == 3'b000 || plat0_color == 3'b010 && plat2_color == 3'b000 || plat2_color == 3'b010)
                         plat1_trigger <= 3'b100;
                 end
             else   
                 plat_offscreen[1] = 0;  
-            if(platY2 - plat_sizeY >= 9'd478)
+            if(platY2 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[2] = 1;
                     if(!Score[0])
@@ -1204,12 +1217,12 @@ always_ff @ (posedge Clk)
                         plat2_trigger <= 3'b011;
                     else if (!Score[2])
                         plat2_trigger <= 3'b001;
-                    else if(plat1_trigger == 3'b000 || plat1_trigger == 3'b010 && plat3_trigger == 3'b000 || plat3_trigger == 3'b010)
+                    else if(plat1_color == 3'b000 || plat1_color == 3'b010 && plat3_color == 3'b000 || plat3_color == 3'b010)
                         plat2_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[2] = 0;  
-            if(platY3 - plat_sizeY >= 9'd478)
+            if(platY3 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[3] = 1;
                     if(!Score[0])
@@ -1220,12 +1233,12 @@ always_ff @ (posedge Clk)
                         plat3_trigger <= 3'b011;
                     else if (!Score[2])
                         plat3_trigger <= 3'b001;
-                    else if(plat2_trigger == 3'b000 || plat2_trigger == 3'b010 && plat4_trigger == 3'b000 || plat4_trigger == 3'b010)
+                    else if(plat2_color == 3'b000 || plat2_color == 3'b010 && plat4_color == 3'b000 || plat4_color == 3'b010)
                         plat3_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[3] = 0;  
-            if(platY4 - plat_sizeY >= 9'd478)
+            if(platY4 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[4] = 1;
                     if(!Score[0])
@@ -1236,12 +1249,12 @@ always_ff @ (posedge Clk)
                         plat4_trigger <= 3'b011;
                     else if (!Score[2])
                         plat4_trigger <= 3'b001;
-                    else if(plat3_trigger == 3'b000 || plat3_trigger == 3'b010 && plat5_trigger == 3'b000 || plat5_trigger == 3'b010)
+                    else if(plat3_color == 3'b000 || plat3_color == 3'b010 && plat5_color == 3'b000 || plat5_color == 3'b010)
                         plat4_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[4] = 0;  
-            if(platY5 - plat_sizeY >= 9'd478)
+            if(platY5 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[5] = 1;
                     if(!Score[0])
@@ -1252,12 +1265,12 @@ always_ff @ (posedge Clk)
                         plat5_trigger <= 3'b011;
                     else if (!Score[2])
                         plat5_trigger <= 3'b001;
-                    else if(plat4_trigger == 3'b000 || plat4_trigger == 3'b010 && plat6_trigger == 3'b000 || plat6_trigger == 3'b010)
+                    else if(plat4_color == 3'b000 || plat4_color == 3'b010 && plat6_color == 3'b000 || plat6_color == 3'b010)
                         plat5_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[5] = 0;  
-            if(platY6 - plat_sizeY >= 9'd478)
+            if(platY6 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[6] = 1;
                     if(!Score[0])
@@ -1268,12 +1281,12 @@ always_ff @ (posedge Clk)
                         plat6_trigger <= 3'b011;
                     else if (!Score[2])
                         plat6_trigger <= 3'b001;
-                    else if(plat5_trigger == 3'b000 || plat5_trigger == 3'b010 && plat7_trigger == 3'b000 || plat7_trigger == 3'b010)
+                    else if(plat5_color == 3'b000 || plat5_color == 3'b010 && plat7_color == 3'b000 || plat7_color == 3'b010)
                         plat6_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[6] = 0;  
-            if(platY7 - plat_sizeY >= 9'd478)
+            if(platY7 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[7] = 1;
                     if(!Score[0])
@@ -1284,12 +1297,12 @@ always_ff @ (posedge Clk)
                         plat7_trigger <= 3'b011;
                     else if (!Score[2])
                         plat7_trigger <= 3'b001;
-                    else if(plat6_trigger == 3'b000 || plat6_trigger == 3'b010 && plat8_trigger == 3'b000 || plat8_trigger == 3'b010)
+                    else if(plat6_color == 3'b000 || plat6_color == 3'b010 && plat8_color == 3'b000 || plat8_color == 3'b010)
                         plat7_trigger <= 3'b100; 
                 end 
             else   
                 plat_offscreen[7] = 0;  
-            if(platY8 - plat_sizeY >= 9'd478)
+            if(platY8 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[8] = 1;
                     if(!Score[0])
@@ -1300,12 +1313,12 @@ always_ff @ (posedge Clk)
                         plat8_trigger <= 3'b011;
                     else if (!Score[2])
                         plat8_trigger <= 3'b001;
-                    else if(plat7_trigger == 3'b000 || plat7_trigger == 3'b010 && plat9_trigger == 3'b000 || plat9_trigger == 3'b010)
+                    else if(plat7_color == 3'b000 || plat7_color == 3'b010 && plat9_color == 3'b000 || plat9_color == 3'b010)
                         plat8_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[8] = 0;  
-            if(platY9 - plat_sizeY >= 9'd478)
+            if(platY9 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[9] = 1;
                     if(!Score[0])
@@ -1316,12 +1329,12 @@ always_ff @ (posedge Clk)
                         plat9_trigger <= 3'b011;
                     else if (!Score[2])
                         plat9_trigger <= 3'b001;
-                    else if(plat8_trigger == 3'b000 || plat8_trigger == 3'b010 && plat10_trigger == 3'b000 || plat10_trigger == 3'b010)
+                    else if(plat8_color == 3'b000 || plat8_color == 3'b010 && plat10_color == 3'b000 || plat10_color == 3'b010)
                         plat9_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[9] = 0;  
-            if(platY10 - plat_sizeY >= 9'd478)
+            if(platY10 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[10] = 1;
                     if(!Score[0])
@@ -1332,12 +1345,12 @@ always_ff @ (posedge Clk)
                         plat10_trigger <= 3'b011;
                     else if (!Score[2])
                         plat10_trigger <= 3'b001;
-                    else if(plat9_trigger == 3'b000 || plat9_trigger == 3'b010 && plat11_trigger == 3'b000 || plat11_trigger == 3'b010)
+                    else if(plat9_color == 3'b000 || plat9_color == 3'b010 && plat11_color == 3'b000 || plat11_color == 3'b010)
                         plat10_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[10] = 0;  
-            if(platY11 - plat_sizeY >= 9'd478)
+            if(platY11 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[11] = 1;
                     if(!Score[0])
@@ -1348,12 +1361,12 @@ always_ff @ (posedge Clk)
                         plat11_trigger <= 3'b011;
                     else if (!Score[2])
                         plat11_trigger <= 3'b001;
-                    else if(plat10_trigger == 3'b000 || plat10_trigger == 3'b010 && plat12_trigger == 3'b000 || plat12_trigger == 3'b010)
+                    else if(plat10_color == 3'b000 || plat10_color == 3'b010 && plat12_color == 3'b000 || plat12_color == 3'b010)
                         plat11_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[11] = 0;  
-            if(platY12 - plat_sizeY >= 9'd478)
+            if(platY12 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[12] = 1;
                     if(!Score[0])
@@ -1364,12 +1377,12 @@ always_ff @ (posedge Clk)
                         plat12_trigger <= 3'b011;
                     else if (!Score[2])
                         plat12_trigger <= 3'b001;
-                    else if(plat11_trigger == 3'b000 || plat11_trigger == 3'b010 && plat13_trigger == 3'b000 || plat13_trigger == 3'b010)
+                    else if(plat11_color == 3'b000 || plat11_color == 3'b010 && plat13_color == 3'b000 || plat13_color == 3'b010)
                         plat12_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[12] = 0;  
-            if(platY13 - plat_sizeY >= 9'd478)
+            if(platY13 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[13] = 1;
                     if(!Score[0])
@@ -1380,12 +1393,12 @@ always_ff @ (posedge Clk)
                         plat13_trigger <= 3'b011;
                     else if (!Score[2])
                         plat13_trigger <= 3'b001;
-                    else if(plat12_trigger == 3'b000 || plat12_trigger == 3'b010 && plat14_trigger == 3'b000 || plat14_trigger == 3'b010)
+                    else if(plat12_color == 3'b000 || plat12_color == 3'b010 && plat14_color == 3'b000 || plat14_color == 3'b010)
                         plat13_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[13] = 0;  
-            if(platY14 - plat_sizeY >= 9'd478)
+            if(platY14 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[14] = 1;
                     if(!Score[0])
@@ -1396,12 +1409,12 @@ always_ff @ (posedge Clk)
                         plat14_trigger <= 3'b011;
                     else if (!Score[2])
                         plat14_trigger <= 3'b001;
-                    else if(plat13_trigger == 3'b000 || plat13_trigger == 3'b010 && plat15_trigger == 3'b000 || plat15_trigger == 3'b010)
+                    else if(plat13_color == 3'b000 || plat13_color == 3'b010 && plat15_color == 3'b000 || plat15_color == 3'b010)
                         plat14_trigger <= 3'b100;
                 end 
             else   
                 plat_offscreen[14] = 0;  
-            if(platY15 - plat_sizeY >= 9'd478)
+            if(platY15 - plat_sizeY >= 9'd480)
                 begin
                 plat_offscreen[15] = 1;
                     if(!Score[0])
@@ -1412,7 +1425,7 @@ always_ff @ (posedge Clk)
                         plat15_trigger <= 3'b011;
                     else if (!Score[2])
                         plat15_trigger <= 3'b001;
-                    else if(plat14_trigger == 3'b000 || plat14_trigger == 3'b010 && plat0_trigger == 3'b000 || plat0_trigger == 3'b010)
+                    else if(plat14_color == 3'b000 || plat14_color == 3'b010 && plat0_color == 3'b000 || plat0_color == 3'b010)
                         plat15_trigger <= 3'b100;
                 end 
             else   
@@ -2465,6 +2478,8 @@ bin2bcd bin2bcd(
     .bin(Score[13:0]),
     .bcd(BCD[15:0])
 );
+
+logic [5:0] antighosting1; 
 logic [15:0] BCD; 
 
 always_comb 
@@ -2473,7 +2488,11 @@ always_comb
         second_digit = BCD[7:4];
         third_digit = BCD[11:8];
         fourth_digit = BCD[15:12];
-        fifth_digit = 0;
+        if(Score[19:0] >= 10000)
+            fifth_digit = 1; 
+        else 
+            fifth_digit = 0; 
+        
         BKG_address_zero = (letter_size * DrawY) + DrawX;
         BKG_address_one = (letter_size * DrawY) + DrawX;
         BKG_address_two = (letter_size * DrawY) + DrawX;
@@ -4992,5 +5011,44 @@ always_comb
                 
     end 
 
+logic PlatformBrown_collision0; 
+logic PlatformBrown_collision1; 
+logic PlatformBrown_collision2; 
+logic PlatformBrown_collision3; 
+logic PlatformBrown_collision4; 
+logic PlatformBrown_collision5; 
+logic PlatformBrown_collision6; 
+logic PlatformBrown_collision7; 
+logic PlatformBrown_collision8; 
+logic PlatformBrown_collision9; 
+logic PlatformBrown_collision10; 
+logic PlatformBrown_collision11; 
+logic PlatformBrown_collision12; 
+logic PlatformBrown_collision13; 
+logic PlatformBrown_collision14; 
+logic PlatformBrown_collision15; 
+
+always_comb 
+    begin 
+
+    PlatformBrown_collision0 = (plat0_color == 3'b100 && (DoodleY + Doodle_size <= platY + plat_sizeY) && (DoodleY + Doodle_size >= platY - plat_sizeY) && (platX + plat_sizeX >= DoodleX - Doodle_size ) && (platX - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision1 = (plat1_color == 3'b100 && (DoodleY + Doodle_size <= platY1 + plat_sizeY) &&(DoodleY + Doodle_size >= platY1 - plat_sizeY) && (platX1 + plat_sizeX >= DoodleX - Doodle_size) && (platX1 - plat_sizeX <= DoodleX + Doodle_size)); 
+	PlatformBrown_collision2 = (plat2_color == 3'b100 && (DoodleY + Doodle_size <= platY2 + plat_sizeY) &&(DoodleY + Doodle_size >= platY2 - plat_sizeY) && (platX2 + plat_sizeX >= DoodleX - Doodle_size) && (platX2 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision3 = (plat3_color == 3'b100 && (DoodleY + Doodle_size <= platY3 + plat_sizeY) &&(DoodleY + Doodle_size >= platY3 - plat_sizeY) && (platX3 + plat_sizeX >= DoodleX - Doodle_size) && (platX3 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision4 = (plat4_color == 3'b100 && (DoodleY + Doodle_size <= platY4 + plat_sizeY) &&(DoodleY + Doodle_size >= platY4 - plat_sizeY) && (platX4 + plat_sizeX >= DoodleX - Doodle_size) && (platX4 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision5 = (plat5_color == 3'b100 && (DoodleY + Doodle_size <= platY5 + plat_sizeY) &&(DoodleY + Doodle_size >= platY5 - plat_sizeY) && (platX5 + plat_sizeX >= DoodleX - Doodle_size) && (platX5 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision6 = (plat6_color == 3'b100 && (DoodleY + Doodle_size <= platY6 + plat_sizeY) &&(DoodleY + Doodle_size >= platY6 - plat_sizeY) && (platX6 + plat_sizeX >= DoodleX - Doodle_size) && (platX6 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision7 = (plat7_color == 3'b100 && (DoodleY + Doodle_size <= platY7 + plat_sizeY) &&(DoodleY + Doodle_size >= platY7 - plat_sizeY) && (platX7 + plat_sizeX >= DoodleX - Doodle_size) && (platX7 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision8 = (plat8_color == 3'b100 && (DoodleY + Doodle_size <= platY8 + plat_sizeY) &&(DoodleY + Doodle_size >= platY8 - plat_sizeY) && (platX8 + plat_sizeX >= DoodleX - Doodle_size) && (platX8 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision9 = (plat9_color == 3'b100 && (DoodleY + Doodle_size <= platY9 + plat_sizeY) &&(DoodleY + Doodle_size >= platY9 - plat_sizeY) && (platX9 + plat_sizeX >= DoodleX - Doodle_size) && (platX9 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision10 = (plat10_color == 3'b100 && (DoodleY + Doodle_size <= platY10  + plat_sizeY) &&(DoodleY + Doodle_size >= platY10 - plat_sizeY) && (platX10 + plat_sizeX >= DoodleX - Doodle_size) && (platX10 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision11 = (plat11_color == 3'b100 && (DoodleY + Doodle_size <= platY11  + plat_sizeY) &&(DoodleY + Doodle_size >= platY11 - plat_sizeY) && (platX11 + plat_sizeX >= DoodleX - Doodle_size) && (platX11 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision12 = (plat12_color == 3'b100 && (DoodleY + Doodle_size <= platY12  + plat_sizeY) &&(DoodleY + Doodle_size >= platY12 - plat_sizeY) && (platX12 + plat_sizeX >= DoodleX - Doodle_size) && (platX12 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision13 = (plat13_color == 3'b100 && (DoodleY + Doodle_size <= platY13  + plat_sizeY) &&(DoodleY + Doodle_size >= platY13 - plat_sizeY) && (platX13 + plat_sizeX >= DoodleX - Doodle_size) && (platX13 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision14 = (plat14_color == 3'b100 && (DoodleY + Doodle_size <= platY14  + plat_sizeY) &&(DoodleY + Doodle_size >= platY14 - plat_sizeY) && (platX14 + plat_sizeX >= DoodleX - Doodle_size) && (platX14 - plat_sizeX <= DoodleX + Doodle_size));
+	PlatformBrown_collision15 = (plat15_color == 3'b100 && (DoodleY + Doodle_size <= platY15  + plat_sizeY) &&(DoodleY + Doodle_size >= platY15 - plat_sizeY) && (platX15 + plat_sizeX >= DoodleX - Doodle_size) && (platX15 - plat_sizeX <= DoodleX + Doodle_size));
+
+
+    end
 
 endmodule
