@@ -1156,19 +1156,19 @@ always_ff @ (posedge Clk)
         3'b000, 3'b001:
             begin
                 plat0_trigger <= 3'b000;
-                plat1_trigger <= 3'b000;
-                plat2_trigger <= 3'b000;
+                plat1_trigger <= 3'b001;
+                plat2_trigger <= 3'b010;
                 plat3_trigger <= 3'b000;
-                plat4_trigger <= 3'b000;
-                plat5_trigger <= 3'b000;
+                plat4_trigger <= 3'b010;
+                plat5_trigger <= 3'b010;
                 plat6_trigger <= 3'b000;
                 plat7_trigger <= 3'b000;
-                plat8_trigger <= 3'b000;
+                plat8_trigger <= 3'b100;
                 plat9_trigger <= 3'b000;
                 plat10_trigger <= 3'b000;
                 plat11_trigger <= 3'b000;
-                plat12_trigger <= 3'b000;
-                plat13_trigger <= 3'b000;
+                plat12_trigger <= 3'b010;
+                plat13_trigger <= 3'b100;
                 plat14_trigger <= 3'b000;
                 plat15_trigger <= 3'b000;
             end
@@ -1181,12 +1181,12 @@ always_ff @ (posedge Clk)
                         plat0_trigger <= 3'b000; // green 
                     else if (Score[1])
                         plat0_trigger <= 3'b010; // blue 
+                    else if(plat15_color == 3'b000 || plat15_color == 3'b010 && plat1_color == 3'b000 || plat1_color == 3'b010)
+                        plat0_trigger <= 3'b100; // brown 
                     else if (Score[2])
                         plat0_trigger <= 3'b011; // yellow
                     else if (!Score[2])
                         plat0_trigger <= 3'b001; // white 
-                    else if(plat15_color == 3'b000 || plat15_color == 3'b010 && plat1_color == 3'b000 || plat1_color == 3'b010)
-                        plat0_trigger <= 3'b100; // brown 
                 end
             else   
                 plat_offscreen[0] = 0;  
@@ -1293,12 +1293,12 @@ always_ff @ (posedge Clk)
                         plat7_trigger <= 3'b000;
                     else if (Score[1])
                         plat7_trigger <= 3'b010;
+                    else if(plat6_color == 3'b000 || plat6_color == 3'b010 && plat8_color == 3'b000 || plat8_color == 3'b010)
+                        plat7_trigger <= 3'b100; 
                     else if (Score[2])
                         plat7_trigger <= 3'b011;
                     else if (!Score[2])
                         plat7_trigger <= 3'b001;
-                    else if(plat6_color == 3'b000 || plat6_color == 3'b010 && plat8_color == 3'b000 || plat8_color == 3'b010)
-                        plat7_trigger <= 3'b100; 
                 end 
             else   
                 plat_offscreen[7] = 0;  
@@ -5492,9 +5492,9 @@ always_comb
                 end 
                 else 
                 begin
-                    Red = 8'hA5;
-                    Green = 8'h2A; 
-                    Blue = 8'h2A;
+                    Red = 8'hA0;
+                    Green = 8'h52; 
+                    Blue = 8'h2D;
                 end 
             end
         else if(greenplat32_on)
@@ -5558,9 +5558,9 @@ always_comb
                 end 
                 else 
                 begin
-                    Red = 8'hA5;
-                    Green = 8'h2A; 
-                    Blue = 8'h2A;
+                    Red = 8'hA0;
+                    Green = 8'h52; 
+                    Blue = 8'h2D;
                 end 
             end        
         else if(greenplat64_on)
@@ -5624,9 +5624,9 @@ always_comb
                 end 
                 else 
                 begin
-                    Red = 8'hA5;
-                    Green = 8'h2A; 
-                    Blue = 8'h2A;
+                    Red = 8'hA0;
+                    Green = 8'h52; 
+                    Blue = 8'h2D;
                 end 
             end
         
