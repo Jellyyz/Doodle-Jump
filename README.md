@@ -17,3 +17,6 @@ as well as the algorithm for BCD on the screen
 https://www.realdigital.org/doc/6dae6583570fd816d1d675b93578203d
 
 
+https://www.youtube.com/watch?v=-pjRKaqpoLw
+
+[![Doodle Jump Video](https://img.youtube.com/vi/-pjRKaqpoLw/0.jpg)](https://www.youtube.com/watch?v=-pjRKaqpoLw)
